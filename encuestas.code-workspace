@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"backported",
+			"clsx",
+			"descripcion",
+			"lucide",
+			"onsave",
+			"opcion",
+			"preg",
+			"puntaje",
+			"tailwindcss",
+			"titulos",
+			"unica"
+		]
+	}
+}
