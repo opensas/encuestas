@@ -6,6 +6,6 @@
 	}
 </script>
 
-<div class="my-20 flex h-screen items-center justify-center px-10">
+<div class="flex h-screen items-center justify-center px-4 sm:px-10">
 	<Encuesta encuesta={encuesta02} {onsave} />
 </div>
