@@ -2,18 +2,23 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../encuesta-tmp"
 		}
 	],
 	"settings": {
 		"cSpell.words": [
 			"backported",
 			"clsx",
+			"Contanos",
 			"descripcion",
 			"lucide",
 			"onsave",
 			"opcion",
 			"preg",
 			"puntaje",
+			"shadcn",
 			"tailwindcss",
 			"titulos",
 			"unica"
