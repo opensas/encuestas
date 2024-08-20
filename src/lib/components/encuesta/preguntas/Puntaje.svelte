@@ -2,8 +2,9 @@
 	import type { PreguntaPuntaje } from '$lib/types';
 
 	import { Button } from '$lib/components/ui/button';
-	import { Minus, Plus } from 'lucide-svelte';
 	import { Slider } from '$lib/components/ui/slider';
+
+	import { Minus, Plus } from 'lucide-svelte';
 
 	export let pregunta: PreguntaPuntaje;
 	export let onupdate: (respuesta: number) => void = () => {};

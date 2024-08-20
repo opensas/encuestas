@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition';
+
 	import Component from './Component.svelte';
 
 	let component = Component;

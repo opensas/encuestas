@@ -1,19 +1,21 @@
 import js from '@eslint/js';
-import ts from 'typescript-eslint';
-import svelte from 'eslint-plugin-svelte';
+
 import prettier from 'eslint-config-prettier';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
+import ts from 'typescript-eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs['flat/recommended'],
+	{ plugins: { 'simple-import-sort': simpleImportSort } },
 	{
 		rules: {
 			// override/add rules settings here, such as:
 			// 'svelte/rule-name': 'error'
-
 			'svelte/sort-attributes': [
 				'error',
 				{
@@ -59,6 +61,35 @@ export default [
 						{ match: '/^animate:/u', sort: 'alphabetical' },
 						// `let:` directives. (Alphabetical order within the same group.)
 						{ match: '/^let:/u', sort: 'alphabetical' }
+					]
+				}
+			],
+			'simple-import-sort/imports': [
+				'error',
+				{
+					groups: [
+						// Style imports
+						['^.+\\.s?css$'],
+						// $lib imports
+						['^\\$lib/types'],
+						['^\\$lib/components'],
+						['^\\$lib'],
+
+						// svelte imports
+						['^svelte'],
+
+						// Packages starting with `@`
+						['^@'],
+						// Packages starting with `~`
+						['^~'],
+						// rest of the packages
+						['^'],
+						// Imports starting with `../`
+						['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+						// Imports starting with `./`
+						['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+						// Side effect imports
+						['^\\u0000']
 					]
 				}
 			]

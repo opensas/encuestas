@@ -1,8 +1,10 @@
 <script>
-	import { ModeWatcher, toggleMode } from 'mode-watcher';
 	import '../app.css';
+
 	import { Button } from '$lib/components/ui/button';
+
 	import { Moon, Sun } from 'lucide-svelte';
+	import { ModeWatcher, toggleMode } from 'mode-watcher';
 </script>
 
 <ModeWatcher />
