@@ -15,11 +15,9 @@
 	function onupdate(respuesta: Encuesta['preguntas'][number]['respuesta']) {
 		encuesta.preguntas[current].respuesta = respuesta;
 	}
-
-	$: console.log('!!!', { current, respuesta: encuesta.preguntas[current].respuesta, encuesta });
 </script>
 
-<div class="rounded-[0.5rem] border bg-background shadow-xl">
+<div class="rounded-[0.5rem] bg-background sm:border sm:shadow-xl">
 	<div class="space-y-6 p-6 sm:p-10 md:block">
 		<div class="space-y-1">
 			<h2 class="text-2xl font-bold tracking-tight">{encuesta.titulo}</h2>
