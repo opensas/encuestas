@@ -48,7 +48,7 @@
 		{/if}
 
 		<div class="flex justify-between pt-4">
-			<Button variant="outline" class={current <= 0 ? 'invisible' : ''} on:click={() => current--}>
+			<Button class={current <= 0 ? 'invisible' : ''} variant="outline" on:click={() => current--}>
 				Anterior
 			</Button>
 			{#if current < encuesta.preguntas.length - 1}

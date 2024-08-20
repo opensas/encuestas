@@ -46,7 +46,7 @@
 		{@const id = `opcion_${index}`}
 		<div class="flex items-center space-x-3">
 			<Checkbox {id} bind:checked={checked[index]} class="self-start" />
-			<Label for={id} class="flex flex-col space-y-1">
+			<Label class="flex flex-col space-y-1" for={id}>
 				<div>{titulo}</div>
 				{#if descripcion}
 					<div class="text-xs font-normal text-muted-foreground">{descripcion}</div>
@@ -59,7 +59,7 @@
 		<div class="flex items-center space-x-3">
 			<Checkbox id="opcion_otra" bind:checked={checkedOther} class="--self-start" />
 			<div class="w-full space-y-1">
-				<Input placeholder="otra opción" bind:value={other} --disabled />
+				<Input bind:value={other} --disabled placeholder="otra opción" />
 			</div>
 		</div>
 	{/if}

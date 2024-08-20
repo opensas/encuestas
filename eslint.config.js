@@ -9,6 +9,61 @@ export default [
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs['flat/recommended'],
+	{
+		rules: {
+			// override/add rules settings here, such as:
+			// 'svelte/rule-name': 'error'
+
+			'svelte/sort-attributes': [
+				'error',
+				{
+					order: [
+						// `this` property.
+						'this',
+						// `bind:this` directive.
+						'bind:this',
+						// `id` attribute.
+						'id',
+						// `name` attribute.
+						'name',
+						// `value` attribute.
+						['value', '/^bind:value:/u'],
+						// `bind:` directives (other then `bind:this`)
+						['/^bind:/u', '!bind:this'],
+						// `slot` attribute.
+						'slot',
+						// `--style-props` (Alphabetical order within the same group.)
+						{ match: '/^--/u', sort: 'alphabetical' },
+						// `style` attribute, and `style:` directives.
+						['style', '/^style:/u'],
+						// `class` attribute.
+						'class',
+						// `class:` directives. (Alphabetical order within the same group.)
+						{ match: '/^class:/u', sort: 'alphabetical' },
+						// other attributes. (Alphabetical order within the same group.)
+						{
+							match: ['!/:/u', '!/^(?:this|id|name|style|class)$/u', '!/^--/u', '!/^on/u'],
+							sort: 'alphabetical'
+						},
+						// on event handlers - properties starting with on
+						{ match: '/^on/u', sort: 'alphabetical' },
+						// `use:` directives. (Alphabetical order within the same group.)
+						{ match: '/^use:/u', sort: 'alphabetical' },
+						// `transition:` directive.
+						{ match: '/^transition:/u', sort: 'alphabetical' },
+						// `in:` directive.
+						{ match: '/^in:/u', sort: 'alphabetical' },
+						// `out:` directive.
+						{ match: '/^out:/u', sort: 'alphabetical' },
+						// `animate:` directive.
+						{ match: '/^animate:/u', sort: 'alphabetical' },
+						// `let:` directives. (Alphabetical order within the same group.)
+						{ match: '/^let:/u', sort: 'alphabetical' }
+					]
+				}
+			]
+		}
+	},
 	prettier,
 	...svelte.configs['flat/prettier'],
 	{

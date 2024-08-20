@@ -41,8 +41,8 @@
 	{#each opciones as { titulo, descripcion }, index}
 		{@const id = `opcion_${index}`}
 		<div class="flex items-center space-x-3">
-			<Radio.Item value={titulo} {id} class="self-start" />
-			<Label for={id} class="flex flex-col space-y-1">
+			<Radio.Item {id} value={titulo} class="self-start" />
+			<Label class="flex flex-col space-y-1" for={id}>
 				<div>{titulo}</div>
 				{#if descripcion}
 					<div class="text-xs font-normal text-muted-foreground">{descripcion}</div>
@@ -53,7 +53,7 @@
 
 	{#if pregunta.acepta_otros}
 		<div class="flex items-center space-x-3">
-			<Radio.Item value={OTHER_VALUE} id="option-other" class="--self-start" />
+			<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
 			<div class="w-full space-y-1">
 				<Input bind:value={other} placeholder="Otra opción" />
 			</div>

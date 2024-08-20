@@ -22,11 +22,11 @@
 <div class="space-y-2 p-4 pb-0">
 	<div class="flex items-center justify-center space-x-2">
 		<Button
-			variant="outline"
-			size="icon"
 			class="h-8 w-8 shrink-0 rounded-full"
-			on:click={() => updateSlider(-1)}
 			disabled={respuesta <= 0}
+			size="icon"
+			variant="outline"
+			on:click={() => updateSlider(-1)}
 		>
 			<Minus class="h-4 w-4" />
 			<span class="sr-only">Sumar 1</span>
@@ -38,11 +38,11 @@
 			<div class="text-[0.70rem] uppercase text-muted-foreground">Puntaje</div>
 		</div>
 		<Button
-			variant="outline"
-			size="icon"
 			class="h-8 w-8 shrink-0 rounded-full"
-			on:click={() => updateSlider(1)}
 			disabled={respuesta >= 10}
+			size="icon"
+			variant="outline"
+			on:click={() => updateSlider(1)}
 		>
 			<Plus class="h-4 w-4" />
 			<span class="sr-only">Restar 1</span>
