@@ -1,14 +1,16 @@
 <script>
-	import { ModeWatcher, toggleMode } from 'mode-watcher';
 	import '../app.css';
+
 	import { Button } from '$lib/components/ui/button';
+
 	import { Moon, Sun } from 'lucide-svelte';
+	import { ModeWatcher, toggleMode } from 'mode-watcher';
 </script>
 
 <ModeWatcher />
 
 <div class="flex h-screen items-center justify-center">
-	<Button on:click={toggleMode} variant="outline" size="icon" class="absolute right-4 top-4 z-10">
+	<Button class="absolute right-4 top-4 z-10" size="icon" variant="outline" on:click={toggleMode}>
 		<Sun
 			class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 		/>

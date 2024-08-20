@@ -16,7 +16,7 @@
 
 <div class="grid w-full gap-1.5">
 	<Label for="opcion-libre">{titulo}</Label>
-	<Textarea bind:value={respuesta} placeholder="Type your message here." id="opcion-libre" />
+	<Textarea id="opcion-libre" bind:value={respuesta} placeholder="Type your message here." />
 	{#if descripcion}
 		<p class="text-sm text-muted-foreground">{descripcion}</p>
 	{/if}
