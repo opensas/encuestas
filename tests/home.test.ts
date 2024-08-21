@@ -1,10 +1,19 @@
 import { expect, test } from '@playwright/test';
 
-test('home page has expected h1', async ({ page }) => {
+test('home page has expected h2', async ({ page }) => {
 	await page.goto('/');
 
 	// titulo
 	await expect(page.locator('h2')).toBeVisible();
+});
+
+test('previous button is not visible on first question', async ({ page }) => {
+	await page.goto('/');
+
+	// titulo
+	const question = page.locator('h3')
+	await expect(question).toBeVisible();
+	await expect(question).toContainText(/^1\./);
 
 	const siguiente = await page.$('button:has-text("Siguiente")');
 	expect(siguiente).not.toBeNull();

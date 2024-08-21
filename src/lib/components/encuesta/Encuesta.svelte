@@ -29,7 +29,7 @@
 		<Separator class="my-6" />
 
 		<div class="space-y-0.5">
-			<h3 class="text-lg font-medium">{current + 1}. {pregunta.titulo}</h3>
+			<h3 class="text-lg font-medium">{current}. {pregunta.titulo}</h3>
 			{#if pregunta.descripcion}
 				<p class="text-sm text-muted-foreground">{pregunta.descripcion}</p>
 			{/if}
@@ -46,7 +46,7 @@
 		{/if}
 
 		<div class="flex justify-between pt-4">
-			<Button class={current < 0 ? 'invisible' : ''} variant="outline" on:click={() => current--}>
+			<Button class={current <= 0 ? 'invisible' : ''} variant="outline" on:click={() => current--}>
 				Anterior
 			</Button>
 			{#if current < encuesta.preguntas.length - 1}
