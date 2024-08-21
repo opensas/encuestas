@@ -1,12 +1,29 @@
 # checklist demo
 
+- requerimiento y prototipo
+- intro a svelte
+- mostrar el protipo
+
+  - proceso de desarrollo - development workflow o pipline de desarrollo
+
+- proceso de colaboración y desarrollo de software que
+
+  - utiliza herramientas de código abierto y servicios en la nube para gestionar y desplegar aplicaciones web.
+  - creacion de un repositorio en github
+  - crean pull requests (feature branches)
+  - deploy automatico en vercel
+  - herramientas de control de calidad
+    - formatting and linting
+    - testing: pruebas unitarias y de integracion
+  - devops: optimización, pruebas y deploy automático
+
 ## explicar el requerimiento
 
-## mostrar la app final: https://encuestas-online.vercel.app
+![](img/app.png)## mostrar la app final: https://encuestas-online.vercel.app
 
-- mostrar qr
+- mostrar qr: https://encuestas-online.vercel.app/qr
 
-## intro general a UI frameworks
+![](img/encuestas-qr.png)## intro general a UI frameworks
 
 - Node.js: 2009
 - Angular 1.x: 2010
