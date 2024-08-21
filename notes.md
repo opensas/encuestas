@@ -189,3 +189,5 @@ https://svelte-5-preview.vercel.app/#H4sIAAAAAAAAA51WX2_bNhD_Klc1gGxEku143YNqeyi
 ```
 
 ---
+
+qr-code generator: https://app.flowcode.com/codes/R3uAs

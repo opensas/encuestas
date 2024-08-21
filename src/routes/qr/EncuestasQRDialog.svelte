@@ -14,11 +14,11 @@
 			<span class="sr-only">Escaneá el código QR</span>
 		</Button>
 	</Dialog.Trigger>
-	<Dialog.Content class="--sm:max-w-md">
+	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title>Escaneá el código QR</Dialog.Title>
 			<Dialog.Description class="text-nowrap">
-				Escaneá este código QR para navegar a
+				Escaneá para navegar a
 				<a href="https://encuestas-online.vercel.app">encuestas-online.vercel.app</a>
 			</Dialog.Description>
 		</Dialog.Header>
