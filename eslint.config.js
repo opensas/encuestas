@@ -95,6 +95,7 @@ export default [
 			]
 		}
 	},
+
 	prettier,
 	...svelte.configs['flat/prettier'],
 	{

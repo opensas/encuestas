@@ -1,19 +1,27 @@
 # starting from scratch
 
 ```shell
-pn create svelte@latest my-app
+pnpm create svelte@latest encuestas-v2
 
 - Which Svelte app template?: Skeleton project
 - Add type checking with TypeScript?: Yes, using TypeScript syntax
 - Select additional options (use arrow keys/space bar)
-│  Add ESLint for code linting, Add Prettier for code formatting, Try the Svelte 5 preview (unstable!)
+- ◼ Add ESLint for code linting
+- ◼ Add Prettier for code formatting
+- ◼ Add Playwright for browser testing
+- ◼ Add Vitest for unit testing
+- ◼ Try the Svelte 5 preview (unstable!)
 
-$ cd poll/
+$ cd encuestas-v2/
 
 $ pn install
 
-$ pn lint && pn check
+$ pnpm lint && pnpm check && pnpm test:unit --run && pnpm test:integration
 
+```
+
+```
+pnpm exec playwright install
 ```
 
 add tailwind
@@ -35,7 +43,7 @@ px shadcn-svelte@latest init
 
 copy template01/+page.svelte to routes/+page.svelte
 
-add code
+add code i
 
 ```javascript
 let encuesta = {
@@ -79,4 +87,23 @@ let encuesta = {
 
 let current = 0;
 $: pregunta = encuesta.preguntas[current];
+```
+
+---
+
+add required shadcn components
+
+```shell
+px shadcn-svelte@latest add button card checkbox input label radio-group separator slider textarea
+```
+
+---
+
+testing tips
+
+```shell
+pn test:unit --run
+
+pn test:integration --ui
+pn test:integration --headed --browser=firefox
 ```
