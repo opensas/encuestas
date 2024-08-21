@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../encuesta-tmp"
+		},
+		{
+			"path": "../encuesta-tmp/encuestas-v2"
 		}
 	],
 	"settings": {
@@ -12,7 +15,10 @@
 			"backported",
 			"clsx",
 			"Contanos",
+			"cuit",
+			"cuits",
 			"descripcion",
+			"digito",
 			"lucide",
 			"onsave",
 			"opcion",

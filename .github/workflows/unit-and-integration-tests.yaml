@@ -1,4 +1,4 @@
-name: Lint and Check
+name: Unit and Integration tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  lint-and-check:
+  unit-and-integration-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +23,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run lint (prettier and eslint)
-        run: pnpm lint
+      - name: Unit tests
+        run: pnpm test:unit --run
 
-      - name: Run check (typescript check via svelte-check)
-        run: pnpm check
+      - name: Install playwright
+        run: pnpm exec playwright install
+
+      - name: Integration tests
+        run: pnpm test:integration
