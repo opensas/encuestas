@@ -88,7 +88,7 @@ agregar
 ```shell
 cd ../encuesta-tmp/
 cp -r ../encuestas .
- mv encuestas encuestas-demo
+mv encuestas encuestas-deploy
 cd encuestas-demo/
 
 rm -fr .github .git node_modules
@@ -97,15 +97,38 @@ pn install
 pn dev
 ```
 
-- crear repo en github
+- crear repo en github:
+
+  - https://github.com/opensas?tab=repositories
+
+```shell
+git init
+git add .
+git commit -m 'initial commit'
+git remote add origin git@github.com:opensas/encuestas-deploy.git
+git push -u origin main
+```
 
 - desplegar en vercel
+  - https://vercel.com/opensas-projects
+  - https://vercel.com/new/opensas-projects
 
 ---
 
 ## git repo management - pull requests
 
 - configurar repo
+  - Allow merge commits: Pull request title and Description
+  - Allow squash merging: Pull request title and Description
+  - Automatically delete head branches : checked
+- https://github.com/opensas/encuestas-deploy/settings
+- https://github.com/opensas/encuestas-deploy/settings/branch_protection_rules/new
+
+- configurar main branch
+
+  - Require a pull request before merging: checked
+  - Require approvals: unchecked
+  - Do not allow bypassing the above settings: checked
 
 ![](img/github-configure-pull-request.png)mostrar pull requests
 ![](img/protect-main-branch-01.png)
@@ -113,11 +136,17 @@ pn dev
 
 - realizar pull request
 
+  - realizar alguna modificion
+  - mostrar vercel preview sites
+
 ## devops
 
 - linting
 
   - encuestas/.github/workflows/lint-and-check.yaml
+  - error de Typescript
 
 - tests
   - encuestas/.github/workflows/unit-and-integration-tests.yaml
+  - error de cuit
+  - error de boton anterior
