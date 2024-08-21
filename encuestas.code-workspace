@@ -2,12 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../encuesta-tmp"
-		},
-		{
-			"path": "../encuesta-tmp/encuestas-v2"
 		}
 	],
 	"settings": {
