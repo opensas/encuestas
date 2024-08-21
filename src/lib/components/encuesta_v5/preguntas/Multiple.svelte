@@ -7,7 +7,7 @@
 
 	type Props = {
 		pregunta: PreguntaMultiple;
-		onupdate: (respuesta: PreguntaMultiple['respuesta']) => void;
+		onupdate: (respuesta: PreguntaMultiple["respuesta"]) => void;
 	};
 
 	let { pregunta, onupdate = () => {} }: Props = $props();
