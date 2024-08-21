@@ -1,6 +1,7 @@
 sample:
 
 svelte 4 version:
+
 [encuesta tutorial - 00](https://svelte.dev/repl/b0f98f3a6d664112a62b583238f0d8ba?version=4.2.18)
 
 [encuesta tutorial - 02](https://svelte.dev/repl/135fd2f280da482f9b937598aafaa484?version=4.2.18)
