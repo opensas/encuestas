@@ -5,9 +5,13 @@
 
 	import { Moon, Sun } from 'lucide-svelte';
 	import { ModeWatcher, toggleMode } from 'mode-watcher';
+
+	import EncuestasQrDialog from './qr/EncuestasQRDialog.svelte';
 </script>
 
 <ModeWatcher />
+
+<EncuestasQrDialog />
 
 <Button class="absolute right-4 top-4 z-10" size="icon" variant="outline" on:click={toggleMode}>
 	<Sun
