@@ -11,7 +11,7 @@ test('previous button is not visible on first question', async ({ page }) => {
 	await page.goto('/');
 
 	// titulo
-	const question = page.locator('h3')
+	const question = page.locator('h3');
 	await expect(question).toBeVisible();
 	await expect(question).toContainText(/^1\./);
 
