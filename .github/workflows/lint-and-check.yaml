@@ -1,0 +1,24 @@
+name: Lint and Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run lint (prettier and eslint)
+        run: pnpm lint
+
+      - name: Run check (typescript check via svelte-check)
+        run: pnpm check
