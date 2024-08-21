@@ -27,4 +27,5 @@ jobs:
         run: pnpm test:unit --run
 
       - name: Integration tests
+        run: pnpm exec playwright install 
         run: pnpm test:integration
