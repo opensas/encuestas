@@ -48,6 +48,7 @@
 		{:else if pregunta.tipo === 'puntaje'}
 			<Puntaje {pregunta} {onupdate} />
 		{:else if pregunta.tipo === 'libre'}
+			<!-- <Libre bind:respuesta={pregunta.respuesta} {pregunta} /> -->
 			<Libre {pregunta} {onupdate} />
 		{/if}
 

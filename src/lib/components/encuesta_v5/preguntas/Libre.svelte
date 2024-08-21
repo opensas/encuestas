@@ -4,14 +4,14 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
 
+	type Respuesta = PreguntaLibre['respuesta'];
 	type Props = {
 		pregunta: PreguntaLibre;
-		onupdate: (respuesta: PreguntaLibre['respuesta']) => void;
+		respuesta?: Respuesta;
+		onupdate?: (respuesta: Respuesta) => void;
 	};
 
-	let { pregunta, onupdate = () => {} }: Props = $props();
-
-	let respuesta = $state(pregunta.respuesta || '');
+	let { pregunta, respuesta = $bindable(''), onupdate = () => {} }: Props = $props();
 
 	let { titulo, descripcion } = $derived(pregunta);
 

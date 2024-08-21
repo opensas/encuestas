@@ -1,6 +1,12 @@
 sample:
 
-svelte 4 version: https://svelte.dev/repl/9434bac592644b5ba306a5c6ed0e79c4?version=4.2.18
+svelte 4 version:
+
+[encuesta tutorial - 00](https://svelte.dev/repl/b0f98f3a6d664112a62b583238f0d8ba?version=4.2.18)
+
+[encuesta tutorial - 02](https://svelte.dev/repl/135fd2f280da482f9b937598aafaa484?version=4.2.18)
+
+[encuesta tutorial - final](https://svelte.dev/repl/9434bac592644b5ba306a5c6ed0e79c4?version=4.2.18)
 
 ```svelte
 <!-- App.svelte -->
@@ -81,19 +87,16 @@ export const encuesta01 = {
 			id: 'preg_001',
 			titulo: '¿Qué tan conforme está con la gestión del programa?',
 			descripcion: 'Indicanos que tan conforme estas con el desarrollo del programa',
-			tipo: 'unica',
 			opciones: ['mucho', 'bastante', 'normal', 'poco', 'nada conforme']
 		},
 		{
 			id: 'preg_002',
 			titulo: '¿Cómo mejoraría la gestión del programa?',
-			tipo: 'multiple',
 			opciones: ['más opciones de cursos', 'mejores docentes', 'mejor equipamiento', 'más difusión']
 		},
 		{
 			id: 'preg_002',
 			titulo: '¿Qué puntaje le daría a la gestión del programa?',
-			tipo: 'unica',
 			opciones: [1, 2, 3, 4, 5]
 		}
 	]
@@ -104,7 +107,7 @@ export const encuesta01 = {
 
 svelte 5
 
-https://svelte-5-preview.vercel.app/#H4sIAAAAAAAAA51WzW4bNxB-lYlsYCVYuytZdQ8bSUVQJEAPBdqzZcTULleiwiUZkqvY3ezD5NhDT3mAAtWLdbj_hhUjLWTL5Mzwm4_D-XExShmnZhTdFiNBMjqKRm-UGk1H9lG5jTlSbinujcx17CTLV74PaBPUKvD99UYsTayZsrjaWJYpqS0UQEWcU2PJbA4lpFpm4AUhfSCZ4jQ4GA-N0ZxT21nCCi7xj6Xj_uykNYpzramwvc2sUylNd7mozydUsyNNOoSgVZrbBuFuUnu-ZMIoGttx0dqWk6fy9ugUNDWqMok6Z0EnKxvANBexZVKAIUc6nkDhhBsbS2Fsj2CQ5XNyQUbUWMFqDfeXhQosszmXZQRu0zu6nwQHycTY22z0BtGrb29S-yGcaju-f0c5i5klMTKh5hXE0gUcXeBjcdK7HkJcFj09dOLwSnzVsH9WsUzYEWJOjFltRhlhYjOqntv9PtHFRCetzi731-s-E5prQbkMUd5YqKFBQiuXjruzUh2MhrBbL9ZF85RX8zLATOueZIC_GOJ3BufwK7PigqVDHCVhtVqBlwsWEw8-fz6nzHKOG069sgZBbzlft-vigpJ435-Tqn4SwBSo190xPMjZut_hngmVW3BliDHVJGFyM4ItE0m00zJXq-JMHsKR8Jyuiga9C1nD57nTcOC1CB3d_iZhd5UiZGkrr2OK792dW25zazGcUsSYeB9WBWY-pnHzQr5frt8Ii0Up9TKsTQcRwqC3db08VxWcip3d-_Mh6Rf9XV2V69-k-ZbDiHJDXwJzpVuu3zFBOPuDnEHoY7EM2zB0KzFYGfvIaaVGUeAqpm0ICTOKk8cIUk4fXteyPWW7vY1gPpsd96_bgmY74TNLMxNBTF0UG80hN5aljz62FovyJ9qKXeCqsPYHkDHhf2KJ3Ufw42ymapcAiiQJE7sIrnvZVmpsoL7Lt9w4NgPNg2_2JJGfIpjhx6lA77ZkPJtC8xPcTFprEn9weSoS5MiljuBisVg0ylaSpmnPGCu8CU9G9I4JdB7caJrBrLfhrL0SZ8b6VYR9VyIRCKys1hD7VhV7HFuZTFjKaDKKrM5pOe2mXDOH-kl3MMMpF4bQT6qNoA_VTKs7-WCurWo-LInAQ_H72WzuTZ2kbkQo_ZUIiRXvOq_calJrB10ITd620y-hODksMymJY3b6KlDAsX3InSZZpX3rCEnIzmF2NRPBbVO2bc5W9Jy-5-c-Hcd__v49P_0Jlgh3w1TqjAISOn1xW-dlh7tnhH7qkZ7e5xeRYM90FD_m9BkqNj-HikB4imgtOTbsIe6QoHL06hbcSds2ivfEBhzvpTcFb4vjjWAJuLVAV4S7lZJxpRUkIR0J766DIjFVlryXVkuESwn2hlpVTl8I4fXZEP58-prh09CD1ESf_iLfE7fmgt0YOXfHvld52elLOzlwimA-YM8z0vTHnI0j4LSyaglnlEA_5kyRjKFePlU7fKyX3DjSXqv5VrxcRf3vcFUZp1zCHvDfEgpJHbT_ErZv58V8CtdTWEzhhyncfPdz321EiS3kede4K_8FW_iD7CcLAAA=
+https://svelte-5-preview.vercel.app/#H4sIAAAAAAAAA51WX2_bNhD_Klc1gGxEku143YNqeyiGFtjDgO05ChJaomy6FKmSlJtM0Ifp4x721A8wYP5iO-q_ETfoBicOeffj7453vLuUTso41U54WzqCZNQJnXd57niOecrtRh8pNxT3WhYqtpLVK98HxASNCnx_E4mVjhXLDa4iw7JcKgMlUBEXVBsyX0AFqZIZuMGMPpIs5zQ4aBfBCOfU9EhYwxX-MXQynJ12oLhQigozYOa9Kld0V4jmfEIVO9KkZwg6pb5tGe6mjeUrJnROYzMpO2w1PZd3Rz1QVOc1JOyNBb2sagnTQsSGSQGaHOlkCqUVRiaWQpuBQaOXz50LMpJPclhv4OGqzAPDTMFlFYLdDIYepsFBMjFxo0hFyF5_u9PGDuFUmcnDB8pZzAyJ0ROqX0EsbcDRBCaLk8H0mOKqHNxDI5avwqzOhrSKVcKOEHOi9TpyMsJE5NTptr9nupiopNOZ1f5mM7yE9lpQrWYobxH5GJDQ2qT13aLynkbBrF8vN2WbyutFFeBL61My4l-O-XvAJf4GVvD2QGTK15TE--GQzJtYAuauWXvAREIfq-4EnucMNsPWCsiWckilwpg0p-7L9pRzhkQsE3lhwNYcghVJmIwc2CI63ClZ5OvywqODI-EFXZcNdwUsuWCoj1r36eBnrs5qX0dIlLAhHDMbjvbEajYEqhFg7nvoalsYg6GVIsZH-HFdYhXgk26z5fvV5p0wWKBSrWYNdBR0lvY1vrpUIZyKndn7i3HUX7R3fV1tfpP6WwZDyjV9icyWcbX5wATh7A9ygWHG0j4sXRj6lRittHnitFajKLDV0zWHhOmck6cQUk4f3zayPWW7vQlhMZ8f92-74mY74TNDMx1CTG0UW82h0IalTz62GYPyM23tXWArsrEHkDHhf2aJ2Yfw43yeNyYBcpIkTOxCuBlkW6mwmfr2ORbaejPSPPp6TxL5OYQ5fqwK1G5LJnMP2p_gzbRDk_ijfcYiQR-5VCG8Xi6XrbKTpGk6eIzV3oYnI2rHBBoP3iiawXzAYL21V-JMG7-OsG8rKASBxdoBsYfVsccRlsmEpYwmTmhUQSuvn3jtTBqm3kGPJ95sBsPUigR9rOdb09VHM27d-MOSEFwU38_nC9ezkqYpofRXIiQ2EduF5VaRRjvqSAh5303ChOIUMUynJI7Z6atAAceOJHeKZLX2vXVIQnaJs6-ZEG6bOJbdm63ds_rBP_vpffzn79-L059giLA3xO6VUUCHTl_s1lrZ4e6ZQz8NTOf3-UUkLK5d_FTQZ6zYTy0rEuEpopTk2LzHvANt14PxRm5WxHvpeuBucagRfOx2LZCUcLvKZVxrBUlIb86966lITHND7qVREulSgl2gUVXeC8G6uRisn09fM0wCPUhF1Okv8j0RGl1laD5udvrSTRecNJhgbGJa6uGYxVg7VivrGr-gBPqpYDnJGOrludryYwEU2vrmdppvhcWWyP-OSv2EcvsCD_g_B4Wkic1_jc7CgxsPlh784MGb787fXSQqrP7nBX9X_Qu-_r1J7goAAA==
 
 ```svelte
 <!-- App.svelte -->
@@ -134,16 +137,21 @@ https://svelte-5-preview.vercel.app/#H4sIAAAAAAAAA51WzW4bNxB-lYlsYCVYuytZdQ8bSUV
 		<h3>{current + 1}. {pregunta.titulo}</h3>
 		<p>{pregunta.descripcion}</p>
 
-		{#if pregunta.tipo === 'unica' || pregunta.tipo === 'multiple'}
-			<ul>
-				{#each pregunta.opciones as opcion}
-					<li>
-						<input type="radio" bind:group={pregunta.respuesta} value={opcion} />
+		<ul>
+			{#each pregunta.opciones as opcion, index}
+				<li>
+					<label for="opcion_{index}">
+						<input
+							type="radio"
+							bind:group={pregunta.respuesta}
+							value={opcion}
+							id="opcion_{index}"
+						/>
 						{opcion}
-					</li>
-				{/each}
-			</ul>
-		{/if}
+					</label>
+				</li>
+			{/each}
+		</ul>
 
 		<div>
 			<button onclick={() => current--}>Anterior</button>
@@ -179,3 +187,5 @@ https://svelte-5-preview.vercel.app/#H4sIAAAAAAAAA51WzW4bNxB-lYlsYCVYuytZdQ8bSUV
 	}
 </style>
 ```
+
+---
