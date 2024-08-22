@@ -35,10 +35,10 @@
 			{/if}
 		</div>
 
-		{#if pregunta.tipo === 'multiple'}
-			<Multiple {pregunta} {onupdate} />
-		{:else if pregunta.tipo === 'unica'}
+		{#if pregunta.tipo === 'unica'}
 			<Unica {pregunta} {onupdate} />
+		{:else if pregunta.tipo === 'multiple'}
+			<Multiple {pregunta} {onupdate} />
 		{:else if pregunta.tipo === 'puntaje'}
 			<Puntaje {pregunta} {onupdate} />
 		{:else if pregunta.tipo === 'libre'}
