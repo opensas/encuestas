@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { Encuesta, encuestas } from '$lib/components/encuesta';
+	import { Encuesta } from '$lib/components/encuesta';
 
 	export let data;
 
-	const encuesta = encuestas.find((e) => e.codigo === data.codigo) || encuestas[0];
+	$: encuesta = data.encuesta;
 
 	function onsave(encuesta: import('$lib/types').Encuesta) {
 		console.log('!encuesta saved!', { encuesta });

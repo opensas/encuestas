@@ -197,4 +197,4 @@ export const encuesta_ingles: Encuesta = {
 };
 
 export const encuestas = [encuesta_fp, encuesta_fp_auto, encuesta_manos, encuesta_ingles];
-export const DEFAULT_CODIGO_ENCUESTA = encuestas[0].codigo;
+export const DEFAULT_ENCUESTA = encuesta_ingles;
