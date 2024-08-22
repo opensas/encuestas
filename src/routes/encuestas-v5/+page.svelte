@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { encuesta_ingles } from '$lib/components/encuesta';
+	import { DEFAULT_ENCUESTA } from '$lib/components/encuesta';
 	import { Encuesta } from '$lib/components/encuesta_v5';
 
-	let encuesta = $state(encuesta_ingles);
+	let encuesta = $state(DEFAULT_ENCUESTA);
 
 	function onsave(encuesta: import('$lib/types').Encuesta) {
 		console.log('!encuesta saved!!!', { encuesta });
