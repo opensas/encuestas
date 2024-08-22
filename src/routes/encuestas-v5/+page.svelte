@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { Encuesta, encuesta02 } from '$lib/components/encuesta';
+	import { DEFAULT_ENCUESTA } from '$lib/components/encuesta';
+	import { Encuesta } from '$lib/components/encuesta_v5';
+
+	let encuesta = $state(DEFAULT_ENCUESTA);
 
 	function onsave(encuesta: import('$lib/types').Encuesta) {
 		console.log('!encuesta saved!!!', { encuesta });
@@ -9,8 +12,10 @@
 			.join(LF);
 		alert(`Felicitaciones! completaste la encuesta.${LF}${respuestas}`);
 	}
+
+	$inspect(encuesta);
 </script>
 
 <div class="flex h-screen items-center justify-center px-2 sm:px-10">
-	<Encuesta encuesta={encuesta02} {onsave} />
+	<Encuesta {encuesta} {onsave} />
 </div>

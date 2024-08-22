@@ -1,7 +1,96 @@
 import type { Encuesta } from '$lib/types';
 
-export const encuesta01: Encuesta = {
+export const encuesta_fp: Encuesta = {
 	id: 'enc_001',
+	codigo: 'fp',
+	titulo: 'Satisfacción de participantes de cursos de Formación Profesional ',
+	descripcion:
+		'¿Cómo fue tu experiencia en los cursos de Formación Profesional presencial y semi-presencial Fomentar/VAT?',
+	preguntas: [
+		{
+			id: 'preg_001',
+			titulo: '¿El curso le pareció útil para aumentar sus posibilidades de encontrar empleo? ',
+			descripcion: 'Contanos que tan conforme estas con el desarrollo del programa',
+			tipo: 'unica',
+			opciones: ['Sí', 'Medianamente útil', 'NO'],
+			acepta_otros: false
+		},
+		{
+			id: 'preg_002',
+			titulo:
+				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
+			acepta_otros: false
+		},
+		{
+			id: 'preg_003',
+			titulo: '¿El docente del curso respondió a sus dudas o consultas cuando Ud. lo requirió?',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: ['Sí', 'A veces', 'NO', 'No había docente'],
+			acepta_otros: false
+		},
+		{
+			id: 'preg_004',
+			titulo:
+				'En caso de que el curso haya sido virtual ¿pudo acceder al campus y a los materiales fácilmente? ',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
+			acepta_otros: false
+		},
+		{
+			id: 'preg_005',
+			titulo:
+				'En caso que el curso haya sido presencial ¿le facilitaron los insumos, herramientas o equipos necesarios para el desarrollo del mismo?',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: ['Sí', 'Parcialmente', 'NO', 'No corresponde'],
+			acepta_otros: false
+		}
+	]
+};
+
+export const encuesta_fp_auto: Encuesta = {
+	id: 'enc_001',
+	codigo: 'fp-autoasistido',
+	titulo: 'Satisfacción de participantes de cursos de Formación Profesional ',
+	descripcion:
+		'¿Cómo fue tu experiencia en los cursos de Formación Profesional auto-asistida Fomentar/VAT?',
+	preguntas: [
+		{
+			id: 'preg_001',
+			titulo: '¿El curso le pareció útil para aumentar sus posibilidades de encontrar empleo? ',
+			descripcion: 'Contanos que tan conforme estas con el desarrollo del programa',
+			tipo: 'unica',
+			opciones: ['Sí', 'Medianamente útil', 'NO'],
+			acepta_otros: false
+		},
+		{
+			id: 'preg_002',
+			titulo:
+				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
+			acepta_otros: false
+		},
+		{
+			id: 'preg_003',
+			titulo: '¿Pudo acceder al campus y a los materiales fácilmente? ',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
+			acepta_otros: false
+		}
+	]
+};
+
+export const encuesta_manos: Encuesta = {
+	id: 'enc_001',
+	codigo: 'manos',
 	titulo: 'Manos a la obra',
 	descripcion: 'Encuesta de satisfacción del programa de Empleo manos a la obra',
 	preguntas: [
@@ -41,8 +130,9 @@ export const encuesta01: Encuesta = {
 	]
 };
 
-export const encuesta02: Encuesta = {
+export const encuesta_ingles: Encuesta = {
 	id: 'enc_ingles_experiencia',
+	codigo: 'ingles',
 	titulo: 'Evaluación de la experiencia en el curso de inglés',
 	descripcion:
 		'Por favor, responda a las siguientes preguntas para ayudarnos a mejorar nuestro curso de inglés',
@@ -105,3 +195,6 @@ export const encuesta02: Encuesta = {
 		}
 	]
 };
+
+export const encuestas = [encuesta_fp, encuesta_fp_auto, encuesta_manos, encuesta_ingles];
+export const DEFAULT_ENCUESTA = encuesta_ingles;
