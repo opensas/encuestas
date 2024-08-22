@@ -1,5 +1,6 @@
 export type Encuesta = {
 	id: `enc_${string}`;
+	codigo?: string;
 	titulo: string;
 	descripcion?: string;
 	preguntas: Pregunta[];
