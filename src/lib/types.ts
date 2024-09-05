@@ -8,7 +8,7 @@ export type Encuesta = {
 
 export type TipoPregunta = Pregunta['tipo'];
 
-export type Opcion = { titulo: string; descripcion?: string };
+export type Opcion = { titulo: string; descripcion?: string; proxima?: Pregunta['proxima'] };
 
 export type PreguntaUnica = Extract<Pregunta, { tipo: 'unica' }>;
 export type PreguntaMultiple = Extract<Pregunta, { tipo: 'multiple' }>;
@@ -17,6 +17,7 @@ export type PreguntaLibre = Extract<Pregunta, { tipo: 'libre' }>;
 
 export type Pregunta = {
 	id: `preg_${string}`;
+	proxima?: Pregunta['id'] | undefined | null; // null ends the survey
 	titulo: string;
 	descripcion?: string;
 	// tipo: TipoPregunta; // 'unica' | 'multiple' | 'puntaje' | 'libre'
@@ -25,12 +26,16 @@ export type Pregunta = {
 			tipo: 'unica';
 			opciones: Array<Opcion | string>;
 			acepta_otros?: boolean;
+			texto_otros?: string;
+			proxima_otros?: Pregunta['proxima'];
 			respuesta?: string;
 	  }
 	| {
 			tipo: 'multiple';
 			opciones: Array<Opcion | string>;
 			acepta_otros?: boolean;
+			texto_otros?: boolean;
+			proxima_otros?: Pregunta['proxima'];
 			respuesta?: string[];
 	  }
 	| {
