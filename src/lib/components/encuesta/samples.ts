@@ -196,5 +196,113 @@ export const encuesta_ingles: Encuesta = {
 	]
 };
 
-export const encuestas = [encuesta_fp, encuesta_fp_auto, encuesta_manos, encuesta_ingles];
+export const encuesta_cinefila: Encuesta = {
+	id: 'enc_condicional',
+	codigo: 'cinefila',
+	titulo: 'Encuesta cinéfila',
+	descripcion: 'Encuesta de prueba para probar caminos condicionales',
+	preguntas: [
+		{
+			id: 'preg_inicio',
+			titulo: 'Te gusta el cine? ',
+			tipo: 'unica',
+			opciones: [
+				'Sí',
+				'más o menos',
+				'Muy poco',
+				{ titulo: 'Ir al final', proxima: 'preg_final' },
+				{ titulo: 'Terminar esto ya', proxima: null }
+			],
+			acepta_otros: false
+		},
+
+		{
+			id: 'preg_genero',
+			proxima: 'preg_final',
+			titulo: '¿Qué género te gusta más?',
+			tipo: 'unica',
+			opciones: [
+				{ titulo: 'Ciencia ficción', proxima: 'preg_genero_ciencia' },
+				{
+					titulo: 'Acción',
+					descripcion: 'Películas para ver tiros y piñas',
+					proxima: 'preg_genero_accion'
+				},
+				{ titulo: 'Drama', descripcion: 'Películas para llorar' }
+			],
+			acepta_otros: true,
+			texto_otros: 'Ingresa aquí el género de tu preferencia',
+			proxima_otros: 'preg_genero_otros'
+		},
+
+		{
+			id: 'preg_genero_ciencia',
+			proxima: 'preg_final',
+			titulo: '¿Qué película de ciencia ficción es tu favorita?',
+			tipo: 'unica',
+			opciones: [
+				{ titulo: 'Star wars', proxima: 'preg_genero_ciencia_star' },
+				'Blade runner',
+				'2001',
+				'Dune',
+				'Mad max'
+			],
+			acepta_otros: true,
+			texto_otros: 'Ingresa aquí tu película de ciencia ficción favorita',
+			proxima_otros: 'preg_final'
+		},
+
+		{
+			id: 'preg_genero_ciencia_star',
+			proxima: 'preg_final',
+			titulo: '¿Qué película de la saga de Star wars es tu favorita?',
+			tipo: 'unica',
+			opciones: [
+				'Una nueva esperanza (IV)',
+				'El imperio contra-ataca (V)',
+				'El retorno del Jedi (VI)'
+			]
+		},
+
+		{
+			id: 'preg_genero_accion',
+			proxima: 'preg_final',
+			titulo: '¿Qué película de acción es tu favorita?',
+			tipo: 'unica',
+			opciones: ['Indiana Jones', 'James Bond', 'Duro de matar', 'Mad max'],
+			acepta_otros: true
+		},
+
+		{
+			id: 'preg_genero_otros',
+			proxima: 'preg_final',
+			titulo: '¿Qué película de ese género es tu favorita?',
+			tipo: 'libre'
+		},
+
+		{
+			id: 'preg_final',
+			titulo: '¿Qué te pareció esta encuesta?',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: [
+				'Me encantó',
+				'Muy bueno',
+				'bueh...',
+				{ titulo: 'Me equivoqué de género', proxima: 'preg_genero' },
+				{ titulo: 'La quiero hacer de nuevo', proxima: 'preg_inicio' }
+			],
+			acepta_otros: true,
+			texto_otros: 'Ingresa aquí tu opinión'
+		}
+	]
+};
+
+export const encuestas = [
+	encuesta_fp,
+	encuesta_fp_auto,
+	encuesta_manos,
+	encuesta_ingles,
+	encuesta_cinefila
+];
 export const DEFAULT_ENCUESTA = encuesta_ingles;
