@@ -11,7 +11,7 @@
 
 	// pregunta actualmente siendo respondida
 	let pregunta: Pregunta = encuesta.preguntas[0];
-	$: proxima = updateProxima(pregunta, encuesta);
+	$: proxima = calculateProxima(pregunta, encuesta);
 
 	$: current = preguntas.length + 1; // numero de pregunta actual, respondidas + 1
 
@@ -27,8 +27,8 @@
 		pregunta = encuesta.preguntas.find((p) => p.id === proxima)!;
 	}
 
-	function updateProxima(pregunta: Pregunta, encuesta: Encuesta) {
-		let proxima = getProxima(pregunta);
+	function calculateProxima(pregunta: Pregunta, encuesta: Encuesta) {
+		let proxima = _proxima(pregunta);
 
 		// by default, jump to next pregunta
 		if (proxima === undefined) {
@@ -41,7 +41,7 @@
 		return proxima;
 	}
 
-	function getProxima(pregunta: Pregunta) {
+	function _proxima(pregunta: Pregunta) {
 		if (!pregunta) return undefined;
 
 		const { tipo, respuesta, proxima } = pregunta;
@@ -68,7 +68,8 @@
 	}
 
 	function prev() {
-		if (!preguntas.length) return;
+		if (preguntas.length <= 0) return;
+		pregunta = preguntas.at(-1)!;
 		preguntas = preguntas.slice(0, -1);
 	}
 
