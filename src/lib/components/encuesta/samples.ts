@@ -196,9 +196,9 @@ export const encuesta_ingles: Encuesta = {
 	]
 };
 
-export const encuesta_cinefila: Encuesta = {
+export const encuesta_cine: Encuesta = {
 	id: 'enc_condicional',
-	codigo: 'cinefila',
+	codigo: 'cine',
 	titulo: 'Encuesta cinéfila',
 	descripcion: 'Encuesta de prueba para probar caminos condicionales',
 	preguntas: [
@@ -762,6 +762,6 @@ export const encuestas = [
 	encuesta_fp_auto,
 	encuesta_manos,
 	encuesta_ingles,
-	encuesta_cinefila
+	encuesta_cine
 ];
 export const DEFAULT_ENCUESTA = encuesta_aept;
