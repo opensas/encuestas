@@ -38,18 +38,25 @@
 </script>
 
 <Radio.Root bind:value={checked} class="gap-0 space-y-4">
-	{#each opciones as { titulo, descripcion }, index}
-		{@const id = `opcion_${index}`}
-		<div class="flex items-center space-x-3">
-			<Radio.Item {id} value={titulo} class="self-start" />
-			<Label class="flex flex-col space-y-1" for={id}>
-				<div>{titulo}</div>
-				{#if descripcion}
-					<div class="text-xs font-normal text-muted-foreground">{descripcion}</div>
-				{/if}
-			</Label>
-		</div>
-	{/each}
+	<div
+		class="gap-x-2 space-y-4"
+		class:lg:columns-3={opciones.length >= 12}
+		class:md:columns-2={opciones.length >= 8}
+	>
+		{#each opciones as { titulo, descripcion }, index}
+			{@const id = `opcion_${index}`}
+			<div class="flex items-center space-x-3">
+				<!-- mt-1 compensates for the leading-snug, to have both aligned to the top -->
+				<Radio.Item {id} value={titulo} class="mt-1 self-start" />
+				<Label class="flex flex-col space-y-1 leading-snug" for={id}>
+					<div>{titulo}</div>
+					{#if descripcion}
+						<div class="text-xs font-normal text-muted-foreground">{descripcion}</div>
+					{/if}
+				</Label>
+			</div>
+		{/each}
+	</div>
 
 	{#if pregunta.acepta_otros}
 		<div class="flex items-center space-x-3">
@@ -60,26 +67,3 @@
 		</div>
 	{/if}
 </Radio.Root>
-
-<!-- 
-{#each opciones as { titulo, descripcion }, index}
-	{@const id = `opcion_${index}`}
-	<div class="flex items-center space-x-3">
-		<Checkbox {id} bind:checked={checked[index]} class="self-start" />
-		<Label for={id} class="flex flex-col space-y-1">
-			<div>{titulo}</div>
-			{#if descripcion}
-				<div class="text-xs font-normal text-muted-foreground">{descripcion}</div>
-			{/if}
-		</Label>
-	</div>
-{/each}
-
-{#if pregunta.acepta_otros}
-	<div class="flex items-center space-x-3">
-		<Checkbox id="opcion_otra" bind:checked={checkedOther} class="--self-start" />
-		<div class="w-full space-y-1">
-			<Input placeholder="otra opción" bind:value={other} --disabled />
-		</div>
-	</div>
-{/if} -->

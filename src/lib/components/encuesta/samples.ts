@@ -529,10 +529,10 @@ export const encuesta_upep: Encuesta = {
 			tipo: 'unica',
 			opciones: [
 				'Buenos Aires',
+				'CABA',
 				'Catamarca',
 				'Chaco',
 				'Chubut',
-				'Ciudad Autonoma de Buenos Aires',
 				'Corrientes',
 				'Entre Rios',
 				'Formosa',
