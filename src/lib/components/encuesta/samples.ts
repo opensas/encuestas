@@ -489,7 +489,7 @@ export const encuesta_upep: Encuesta = {
 				'Pequeño emprendimiento familiar',
 				'Pequeño emprendimiento no familiar',
 				'Organización comunitaria / social',
-				'Cuadrilla municipal',
+				'Cuadrilla municipal'
 			],
 			acepta_otros: true
 		},
