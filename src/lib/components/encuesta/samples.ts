@@ -424,6 +424,8 @@ export const encuesta_aept: Encuesta = {
 	]
 };
 
+const CRLF = '\n';
+
 export const encuesta_upep: Encuesta = {
 	id: 'enc_upep',
 	codigo: 'upep',
@@ -432,8 +434,9 @@ export const encuesta_upep: Encuesta = {
 		{
 			id: 'preg_0',
 			codigo: 'P0',
-			titulo: 'Ingresa tus datos de contact: Nombre, Apellido y Celular?',
-			tipo: 'libre'
+			titulo: 'Ingresá tus datos de contacto: nombre, apellido y celular',
+			tipo: 'libre',
+			respuesta: `Nombre: ${CRLF}Apellido: ${CRLF}Celular: `
 		},
 		{
 			id: 'preg_1',
@@ -470,7 +473,9 @@ export const encuesta_upep: Encuesta = {
 			id: 'preg_5',
 			codigo: 'P5',
 			titulo: '¿Cuántas personas trabajan en la unidad productiva/emprendimiento, aproximadamente?',
-			tipo: 'libre'
+			tipo: 'libre',
+			control: 'input',
+			maxlength: 4
 		},
 		{
 			id: 'preg_6',

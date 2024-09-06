@@ -90,9 +90,6 @@
 		encuesta = encuesta;
 		// encuesta.preguntas[current].respuesta = respuesta;
 	}
-
-	$: console.log({ pregunta, respuesta: pregunta.respuesta, proxima });
-	$: console.log({ preguntas, respondidas: preguntas.length });
 </script>
 
 <div class={cn('rounded-[0.5rem] bg-background sm:border sm:shadow-xl', className)}>
