@@ -3,17 +3,16 @@ import type { Encuesta } from '$lib/types';
 export const encuesta_fp: Encuesta = {
 	id: 'enc_001',
 	codigo: 'fp',
-	titulo: 'Satisfacción de participantes de cursos de Formación Profesional ',
+	titulo: 'Satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL',
 	descripcion:
-		'¿Cómo fue tu experiencia en los cursos de Formación Profesional presencial y semi-presencial Fomentar/VAT?',
+		'Encuesta de satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL de Formación Profesional presencial y semi-presencial Fomentar/VAT (NO - Auto asistidos)',
 	preguntas: [
 		{
 			id: 'preg_001',
-			titulo: '¿El curso le pareció útil para aumentar sus posibilidades de encontrar empleo? ',
+			titulo: '¿El curso/taller de orientación laboral le pareció útil para aumentar sus posibilidades de encontrar empleo?',
 			descripcion: 'Contanos que tan conforme estas con el desarrollo del programa',
 			tipo: 'unica',
-			opciones: ['Sí', 'Medianamente útil', 'NO'],
-			acepta_otros: false
+			opciones: ['Sí', 'Medianamente útil', 'NO']
 		},
 		{
 			id: 'preg_002',
@@ -21,34 +20,39 @@ export const encuesta_fp: Encuesta = {
 				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
 			descripcion: '',
 			tipo: 'unica',
-			opciones: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
-			acepta_otros: false
+			opciones: ['Sí', 'Medianamente comprensibles y adecuados', 'NO']
 		},
 		{
 			id: 'preg_003',
-			titulo: '¿El docente del curso respondió a sus dudas o consultas cuando Ud. lo requirió?',
+			titulo:
+				'¿El capacitador del curso/taller de orientación laboral respondió a sus dudas o consultas cuando Ud. lo requirió?',
 			descripcion: '',
 			tipo: 'unica',
-			opciones: ['Sí', 'A veces', 'NO', 'No había docente'],
-			acepta_otros: false
+			opciones: ['Sí', 'A veces', 'NO', 'No había docente/capacitador']
 		},
 		{
 			id: 'preg_004',
 			titulo:
-				'En caso de que el curso haya sido virtual ¿pudo acceder al campus y a los materiales fácilmente? ',
+				'n caso de que el curso/taller de orientación laboral haya sido virtual ¿pudo acceder al campus/plataforma y a los materiales fácilmente?',
 			descripcion: '',
 			tipo: 'unica',
-			opciones: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
-			acepta_otros: false
+			opciones: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde']
 		},
 		{
 			id: 'preg_005',
 			titulo:
-				'En caso que el curso haya sido presencial ¿le facilitaron los insumos, herramientas o equipos necesarios para el desarrollo del mismo?',
+				'En caso que el curso/taller de orientación laboral haya sido presencial ¿le facilitaron los insumos, herramientas o equipos necesarios para el desarrollo del mismo?',
 			descripcion: '',
 			tipo: 'unica',
-			opciones: ['Sí', 'Parcialmente', 'NO', 'No corresponde'],
-			acepta_otros: false
+			opciones: ['Sí', 'Parcialmente', 'NO', 'No corresponde']
+		},
+		{
+			id: 'preg_006',
+			titulo:
+				'Percibe que luego del curso/taller de orientación laboral, ¿tiene mayor confianza sobre su propio trabajo y sus habilidades?',
+			descripcion: '',
+			tipo: 'unica',
+			opciones: ['Sí', 'Parcialmente', 'NO']
 		}
 	]
 };
@@ -56,13 +60,14 @@ export const encuesta_fp: Encuesta = {
 export const encuesta_fp_auto: Encuesta = {
 	id: 'enc_001',
 	codigo: 'fp-autoasistido',
-	titulo: 'Satisfacción de participantes de cursos de Formación Profesional ',
+	titulo:
+		'Satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL - Auto asistidos',
 	descripcion:
-		'¿Cómo fue tu experiencia en los cursos de Formación Profesional auto-asistida Fomentar/VAT?',
+		'Encuesta de satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL de Formación Profesional presencial y semi-presencial Fomentar/VAT - Auto asistidos',
 	preguntas: [
 		{
 			id: 'preg_001',
-			titulo: '¿El curso le pareció útil para aumentar sus posibilidades de encontrar empleo? ',
+			titulo: '¿El curso le pareció útil para aumentar sus posibilidades de encontrar empleo?',
 			descripcion: 'Contanos que tan conforme estas con el desarrollo del programa',
 			tipo: 'unica',
 			opciones: ['Sí', 'Medianamente útil', 'NO'],
@@ -79,7 +84,7 @@ export const encuesta_fp_auto: Encuesta = {
 		},
 		{
 			id: 'preg_003',
-			titulo: '¿Pudo acceder al campus y a los materiales fácilmente? ',
+			titulo: '¿Pudo acceder al campus y a los materiales fácilmente?',
 			descripcion: '',
 			tipo: 'unica',
 			opciones: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
