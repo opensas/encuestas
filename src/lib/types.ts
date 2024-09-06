@@ -19,6 +19,7 @@ export type Pregunta = {
 	id: `preg_${string}`;
 	proxima?: Pregunta['id'] | undefined | null; // null ends the survey
 	titulo: string;
+	codigo?: string;
 	descripcion?: string;
 	// tipo: TipoPregunta; // 'unica' | 'multiple' | 'puntaje' | 'libre'
 } & (
@@ -34,7 +35,7 @@ export type Pregunta = {
 			tipo: 'multiple';
 			opciones: Array<Opcion | string>;
 			acepta_otros?: boolean;
-			texto_otros?: boolean;
+			texto_otros?: string;
 			proxima_otros?: Pregunta['proxima'];
 			respuesta?: string[];
 	  }
