@@ -102,7 +102,7 @@
 		<Separator class="my-6" />
 
 		<div class="space-y-0.5">
-			<h3 class="text-lg font-medium">{current}. {pregunta.titulo}</h3>
+			<h3 class="text-lg font-medium">{pregunta.codigo || current}. {pregunta.titulo}</h3>
 			{#if pregunta.descripcion}
 				<p class="text-sm text-muted-foreground">{pregunta.descripcion}</p>
 			{/if}

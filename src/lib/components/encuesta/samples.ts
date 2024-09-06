@@ -204,7 +204,7 @@ export const encuesta_cinefila: Encuesta = {
 	preguntas: [
 		{
 			id: 'preg_inicio',
-			titulo: 'Te gusta el cine? ',
+			titulo: '¿Te gusta el cine?',
 			tipo: 'unica',
 			opciones: [
 				'Sí',
@@ -288,7 +288,7 @@ export const encuesta_cinefila: Encuesta = {
 			opciones: [
 				'Me encantó',
 				'Muy bueno',
-				'bueh...',
+				'en fin...',
 				{ titulo: 'Me equivoqué de género', proxima: 'preg_genero' },
 				{ titulo: 'La quiero hacer de nuevo', proxima: 'preg_inicio' }
 			],
@@ -298,11 +298,465 @@ export const encuesta_cinefila: Encuesta = {
 	]
 };
 
+export const encuesta_aept: Encuesta = {
+	id: 'enc_aept',
+	codigo: 'aept',
+	titulo: 'Evaluación de participantes de Acciones de Entrenamiento para el Trabajo (AEPT)',
+	descripcion:
+		'Encuesta online para evaluar la satisfacción y experiencia de los participantes en el Programa de Entrenamiento para el Trabajo brindado por la Secretaría de Trabajo, Empleo y Seguridad Social (STEySS) / Subsecretarías de Empleo y Formación Laboral(SSEyFL).',
+	preguntas: [
+		{
+			id: 'preg_1',
+			codigo: 'P1',
+			titulo:
+				'¿Cuán satisfecho estás con el Programa de Entrenamiento para el Trabajo brindado por la STEySS/SSEyFL?',
+			tipo: 'unica',
+			opciones: ['Muy satisfecho', 'Satisfecho', 'Indistinto', 'Insatisfecho', 'Muy insatisfecho']
+		},
+		{
+			id: 'preg_2_1',
+			codigo: 'P2.1',
+			titulo:
+				'¿Cómo fue tu experiencia en relación al "Registro en el Portal Empleo" para acceder al Entrenamiento para el Trabajo?',
+			tipo: 'unica',
+			opciones: ['Buena', 'Regular', 'Mala']
+		},
+		{
+			id: 'preg_2_2',
+			codigo: 'P2.2',
+			titulo:
+				'¿Cómo fue tu experiencia en relación a la "Búsqueda de la oferta de EPT" para acceder al Entrenamiento para el Trabajo?',
+			tipo: 'unica',
+			opciones: ['Buena', 'Regular', 'Mala']
+		},
+		{
+			id: 'preg_2_3',
+			codigo: 'P2.3',
+			titulo:
+				'¿Cómo fue tu experiencia en relación a la "Postulación a la oferta de EPT" para acceder al Entrenamiento para el Trabajo?',
+			tipo: 'unica',
+			opciones: ['Buena', 'Regular', 'Mala']
+		},
+
+		{
+			id: 'preg_3_1',
+			codigo: 'P3.1',
+			titulo:
+				'¿En qué medida acordás con que "Me permitió adquirir nuevos conocimientos y habilidades" sobre la participación en la práctica de Entrenamiento para el Trabajo?',
+			tipo: 'unica',
+			opciones: [
+				'Muy de acuerdo',
+				'De acuerdo',
+				'Ni de acuerdo ni en desacuerdo',
+				'En desacuerdo',
+				'Muy en desacuerdo'
+			]
+		},
+		{
+			id: 'preg_3_2',
+			codigo: 'P3.2',
+			titulo:
+				'¿En qué medida acordás con que "Mejora mis posibilidades de conseguir trabajo" sobre la participación en la práctica de Entrenamiento para el Trabajo?',
+			tipo: 'unica',
+			opciones: [
+				'Muy de acuerdo',
+				'De acuerdo',
+				'Ni de acuerdo ni en desacuerdo',
+				'En desacuerdo',
+				'Muy en desacuerdo'
+			]
+		},
+
+		{
+			id: 'preg_4',
+			codigo: 'P4',
+			titulo:
+				'¿La empresa cumplió con los siguientes compromisos establecidos en el Acuerdo de Entrenamiento para el Trabajo?',
+			tipo: 'multiple',
+			opciones: [
+				'Cantidad de horas',
+				'Días y horarios',
+				'Tareas del puesto',
+				'Acompañamiento de un tutor'
+			]
+		},
+
+		{
+			id: 'preg_5',
+			codigo: 'P5',
+			proxima: 'preg_6',
+			titulo: '¿Participaste en algún otro programa de la STEySS/SSEyFL?',
+			tipo: 'unica',
+			opciones: [{ titulo: 'Sí', proxima: 'preg_5_1' }, 'No']
+		},
+
+		{
+			id: 'preg_5_1',
+			codigo: 'P5.1',
+			proxima: 'preg_5_2',
+			titulo: '¿En cuál programa de la STEySS/SSEyFL participaste?',
+			tipo: 'unica',
+			opciones: ['Cursos', 'Programa de Inserción Laboral', 'Programa de Empleo Independiente'],
+			acepta_otros: true,
+			texto_otros: 'En qué otros programas participaste?'
+		},
+
+		{
+			id: 'preg_5_2',
+			codigo: 'P5.2',
+			proxima: 'preg_6',
+			titulo: '¿Considerás que la experiencia en esos programas...?',
+			tipo: 'multiple',
+			opciones: [
+				'Resultó una buena preparación para participar del entrenamiento',
+				'Complementa la formación obtenida durante el entrenamiento'
+			]
+		},
+
+		{
+			id: 'preg_6',
+			codigo: 'P6',
+			titulo:
+				'Para acceder al Entrenamiento para el trabajo ¿contaste con la asistencia de alguna Oficina de Empleo o Agencia Territorial?',
+			tipo: 'unica',
+			opciones: ['Si', 'No']
+		}
+	]
+};
+
+export const encuesta_upep: Encuesta = {
+	id: 'enc_upep',
+	codigo: 'upep',
+	titulo: 'Relevamiento de Unidades Productivas de la Economía Popular - Prueba piloto',
+	preguntas: [
+		{
+			id: 'preg_0',
+			codigo: 'P0',
+			titulo: 'Ingresa tus datos de contact: Nombre, Apellido y Celular?',
+			tipo: 'libre'
+		},
+		{
+			id: 'preg_1',
+			codigo: 'P1',
+			titulo:
+				'¿Hacés alguna actividad laboral en una organización comunitaria, barrial, social, familiar o cooperativa?',
+			tipo: 'unica',
+			opciones: ['Si', 'No']
+		},
+		{
+			id: 'preg_2',
+			codigo: 'P2',
+			titulo: '¿Cuál es el nombre de la unidad productiva/emprendimiento donde trabajas?',
+			tipo: 'libre'
+		},
+		{
+			id: 'preg_3',
+			codigo: 'P3',
+			titulo: 'Esa actividad, la realizás de manera…',
+			tipo: 'unica',
+			opciones: ['Colectiva, con otras personas', 'Individual']
+		},
+		{
+			id: 'preg_4',
+			codigo: 'P4',
+			titulo:
+				'En la unidad productiva, ¿Quién toma las decisiones? Marque todas las opciones que correspondan',
+			tipo: 'multiple',
+			opciones: ['Un referente', 'Un patrón o patrona', 'Un coordinador/a', 'Una asamblea'],
+			acepta_otros: true,
+			texto_otros: 'Otro referente con poder de decisión'
+		},
+		{
+			id: 'preg_5',
+			codigo: 'P5',
+			titulo: '¿Cuántas personas trabajan en la unidad productiva/emprendimiento, aproximadamente?',
+			tipo: 'libre'
+		},
+		{
+			id: 'preg_6',
+			codigo: 'P6',
+			titulo: '¿Cuál es la forma de organización de la unidad productiva / emprendimiento ?',
+			tipo: 'unica',
+			opciones: [
+				'Cooperativa',
+				'Cooperativa - Empresa recuperada',
+				'Polo - Cooperativa de Liberados',
+				'Pequeño emprendimiento familiar',
+				'Pequeño emprendimiento no familiar',
+				'Organización comunitaria / social',
+				'Cuadrilla municipal'
+			],
+			acepta_otros: true
+		},
+		{
+			id: 'preg_7_1',
+			codigo: 'P7.1',
+			titulo:
+				'La unidad productiva/emprendimiento, ¿tiene relación con alguna organización social?',
+			tipo: 'unica',
+			opciones: ['No'],
+			acepta_otros: true,
+			texto_otros: 'En caso afirmativo especifique el nombre de la organización social'
+		},
+		{
+			id: 'preg_7_2',
+			codigo: 'P7.2',
+			titulo:
+				'La unidad productiva/emprendimiento, ¿tiene relación con una organización religiosa?',
+			tipo: 'unica',
+			opciones: ['No'],
+			acepta_otros: true,
+			texto_otros: 'En caso afirmativo especifique el nombre de la organización religiosa'
+		},
+		{
+			id: 'preg_7_3',
+			codigo: 'P7.3',
+			titulo: 'La unidad productiva/emprendimiento, ¿tiene relación con un gobierno municipal?',
+			tipo: 'unica',
+			opciones: ['No'],
+			acepta_otros: true,
+			texto_otros: 'En caso afirmativo especifique el nombre del Municipio'
+		},
+		{
+			id: 'preg_8',
+			codigo: 'P8',
+			titulo: '¿En qué provincia se encuentra localizada la unidad productiva?',
+			tipo: 'unica',
+			opciones: [
+				'Buenos Aires',
+				'Catamarca',
+				'Chaco',
+				'Chubut',
+				'Ciudad Autonoma de Buenos Aires',
+				'Corrientes',
+				'Entre Rios',
+				'Formosa',
+				'Jujuy',
+				'La Pampa',
+				'La Rioja',
+				'Mendoza',
+				'Misiones',
+				'Neuquen',
+				'Rio Negro',
+				'Salta',
+				'San Juan',
+				'San Luis',
+				'Santa Cruz',
+				'Santa Fe',
+				'Santiago del Estero',
+				'Tierra del Fuego',
+				'Tucuman'
+			]
+		},
+		{
+			id: 'preg_8_1',
+			codigo: 'P8_1',
+			titulo: '¿Cuál es el domicilio de la unidad productiva/emprendimiento?',
+			descripcion:
+				'Dirección completa (calle, nro, piso/depto, manzana, lote) cp, localidad, departamento/partido. Si la unidad tiene más de un domicilio, por favor indique el más importante.',
+			tipo: 'libre'
+		},
+		{
+			id: 'preg_9',
+			codigo: 'P9',
+			titulo: '¿A qué se dedica o qué produce la unidad productiva/emprendimiento ?',
+			tipo: 'unica',
+			opciones: [
+				{
+					titulo: '1. Comercio popular y trabajos en espacios públicos',
+					descripcion: 'Ferias, venta ambulante, cuidado de coches, etc.',
+					proxima: 'preg_9_1'
+				},
+				{
+					titulo: '2. Recuperación, Reciclado y Servicios ambientales',
+					descripcion: 'Recolección de cartones y otros materiales, reciclado de residuos, etc.',
+					proxima: 'preg_9_2'
+				},
+				{
+					titulo: '3. Construcción e infraestructura social y Mejoramiento ambiental',
+					proxima: 'preg_9_3'
+				},
+				{
+					titulo: '4. Industria manufacturera',
+					descripcion: 'Elaboración de productos',
+					proxima: 'preg_9_4'
+				},
+				{
+					titulo: '5. Servicios socio comunitarios',
+					descripcion:
+						'Comedores, merenderos, clubes barriales, salud comunitaria, cuidado de personas, apoyo escolar, medios comunitarios, espacios culturales, etc.',
+					proxima: 'preg_9_5'
+				},
+				{ titulo: '6. Agricultura familiar y campesina', proxima: 'preg_9_6' },
+				{ titulo: '7. Transporte', proxima: 'preg_9_7' }
+			]
+		},
+		{
+			id: 'preg_9_1',
+			codigo: 'P9.1',
+			proxima: null,
+			titulo: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
+			descripcion:
+				'Elija una opción de la rama de actividad de la unidad productiva/emprendimiento',
+			tipo: 'unica',
+			opciones: [
+				'Artesano/a',
+				'Artista Callejero',
+				'Cuida Coche',
+				'Feriante',
+				{
+					titulo: 'Intermediación solidaria',
+					descripcion: 'Ferias, mercado, Almacenes, Nodos, Galpones, Logística, etc.'
+				},
+				'Limpia vidrio //vehículos',
+				'Mensajería // Delivery',
+				'Vendedor/a ambulante',
+				'Venta directa'
+			],
+			acepta_otros: true
+		},
+
+		{
+			id: 'preg_9_2',
+			codigo: 'P9.2',
+			proxima: null,
+			titulo: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
+			descripcion:
+				'Elija una opción de la rama de actividad de la unidad productiva/emprendimiento',
+			tipo: 'unica',
+			opciones: [
+				'Carrero/a',
+				'Cartonero/reciclador/a',
+				'Chofer de camión',
+				'Forestación',
+				'Operario/a de plantas recicladora',
+				'Promotor/a ambiental',
+				'Reciclador/a de basura',
+				'Recolectores/as de residuos en villas',
+				'Trabajador/a de limpieza de terrenos y espacios verdes'
+			],
+			acepta_otros: true
+		},
+
+		{
+			id: 'preg_9_3',
+			codigo: 'P9.3',
+			proxima: null,
+			titulo: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
+			descripcion:
+				'Elija una opción de la rama de actividad de la unidad productiva/emprendimiento',
+			tipo: 'unica',
+			opciones: [
+				'Albañil // Durlero',
+				'Ayudante // Auxiliar en obras de construcción',
+				'Electricista',
+				'Gasista',
+				'Herrería',
+				'Pintor/a',
+				'Plomero/a // Fontanero/a // Instalador/a de redes de agua potable y tuberías',
+				'Soldador/a',
+				'Techista // Zinguero // Zanjero',
+				'Vidriero/a'
+			],
+			acepta_otros: true
+		},
+		{
+			id: 'preg_9_4',
+			codigo: 'P9.4',
+			proxima: null,
+			titulo: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
+			descripcion:
+				'Elija una opción de la rama de actividad de la unidad productiva/emprendimiento',
+			tipo: 'unica',
+			opciones: [
+				'Producción de alimentos',
+				'Fabricación de calzados',
+				'Extracción y manufactura de minerales',
+				'Indumentaria y Textil',
+				'Producción de productos de tocador y limpieza',
+				'Fabricante de Bloques // Ladrillero',
+				'Carpintería y Zinguería',
+				'Producción de productos sanitarios'
+			],
+			acepta_otros: true
+		},
+
+		{
+			id: 'preg_9_5',
+			codigo: 'P9.5',
+			proxima: null,
+			titulo: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
+			descripcion:
+				'Elija una opción de la rama de actividad de la unidad productiva/emprendimiento',
+			tipo: 'unica',
+			opciones: [
+				'Acompañamiento de reinserción de liberados/as y recuperados/as',
+				{
+					titulo: 'Asistente Socio Educativo',
+					descripcion: 'Bachillerato Popular, Jardín Comunitario, Clases de apoyo escolar'
+				},
+				'Atención de Comedores y Merenderos Comunitarios',
+				{
+					titulo: 'Cuidados',
+					descripcion: 'Niños/as, enfermos/as, personas con discapacidad, ancianos/as'
+				},
+				'Promotor/a contra la violencia de género',
+				'Promotor/a de salud',
+				{
+					titulo: 'Trabajador/a de Cultura Comunitaria',
+					descripcion: 'Talleres, Orquestas, Espacios Culturales'
+				},
+				'Trabajador/a de Medio de Comunicación Comunitaria',
+				'Trabajador/a de deportes y recreación'
+			],
+			acepta_otros: true
+		},
+
+		{
+			id: 'preg_9_6',
+			codigo: 'P9.6',
+			proxima: null,
+			titulo: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
+			descripcion:
+				'Elija una opción de la rama de actividad de la unidad productiva/emprendimiento',
+			tipo: 'unica',
+			opciones: [
+				'Agroindustria',
+				'Agricultura',
+				'Ganadería',
+				'Pesca y Acuicultura',
+				'Turismo rural',
+				'Viveros y Huertas Urbanas'
+			],
+			acepta_otros: true
+		},
+
+		{
+			id: 'preg_9_7',
+			codigo: 'P9.7',
+			proxima: null,
+			titulo: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
+			descripcion:
+				'Elija una opción de la rama de actividad de la unidad productiva/emprendimiento',
+			tipo: 'unica',
+			opciones: [
+				'Carga de mercadería',
+				'Flete',
+				'Mensajería // Delivery',
+				'Transporte de pasajeros'
+			],
+			acepta_otros: true
+		}
+	]
+};
+
 export const encuestas = [
+	encuesta_aept,
+	encuesta_upep,
 	encuesta_fp,
 	encuesta_fp_auto,
 	encuesta_manos,
 	encuesta_ingles,
 	encuesta_cinefila
 ];
-export const DEFAULT_ENCUESTA = encuesta_ingles;
+export const DEFAULT_ENCUESTA = encuesta_aept;
