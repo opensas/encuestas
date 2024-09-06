@@ -9,7 +9,8 @@ export const encuesta_fp: Encuesta = {
 	preguntas: [
 		{
 			id: 'preg_001',
-			titulo: '¿El curso/taller de orientación laboral le pareció útil para aumentar sus posibilidades de encontrar empleo?',
+			titulo:
+				'¿El curso/taller de orientación laboral le pareció útil para aumentar sus posibilidades de encontrar empleo?',
 			descripcion: 'Contanos que tan conforme estas con el desarrollo del programa',
 			tipo: 'unica',
 			opciones: ['Sí', 'Medianamente útil', 'NO']
