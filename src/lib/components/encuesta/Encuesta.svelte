@@ -24,7 +24,12 @@
 	let preguntas: Pregunta[] = [];
 
 	function next() {
-		// contesté una pregunta
+		// contesté una nueva pregunta
+
+		// verifico si ya conteste anteriormente esa pregunta, evito bucles
+		const index = preguntas.findIndex((p) => p.id === pregunta.id);
+		if (index !== -1) preguntas = preguntas.slice(0, index);
+
 		preguntas = [...preguntas, pregunta];
 
 		if (proxima === null) return;
