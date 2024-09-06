@@ -45,6 +45,10 @@ export type Pregunta = {
 	  }
 	| {
 			tipo: 'libre';
+			opcion?: Opcion | string;
+			texto?: string; // placeholder
+			control?: 'textarea' | 'input';
+			maxlength?: number;
 			respuesta?: string;
 	  }
 );

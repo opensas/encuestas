@@ -13,8 +13,6 @@
 			.join(LF);
 		alert(`Felicitaciones! completaste la encuesta.${LF}${respuestas}`);
 	}
-
-	$: console.log('!!! from +page.svelte', { encuesta });
 </script>
 
 <div class="flex h-screen items-center justify-center px-2 sm:px-10">
