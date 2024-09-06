@@ -489,7 +489,7 @@ export const encuesta_upep: Encuesta = {
 				'Pequeño emprendimiento familiar',
 				'Pequeño emprendimiento no familiar',
 				'Organización comunitaria / social',
-				'Cuadrilla municipal'
+				'Cuadrilla municipal',
 			],
 			acepta_otros: true
 		},
@@ -529,10 +529,10 @@ export const encuesta_upep: Encuesta = {
 			tipo: 'unica',
 			opciones: [
 				'Buenos Aires',
+				'CABA',
 				'Catamarca',
 				'Chaco',
 				'Chubut',
-				'Ciudad Autonoma de Buenos Aires',
 				'Corrientes',
 				'Entre Rios',
 				'Formosa',
