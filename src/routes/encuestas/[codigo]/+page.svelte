@@ -18,5 +18,5 @@
 </script>
 
 <div class="flex h-screen items-center justify-center px-2 sm:px-10">
-	<Encuesta {encuesta} {onsave} />
+	<Encuesta class="max-w-4xl" {encuesta} {onsave} />
 </div>

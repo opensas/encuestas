@@ -4,10 +4,15 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Separator } from '$lib/components/ui/separator';
 
+	import { cn } from '$lib/utils';
+
 	import { Libre, Multiple, Puntaje, Unica } from './preguntas';
 
 	export let encuesta: Encuesta;
 	export let onsave: (encuesta: Encuesta) => void = () => {};
+
+	let className = '';
+	export { className as class };
 
 	// pregunta actualmente siendo respondida
 	let pregunta: Pregunta = encuesta.preguntas[0];
@@ -90,7 +95,7 @@
 	$: console.log({ preguntas, respondidas: preguntas.length });
 </script>
 
-<div class="rounded-[0.5rem] bg-background sm:border sm:shadow-xl">
+<div class={cn('rounded-[0.5rem] bg-background sm:border sm:shadow-xl', className)}>
 	<div class="space-y-6 p-6 sm:p-10 md:block">
 		<div class="space-y-1">
 			<h2 class="text-2xl font-bold tracking-tight">{encuesta.titulo}</h2>
