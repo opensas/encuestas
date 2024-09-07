@@ -1,22 +1,22 @@
 <script lang="ts">
-	import type { PreguntaPuntaje } from '$lib/types';
+	import type { RatingQuestion } from '$lib/types';
 
 	import { Button } from '$lib/components/ui/button';
 	import { Slider } from '$lib/components/ui/slider';
 
 	import { Minus, Plus } from 'lucide-svelte';
 
-	export let pregunta: PreguntaPuntaje;
+	export let question: RatingQuestion;
 	export let onupdate: (respuesta: number) => void = () => {};
 
-	let respuesta = pregunta.respuesta || 0;
-	let slider = [respuesta];
+	let answer = question.answer || 0;
+	let slider = [answer];
 
-	$: respuesta = slider[0];
-	$: onupdate(respuesta);
+	$: answer = slider[0];
+	$: onupdate(answer);
 
 	function updateSlider(value: number) {
-		slider = [respuesta + value];
+		slider = [answer + value];
 	}
 </script>
 
@@ -24,7 +24,7 @@
 	<div class="flex items-center justify-center space-x-2">
 		<Button
 			class="h-8 w-8 shrink-0 rounded-full"
-			disabled={respuesta <= 0}
+			disabled={answer <= 0}
 			size="icon"
 			variant="outline"
 			on:click={() => updateSlider(-1)}
@@ -34,13 +34,13 @@
 		</Button>
 		<div class="flex-1 text-center">
 			<div class="text-7xl font-bold tracking-tighter">
-				{respuesta}
+				{answer}
 			</div>
 			<div class="text-[0.70rem] uppercase text-muted-foreground">Puntaje</div>
 		</div>
 		<Button
 			class="h-8 w-8 shrink-0 rounded-full"
-			disabled={respuesta >= 10}
+			disabled={answer >= 10}
 			size="icon"
 			variant="outline"
 			on:click={() => updateSlider(1)}
