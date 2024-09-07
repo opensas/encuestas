@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Option, SingleQuestion } from '$lib/types';
 
+	import { toOption } from '$lib/components/survey';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
@@ -17,7 +18,7 @@
 	// init checked from answer
 	function initState() {
 		checked = question.answer || '';
-		options = question.options.map((op) => (typeof op === 'object' ? op : { title: op }));
+		options = question.options.map(toOption);
 
 		// check is it's an other option
 		const answer = question.answer || '';

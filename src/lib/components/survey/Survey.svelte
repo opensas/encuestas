@@ -7,6 +7,7 @@
 	import { cn } from '$lib/utils';
 
 	import { Multiple, Rating, Single, Text } from './question';
+	import { toOption } from '.';
 
 	export let survey: Survey;
 	export let onsave: (survey: Survey) => void = () => {};
@@ -62,7 +63,7 @@
 		// single or multiple
 		if ('options' in question) {
 			// normalize options
-			const options = question.options.map((o) => (typeof o === 'string' ? { title: o } : o));
+			const options = question.options.map(toOption);
 			for (const option of options) {
 				let isSelected = false;
 				if (kind === 'single' && option.title === answer) isSelected = true;
