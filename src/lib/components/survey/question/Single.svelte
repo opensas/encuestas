@@ -1,64 +1,64 @@
 <script lang="ts">
-	import type { Opcion, PreguntaUnica } from '$lib/types';
+	import type { Option, SingleQuestion } from '$lib/types';
 
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
-	export let pregunta: PreguntaUnica;
-	export let onupdate: (respuesta: string) => void = () => {};
+	export let question: SingleQuestion;
+	export let onupdate: (answer: string) => void = () => {};
 
-	let opciones: Opcion[];
+	let options: Option[];
 	let checked: string;
 
 	const OTHER_VALUE = '__OTHER__';
 	let other = '';
 
-	// init checked from respuesta
+	// init checked from answer
 	function initState() {
-		checked = pregunta.respuesta || '';
-		opciones = pregunta.opciones.map((op) => (typeof op === 'object' ? op : { titulo: op }));
+		checked = question.answer || '';
+		options = question.options.map((op) => (typeof op === 'object' ? op : { title: op }));
 
 		// check is it's an other option
-		const respuesta = pregunta.respuesta || '';
-		if (!respuesta) {
+		const answer = question.answer || '';
+		if (!answer) {
 			checked = '';
-		} else if (opciones.find((opcion) => opcion.titulo === respuesta)) {
-			checked = respuesta;
+		} else if (options.find((opcion) => opcion.title === answer)) {
+			checked = answer;
 		} else {
 			checked = OTHER_VALUE;
-			other = respuesta;
+			other = answer;
 		}
 	}
 
 	initState();
 
-	$: respuesta = checked === OTHER_VALUE ? other : checked;
-	$: onupdate(respuesta);
+	$: answer = checked === OTHER_VALUE ? other : checked;
+	$: onupdate(answer);
 </script>
 
 <Radio.Root bind:value={checked} class="gap-0 space-y-4">
 	<div
 		class="gap-x-2 space-y-4"
-		class:lg:columns-3={opciones.length >= 12}
-		class:md:columns-2={opciones.length >= 8}
+		class:lg:columns-3={options.length >= 12}
+		class:md:columns-2={options.length >= 8}
 	>
-		{#each opciones as { titulo, descripcion }, index}
+		{#each options as { title, description }, index}
 			{@const id = `opcion_${index}`}
 			<div class="flex items-center space-x-3">
 				<!-- mt-1 compensates for the leading-snug, to have both aligned to the top -->
-				<Radio.Item {id} value={titulo} class="mt-1 self-start" />
+				<Radio.Item {id} value={title} class="mt-1 self-start" />
 				<Label class="flex flex-col space-y-1 leading-snug" for={id}>
-					<div>{titulo}</div>
-					{#if descripcion}
-						<div class="text-xs font-normal text-muted-foreground">{descripcion}</div>
+					<div>{title}</div>
+					{#if description}
+						<div class="text-xs font-normal text-muted-foreground">{description}</div>
 					{/if}
 				</Label>
 			</div>
 		{/each}
 	</div>
 
-	{#if pregunta.acepta_otros}
+	{#if question.allowOther}
 		<div class="flex items-center space-x-3">
 			<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
 			<div class="w-full space-y-1">

@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { Encuesta } from '$lib/components/encuesta';
+	import { Survey } from '$lib/components/survey/index.js';
 
 	export let data;
 
-	$: encuesta = data.encuesta;
+	$: survey = data.survey;
 
-	function onsave(encuesta: import('$lib/types').Encuesta) {
-		console.log('!encuesta saved!', { encuesta });
+	function onsave(survey: import('$lib/types').Survey) {
+		console.log('!survey saved!', { survey });
 		const LF = '\r\n\r\n';
-		const respuestas = encuesta.preguntas
-			.map((p) => `${p.titulo}: ${(p.respuesta || '').toString()}`)
+		const respuestas = survey.questions
+			.map((p) => `${p.title}: ${(p.answer || '').toString()}`)
 			.join(LF);
 		alert(`Felicitaciones! completaste la encuesta.${LF}${respuestas}`);
 	}
 </script>
 
 <div class="flex h-screen items-center justify-center px-2 sm:px-10">
-	<Encuesta class="max-w-4xl" {encuesta} {onsave} />
+	<Survey class="max-w-4xl" {survey} {onsave} />
 </div>

@@ -1,11 +1,11 @@
-import { DEFAULT_ENCUESTA, encuestas } from '$lib/components/encuesta';
+import { DEFAULT_SURVEY, surveys } from '$lib/components/survey';
 
 import { redirect } from '@sveltejs/kit';
 
 export async function load({ params }) {
-	const encuesta = encuestas.find((e) => e.codigo === params.codigo);
+	const survey = surveys.find((e) => e.code === params.codigo);
 
-	if (!encuesta) throw redirect(302, `/encuestas/${DEFAULT_ENCUESTA.codigo}`);
+	if (!survey) throw redirect(302, `/surveys/${DEFAULT_SURVEY.code}`);
 
-	return { encuesta };
+	return { survey };
 }

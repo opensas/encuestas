@@ -1,54 +1,54 @@
-export type Encuesta = {
+export type Survey = {
 	id: `enc_${string}`;
-	codigo: string;
-	titulo: string;
-	descripcion?: string;
-	preguntas: Pregunta[];
+	code: string;
+	title: string;
+	description?: string;
+	questions: Question[];
 };
 
-export type TipoPregunta = Pregunta['tipo'];
+export type QuestionKind = Question['kind'];
 
-export type Opcion = { titulo: string; descripcion?: string; proxima?: Pregunta['proxima'] };
+export type Option = { title: string; description?: string; next?: Question['next'] };
 
-export type PreguntaUnica = Extract<Pregunta, { tipo: 'unica' }>;
-export type PreguntaMultiple = Extract<Pregunta, { tipo: 'multiple' }>;
-export type PreguntaPuntaje = Extract<Pregunta, { tipo: 'puntaje' }>;
-export type PreguntaLibre = Extract<Pregunta, { tipo: 'libre' }>;
+export type SingleQuestion = Extract<Question, { kind: 'single' }>;
+export type MultipleQuestion = Extract<Question, { kind: 'multiple' }>;
+export type RatingQuestion = Extract<Question, { kind: 'rating' }>;
+export type TextQuestion = Extract<Question, { kind: 'text' }>;
 
-export type Pregunta = {
+export type Question = {
 	id: `preg_${string}`;
-	proxima?: Pregunta['id'] | undefined | null; // null ends the survey
-	titulo: string;
-	codigo?: string;
-	descripcion?: string;
+	next?: Question['id'] | undefined | null; // null ends the survey
+	title: string;
+	code?: string;
+	description?: string;
 	// tipo: TipoPregunta; // 'unica' | 'multiple' | 'puntaje' | 'libre'
 } & (
 	| {
-			tipo: 'unica';
-			opciones: Array<Opcion | string>;
-			acepta_otros?: boolean;
-			texto_otros?: string;
-			proxima_otros?: Pregunta['proxima'];
-			respuesta?: string;
+			kind: 'single';
+			options: Array<Option | string>;
+			allowOther?: boolean;
+			placeholderOther?: string;
+			nextOther?: Question['next'];
+			answer?: string;
 	  }
 	| {
-			tipo: 'multiple';
-			opciones: Array<Opcion | string>;
-			acepta_otros?: boolean;
-			texto_otros?: string;
-			proxima_otros?: Pregunta['proxima'];
-			respuesta?: string[];
+			kind: 'multiple';
+			options: Array<Option | string>;
+			allowOther?: boolean;
+			placeholderOther?: string;
+			nextOther?: Question['next'];
+			answer?: string[];
 	  }
 	| {
-			tipo: 'puntaje';
-			respuesta?: number;
+			kind: 'rating';
+			answer?: number;
 	  }
 	| {
-			tipo: 'libre';
-			opcion?: Opcion | string;
-			texto?: string; // placeholder
+			kind: 'text';
+			option?: Option | string;
+			placeholder?: string; // placeholder
 			control?: 'textarea' | 'input';
 			maxlength?: number;
-			respuesta?: string;
+			answer?: string;
 	  }
 );
