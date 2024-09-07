@@ -6,12 +6,13 @@
 	$: survey = data.survey;
 
 	function onsave(survey: import('$lib/types').Survey) {
-		console.log('!survey saved!', { survey });
+		const respuestas = survey.questions.map((p) => [p.title, p.answer]);
+		console.log('!survey saved!', { survey, respuestas });
 		const LF = '\r\n\r\n';
-		const respuestas = survey.questions
+		const message = survey.questions
 			.map((p) => `${p.title}: ${(p.answer || '').toString()}`)
 			.join(LF);
-		alert(`Felicitaciones! completaste la encuesta.${LF}${respuestas}`);
+		alert(`Felicitaciones! completaste la encuesta.${LF}${message}`);
 	}
 </script>
 

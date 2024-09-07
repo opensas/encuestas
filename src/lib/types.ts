@@ -45,7 +45,8 @@ export type Question = {
 	  }
 	| {
 			kind: 'text';
-			option?: Option | string;
+			title?: string;
+			description?: string;
 			placeholder?: string; // placeholder
 			control?: 'textarea' | 'input';
 			maxlength?: number;

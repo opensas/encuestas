@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { MultipleQuestion, Option } from '$lib/types';
 
+	import { toOption } from '$lib/components/survey';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
@@ -20,7 +21,7 @@
 		answer = question.answer || [];
 		onupdate(answer);
 
-		options = question.options.map((op) => (typeof op === 'object' ? op : { title: op }));
+		options = question.options.map(toOption);
 		const titulos = options.map((option) => option.title);
 
 		checked = titulos.map((titulo) => answer.includes(titulo));

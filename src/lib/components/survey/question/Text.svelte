@@ -10,15 +10,13 @@
 
 	let answer = question.answer || '';
 
-	$: ({ option, placeholder, control = 'textarea', maxlength } = question);
-	$: titulo = typeof option === 'object' ? option.title : '';
-	$: description = typeof option === 'object' ? option.description : '';
+	$: ({ title, description, placeholder, control = 'textarea', maxlength } = question);
 
 	$: onupdate(answer);
 </script>
 
 <div class="grid w-full gap-1.5">
-	<Label for="opcion-libre">{titulo}</Label>
+	<Label for="opcion-libre">{title}</Label>
 	{#if control === 'textarea'}
 		<Textarea id="opcion-libre" bind:value={answer} {maxlength} {placeholder} />
 	{:else if control === 'input'}
