@@ -29,7 +29,7 @@
 		checkedOther = !!other;
 	}
 
-	function updateRespuesta(checked: boolean[], checkedOther: boolean, other: string) {
+	function updateAnswer(checked: boolean[], checkedOther: boolean, other: string) {
 		answer = checked
 			.map((check, index) => (check ? options[index].title : null))
 			.filter((resp) => resp !== null); // remove unchecked items
@@ -39,7 +39,7 @@
 
 	initState();
 
-	$: updateRespuesta(checked, checkedOther, other);
+	$: updateAnswer(checked, checkedOther, other);
 </script>
 
 <div class="space-y-4">
