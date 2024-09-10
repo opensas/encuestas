@@ -6,7 +6,7 @@
 
 	import { cn } from '$lib/utils';
 
-	import { Multiple, Rating, Single, Text } from './question';
+	import { GridText, Multiple, Rating, Single, Text } from './question';
 	import { toOption } from '.';
 
 	export let survey: Survey;
@@ -26,16 +26,15 @@
 
 	function goNext() {
 		// contesté una nueva pregunta
-
-		// check ig the questions is in the answered questions, to avoid loops
-		const index = questions.findIndex((p) => p.id === question.id);
-		if (index !== -1) questions = questions.slice(0, index);
-
 		questions = [...questions, question];
 
-		if (next === null) return;
+		if (next === null) return; // end of survey
 
-		question = survey.questions.find((p) => p.id === next)!;
+		question = survey.questions.find((p) => p.id === next)!; // calculate next question
+
+		// if the current question has already been answered, go back in history, yo avoid loops
+		const index = questions.findIndex((p) => p.id === question.id);
+		if (index !== -1) questions = questions.slice(0, index);
 	}
 
 	function calculateNext(pregunta: Question, survey: Survey) {
@@ -86,7 +85,7 @@
 	}
 
 	function save() {
-		// update survey con las preguntas efectivamente respondidas
+		// update survey with the effectively answered questions (the question history)
 		goNext();
 		const saved = { ...survey, preguntas: questions };
 		onsave(saved);
@@ -126,6 +125,8 @@
 				<Rating {question} {onupdate} />
 			{:else if question.kind === 'text'}
 				<Text {question} {onupdate} />
+			{:else if question.kind === 'grid-text'}
+				<GridText {question} {onupdate} />
 			{/if}
 		{/key}
 

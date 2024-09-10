@@ -210,6 +210,22 @@ export const survey_cine: Survey = {
 	questions: [
 		{
 			id: 'preg_inicio',
+			title: 'Contanos un poco acerca de tí',
+			description: 'Algunos datos para conocerte mejor',
+			kind: 'grid-text',
+			items: [
+				'Nombre',
+				'Apellido',
+				{
+					title: 'Bio',
+					description: 'Contanos quién sos',
+					control: 'textarea',
+					placeholder: 'a short bio'
+				}
+			]
+		},
+		{
+			id: 'preg_te_gusta_el_cine',
 			title: '¿Te gusta el cine?',
 			kind: 'single',
 			options: [
@@ -255,12 +271,12 @@ export const survey_cine: Survey = {
 			],
 			allowOther: true,
 			placeholderOther: 'Ingresa aquí tu película de ciencia ficción favorita',
-			nextOther: 'preg_final'
+			nextOther: 'preg_feedback'
 		},
 
 		{
 			id: 'preg_genero_ciencia_star',
-			next: 'preg_final',
+			next: 'preg_feedback',
 			title: '¿Qué película de la saga de Star wars es tu favorita?',
 			kind: 'single',
 			options: [
@@ -272,7 +288,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'preg_genero_accion',
-			next: 'preg_final',
+			next: 'preg_feedback',
 			title: '¿Qué película de acción es tu favorita?',
 			kind: 'single',
 			options: ['Indiana Jones', 'James Bond', 'Duro de matar', 'Mad max'],
@@ -281,25 +297,34 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'preg_genero_otros',
-			next: 'preg_final',
+			next: 'preg_feedback',
 			title: '¿Qué película de ese género es tu favorita?',
 			kind: 'text'
 		},
 
 		{
+			id: 'preg_feedback',
+			title: '¿Qué mejorarías de esta entrevista?',
+			kind: 'multiple',
+			options: [
+				'Preguntar por otros géneros',
+				'Hacerla más larga',
+				'Hacerla más corta',
+				'No haría este tipo de entrevistas'
+			],
+			allowOther: true
+		},
+
+		{
 			id: 'preg_final',
-			title: '¿Qué te pareció esta encuesta?',
+			title: 'Gracias por completar la encuesta. ¿Querés hacer algún cambio?',
 			description: '',
 			kind: 'single',
 			options: [
-				'Me encantó',
-				'Muy bueno',
-				'en fin...',
+				'No, terminar la encuesta',
 				{ title: 'Me equivoqué de género', next: 'preg_genero' },
 				{ title: 'La quiero hacer de nuevo', next: 'preg_inicio' }
-			],
-			allowOther: true,
-			placeholderOther: 'Ingresa aquí tu opinión'
+			]
 		}
 	]
 };
@@ -430,8 +455,6 @@ export const survey_aept: Survey = {
 	]
 };
 
-const CRLF = '\n';
-
 export const survey_upep: Survey = {
 	id: 'enc_upep',
 	code: 'upep',
@@ -441,8 +464,12 @@ export const survey_upep: Survey = {
 			id: 'preg_0',
 			code: 'P0',
 			title: 'Ingresá tus datos de contacto: nombre, apellido y celular',
-			kind: 'text',
-			answer: `Nombre: ${CRLF}Apellido: ${CRLF}Celular: `
+			kind: 'grid-text',
+			items: [
+				{ title: 'Nombre', maxlength: 50 },
+				{ title: 'Apellido', maxlength: 50 },
+				{ title: 'Celular', maxlength: 50 }
+			]
 		},
 		{
 			id: 'preg_1',
@@ -562,8 +589,22 @@ export const survey_upep: Survey = {
 			code: 'P8_1',
 			title: '¿Cuál es el domicilio de la unidad productiva/emprendimiento?',
 			description:
-				'Dirección completa (calle, nro, piso/depto, manzana, lote) cp, localidad, departamento/partido. Si la unidad tiene más de un domicilio, por favor indique el más importante.',
-			kind: 'text'
+				'Complete los que correspondan. Si la unidad tiene más de un domicilio, por favor indique el más importante.',
+			kind: 'grid-text',
+			items: [
+				'Calle',
+				'Manzana',
+				'Torre',
+				'Lote',
+				'Código Postal',
+				'Departamento/ Partido',
+				'Número',
+				'Monoblock',
+				'Piso / Depto',
+				'Entre calles',
+				'Localidad',
+				'Comunidad'
+			]
 		},
 		{
 			id: 'preg_9',
