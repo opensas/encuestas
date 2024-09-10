@@ -14,6 +14,15 @@ export type SingleQuestion = Extract<Question, { kind: 'single' }>;
 export type MultipleQuestion = Extract<Question, { kind: 'multiple' }>;
 export type RatingQuestion = Extract<Question, { kind: 'rating' }>;
 export type TextQuestion = Extract<Question, { kind: 'text' }>;
+export type GridTextQuestion = Extract<Question, { kind: 'grid-text' }>;
+
+export type TextItem = {
+	title: string;
+	description?: string;
+	placeholder?: string;
+	control?: 'textarea' | 'input';
+	maxlength?: number;
+};
 
 export type Question = {
 	id: `preg_${string}`;
@@ -38,6 +47,11 @@ export type Question = {
 			placeholderOther?: string;
 			nextOther?: Question['next'];
 			answer?: string[];
+	  }
+	| {
+			kind: 'grid-text';
+			items: Array<TextItem | string>;
+			answer?: Record<string, string>;
 	  }
 	| {
 			kind: 'rating';

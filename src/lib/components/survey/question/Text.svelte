@@ -16,11 +16,11 @@
 </script>
 
 <div class="grid w-full gap-1.5">
-	<Label for="opcion-libre">{title}</Label>
+	<Label for="text-question">{title}</Label>
 	{#if control === 'textarea'}
-		<Textarea id="opcion-libre" bind:value={answer} {maxlength} {placeholder} />
+		<Textarea id="text-question" bind:value={answer} {maxlength} {placeholder} />
 	{:else if control === 'input'}
-		<Input id="opcion-libre" bind:value={answer} {maxlength} {placeholder} />
+		<Input id="text-question" bind:value={answer} {maxlength} {placeholder} />
 	{/if}
 	{#if description}
 		<p class="text-sm text-muted-foreground">{description}</p>
