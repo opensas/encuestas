@@ -37,6 +37,7 @@ export type Question = {
 			options: Array<Option | string>;
 			allowOther?: boolean;
 			placeholderOther?: string;
+			control?: 'radio' | 'select';
 			nextOther?: Question['next'];
 			answer?: string;
 	  }
