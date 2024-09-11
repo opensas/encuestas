@@ -558,6 +558,7 @@ export const survey_upep: Survey = {
 			code: 'P8',
 			title: '¿En qué provincia se encuentra localizada la unidad productiva?',
 			kind: 'single',
+			control: 'select',
 			options: [
 				'Buenos Aires',
 				'CABA',
