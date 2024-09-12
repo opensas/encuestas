@@ -13,7 +13,7 @@ export const survey_fp: Survey = {
 				'¿El curso/taller de orientación laboral le pareció útil para aumentar sus posibilidades de encontrar empleo?',
 			description: 'Contanos que tan conforme estas con el desarrollo del programa',
 			kind: 'single',
-			options: ['Sí', 'Medianamente útil', 'NO']
+			options: ['Sí', 'Medianamente útil', 'NO'],
 		},
 		{
 			id: 'preg_002',
@@ -21,7 +21,7 @@ export const survey_fp: Survey = {
 				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
 			description: '',
 			kind: 'single',
-			options: ['Sí', 'Medianamente comprensibles y adecuados', 'NO']
+			options: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
 		},
 		{
 			id: 'preg_003',
@@ -29,7 +29,7 @@ export const survey_fp: Survey = {
 				'¿El capacitador del curso/taller de orientación laboral respondió a sus dudas o consultas cuando Ud. lo requirió?',
 			description: '',
 			kind: 'single',
-			options: ['Sí', 'A veces', 'NO', 'No había docente/capacitador']
+			options: ['Sí', 'A veces', 'NO', 'No había docente/capacitador'],
 		},
 		{
 			id: 'preg_004',
@@ -37,7 +37,7 @@ export const survey_fp: Survey = {
 				'n caso de que el curso/taller de orientación laboral haya sido virtual ¿pudo acceder al campus/plataforma y a los materiales fácilmente?',
 			description: '',
 			kind: 'single',
-			options: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde']
+			options: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
 		},
 		{
 			id: 'preg_005',
@@ -45,7 +45,7 @@ export const survey_fp: Survey = {
 				'En caso que el curso/taller de orientación laboral haya sido presencial ¿le facilitaron los insumos, herramientas o equipos necesarios para el desarrollo del mismo?',
 			description: '',
 			kind: 'single',
-			options: ['Sí', 'Parcialmente', 'NO', 'No corresponde']
+			options: ['Sí', 'Parcialmente', 'NO', 'No corresponde'],
 		},
 		{
 			id: 'preg_006',
@@ -53,9 +53,9 @@ export const survey_fp: Survey = {
 				'Percibe que luego del curso/taller de orientación laboral, ¿tiene mayor confianza sobre su propio trabajo y sus habilidades?',
 			description: '',
 			kind: 'single',
-			options: ['Sí', 'Parcialmente', 'NO']
-		}
-	]
+			options: ['Sí', 'Parcialmente', 'NO'],
+		},
+	],
 };
 
 export const survey_fp_auto: Survey = {
@@ -72,7 +72,7 @@ export const survey_fp_auto: Survey = {
 			description: 'Contanos que tan conforme estas con el desarrollo del programa',
 			kind: 'single',
 			options: ['Sí', 'Medianamente útil', 'NO'],
-			allowOther: false
+			allowOther: false,
 		},
 		{
 			id: 'preg_002',
@@ -81,7 +81,7 @@ export const survey_fp_auto: Survey = {
 			description: '',
 			kind: 'single',
 			options: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
-			allowOther: false
+			allowOther: false,
 		},
 		{
 			id: 'preg_003',
@@ -89,9 +89,9 @@ export const survey_fp_auto: Survey = {
 			description: '',
 			kind: 'single',
 			options: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
-			allowOther: false
-		}
-	]
+			allowOther: false,
+		},
+	],
 };
 
 export const survey_manos: Survey = {
@@ -106,7 +106,7 @@ export const survey_manos: Survey = {
 			description: 'Indicanos que tan conforme estas con el desarrollo del programa',
 			kind: 'single',
 			options: ['mucho', 'bastante', 'normal', 'poco', 'nada conforme'],
-			allowOther: false
+			allowOther: false,
 		},
 		{
 			id: 'preg_002',
@@ -118,215 +118,22 @@ export const survey_manos: Survey = {
 				'mejor equipamiento',
 				{
 					title: 'más difusión',
-					description: 'darle mas difusión a través de medios de comunicación y redes sociales'
-				}
+					description: 'darle mas difusión a través de medios de comunicación y redes sociales',
+				},
 			],
-			allowOther: true
+			allowOther: true,
 		},
 		{
 			id: 'preg_002',
 			title: '¿Qué puntaje le daría a la gestión del programa?',
-			kind: 'rating'
+			kind: 'rating',
 		},
 		{
 			id: 'preg_002',
 			title: '¿Alguna otro comentario que quiera hacernos llegar?',
-			kind: 'text'
-		}
-	]
-};
-
-export const survey_ingles: Survey = {
-	id: 'enc_ingles_experiencia',
-	code: 'ingles',
-	title: 'Evaluación de la experiencia en el curso de inglés',
-	description:
-		'Por favor, responda a las siguientes preguntas para ayudarnos a mejorar nuestro curso de inglés',
-	questions: [
-		{
-			id: 'preg_1',
-			title: '¿Cómo te enteraste del curso?',
-			kind: 'single',
-			options: [
-				'Redes sociales',
-				'Correo electrónico',
-				'Búsqueda en internet',
-				'Recomendación de un amigo',
-				'Anuncio en línea'
-			],
-			answer: 'otra opcion',
-			allowOther: true
-		},
-		{
-			id: 'preg_2',
-			title: '¿Qué te pareció la calidad del contenido del curso?',
-			kind: 'rating',
-			answer: 4
-		},
-		{
-			id: 'preg_3',
-			title: '¿Cuánto tiempo dedicaste a estudiar cada semana?',
-			kind: 'single',
-			options: ['Menos de 1 hora', '1-2 horas', '2-3 horas', '3-4 horas', 'Más de 4 horas'],
-			answer: 'Más de 4 horas',
-			allowOther: false
-		},
-		{
-			id: 'preg_4',
-			title: '¿Qué te gustaría ver incluido en futuras versiones del curso?',
-			kind: 'multiple',
-			options: [
-				'Más contenido de gramática',
-				'Más contenido de vocabulario',
-				'Más contenido de conversación',
-				'Más contenido de lectura',
-				'Más contenido de escritura'
-			],
-			answer: ['Más contenido de lectura', 'Más contenido de escritura', 'otra opcion nueva'],
-			allowOther: true
-		},
-		{
-			id: 'preg_5',
-			title: '¿Recomendarías este curso a otros?',
-			kind: 'single',
-			options: ['Sí', 'No', 'No estoy seguro'],
-			answer: 'No',
-			allowOther: false
-		},
-		{
-			id: 'preg_6',
-			title: '¿Tienes alguna sugerencia para mejorar el curso?',
 			kind: 'text',
-			answer: 'agregar mas horarios'
-		}
-	]
-};
-
-export const survey_cine: Survey = {
-	id: 'enc_condicional',
-	code: 'cine',
-	title: 'Encuesta cinéfila',
-	description: 'Encuesta de prueba para probar caminos condicionales',
-	questions: [
-		{
-			id: 'preg_inicio',
-			title: 'Contanos un poco acerca de tí',
-			description: 'Algunos datos para conocerte mejor',
-			kind: 'grid-text',
-			items: [
-				'Nombre',
-				'Apellido',
-				{
-					title: 'Bio',
-					description: 'Contanos quién sos',
-					control: 'textarea',
-					placeholder: 'a short bio'
-				}
-			]
 		},
-		{
-			id: 'preg_te_gusta_el_cine',
-			title: '¿Te gusta el cine?',
-			kind: 'single',
-			options: [
-				'Sí',
-				'más o menos',
-				'Muy poco',
-				{ title: 'Ir al final', next: 'preg_final' },
-				{ title: 'Terminar esto ya', next: null }
-			],
-			allowOther: false
-		},
-
-		{
-			id: 'preg_genero',
-			next: 'preg_final',
-			title: '¿Qué género te gusta más?',
-			kind: 'single',
-			options: [
-				{ title: 'Ciencia ficción', next: 'preg_genero_ciencia' },
-				{
-					title: 'Acción',
-					description: 'Películas para ver tiros y piñas',
-					next: 'preg_genero_accion'
-				},
-				{ title: 'Drama', description: 'Películas para llorar' }
-			],
-			allowOther: true,
-			placeholderOther: 'Ingresa aquí el género de tu preferencia',
-			nextOther: 'preg_genero_otros'
-		},
-
-		{
-			id: 'preg_genero_ciencia',
-			next: 'preg_final',
-			title: '¿Qué película de ciencia ficción es tu favorita?',
-			kind: 'single',
-			options: [
-				{ title: 'Star wars', next: 'preg_genero_ciencia_star' },
-				'Blade runner',
-				'2001',
-				'Dune',
-				'Mad max'
-			],
-			allowOther: true,
-			placeholderOther: 'Ingresa aquí tu película de ciencia ficción favorita',
-			nextOther: 'preg_feedback'
-		},
-
-		{
-			id: 'preg_genero_ciencia_star',
-			next: 'preg_feedback',
-			title: '¿Qué película de la saga de Star wars es tu favorita?',
-			kind: 'single',
-			options: [
-				'Una nueva esperanza (IV)',
-				'El imperio contra-ataca (V)',
-				'El retorno del Jedi (VI)'
-			]
-		},
-
-		{
-			id: 'preg_genero_accion',
-			next: 'preg_feedback',
-			title: '¿Qué película de acción es tu favorita?',
-			kind: 'single',
-			options: ['Indiana Jones', 'James Bond', 'Duro de matar', 'Mad max'],
-			allowOther: true
-		},
-
-		{
-			id: 'preg_genero_otros',
-			next: 'preg_feedback',
-			title: '¿Qué película de ese género es tu favorita?',
-			kind: 'text'
-		},
-
-		{
-			id: 'preg_feedback',
-			title: '¿Qué mejorarías de esta entrevista?',
-			kind: 'multiple',
-			options: [
-				'Preguntar por otros géneros',
-				'Hacerla más larga',
-				'Hacerla más corta',
-				'No haría este tipo de entrevistas'
-			],
-			allowOther: true
-		},
-
-		{
-			id: 'preg_final',
-			title: 'Gracias por completar la encuesta. ¿Querés hacer algún cambio?',
-			description: '',
-			kind: 'single',
-			options: [
-				'No, terminar la encuesta',
-				{ title: 'Me equivoqué de género', next: 'preg_genero' },
-				{ title: 'La quiero hacer de nuevo', next: 'preg_inicio' }
-			]
-		}
-	]
+	],
 };
 
 export const survey_aept: Survey = {
@@ -342,7 +149,7 @@ export const survey_aept: Survey = {
 			title:
 				'¿Cuán satisfecho estás con el Programa de Entrenamiento para el Trabajo brindado por la STEySS/SSEyFL?',
 			kind: 'single',
-			options: ['Muy satisfecho', 'Satisfecho', 'Indistinto', 'Insatisfecho', 'Muy insatisfecho']
+			options: ['Muy satisfecho', 'Satisfecho', 'Indistinto', 'Insatisfecho', 'Muy insatisfecho'],
 		},
 		{
 			id: 'preg_2_1',
@@ -350,7 +157,7 @@ export const survey_aept: Survey = {
 			title:
 				'¿Cómo fue tu experiencia en relación al "Registro en el Portal Empleo" para acceder al Entrenamiento para el Trabajo?',
 			kind: 'single',
-			options: ['Buena', 'Regular', 'Mala']
+			options: ['Buena', 'Regular', 'Mala'],
 		},
 		{
 			id: 'preg_2_2',
@@ -358,7 +165,7 @@ export const survey_aept: Survey = {
 			title:
 				'¿Cómo fue tu experiencia en relación a la "Búsqueda de la oferta de EPT" para acceder al Entrenamiento para el Trabajo?',
 			kind: 'single',
-			options: ['Buena', 'Regular', 'Mala']
+			options: ['Buena', 'Regular', 'Mala'],
 		},
 		{
 			id: 'preg_2_3',
@@ -366,7 +173,7 @@ export const survey_aept: Survey = {
 			title:
 				'¿Cómo fue tu experiencia en relación a la "Postulación a la oferta de EPT" para acceder al Entrenamiento para el Trabajo?',
 			kind: 'single',
-			options: ['Buena', 'Regular', 'Mala']
+			options: ['Buena', 'Regular', 'Mala'],
 		},
 
 		{
@@ -380,8 +187,8 @@ export const survey_aept: Survey = {
 				'De acuerdo',
 				'Ni de acuerdo ni en desacuerdo',
 				'En desacuerdo',
-				'Muy en desacuerdo'
-			]
+				'Muy en desacuerdo',
+			],
 		},
 		{
 			id: 'preg_3_2',
@@ -394,8 +201,8 @@ export const survey_aept: Survey = {
 				'De acuerdo',
 				'Ni de acuerdo ni en desacuerdo',
 				'En desacuerdo',
-				'Muy en desacuerdo'
-			]
+				'Muy en desacuerdo',
+			],
 		},
 
 		{
@@ -408,8 +215,8 @@ export const survey_aept: Survey = {
 				'Cantidad de horas',
 				'Días y horarios',
 				'Tareas del puesto',
-				'Acompañamiento de un tutor'
-			]
+				'Acompañamiento de un tutor',
+			],
 		},
 
 		{
@@ -418,7 +225,7 @@ export const survey_aept: Survey = {
 			next: 'preg_6',
 			title: '¿Participaste en algún otro programa de la STEySS/SSEyFL?',
 			kind: 'single',
-			options: [{ title: 'Sí', next: 'preg_5_1' }, 'No']
+			options: [{ title: 'Sí', next: 'preg_5_1' }, 'No'],
 		},
 
 		{
@@ -429,7 +236,7 @@ export const survey_aept: Survey = {
 			kind: 'single',
 			options: ['Cursos', 'Programa de Inserción Laboral', 'Programa de Empleo Independiente'],
 			allowOther: true,
-			placeholderOther: 'En qué otros programas participaste?'
+			placeholderOther: 'En qué otros programas participaste?',
 		},
 
 		{
@@ -440,8 +247,8 @@ export const survey_aept: Survey = {
 			kind: 'multiple',
 			options: [
 				'Resultó una buena preparación para participar del entrenamiento',
-				'Complementa la formación obtenida durante el entrenamiento'
-			]
+				'Complementa la formación obtenida durante el entrenamiento',
+			],
 		},
 
 		{
@@ -450,9 +257,9 @@ export const survey_aept: Survey = {
 			title:
 				'Para acceder al Entrenamiento para el trabajo ¿contaste con la asistencia de alguna Oficina de Empleo o Agencia Territorial?',
 			kind: 'single',
-			options: ['Si', 'No']
-		}
-	]
+			options: ['Si', 'No'],
+		},
+	],
 };
 
 export const survey_upep: Survey = {
@@ -468,8 +275,8 @@ export const survey_upep: Survey = {
 			items: [
 				{ title: 'Nombre', maxlength: 50 },
 				{ title: 'Apellido', maxlength: 50 },
-				{ title: 'Celular', maxlength: 50 }
-			]
+				{ title: 'Celular', maxlength: 50 },
+			],
 		},
 		{
 			id: 'preg_1',
@@ -477,20 +284,20 @@ export const survey_upep: Survey = {
 			title:
 				'¿Hacés alguna actividad laboral en una organización comunitaria, barrial, social, familiar o cooperativa?',
 			kind: 'single',
-			options: ['Si', 'No']
+			options: ['Si', 'No'],
 		},
 		{
 			id: 'preg_2',
 			code: 'P2',
 			title: '¿Cuál es el nombre de la unidad productiva/emprendimiento donde trabajas?',
-			kind: 'text'
+			kind: 'text',
 		},
 		{
 			id: 'preg_3',
 			code: 'P3',
 			title: 'Esa actividad, la realizás de manera…',
 			kind: 'single',
-			options: ['Colectiva, con otras personas', 'Individual']
+			options: ['Colectiva, con otras personas', 'Individual'],
 		},
 		{
 			id: 'preg_4',
@@ -500,7 +307,7 @@ export const survey_upep: Survey = {
 			kind: 'multiple',
 			options: ['Un referente', 'Un patrón o patrona', 'Un coordinador/a', 'Una asamblea'],
 			allowOther: true,
-			placeholderOther: 'Otro referente con poder de decisión'
+			placeholderOther: 'Otro referente con poder de decisión',
 		},
 		{
 			id: 'preg_5',
@@ -508,7 +315,7 @@ export const survey_upep: Survey = {
 			title: '¿Cuántas personas trabajan en la unidad productiva/emprendimiento, aproximadamente?',
 			kind: 'text',
 			control: 'input',
-			maxlength: 4
+			maxlength: 4,
 		},
 		{
 			id: 'preg_6',
@@ -522,9 +329,9 @@ export const survey_upep: Survey = {
 				'Pequeño emprendimiento familiar',
 				'Pequeño emprendimiento no familiar',
 				'Organización comunitaria / social',
-				'Cuadrilla municipal'
+				'Cuadrilla municipal',
 			],
-			allowOther: true
+			allowOther: true,
 		},
 		{
 			id: 'preg_7_1',
@@ -533,7 +340,7 @@ export const survey_upep: Survey = {
 			kind: 'single',
 			options: ['No'],
 			allowOther: true,
-			placeholderOther: 'En caso afirmativo especifique el nombre de la organización social'
+			placeholderOther: 'En caso afirmativo especifique el nombre de la organización social',
 		},
 		{
 			id: 'preg_7_2',
@@ -542,7 +349,7 @@ export const survey_upep: Survey = {
 			kind: 'single',
 			options: ['No'],
 			allowOther: true,
-			placeholderOther: 'En caso afirmativo especifique el nombre de la organización religiosa'
+			placeholderOther: 'En caso afirmativo especifique el nombre de la organización religiosa',
 		},
 		{
 			id: 'preg_7_3',
@@ -551,7 +358,7 @@ export const survey_upep: Survey = {
 			kind: 'single',
 			options: ['No'],
 			allowOther: true,
-			placeholderOther: 'En caso afirmativo especifique el nombre del Municipio'
+			placeholderOther: 'En caso afirmativo especifique el nombre del Municipio',
 		},
 		{
 			id: 'preg_8',
@@ -582,8 +389,8 @@ export const survey_upep: Survey = {
 				'Santa Fe',
 				'Santiago del Estero',
 				'Tierra del Fuego',
-				'Tucuman'
-			]
+				'Tucuman',
+			],
 		},
 		{
 			id: 'preg_8_1',
@@ -604,8 +411,8 @@ export const survey_upep: Survey = {
 				'Piso / Depto',
 				'Entre calles',
 				'Localidad',
-				'Comunidad'
-			]
+				'Comunidad',
+			],
 		},
 		{
 			id: 'preg_9',
@@ -616,31 +423,31 @@ export const survey_upep: Survey = {
 				{
 					title: '1. Comercio popular y trabajos en espacios públicos',
 					description: 'Ferias, venta ambulante, cuidado de coches, etc.',
-					next: 'preg_9_1'
+					next: 'preg_9_1',
 				},
 				{
 					title: '2. Recuperación, Reciclado y Servicios ambientales',
 					description: 'Recolección de cartones y otros materiales, reciclado de residuos, etc.',
-					next: 'preg_9_2'
+					next: 'preg_9_2',
 				},
 				{
 					title: '3. Construcción e infraestructura social y Mejoramiento ambiental',
-					next: 'preg_9_3'
+					next: 'preg_9_3',
 				},
 				{
 					title: '4. Industria manufacturera',
 					description: 'Elaboración de productos',
-					next: 'preg_9_4'
+					next: 'preg_9_4',
 				},
 				{
 					title: '5. Servicios socio comunitarios',
 					description:
 						'Comedores, merenderos, clubes barriales, salud comunitaria, cuidado de personas, apoyo escolar, medios comunitarios, espacios culturales, etc.',
-					next: 'preg_9_5'
+					next: 'preg_9_5',
 				},
 				{ title: '6. Agricultura familiar y campesina', next: 'preg_9_6' },
-				{ title: '7. Transporte', next: 'preg_9_7' }
-			]
+				{ title: '7. Transporte', next: 'preg_9_7' },
+			],
 		},
 		{
 			id: 'preg_9_1',
@@ -657,14 +464,14 @@ export const survey_upep: Survey = {
 				'Feriante',
 				{
 					title: 'Intermediación solidaria',
-					description: 'Ferias, mercado, Almacenes, Nodos, Galpones, Logística, etc.'
+					description: 'Ferias, mercado, Almacenes, Nodos, Galpones, Logística, etc.',
 				},
 				'Limpia vidrio //vehículos',
 				'Mensajería // Delivery',
 				'Vendedor/a ambulante',
-				'Venta directa'
+				'Venta directa',
 			],
-			allowOther: true
+			allowOther: true,
 		},
 
 		{
@@ -684,9 +491,9 @@ export const survey_upep: Survey = {
 				'Promotor/a ambiental',
 				'Reciclador/a de basura',
 				'Recolectores/as de residuos en villas',
-				'Trabajador/a de limpieza de terrenos y espacios verdes'
+				'Trabajador/a de limpieza de terrenos y espacios verdes',
 			],
-			allowOther: true
+			allowOther: true,
 		},
 
 		{
@@ -707,9 +514,9 @@ export const survey_upep: Survey = {
 				'Plomero/a // Fontanero/a // Instalador/a de redes de agua potable y tuberías',
 				'Soldador/a',
 				'Techista // Zinguero // Zanjero',
-				'Vidriero/a'
+				'Vidriero/a',
 			],
-			allowOther: true
+			allowOther: true,
 		},
 		{
 			id: 'preg_9_4',
@@ -727,9 +534,9 @@ export const survey_upep: Survey = {
 				'Producción de productos de tocador y limpieza',
 				'Fabricante de Bloques // Ladrillero',
 				'Carpintería y Zinguería',
-				'Producción de productos sanitarios'
+				'Producción de productos sanitarios',
 			],
-			allowOther: true
+			allowOther: true,
 		},
 
 		{
@@ -744,23 +551,23 @@ export const survey_upep: Survey = {
 				'Acompañamiento de reinserción de liberados/as y recuperados/as',
 				{
 					title: 'Asistente Socio Educativo',
-					description: 'Bachillerato Popular, Jardín Comunitario, Clases de apoyo escolar'
+					description: 'Bachillerato Popular, Jardín Comunitario, Clases de apoyo escolar',
 				},
 				'Atención de Comedores y Merenderos Comunitarios',
 				{
 					title: 'Cuidados',
-					description: 'Niños/as, enfermos/as, personas con discapacidad, ancianos/as'
+					description: 'Niños/as, enfermos/as, personas con discapacidad, ancianos/as',
 				},
 				'Promotor/a contra la violencia de género',
 				'Promotor/a de salud',
 				{
 					title: 'Trabajador/a de Cultura Comunitaria',
-					description: 'Talleres, Orquestas, Espacios Culturales'
+					description: 'Talleres, Orquestas, Espacios Culturales',
 				},
 				'Trabajador/a de Medio de Comunicación Comunitaria',
-				'Trabajador/a de deportes y recreación'
+				'Trabajador/a de deportes y recreación',
 			],
-			allowOther: true
+			allowOther: true,
 		},
 
 		{
@@ -777,9 +584,9 @@ export const survey_upep: Survey = {
 				'Ganadería',
 				'Pesca y Acuicultura',
 				'Turismo rural',
-				'Viveros y Huertas Urbanas'
+				'Viveros y Huertas Urbanas',
 			],
-			allowOther: true
+			allowOther: true,
 		},
 
 		{
@@ -794,11 +601,257 @@ export const survey_upep: Survey = {
 				'Carga de mercadería',
 				'Flete',
 				'Mensajería // Delivery',
-				'Transporte de pasajeros'
+				'Transporte de pasajeros',
 			],
-			allowOther: true
-		}
-	]
+			allowOther: true,
+		},
+	],
+};
+
+export const survey_ingles: Survey = {
+	id: 'enc_ingles_experiencia',
+	code: 'ingles',
+	title: 'Evaluación de la experiencia en el curso de inglés',
+	description:
+		'Por favor, responda a las siguientes preguntas para ayudarnos a mejorar nuestro curso de inglés',
+	questions: [
+		{
+			id: 'preg_1',
+			title: '¿Cómo te enteraste del curso?',
+			kind: 'single',
+			options: [
+				'Redes sociales',
+				'Correo electrónico',
+				'Búsqueda en internet',
+				'Recomendación de un amigo',
+				'Anuncio en línea',
+			],
+			answer: 'otra opcion',
+			allowOther: true,
+		},
+		{
+			id: 'preg_2',
+			title: '¿Qué te pareció la calidad del contenido del curso?',
+			kind: 'rating',
+			answer: 4,
+		},
+		{
+			id: 'preg_3',
+			title: '¿Cuánto tiempo dedicaste a estudiar cada semana?',
+			kind: 'single',
+			options: ['Menos de 1 hora', '1-2 horas', '2-3 horas', '3-4 horas', 'Más de 4 horas'],
+			answer: 'Más de 4 horas',
+			allowOther: false,
+		},
+		{
+			id: 'preg_4',
+			title: '¿Qué te gustaría ver incluido en futuras versiones del curso?',
+			kind: 'multiple',
+			options: [
+				'Más contenido de gramática',
+				'Más contenido de vocabulario',
+				'Más contenido de conversación',
+				'Más contenido de lectura',
+				'Más contenido de escritura',
+			],
+			answer: ['Más contenido de lectura', 'Más contenido de escritura', 'otra opcion nueva'],
+			allowOther: true,
+		},
+		{
+			id: 'preg_5',
+			title: '¿Recomendarías este curso a otros?',
+			kind: 'single',
+			options: ['Sí', 'No', 'No estoy seguro'],
+			answer: 'No',
+			allowOther: false,
+		},
+		{
+			id: 'preg_6',
+			title: '¿Tienes alguna sugerencia para mejorar el curso?',
+			kind: 'text',
+			answer: 'agregar mas horarios',
+		},
+	],
+};
+
+export const survey_cine: Survey = {
+	id: 'enc_condicional',
+	code: 'cine',
+	title: 'Encuesta cinéfila',
+	description: 'Encuesta de prueba para probar caminos condicionales',
+	questions: [
+		{
+			id: 'preg_inicio',
+			title: 'Contanos un poco acerca de tí',
+			description: 'Algunos datos para conocerte mejor',
+			kind: 'grid-text',
+			items: [
+				'Nombre',
+				'Apellido',
+				{
+					title: 'Bio',
+					description: 'Contanos quién sos',
+					control: 'textarea',
+					placeholder: 'a short bio',
+				},
+			],
+		},
+		{
+			id: 'preg_te_gusta_el_cine',
+			title: '¿Te gusta el cine?',
+			kind: 'single',
+			options: [
+				'Sí',
+				'más o menos',
+				'Muy poco',
+				{ title: 'Ir al final', next: 'preg_final' },
+				{ title: 'Terminar esto ya', next: null },
+			],
+			allowOther: false,
+		},
+
+		{
+			id: 'preg_genero',
+			next: 'preg_final',
+			title: '¿Qué género te gusta más?',
+			kind: 'single',
+			options: [
+				{ title: 'Ciencia ficción', next: 'preg_genero_ciencia' },
+				{
+					title: 'Acción',
+					description: 'Películas para ver tiros y piñas',
+					next: 'preg_genero_accion',
+				},
+				{ title: 'Drama', description: 'Películas para llorar' },
+			],
+			allowOther: true,
+			placeholderOther: 'Ingresa aquí el género de tu preferencia',
+			nextOther: 'preg_genero_otros',
+		},
+
+		{
+			id: 'preg_genero_ciencia',
+			next: 'preg_final',
+			title: '¿Qué película de ciencia ficción es tu favorita?',
+			kind: 'single',
+			options: [
+				{ title: 'Star wars', next: 'preg_genero_ciencia_star' },
+				'Blade runner',
+				'2001',
+				'Dune',
+				'Mad max',
+			],
+			allowOther: true,
+			placeholderOther: 'Ingresa aquí tu película de ciencia ficción favorita',
+			nextOther: 'preg_feedback',
+		},
+
+		{
+			id: 'preg_genero_ciencia_star',
+			next: 'preg_feedback',
+			title: '¿Qué película de la saga de Star wars es tu favorita?',
+			kind: 'single',
+			options: [
+				'Una nueva esperanza (IV)',
+				'El imperio contra-ataca (V)',
+				'El retorno del Jedi (VI)',
+			],
+		},
+
+		{
+			id: 'preg_genero_accion',
+			next: 'preg_feedback',
+			title: '¿Qué película de acción es tu favorita?',
+			kind: 'single',
+			options: ['Indiana Jones', 'James Bond', 'Duro de matar', 'Mad max'],
+			allowOther: true,
+		},
+
+		{
+			id: 'preg_genero_otros',
+			next: 'preg_feedback',
+			title: '¿Qué película de ese género es tu favorita?',
+			kind: 'text',
+		},
+
+		{
+			id: 'preg_feedback',
+			title: '¿Qué mejorarías de esta entrevista?',
+			kind: 'multiple',
+			options: [
+				'Preguntar por otros géneros',
+				'Hacerla más larga',
+				'Hacerla más corta',
+				'No haría este tipo de entrevistas',
+			],
+			allowOther: true,
+		},
+
+		{
+			id: 'preg_final',
+			title: 'Gracias por completar la encuesta. ¿Querés hacer algún cambio?',
+			description: '',
+			kind: 'single',
+			options: [
+				'No, terminar la encuesta',
+				{ title: 'Me equivoqué de género', next: 'preg_genero' },
+				{ title: 'La quiero hacer de nuevo', next: 'preg_inicio' },
+			],
+		},
+	],
+};
+
+export const survey_test: Survey = {
+	id: 'enc_test',
+	code: 'test',
+	title: 'Encuesta de muestra de los distintos tipos de pregunta',
+	questions: [
+		{
+			id: 'preg_single',
+			title: 'single - pregunta que acepta un solo valor',
+			kind: 'single',
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			answer: 'opcion 2',
+			allowOther: true,
+		},
+		{
+			id: 'preg_single_combo',
+			title: 'single, control: combo - pregunta que acepta un solo valor',
+			kind: 'single',
+			control: 'select',
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4, opcion 5, opcion 6'.split(', '),
+			answer: 'opcion 2',
+			allowOther: true,
+		},
+		{
+			id: 'preg_multiple',
+			title: 'multiple - pregunta que acepta múltiples valores',
+			kind: 'multiple',
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			answer: ['opcion 2', 'opcion 3'],
+			allowOther: true,
+		},
+		{
+			id: 'preg_grid_text',
+			title: 'grid-text - pregunta que acepta múltiples inputs',
+			kind: 'grid-text',
+			items: 'nombre, apellido, direccion'.split(', '),
+			answer: { nombre: 'nombre...' },
+		},
+		{
+			id: 'preg_rating',
+			title: 'rating - pregunta que acepta un puntaje',
+			kind: 'rating',
+			answer: 6,
+		},
+		{
+			id: 'preg_text',
+			title: 'text - pregunta que acepta un texto libre',
+			kind: 'text',
+			control: 'textarea',
+			answer: 'ingrese su respuesta',
+		},
+	],
 };
 
 export const surveys = [
@@ -808,6 +861,7 @@ export const surveys = [
 	survey_fp_auto,
 	survey_manos,
 	survey_ingles,
-	survey_cine
+	survey_cine,
+	survey_test,
 ];
 export const DEFAULT_SURVEY = survey_aept;

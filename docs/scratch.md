@@ -58,17 +58,17 @@ let encuesta = {
 			opciones: [
 				{
 					titulo: 'Más ejemplos prácticos',
-					descripcion: 'Incluir más ejemplos prácticos en las lecciones'
+					descripcion: 'Incluir más ejemplos prácticos en las lecciones',
 				},
 				{
 					titulo: 'Más recursos adicionales',
-					descripcion: 'Proporcionar más recursos adicionales, como videos o tutoriales en línea'
+					descripcion: 'Proporcionar más recursos adicionales, como videos o tutoriales en línea',
 				},
 				{
 					titulo: 'Más ejercicios de práctica',
-					descripcion: 'Brindar más ejercicios de práctica para reforzar los conceptos aprendidos'
-				}
-			]
+					descripcion: 'Brindar más ejercicios de práctica para reforzar los conceptos aprendidos',
+				},
+			],
 		},
 		{
 			id: 'preg_002',
@@ -79,10 +79,10 @@ let encuesta = {
 				{ titulo: 'Muy buena' },
 				{ titulo: 'Normal' },
 				{ titulo: 'Regular' },
-				{ titulo: 'Mala' }
-			]
-		}
-	]
+				{ titulo: 'Mala' },
+			],
+		},
+	],
 };
 
 let current = 0;
