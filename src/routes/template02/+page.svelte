@@ -12,20 +12,21 @@
 				opciones: [
 					{
 						titulo: 'Más ejemplos prácticos',
-						descripcion: 'Incluir más ejemplos prácticos en las lecciones'
+						descripcion: 'Incluir más ejemplos prácticos en las lecciones',
 					},
 					{
 						titulo: 'Más recursos adicionales',
-						descripcion: 'Proporcionar más recursos adicionales, como videos o tutoriales en línea'
+						descripcion: 'Proporcionar más recursos adicionales, como videos o tutoriales en línea',
 					},
 					{
 						titulo: 'Más ejercicios de práctica',
-						descripcion: 'Brindar más ejercicios de práctica para reforzar los conceptos aprendidos'
-					}
+						descripcion:
+							'Brindar más ejercicios de práctica para reforzar los conceptos aprendidos',
+					},
 				],
-				acepta_otros: true
-			}
-		]
+				acepta_otros: true,
+			},
+		],
 	};
 	let current = 0;
 	let pregunta = encuesta.preguntas[current];

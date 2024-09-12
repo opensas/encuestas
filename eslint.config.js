@@ -45,7 +45,7 @@ export default [
 						// other attributes. (Alphabetical order within the same group.)
 						{
 							match: ['!/:/u', '!/^(?:this|id|name|style|class)$/u', '!/^--/u', '!/^on/u'],
-							sort: 'alphabetical'
+							sort: 'alphabetical',
 						},
 						// on event handlers - properties starting with on
 						{ match: '/^on/u', sort: 'alphabetical' },
@@ -60,9 +60,9 @@ export default [
 						// `animate:` directive.
 						{ match: '/^animate:/u', sort: 'alphabetical' },
 						// `let:` directives. (Alphabetical order within the same group.)
-						{ match: '/^let:/u', sort: 'alphabetical' }
-					]
-				}
+						{ match: '/^let:/u', sort: 'alphabetical' },
+					],
+				},
 			],
 			'simple-import-sort/imports': [
 				'error',
@@ -89,11 +89,11 @@ export default [
 						// Imports starting with `./`
 						['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
 						// Side effect imports
-						['^\\u0000']
-					]
-				}
-			]
-		}
+						['^\\u0000'],
+					],
+				},
+			],
+		},
 	},
 
 	prettier,
@@ -102,27 +102,27 @@ export default [
 		languageOptions: {
 			globals: {
 				...globals.browser,
-				...globals.node
-			}
-		}
+				...globals.node,
+			},
+		},
 	},
 	{
 		files: ['**/*.svelte'],
 		languageOptions: {
 			parserOptions: {
-				parser: ts.parser
-			}
-		}
+				parser: ts.parser,
+			},
+		},
 	},
 	{
-		ignores: ['build/', '.svelte-kit/', 'dist/']
+		ignores: ['build/', '.svelte-kit/', 'dist/'],
 	},
 	{
 		/* location of your components where you would like to apply these rules  */
 		// see: https://www.shadcn-svelte.com/docs/installation#eslint-configuration
 		files: ['**/components/ui/**/*.svelte'],
 		rules: {
-			'@typescript-eslint/no-unused-vars': 'off'
-		}
-	}
+			'@typescript-eslint/no-unused-vars': 'off',
+		},
+	},
 ];

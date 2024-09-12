@@ -41,7 +41,7 @@
 		{ value: 'plum', label: 'Plum' },
 		{ value: 'raspberry', label: 'Raspberry' },
 		{ value: 'strawberry', label: 'Strawberry' },
-		{ value: 'watermelon', label: 'Watermelon' }
+		{ value: 'watermelon', label: 'Watermelon' },
 	];
 </script>
 

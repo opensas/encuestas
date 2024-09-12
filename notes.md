@@ -87,19 +87,24 @@ export const encuesta01 = {
 			id: 'preg_001',
 			titulo: '¿Qué tan conforme está con la gestión del programa?',
 			descripcion: 'Indicanos que tan conforme estas con el desarrollo del programa',
-			opciones: ['mucho', 'bastante', 'normal', 'poco', 'nada conforme']
+			opciones: ['mucho', 'bastante', 'normal', 'poco', 'nada conforme'],
 		},
 		{
 			id: 'preg_002',
 			titulo: '¿Cómo mejoraría la gestión del programa?',
-			opciones: ['más opciones de cursos', 'mejores docentes', 'mejor equipamiento', 'más difusión']
+			opciones: [
+				'más opciones de cursos',
+				'mejores docentes',
+				'mejor equipamiento',
+				'más difusión',
+			],
 		},
 		{
 			id: 'preg_002',
 			titulo: '¿Qué puntaje le daría a la gestión del programa?',
-			opciones: [1, 2, 3, 4, 5]
-		}
-	]
+			opciones: [1, 2, 3, 4, 5],
+		},
+	],
 };
 ```
 
