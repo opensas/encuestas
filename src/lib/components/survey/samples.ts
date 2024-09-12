@@ -152,50 +152,29 @@ export const survey_aept: Survey = {
 			options: ['Muy satisfecho', 'Satisfecho', 'Indistinto', 'Insatisfecho', 'Muy insatisfecho'],
 		},
 		{
-			id: 'preg_2_1',
-			code: 'P2.1',
+			id: 'preg_2',
+			code: 'P2',
 			title:
-				'¿Cómo fue tu experiencia en relación al "Registro en el Portal Empleo" para acceder al Entrenamiento para el Trabajo?',
-			kind: 'single',
-			options: ['Buena', 'Regular', 'Mala'],
-		},
-		{
-			id: 'preg_2_2',
-			code: 'P2.2',
-			title:
-				'¿Cómo fue tu experiencia en relación a la "Búsqueda de la oferta de EPT" para acceder al Entrenamiento para el Trabajo?',
-			kind: 'single',
-			options: ['Buena', 'Regular', 'Mala'],
-		},
-		{
-			id: 'preg_2_3',
-			code: 'P2.3',
-			title:
-				'¿Cómo fue tu experiencia en relación a la "Postulación a la oferta de EPT" para acceder al Entrenamiento para el Trabajo?',
-			kind: 'single',
+				'¿Cómo fue tu experiencia en relación a los siguientes aspectos de la gestión para acceder al Entrenamiento para el Trabajo?',
+			kind: 'grid-single',
+			items: [
+				'Registro en el Portal Empleo',
+				'Búsqueda de la oferta de EPT',
+				'Postulación a la oferta de EPT',
+			],
 			options: ['Buena', 'Regular', 'Mala'],
 		},
 
 		{
-			id: 'preg_3_1',
-			code: 'P3.1',
+			id: 'preg_3',
+			code: 'P3',
 			title:
-				'¿En qué medida acordás con que "Me permitió adquirir nuevos conocimientos y habilidades" sobre la participación en la práctica de Entrenamiento para el Trabajo?',
-			kind: 'single',
-			options: [
-				'Muy de acuerdo',
-				'De acuerdo',
-				'Ni de acuerdo ni en desacuerdo',
-				'En desacuerdo',
-				'Muy en desacuerdo',
+				'¿En qué medida acordás con las siguientes afirmaciones sobre la participación en la práctica de Entrenamiento para el Trabajo?',
+			kind: 'grid-single',
+			items: [
+				'Me permitió adquirir nuevos conocimientos y habilidades',
+				'Mejora mis posibilidades de conseguir empleo',
 			],
-		},
-		{
-			id: 'preg_3_2',
-			code: 'P3.2',
-			title:
-				'¿En qué medida acordás con que "Mejora mis posibilidades de conseguir trabajo" sobre la participación en la práctica de Entrenamiento para el Trabajo?',
-			kind: 'single',
 			options: [
 				'Muy de acuerdo',
 				'De acuerdo',
@@ -806,6 +785,25 @@ export const survey_test: Survey = {
 	code: 'test',
 	title: 'Encuesta de muestra de los distintos tipos de pregunta',
 	questions: [
+		{
+			id: 'preg_grid_single',
+			title: 'grid-single - varias preguntas que aceptan un solo valor',
+			kind: 'grid-single',
+			items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			answer: { 'pregunta 1': 'opcion 2', 'pregunta 2': 'opcion 3', 'pregunta 3': 'opcion 2' },
+			allowOther: true,
+		},
+		{
+			id: 'preg_grid_single_select',
+			title: 'grid-single, control: select - varias preguntas que aceptan un solo valor',
+			kind: 'grid-single',
+			control: 'select',
+			items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			answer: { 'pregunta 1': 'opcion 2', 'pregunta 2': 'opcion 3', 'pregunta 3': 'opcion 2' },
+			allowOther: true,
+		},
 		{
 			id: 'preg_single',
 			title: 'single - pregunta que acepta un solo valor',

@@ -11,6 +11,7 @@ export type QuestionKind = Question['kind'];
 export type Option = { title: string; description?: string; next?: Question['next'] };
 
 export type SingleQuestion = Extract<Question, { kind: 'single' }>;
+export type GridSingleQuestion = Extract<Question, { kind: 'grid-single' }>;
 export type MultipleQuestion = Extract<Question, { kind: 'multiple' }>;
 export type RatingQuestion = Extract<Question, { kind: 'rating' }>;
 export type TextQuestion = Extract<Question, { kind: 'text' }>;
@@ -40,6 +41,16 @@ export type Question = {
 			control?: 'radio' | 'select';
 			nextOther?: Question['next'];
 			answer?: string;
+	  }
+	| {
+			kind: 'grid-single';
+			items: Array<string>;
+			options: Array<Option | string>;
+			allowOther?: boolean;
+			placeholderOther?: string;
+			control?: 'radio' | 'select';
+			nextOther?: Question['next'];
+			answer?: Record<string, string>;
 	  }
 	| {
 			kind: 'multiple';

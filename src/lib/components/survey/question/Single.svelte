@@ -25,7 +25,7 @@
 		const answer = question.answer || '';
 		if (!answer) {
 			checked = '';
-		} else if (options.find((opcion) => opcion.title === answer)) {
+		} else if (options.find((option) => option.title === answer)) {
 			checked = answer;
 		} else {
 			checked = OTHER_VALUE;
@@ -37,9 +37,6 @@
 
 	$: answer = checked === OTHER_VALUE ? other : checked;
 	$: onupdate(answer);
-
-	$: console.log('!!!!', { checked });
-	$: console.log('!!!!', { answer });
 </script>
 
 <Radio.Root bind:value={checked} class="gap-0 space-y-4">

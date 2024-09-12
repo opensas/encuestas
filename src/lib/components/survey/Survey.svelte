@@ -6,7 +6,7 @@
 
 	import { cn } from '$lib/utils';
 
-	import { GridText, Multiple, Rating, Single, Text } from './question';
+	import { GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
 	import { toOption } from '.';
 
 	export let survey: Survey;
@@ -119,6 +119,8 @@
 		{#key question.id}
 			{#if question.kind === 'single'}
 				<Single {question} {onupdate} />
+			{:else if question.kind === 'grid-single'}
+				<GridSingle {question} {onupdate} />
 			{:else if question.kind === 'multiple'}
 				<Multiple {question} {onupdate} />
 			{:else if question.kind === 'rating'}
