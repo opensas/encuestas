@@ -171,7 +171,10 @@ export const survey_aept: Survey = {
 			title:
 				'¿En qué medida acordás con las siguientes afirmaciones sobre la participación en la práctica de Entrenamiento para el Trabajo?',
 			kind: 'grid-single',
-			items: ['Me permitió adquirir nuevos conocimientos y habilidades', 'Mejora mis posibilidades de conseguir empleo'],
+			items: [
+				'Me permitió adquirir nuevos conocimientos y habilidades',
+				'Mejora mis posibilidades de conseguir empleo',
+			],
 			options: [
 				'Muy de acuerdo',
 				'De acuerdo',
