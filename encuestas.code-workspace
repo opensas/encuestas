@@ -42,10 +42,14 @@
 			"opcion",
 			"preg",
 			"puntaje",
+			"querystring",
 			"realizás",
 			"reciclador",
 			"Reciclador",
 			"recicladora",
+			"redireccionar",
+			"redireccionará",
+			"redirecciones",
 			"shadcn",
 			"tailwindcss",
 			"Techista",
@@ -54,7 +58,7 @@
 			"upep",
 			"Zanjero",
 			"Zinguería",
-			"Zinguero",
+			"Zinguero"
 		],
 	},
 }
