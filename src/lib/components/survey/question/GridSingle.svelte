@@ -59,52 +59,49 @@
 	$: onupdate(answer);
 </script>
 
-<div>
-	<!-- title row -->
-	<div class="grid grid-cols-[1fr_2fr] gap-4 gap-y-6">
-		<!-- pregunta -->
-		<div>&nbsp;</div>
-		<!-- <div class="bg-blue-200">pregunta</div> -->
-		<div style={templateCols} class="grid items-center gap-4">
+<!-- title row -->
+<div class="grid grid-cols-[1fr_2fr] gap-4 gap-y-6">
+	<!-- pregunta -->
+	<div></div>
+	<div style={templateCols} class="grid items-center gap-4">
+		{#if control === 'radio'}
+			<!-- each option as a radio -->
+			{#each question.options as option}
+				<Label class="justify-self-center text-center">{option}</Label>
+			{/each}
+		{:else}
+			<!-- a single select with all the options -->
+			<div></div>
+		{/if}
+		{#if question.allowOther}
+			<Label class="w-full pl-4 text-center">Otra opción</Label>
+		{/if}
+	</div>
+
+	{#each question.items as item}
+		<Label class="self-center text-base">{item}</Label>
+		<Radio.Root
+			bind:value={checked[item]}
+			style={templateCols}
+			class="grid items-center gap-4 "
+			orientation="horizontal"
+		>
 			{#if control === 'radio'}
-				<!-- each option as a radio -->
-				{#each question.options as option}
-					<Label class="justify-self-center text-center">{option}</Label>
+				{#each options as { title }}
+					<Radio.Item value={title} class="justify-self-center" />
 				{/each}
 			{:else}
-				<!-- a single select with all the options -->
-				<div>&nbsp;</div>
+				{@const items = options.map((o) => ({ value: o.title }))}
+				<div class="w-full space-y-1">
+					<Select bind:value={checked[item]} options={items} />
+				</div>
 			{/if}
 			{#if question.allowOther}
-				<Label class="w-full pl-4 text-center">Otra opción</Label>
+				<div class="flex w-full items-center space-x-2 pl-4">
+					<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
+					<Input bind:value={other[item]} placeholder="Otra opción" />
+				</div>
 			{/if}
-		</div>
-
-		{#each question.items as item}
-			<Label class="self-center text-base">{item}</Label>
-			<Radio.Root
-				bind:value={checked[item]}
-				style={templateCols}
-				class="grid items-center gap-4 "
-				orientation="horizontal"
-			>
-				{#if control === 'radio'}
-					{#each options as { title }}
-						<Radio.Item value={title} class="justify-self-center" />
-					{/each}
-				{:else}
-					{@const items = options.map((o) => ({ value: o.title }))}
-					<div class="w-full space-y-1">
-						<Select bind:value={checked[item]} options={items} />
-					</div>
-				{/if}
-				{#if question.allowOther}
-					<div class="flex w-full items-center space-x-2 pl-4">
-						<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
-						<Input bind:value={other[item]} placeholder="Otra opción" />
-					</div>
-				{/if}
-			</Radio.Root>
-		{/each}
-	</div>
+		</Radio.Root>
+	{/each}
 </div>
