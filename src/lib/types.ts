@@ -2,6 +2,8 @@ export type Survey = {
 	id: `enc_${string}`;
 	code: string;
 	title: string;
+	intro?: string;
+	outro?: string;
 	description?: string;
 	questions: Question[];
 };

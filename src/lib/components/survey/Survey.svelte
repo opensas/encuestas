@@ -26,6 +26,9 @@
 	let shake = false;
 	$: isError = saved && !isValid;
 
+	let intro = !!survey.intro;
+	// let outro = false; // #TODO!
+
 	// already answered question
 	let questions: Question[] = [];
 
@@ -106,6 +109,19 @@
 		return isValid;
 	}
 
+	function parseText(text: string) {
+		const CR = '\n';
+		const TAB = '\t';
+
+		let parsed = text
+			.replaceAll(TAB, '') // cleanup
+			.split(CR) // split
+			.filter(Boolean); // remove empty lines
+
+		const [header, ...body] = parsed;
+		return { header, body };
+	}
+
 	function save() {
 		// update survey with the effectively answered questions (the question history)
 		goNext();
@@ -136,46 +152,59 @@
 
 		<Separator class="my-6" />
 
-		<div class="space-y-0.5">
-			<h3 class="text-lg font-medium" class:text-destructive={isError}>
-				{question.code || current}. {question.title}
-				{#if required}
-					<span class="text-destructive">*</span>
+		{#if intro && survey.intro}
+			{@const { header, body } = parseText(survey.intro)}
+			<div class="space-y-0.5">
+				<h3 class="text-xl font-medium">{header}</h3>
+			</div>
+			{#each body as paragraph}
+				<p class="--text-muted-foreground text-base">{paragraph}</p>
+			{/each}
+			<div class="flex justify-end pt-4">
+				<Button on:click={() => (intro = false)}>Comenzar</Button>
+			</div>
+		{:else}
+			<div class="space-y-0.5">
+				<h3 class="text-lg font-medium" class:text-destructive={isError}>
+					{question.code || current}. {question.title}
+					{#if required}
+						<span class="text-destructive">*</span>
+					{/if}
+				</h3>
+				{#if isError}
+					<p class="text-sm text-destructive">Debe completar esta pregunta</p>
 				{/if}
-			</h3>
-			{#if isError}
-				<p class="text-sm text-destructive">Debe completar esta pregunta</p>
-			{/if}
-			{#if question.description}
-				<p class="text-sm text-muted-foreground">{question.description}</p>
-			{/if}
-		</div>
+				{#if question.description}
+					<p class="text-sm text-muted-foreground">{question.description}</p>
+				{/if}
+			</div>
 
-		{#key question.id}
-			{#if question.kind === 'single'}
-				<Single bind:isValid {question} {onupdate} />
-			{:else if question.kind === 'grid-single'}
-				<GridSingle bind:isValid {question} {saved} {onupdate} />
-			{:else if question.kind === 'multiple'}
-				<Multiple bind:isValid {question} {onupdate} />
-			{:else if question.kind === 'rating'}
-				<Rating bind:isValid {question} {onupdate} />
-			{:else if question.kind === 'text'}
-				<Text bind:isValid {question} {onupdate} />
-			{:else if question.kind === 'grid-text'}
-				<GridText bind:isValid {question} {saved} {onupdate} />
-			{/if}
-		{/key}
+			{#key question.id}
+				{#if question.kind === 'single'}
+					<Single bind:isValid {question} {onupdate} />
+				{:else if question.kind === 'grid-single'}
+					<GridSingle bind:isValid {question} {saved} {onupdate} />
+				{:else if question.kind === 'multiple'}
+					<Multiple bind:isValid {question} {onupdate} />
+				{:else if question.kind === 'rating'}
+					<Rating bind:isValid {question} {onupdate} />
+				{:else if question.kind === 'text'}
+					<Text bind:isValid {question} {onupdate} />
+				{:else if question.kind === 'grid-text'}
+					<GridText bind:isValid {question} {saved} {onupdate} />
+				{/if}
+			{/key}
 
-		<div class="flex justify-between pt-4">
-			<Button class={current <= 1 ? 'invisible' : ''} variant="outline" on:click={goPrev}>
-				Anterior
-			</Button>
-			{#if next !== null}
-				<Button on:click={goNext}>Siguiente</Button>
-			{:else}
-				<Button on:click={save}>Finalizar</Button>
-			{/if}
-		</div>
+			<div class="flex justify-between pt-4">
+				<Button class={current <= 1 ? 'invisible' : ''} variant="outline" on:click={goPrev}>
+					Anterior
+				</Button>
+				{#if next !== null}
+					<Button on:click={goNext}>Siguiente</Button>
+				{:else}
+					<Button on:click={save}>Finalizar</Button>
+				{/if}
+			</div>
+		{/if}
 	</div>
 </div>

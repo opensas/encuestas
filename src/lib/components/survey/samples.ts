@@ -245,6 +245,16 @@ export const survey_upep: Survey = {
 	id: 'enc_upep',
 	code: 'upep',
 	title: 'Relevamiento de Unidades Productivas de la Economía Popular - Prueba piloto',
+	intro: `
+
+	Bienvenido al Registro de Unidades Productivas de la Economía Popular
+
+	Las Unidades Productivas de la Economía Popular (UPEPs) son clave para la producción y generación de ingresos, pero su informalidad dificulta su identificación.
+
+	Por tal motivo, nos proponemos crear un registro público para impulsar la productividad y formalidad de estas unidades, comenzando con las que participan en el Programa Volver al Trabajo.
+
+	Por favor, completa el formulario adjunto para ayudarnos a conocer más sobre tu unidad productiva y contribuir al desarrollo de la economía popular.
+	`,
 	questions: [
 		{
 			id: 'preg_0',
@@ -784,6 +794,11 @@ export const survey_test: Survey = {
 	id: 'enc_test',
 	code: 'test',
 	title: 'Encuesta de muestra de los distintos tipos de pregunta',
+	intro: `
+	Bienvenido a la encuesta de muestra
+	Te damos al bienvenida a esta encuesta de muestra
+	Esperamos que te resulte útil
+	`,
 	questions: [
 		{
 			id: 'preg_grid_single',
