@@ -23,6 +23,12 @@ export type TextItem = {
 	placeholder?: string;
 	control?: 'textarea' | 'input';
 	maxlength?: number;
+	required?: boolean;
+};
+
+export type SingleItem = {
+	title: string;
+	required?: boolean;
 };
 
 export type Question = {
@@ -41,16 +47,18 @@ export type Question = {
 			control?: 'radio' | 'select';
 			nextOther?: Question['next'];
 			answer?: string;
+			required?: boolean;
 	  }
 	| {
 			kind: 'grid-single';
-			items: Array<string>;
+			items: Array<SingleItem | string>;
 			options: Array<Option | string>;
 			allowOther?: boolean;
 			placeholderOther?: string;
 			control?: 'radio' | 'select';
 			nextOther?: Question['next'];
 			answer?: Record<string, string>;
+			required?: boolean;
 	  }
 	| {
 			kind: 'multiple';
@@ -59,15 +67,18 @@ export type Question = {
 			placeholderOther?: string;
 			nextOther?: Question['next'];
 			answer?: string[];
+			required?: boolean;
 	  }
 	| {
 			kind: 'grid-text';
 			items: Array<TextItem | string>;
 			answer?: Record<string, string>;
+			required?: boolean;
 	  }
 	| {
 			kind: 'rating';
 			answer?: number;
+			required?: boolean;
 	  }
 	| {
 			kind: 'text';
@@ -77,5 +88,6 @@ export type Question = {
 			control?: 'textarea' | 'input';
 			maxlength?: number;
 			answer?: string;
+			required?: boolean;
 	  }
 );

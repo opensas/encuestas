@@ -21,10 +21,20 @@
 
 	$: current = questions.length + 1; // index of the current question
 
+	let saved = false;
+	let isValid = false;
+	let shake = false;
+	$: isError = saved && !isValid;
+
 	// already answered question
 	let questions: Question[] = [];
 
+	$: required = !('required' in question) || question.required;
+
 	function goNext() {
+		if (!validate()) return;
+		saved = false;
+
 		// contesté una nueva pregunta
 		questions = [...questions, question];
 
@@ -79,16 +89,28 @@
 	}
 
 	function goPrev() {
+		if (!validate()) return;
+		saved = false;
+
 		if (questions.length <= 0) return;
 		question = questions.at(-1)!;
 		questions = questions.slice(0, -1);
 	}
 
+	function validate() {
+		saved = true;
+		if (!isValid) {
+			shake = true;
+			setTimeout(() => (shake = false), 1000);
+		}
+		return isValid;
+	}
+
 	function save() {
 		// update survey with the effectively answered questions (the question history)
 		goNext();
-		const saved = { ...survey, preguntas: questions };
-		onsave(saved);
+		const updated = { ...survey, preguntas: questions };
+		onsave(updated);
 	}
 
 	function onupdate(answer: Survey['questions'][number]['answer']) {
@@ -98,10 +120,15 @@
 	}
 </script>
 
-<div class={cn('rounded-[0.5rem] bg-background sm:border sm:shadow-xl', className)}>
+<div
+	class={cn('rounded-[0.5rem] bg-background sm:border sm:shadow-xl', className)}
+	class:animate-shake={shake}
+>
 	<div class="space-y-6 p-6 sm:p-10 md:block">
 		<div class="space-y-1">
-			<h2 class="text-2xl font-bold tracking-tight">{survey.title}</h2>
+			<h2 class="text-2xl font-bold tracking-tight">
+				{survey.title}
+			</h2>
 			{#if survey.description}
 				<p class="text-muted-foreground">{survey.description}</p>
 			{/if}
@@ -110,7 +137,15 @@
 		<Separator class="my-6" />
 
 		<div class="space-y-0.5">
-			<h3 class="text-lg font-medium">{question.code || current}. {question.title}</h3>
+			<h3 class="text-lg font-medium" class:text-destructive={isError}>
+				{question.code || current}. {question.title}
+				{#if required}
+					<span class="text-destructive">*</span>
+				{/if}
+			</h3>
+			{#if isError}
+				<p class="text-sm text-destructive">Debe completar esta pregunta</p>
+			{/if}
 			{#if question.description}
 				<p class="text-sm text-muted-foreground">{question.description}</p>
 			{/if}
@@ -118,17 +153,17 @@
 
 		{#key question.id}
 			{#if question.kind === 'single'}
-				<Single {question} {onupdate} />
+				<Single bind:isValid {question} {onupdate} />
 			{:else if question.kind === 'grid-single'}
-				<GridSingle {question} {onupdate} />
+				<GridSingle bind:isValid {question} {saved} {onupdate} />
 			{:else if question.kind === 'multiple'}
-				<Multiple {question} {onupdate} />
+				<Multiple bind:isValid {question} {onupdate} />
 			{:else if question.kind === 'rating'}
-				<Rating {question} {onupdate} />
+				<Rating bind:isValid {question} {onupdate} />
 			{:else if question.kind === 'text'}
-				<Text {question} {onupdate} />
+				<Text bind:isValid {question} {onupdate} />
 			{:else if question.kind === 'grid-text'}
-				<GridText {question} {onupdate} />
+				<GridText bind:isValid {question} {saved} {onupdate} />
 			{/if}
 		{/key}
 

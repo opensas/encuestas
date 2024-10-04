@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { GridSingleQuestion, Option } from '$lib/types';
+	import type { GridSingleQuestion, Option, SingleItem } from '$lib/types';
 
 	import { Select } from '$lib/components/select';
 	import { toOption } from '$lib/components/survey';
@@ -9,12 +9,19 @@
 
 	export let question: GridSingleQuestion;
 	export let onupdate: (answer: Answer) => void = () => {};
+	export let isValid = true;
+	export let saved = false;
+
+	let items: SingleItem[];
 
 	type Answer = GridSingleQuestion['answer'];
 
 	let options: Option[];
 	let checked: NonNullable<Answer>;
 	let answer: Answer;
+
+	let valid: Record<string, boolean> = {};
+	let required: Record<string, boolean> = {};
 
 	const OTHER_VALUE = '__OTHER__';
 	let other: NonNullable<Answer>;
@@ -27,17 +34,18 @@
 		checked = {};
 		other = {};
 		options = question.options.map(toOption);
+		items = question.items.map((item) => (typeof item === 'string' ? { title: item } : item));
 
-		for (const item of question.items) {
-			const answer = question?.answer?.[item] || '';
-			other[item] = '';
+		for (const { title } of items) {
+			const answer = question?.answer?.[title] || '';
+			other[title] = '';
 			if (!answer) {
-				checked[item] = '';
+				checked[title] = '';
 			} else if (options.find((option) => option.title === answer)) {
-				checked[item] = answer;
+				checked[title] = answer;
 			} else {
-				checked[item] = OTHER_VALUE;
-				other[item] = answer;
+				checked[title] = OTHER_VALUE;
+				other[title] = answer;
 			}
 		}
 
@@ -46,16 +54,36 @@
 		templateCols = `grid-template-columns: repeat(${cols},1fr) ${otherCol}`;
 	}
 
-	function updateAnswer(_checked: typeof checked) {
+	function updateAnswer(_checked: typeof checked, _other: typeof other) {
 		let answer: Answer = {};
 		for (const [key, value] of Object.entries(_checked)) {
-			answer[key] = value === OTHER_VALUE ? other[key] : value;
+			answer[key] = value === OTHER_VALUE ? _other[key] : value;
 		}
 		return answer;
 	}
 
+	$: required = _required(question, items);
+	$: valid = _valid(required, answer);
+	$: isValid = Object.values(valid).every(Boolean);
+
+	function _required(q: typeof question, it: typeof items) {
+		let ret: typeof required = {};
+		for (const { title, required } of it) {
+			ret[title] = required ?? q.required ?? false; // by default, it's not required
+		}
+		return ret;
+	}
+
+	function _valid(req: typeof required, ans: typeof answer) {
+		let ret: typeof valid = {};
+		for (const [title, required] of Object.entries(req)) {
+			ret[title] = !required || (required && !!ans && !!ans[title]);
+		}
+		return ret;
+	}
+
 	initState();
-	$: answer = updateAnswer(checked);
+	$: answer = updateAnswer(checked, other);
 	$: onupdate(answer);
 </script>
 
@@ -78,12 +106,18 @@
 		{/if}
 	</div>
 
-	{#each question.items as item}
-		<Label class="self-center text-base">{item}</Label>
+	{#each items as { title }}
+		{@const className = saved && !valid[title] ? 'text-destructive' : ''}
+		<Label class="self-center text-base {className}">
+			{title}
+			{#if required[title]}
+				<span class="text-destructive">*</span>
+			{/if}
+		</Label>
 		<Radio.Root
-			bind:value={checked[item]}
+			bind:value={checked[title]}
 			style={templateCols}
-			class="grid items-center gap-4 "
+			class="grid items-center gap-4"
 			orientation="horizontal"
 		>
 			{#if control === 'radio'}
@@ -93,13 +127,13 @@
 			{:else}
 				{@const items = options.map((o) => ({ value: o.title }))}
 				<div class="w-full space-y-1">
-					<Select bind:value={checked[item]} options={items} />
+					<Select bind:value={checked[title]} options={items} />
 				</div>
 			{/if}
 			{#if question.allowOther}
 				<div class="flex w-full items-center space-x-2 pl-4">
 					<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
-					<Input bind:value={other[item]} placeholder="Otra opción" />
+					<Input bind:value={other[title]} placeholder="Otra opción" />
 				</div>
 			{/if}
 		</Radio.Root>

@@ -7,10 +7,14 @@
 
 	export let question: TextQuestion;
 	export let onupdate: (answer: string) => void = () => {};
+	export let isValid = true;
 
 	let answer = question.answer || '';
 
 	$: ({ title, description, placeholder, control = 'textarea', maxlength } = question);
+
+	$: required = question.required ?? true;
+	$: isValid = !required || (required && !!answer);
 
 	$: onupdate(answer);
 </script>
