@@ -9,6 +9,7 @@
 
 	export let question: SingleQuestion;
 	export let onupdate: (answer: string) => void = () => {};
+	export let isValid = true;
 
 	let options: Option[];
 	let checked: string;
@@ -34,6 +35,9 @@
 	}
 
 	initState();
+
+	$: required = question.required ?? true;
+	$: isValid = !required || (required && !!answer);
 
 	$: answer = checked === OTHER_VALUE ? other : checked;
 	$: onupdate(answer);

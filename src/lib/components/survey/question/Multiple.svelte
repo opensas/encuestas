@@ -8,6 +8,7 @@
 
 	export let question: MultipleQuestion;
 	export let onupdate: (answer: string[]) => void = () => {};
+	export let isValid = true;
 
 	let options: Option[];
 	let answer: string[];
@@ -38,6 +39,9 @@
 	}
 
 	initState();
+
+	$: required = question.required ?? true;
+	$: isValid = !required || (required && answer.length > 0);
 
 	$: updateAnswer(checked, checkedOther, other);
 </script>

@@ -8,9 +8,13 @@
 
 	export let question: RatingQuestion;
 	export let onupdate: (respuesta: number) => void = () => {};
+	export let isValid = true;
 
 	let answer = question.answer || 0;
 	let slider = [answer];
+
+	$: required = question.required ?? true;
+	$: isValid = !required || (required && answer !== undefined);
 
 	$: answer = slider[0];
 	$: onupdate(answer);
