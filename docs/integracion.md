@@ -13,13 +13,13 @@ Ejemplo:
 - el portal de empleo (consumidor del servicio de encuestas) redirige al usuario para que complete la encuesta cuyo código es VAT, y especifica a su vez el callback al cual redireccionar al usuario junto con el id de la respuesta:
 
 ```
-REDIRECT https://trabajo.gob.ar/encuestas?encuesta=VAT&callback=https://trabajo.gob.ar/portal-empleo/cb&referencia=beneficiario_999874
+REDIRECT https://trabajo.gob.ar/encuestas?encuesta=VAT&callback=https://trabajo.gob.ar/portal-empleo/cb?formato=json&referencia=beneficiario_999874
 ```
 
 ![](img/integracion-01.png)- una vez completada toda la información, el sistema de encuestas grabará la respuesta, y redireccionará al usuario al callback especificado:
 
 ```
-REDIRECT https://trabajo.gob.ar/portal-empleo/cb&respuesta_id=answ_advf-wert-12dr-345d&reference=beneficiario_999874
+REDIRECT https://trabajo.gob.ar/portal-empleo/cb?respuesta_id=answ_advf-wert-12dr-345d&reference=beneficiario_999874
 ```
 
 ![](img/integracion-02.png)Posteriormente mediante la API rest puede consultar la respuesta por respuesta_id o por referencia:

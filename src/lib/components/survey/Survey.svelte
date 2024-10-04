@@ -92,7 +92,6 @@
 	}
 
 	function goPrev() {
-		if (!validate()) return;
 		saved = false;
 
 		if (questions.length <= 0) return;
