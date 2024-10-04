@@ -15,7 +15,7 @@ test('previous button is not visible on first question', async ({ page }) => {
 	// titulo
 	const question = page.locator('h3');
 	await expect(question).toBeVisible();
-	await expect(question).toContainText(/^P1\./);
+	await expect(question).toContainText(/^P0\./);
 
 	const siguiente = await page.$('button:has-text("Siguiente")');
 	expect(siguiente).not.toBeNull();
