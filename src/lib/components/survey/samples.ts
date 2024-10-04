@@ -876,4 +876,4 @@ export const surveys = [
 	survey_cine,
 	survey_test,
 ];
-export const DEFAULT_SURVEY = survey_aept;
+export const DEFAULT_SURVEY = survey_upep;
