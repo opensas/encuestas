@@ -236,7 +236,7 @@ export const survey_aept: Survey = {
 			title:
 				'Para acceder al Entrenamiento para el trabajo ¿contaste con la asistencia de alguna Oficina de Empleo o Agencia Territorial?',
 			kind: 'single',
-			options: ['Si', 'No'],
+			options: ['Sí', 'No'],
 		},
 	],
 };
@@ -273,7 +273,7 @@ export const survey_upep_v1: Survey = {
 			title:
 				'¿Hacés alguna actividad laboral en una organización comunitaria, barrial, social, familiar o cooperativa?',
 			kind: 'single',
-			options: ['Si', 'No'],
+			options: ['Sí', 'No'],
 		},
 		{
 			id: 'preg_2',
@@ -629,7 +629,7 @@ export const survey_upep: Survey = {
 			title:
 				'¿Hacés alguna actividad laboral en una organización comunitaria, barrial, social, familiar o cooperativa?',
 			kind: 'single',
-			options: ['Si', { title: 'No (fin del cuestionario)', next: null }],
+			options: ['Sí', { title: 'No (fin del cuestionario)', next: null }],
 		},
 		{
 			id: 'preg_2',
@@ -685,7 +685,7 @@ export const survey_upep: Survey = {
 			code: 'P7.1',
 			title: 'La unidad productiva/emprendimiento, ¿tiene relación con alguna organización social?',
 			kind: 'single',
-			options: [{ title: 'Si', next: 'preg_7_1_1' }, 'No'],
+			options: ['Sí', { title: 'No', next: 'preg_7_2' }],
 		},
 		{
 			id: 'preg_7_1_1',
@@ -699,7 +699,7 @@ export const survey_upep: Survey = {
 			code: 'P7.2',
 			title: 'La unidad productiva/emprendimiento, ¿tiene relación con una organización religiosa?',
 			kind: 'single',
-			options: [{ title: 'Si', next: 'preg_7_2_1' }, 'No'],
+			options: ['Sí', { title: 'No', next: 'preg_7_3' }],
 		},
 		{
 			id: 'preg_7_2_1',
@@ -713,7 +713,7 @@ export const survey_upep: Survey = {
 			code: 'P7.3',
 			title: 'La unidad productiva/emprendimiento, ¿tiene relación con un gobierno municipal?',
 			kind: 'single',
-			options: [{ title: 'Si', next: 'preg_7_3_1' }, 'No'],
+			options: ['Sí', { title: 'No', next: 'preg_8' }],
 		},
 		{
 			id: 'preg_7_3_1',
@@ -844,11 +844,10 @@ export const survey_upep: Survey = {
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'single',
 			options: [
-				'Cartonero/r eciclador/a',
+				'Cartonero/reciclador/a',
 				'Carrero/a',
 				'Promotor/a ambiental',
 				'Chofer de camión',
-				'Forestación',
 				'Limpieza de terrenos y espacios verdes',
 				'Reciclador/a de basura/residuos',
 				'Operario/a de plantas recicladora',
