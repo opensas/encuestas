@@ -36,3 +36,14 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+## prisma
+
+### migrations
+
+- [info](https://wanago.io/2023/07/03/api-nestjs-prisma-migrations/)
+- generate Prisma Cli: pnpm prisma generate
+- create migration: pnpm prisma migrate dev --name create-tables
+- exec migration: pnpm prisma migrate deploy
+- exec seed: pnpm tsx prisma/seed.ts
+- create empty migration: pnpm prisma migrate dev --create-only

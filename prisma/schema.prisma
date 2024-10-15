@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider                = "sqlserver"
+  url                     = env("DATABASE_URL")
+}
+
+model Survey {
+	id                Int                             @id @default(autoincrement())
+
+	code              String      @db.VarChar(50)     @default("")
+  version           Int                             @default(1)
+
+	title             String      @db.VarChar(1000)   @default("")
+	description       String      @db.VarChar(4000)   @default("")
+	questions         String      @db.VarChar(MAX)    @default("") @map("json_questions")
+
+  createdAt         DateTime                        @map("created_at")
+  updatedAt         DateTime                        @map("updated_at")
+  createdBy         Int         @default(0)         @map("created_by")
+  updatedBy         Int         @default(0)         @map("updated_by")
+
+  @@map(name: "surveys")
+  @@unique([code, version], name: "uk_survey_code_version")
+
+  answers           Answer[]
+
+}
+
+
+model Answer {
+  id                Int                             @id @default(autoincrement())
+
+  surveyId          Int                             @map("survery_id")
+  survery           Survey      @relation(fields: [surveyId], references: [id])
+
+  answers           String      @db.VarChar(MAX)    @default("") @map("json_answers")
+
+  createdAt         DateTime                        @map("created_at")
+  updatedAt         DateTime                        @map("updated_at")
+  createdBy         Int         @default(0)         @map("created_by")
+  updatedBy         Int         @default(0)         @map("updated_by")
+
+  @@map(name: "answers")
+
+}
