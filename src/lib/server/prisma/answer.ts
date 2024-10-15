@@ -1,4 +1,4 @@
-import { cleanPrefixId, setPrefixId, modelPrefix } from './misc';
+import { cleanPrefixId, modelPrefix, setPrefixId } from './misc';
 
 const objectToModel = (answer: any): any => {
 	answer.surveyId = cleanPrefixId(answer.surveyId);

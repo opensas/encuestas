@@ -1,8 +1,9 @@
 // import { Prisma } from '@prisma/client'
-import { prismaService } from '../src/lib/server/prisma/prisma.service';
 import { Survey as SurveyModel } from '@prisma/client';
 
-let dateAdd = new Date();
+import { prismaService } from '../src/lib/server/prisma/prisma.service';
+
+const dateAdd = new Date();
 
 const surveyData: SurveyModel[] = [
 	{
@@ -183,7 +184,7 @@ async function main() {
 	console.log(`Start seeding ...`);
 
 	for (const sd of surveyData) {
-		let data: any = { ...sd };
+		const data: any = { ...sd };
 		delete data.id;
 
 		const d = await prismaService.survey.create({ data });

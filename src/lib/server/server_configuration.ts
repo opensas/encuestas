@@ -1,5 +1,6 @@
+import { type Configuration, configuration } from '$lib/configuration';
+
 import { DATABASE_URL } from '$env/static/private';
-import { configuration, type Configuration } from '$lib/configuration';
 
 export type ServerConfiguration = Configuration & {
 	databaseUrl: string;

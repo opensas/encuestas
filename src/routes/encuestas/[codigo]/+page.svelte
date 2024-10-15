@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Survey } from '$lib/components/survey/index.js';
+
 	import { configuration } from '$lib/configuration.js';
 
 	export let data;

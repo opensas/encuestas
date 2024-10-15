@@ -1,5 +1,7 @@
 import { DEFAULT_SURVEY, surveys } from '$lib/components/survey';
+
 import { configuration } from '$lib/configuration.js';
+
 import { redirect } from '@sveltejs/kit';
 
 export async function load({ params, fetch }) {
@@ -16,7 +18,7 @@ const getSurveys = async (fetch: any, path: string): Promise<any> => {
 	const url = new URL(configuration.apiUrl);
 	url.pathname = path;
 
-	let opt: RequestInit = {
+	const opt: RequestInit = {
 		method: 'GET',
 		headers: new Headers({ 'content-type': 'application/json' }),
 	};

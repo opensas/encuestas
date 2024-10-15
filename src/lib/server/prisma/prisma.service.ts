@@ -1,8 +1,10 @@
-import { Prisma, PrismaClient } from '@prisma/client';
 import { commonFields } from '$lib/api/common_fields';
+
+import { Prisma, PrismaClient } from '@prisma/client';
+
 import { handleAnswer } from './answer';
-import { handleSurvey } from './survey';
 import { cleanPrefixId, modelPrefix, setPrefixId } from './misc';
+import { handleSurvey } from './survey';
 
 export type Models = keyof Omit<
 	PrismaClient,
@@ -14,8 +16,8 @@ const prismaService = new PrismaClient().$extends({
 		// Extend all models
 		$allModels: {
 			async record<Model, Args>(strId: string): Promise<Prisma.Result<Model, Args, 'findUnique'>> {
-				let id = cleanPrefixId(strId);
-				let params: any = { where: { id } };
+				const id = cleanPrefixId(strId);
+				const params: any = { where: { id } };
 
 				let rec: any = await (this as any).findUnique(params);
 
@@ -31,7 +33,7 @@ const prismaService = new PrismaClient().$extends({
 			async recordByCode<Model, Args>(
 				code: string
 			): Promise<Prisma.Result<Model, Args, 'findUnique'>> {
-				let params: any = { where: { code } };
+				const params: any = { where: { code } };
 				let rec: any;
 
 				if ((this as any).findCode) {

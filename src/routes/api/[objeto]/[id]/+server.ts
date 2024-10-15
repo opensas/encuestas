@@ -1,7 +1,8 @@
-import type { RequestEvent } from './$types.js';
 import { http, ResponseErrorStatus } from '$lib/server/http';
-import { prismaService } from '$lib/server/prisma/prisma.service';
 import { modelPrefix } from '$lib/server/prisma/misc.js';
+import { prismaService } from '$lib/server/prisma/prisma.service';
+
+import type { RequestEvent } from './$types.js';
 
 export async function GET(event: RequestEvent) {
 	const strId = event.params.id;
