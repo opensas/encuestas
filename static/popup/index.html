@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Template Page</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="max-w- mx-4 flex h-screen items-center justify-center">
+			<div class="grid gap-4 rounded-md border bg-slate-50 p-6 shadow-lg">
+				<h2 class="text-2xl">Ejemplo de integración de encuesta mediante popup</h2>
+
+				Haga click en el siguiente botón para abrir un popup con la encuesta
+
+				<button
+					class="h-10 w-fit justify-self-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-600/90"
+					onclick="openSurvey()"
+				>
+					Responder encuesta
+				</button>
+			</div>
+		</div>
+		<script>
+			let popup;
+			const SURVEY_URL = 'https://encuestas-online.vercel.app';
+			const SURVEY_CODE = 'short';
+
+			function openSurvey() {
+				window.addEventListener('message', onsave);
+				popup = window.open(
+					`${SURVEY_URL}/encuestas/${SURVEY_CODE}?p1=param2&p2=param2`,
+					'_blank',
+					'modal=yes,width=1000,height=600,menubar=no,toolbar=no,location=no'
+				);
+				popup?.focus();
+			}
+			function onsave(event) {
+				console.log('event', event);
+				if (event.origin === SURVEY_URL) {
+					console.log('Encuesta respondida', event.data);
+					alert('la encuesta ha sido respondida\r\n(revisá la consola)');
+				}
+				popup?.close();
+				window.removeEventListener('message', onsave);
+			}
+		</script>
+	</body>
+</html>
