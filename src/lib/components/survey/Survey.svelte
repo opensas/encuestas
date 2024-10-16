@@ -29,7 +29,7 @@
 	let intro = !!survey.intro;
 	// let outro = false; // #TODO!
 
-	// already answered question
+	// already answered question, this will bew the question history path
 	let questions: Question[] = [];
 
 	$: required = !('required' in question) || question.required;
@@ -43,20 +43,29 @@
 
 		if (next === null) return; // end of survey
 
-		question = survey.questions.find((p) => p.id === next)!; // calculate next question
+		const historyIndex = questions.findIndex((q) => q.id === next);
+		// the next question is in the history, check for loops
+		if (historyIndex !== -1) {
+			// get index of current and next question
+			const currentIndex = questions.findIndex((q) => q.id === question.id);
+			const nextIndex = questions.findIndex((q) => q.id === next);
 
-		// if the current question has already been answered, go back in history, yo avoid loops
-		const index = questions.findIndex((p) => p.id === question.id);
-		if (index !== -1) questions = questions.slice(0, index);
+			// the next question is a previous questions
+			// user is jumping back, truncate history to avoid loops
+			const isPrevious = nextIndex > currentIndex;
+			if (isPrevious) questions = questions.slice(0, historyIndex);
+		}
+
+		question = survey.questions.find((p) => p.id === next)!; // calculate next question
 	}
 
-	function calculateNext(pregunta: Question, survey: Survey) {
-		let next = _next(pregunta);
+	function calculateNext(question: Question, survey: Survey) {
+		let next = _next(question);
 
 		// a next question has been explicitly set depending on current answer
 		if (next !== undefined) return next;
 
-		const index = survey.questions.findIndex((p) => p.id === pregunta.id);
+		const index = survey.questions.findIndex((p) => p.id === question.id);
 
 		// reached end
 		if (index >= survey.questions.length - 1) return null;
@@ -122,9 +131,9 @@
 	}
 
 	function save() {
-		// update survey with the effectively answered questions (the question history)
+		// update survey with the effectively answered questions (question history path)
 		goNext();
-		const updated = { ...survey, preguntas: questions };
+		const updated = { ...survey, questions };
 		onsave(updated);
 	}
 

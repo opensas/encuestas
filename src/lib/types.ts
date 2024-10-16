@@ -1,5 +1,5 @@
 export type Survey = {
-	id: `enc_${string}`;
+	id: `surv_${string}`;
 	code: string;
 	title: string;
 	intro?: string;
@@ -34,10 +34,10 @@ export type SingleItem = {
 };
 
 export type Question = {
-	id: `preg_${string}`;
-	next?: Question['id'] | undefined | null; // null ends the survey
-	title: string;
+	id: `ques_${string}`;
 	code?: string;
+	title: string;
+	next?: Question['id'] | undefined | null; // null ends the survey
 	description?: string;
 	// tipo: TipoPregunta; // 'unica' | 'multiple' | 'puntaje' | 'libre'
 } & (

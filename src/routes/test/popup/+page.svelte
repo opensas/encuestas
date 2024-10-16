@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { survey_test, surveys } from '$lib/components/survey';
+	import { survey_short, surveys } from '$lib/components/survey';
 
 	let popup: Window | null = null;
 
-	let code = survey_test.code;
+	let code = survey_short.code;
 
 	let status: 'init' | 'success' = 'init';
 
