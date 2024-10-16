@@ -67,6 +67,7 @@
 						<button
 							{id}
 							class="box-content h-4 w-4 shrink-0 self-start rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[disabled=true]:cursor-not-allowed data-[state=checked]:bg-primary"
+							aria-label={titulo}
 							type="button"
 						>
 						</button>
@@ -87,6 +88,7 @@
 						<button
 							id="opcion_otro"
 							class="--self-start box-content h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[disabled=true]:cursor-not-allowed data-[state=checked]:bg-primary"
+							aria-label="Otra opción"
 							type="button"
 						>
 						</button>

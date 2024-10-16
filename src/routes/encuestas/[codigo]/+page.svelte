@@ -3,11 +3,33 @@
 
 	export let data;
 
-	$: survey = data.survey;
+	$: ({ survey, callback, redirect, reference, params } = data);
 
-	function onsave(survey: import('$lib/types').Survey) {
-		const respuestas = survey.questions.map((p) => [p.title, p.answer]);
-		console.log('!survey saved!', { survey, respuestas });
+	async function onsave(survey: import('$lib/types').Survey) {
+		const response = { survey, reference, params };
+
+		if (callback) {
+			await fetch(callback, {
+				method: 'POST',
+				body: JSON.stringify(response),
+			});
+		}
+
+		// called from a popup
+		if (window.opener) {
+			window.opener.postMessage(response, '*');
+			window.close();
+			return;
+		}
+
+		// called from a redirect
+		if (redirect) {
+			window.location.href = redirect;
+			return;
+		}
+
+		const answers = survey.questions.map((p) => [p.title, p.answer]);
+		console.log('!survey saved!', { survey, respuestas: answers });
 		const LF = '\r\n\r\n';
 		const message = survey.questions.map((p) => `${p.title}: ${toString(p.answer)}`).join(LF);
 		alert(`Felicitaciones! completaste la encuesta.${LF}${message}`);
