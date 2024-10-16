@@ -43,11 +43,20 @@
 
 		if (next === null) return; // end of survey
 
-		question = survey.questions.find((p) => p.id === next)!; // calculate next question
+		const historyIndex = questions.findIndex((q) => q.id === next);
+		// the next question is in the history, check for loops
+		if (historyIndex !== -1) {
+			// get index of current and next question
+			const currentIndex = questions.findIndex((q) => q.id === question.id);
+			const nextIndex = questions.findIndex((q) => q.id === next);
 
-		// if the current question has already been answered, go back in history, yo avoid loops
-		const index = questions.findIndex((p) => p.id === question.id);
-		if (index !== -1) questions = questions.slice(0, index);
+			// the next question is a previous questions
+			// user is jumping back, truncate history to avoid loops
+			const isPrevious = nextIndex > currentIndex;
+			if (isPrevious) questions = questions.slice(0, historyIndex);
+		}
+
+		question = survey.questions.find((p) => p.id === next)!; // calculate next question
 	}
 
 	function calculateNext(question: Question, survey: Survey) {

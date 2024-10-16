@@ -1037,6 +1037,7 @@ export const survey_cine: Survey = {
 	questions: [
 		{
 			id: 'ques_inicio',
+			code: '1',
 			title: 'Contanos un poco acerca de tí',
 			description: 'Algunos datos para conocerte mejor',
 			kind: 'grid-text',
@@ -1053,6 +1054,7 @@ export const survey_cine: Survey = {
 		},
 		{
 			id: 'ques_te_gusta_el_cine',
+			code: '2',
 			title: '¿Te gusta el cine?',
 			kind: 'single',
 			options: [
@@ -1067,6 +1069,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'ques_genero',
+			code: '3',
 			next: 'ques_final',
 			title: '¿Qué género te gusta más?',
 			kind: 'single',
@@ -1086,6 +1089,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'ques_genero_ciencia',
+			code: '3.1',
 			next: 'ques_final',
 			title: '¿Qué película de ciencia ficción es tu favorita?',
 			kind: 'single',
@@ -1103,6 +1107,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'ques_genero_ciencia_star',
+			code: '3.1.1',
 			next: 'ques_feedback',
 			title: '¿Qué película de la saga de Star wars es tu favorita?',
 			kind: 'single',
@@ -1115,6 +1120,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'ques_genero_accion',
+			code: '3.2',
 			next: 'ques_feedback',
 			title: '¿Qué película de acción es tu favorita?',
 			kind: 'single',
@@ -1124,6 +1130,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'ques_genero_otros',
+			code: '3.3',
 			next: 'ques_feedback',
 			title: '¿Qué película de ese género es tu favorita?',
 			kind: 'text',
@@ -1131,6 +1138,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'ques_feedback',
+			code: '4',
 			title: '¿Qué mejorarías de esta entrevista?',
 			kind: 'multiple',
 			options: [
@@ -1144,6 +1152,7 @@ export const survey_cine: Survey = {
 
 		{
 			id: 'ques_final',
+			code: '5',
 			title: 'Gracias por completar la encuesta. ¿Querés hacer algún cambio?',
 			description: '',
 			kind: 'single',
