@@ -24,6 +24,7 @@ export type TextItem = {
 	description?: string;
 	placeholder?: string;
 	control?: 'textarea' | 'input';
+	allowedChars?: 'digits' | 'numbers' | string | RegExp;
 	maxlength?: number;
 	required?: boolean;
 };
@@ -82,14 +83,8 @@ export type Question = {
 			answer?: number;
 			required?: boolean;
 	  }
-	| {
+	| ({
 			kind: 'text';
-			title?: string;
-			description?: string;
-			placeholder?: string; // placeholder
-			control?: 'textarea' | 'input';
-			maxlength?: number;
 			answer?: string;
-			required?: boolean;
-	  }
+	  } & TextItem)
 );
