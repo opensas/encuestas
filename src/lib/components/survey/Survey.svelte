@@ -29,7 +29,7 @@
 	let intro = !!survey.intro;
 	// let outro = false; // #TODO!
 
-	// already answered question
+	// already answered question, this will bew the question history path
 	let questions: Question[] = [];
 
 	$: required = !('required' in question) || question.required;
@@ -50,13 +50,13 @@
 		if (index !== -1) questions = questions.slice(0, index);
 	}
 
-	function calculateNext(pregunta: Question, survey: Survey) {
-		let next = _next(pregunta);
+	function calculateNext(question: Question, survey: Survey) {
+		let next = _next(question);
 
 		// a next question has been explicitly set depending on current answer
 		if (next !== undefined) return next;
 
-		const index = survey.questions.findIndex((p) => p.id === pregunta.id);
+		const index = survey.questions.findIndex((p) => p.id === question.id);
 
 		// reached end
 		if (index >= survey.questions.length - 1) return null;
@@ -122,9 +122,9 @@
 	}
 
 	function save() {
-		// update survey with the effectively answered questions (the question history)
+		// update survey with the effectively answered questions (question history path)
 		goNext();
-		const updated = { ...survey, preguntas: questions };
+		const updated = { ...survey, questions };
 		onsave(updated);
 	}
 
