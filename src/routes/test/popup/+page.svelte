@@ -1,14 +1,24 @@
 <script lang="ts">
+	import { survey_test, surveys } from '$lib/components/survey';
+
 	let popup: Window | null = null;
 
+	let code = survey_test.code;
+
+	let status: 'init' | 'success' = 'init';
+
+	let data: unknown;
+
 	function openSurvey() {
-		popup = window.open('/encuestas/test?p1=param2&p2=param2', 'popup');
+		popup = window.open(`/encuestas/${code}?p1=param2&p2=param2`, 'popup');
 	}
 
 	function onsave(event: MessageEvent) {
 		console.log('event', event);
 		if (event.origin === window.location.origin) {
 			console.log('Received message from child:', event.data);
+			data = event.data;
+			status = 'success';
 		}
 		popup?.close();
 	}
@@ -18,7 +28,21 @@
 
 <div class="max-w- flex h-screen items-center justify-center">
 	<div class="grid gap-4 rounded-md border bg-slate-50 p-6 shadow-lg">
-		<h2>Ejemplo de integración de encuesta mediante popup</h2>
+		{#if status === 'init'}
+			<h2 class="text-2xl">Ejemplo de integración de encuesta mediante popup</h2>
+		{:else if status === 'success'}
+			<h2 class="text-2xl">Felicitaciones, has respondido la encuesta</h2>
+			<textarea rows="20">{JSON.stringify(data, null, 2)}</textarea>
+			<hr />
+		{/if}
+		<div class="grid grid-flow-col items-center gap-2 align-middle">
+			Elija la encuesta a responder:
+			<select bind:value={code} class="h-10 rounded-lg px-4">
+				{#each surveys as option}
+					<option value={option.code}>{option.title} ({option.code})</option>
+				{/each}
+			</select>
+		</div>
 
 		Haga click en el siguiente botón para abrir un popup con la encuesta
 
