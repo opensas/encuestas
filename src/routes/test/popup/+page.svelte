@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { survey_short, surveys } from '$lib/components/survey';
+	import { surveys } from '$lib/components/survey';
+	import { survey_short } from '$lib/components/survey/samples/test';
 
 	let popup: Window | null = null;
 
