@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { GridTextQuestion, TextItem } from '$lib/types';
 
+	import { isAllowedChar } from '$lib/components/survey/question';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
@@ -48,6 +49,10 @@
 		return ret;
 	}
 
+	function keypress(event: KeyboardEvent, allowedChars: TextItem['allowedChars']) {
+		if (!isAllowedChar(event.key, allowedChars)) event.preventDefault();
+	}
+
 	initState();
 
 	$: onupdate(answer);
@@ -59,7 +64,7 @@
 		class:lg:columns-3={items.length >= 12}
 		class:md:columns-2={items.length >= 8}
 	>
-		{#each items as { title, description, placeholder, control = 'input', maxlength }, index}
+		{#each items as { title, description, placeholder, control = 'input', maxlength, allowedChars }, index}
 			{@const id = `text_${index}`}
 			{@const className = saved && !valid[title] ? 'text-destructive' : ''}
 
@@ -71,9 +76,21 @@
 					{/if}
 				</Label>
 				{#if control === 'textarea'}
-					<Textarea {id} bind:value={answer[title]} {maxlength} {placeholder} />
+					<Textarea
+						{id}
+						bind:value={answer[title]}
+						{maxlength}
+						{placeholder}
+						on:keypress={(e) => keypress(e, allowedChars)}
+					/>
 				{:else if control === 'input'}
-					<Input {id} bind:value={answer[title]} {maxlength} {placeholder} />
+					<Input
+						{id}
+						bind:value={answer[title]}
+						{maxlength}
+						{placeholder}
+						on:keypress={(e) => keypress(e, allowedChars)}
+					/>
 				{/if}
 				{#if description}
 					<p class="text-sm text-muted-foreground">{description}</p>

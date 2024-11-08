@@ -652,6 +652,7 @@ export const survey_upep: Survey = {
 			kind: 'text',
 			control: 'input',
 			maxlength: 4,
+			allowedChars: 'digits',
 			required: false,
 		},
 		{
@@ -1262,6 +1263,28 @@ export const survey_short: Survey = {
 	title: 'Encuesta breve',
 	questions: [
 		{
+			id: 'ques_grid_text',
+			title: 'grid-text - pregunta que acepta múltiples inputs',
+			kind: 'grid-text',
+			// items: 'nombre, apellido, direccion'.split(', '),
+			items: [
+				{ title: 'nombre' },
+				{ title: 'apellido', required: true },
+				{ title: 'direccion', required: true },
+			],
+			answer: { nombre: 'nombre...', apellido: 'apellido...', direccion: 'direccion...' },
+			required: false,
+		},
+		{
+			id: 'ques_text',
+			title: 'text - pregunta que acepta un texto libre',
+			kind: 'text',
+			control: 'textarea',
+			answer: 'ingrese su respuesta',
+			allowedChars: 'digits',
+			required: true,
+		},
+		{
 			id: 'ques_grid_single',
 			title: 'grid-single - varias preguntas que aceptan un solo valor',
 			kind: 'grid-single',
@@ -1274,19 +1297,6 @@ export const survey_short: Survey = {
 			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
 			answer: { 'pregunta 1': 'opcion 1', 'pregunta 2': 'opcion 2', 'pregunta 3': 'opcion 3' },
 			allowOther: true,
-			required: false,
-		},
-		{
-			id: 'ques_grid_text',
-			title: 'grid-text - pregunta que acepta múltiples inputs',
-			kind: 'grid-text',
-			// items: 'nombre, apellido, direccion'.split(', '),
-			items: [
-				{ title: 'nombre' },
-				{ title: 'apellido', required: true },
-				{ title: 'direccion', required: true },
-			],
-			answer: { nombre: 'nombre...', apellido: 'apellido...', direccion: 'direccion...' },
 			required: false,
 		},
 	],
