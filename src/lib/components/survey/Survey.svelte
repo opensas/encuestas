@@ -149,17 +149,6 @@
 	class:animate-shake={shake}
 >
 	<div class="space-y-6 p-6 sm:p-10 md:block">
-		<div class="space-y-1">
-			<h2 class="text-2xl font-bold tracking-tight">
-				{survey.title}
-			</h2>
-			{#if survey.description}
-				<p class="text-muted-foreground">{survey.description}</p>
-			{/if}
-		</div>
-
-		<Separator class="my-6" />
-
 		{#if intro && survey.intro}
 			{@const { header, body } = parseText(survey.intro)}
 			<div class="space-y-0.5">
@@ -172,6 +161,17 @@
 				<Button on:click={() => (intro = false)}>Comenzar</Button>
 			</div>
 		{:else}
+			<div class="space-y-1">
+				<h2 class="text-xl font-bold tracking-tight">
+					{survey.title}
+				</h2>
+				{#if survey.description}
+					<p class="text-muted-foreground">{survey.description}</p>
+				{/if}
+			</div>
+
+			<Separator class="my-6" />
+
 			<div class="space-y-0.5">
 				<h3 class="text-lg font-medium" class:text-destructive={isError}>
 					{question.code || current}. {question.title}
