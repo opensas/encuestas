@@ -4,7 +4,7 @@ test('home page has expected h2', async ({ page }) => {
 	await page.goto('/');
 
 	// titulo
-	const titulo = page.locator('h2');
+	const titulo = page.locator('h3');
 	await expect(titulo).toBeVisible();
 	await expect(titulo).toContainText(/Economía Popular /);
 });
