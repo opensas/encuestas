@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test';
 
-test('home page has expected h2', async ({ page }) => {
+test('home page has expected h3', async ({ page }) => {
 	await page.goto('/');
 
 	// titulo
 	const titulo = page.locator('h3');
 	await expect(titulo).toBeVisible();
-	await expect(titulo).toContainText(/Economía Popular /);
+	await expect(titulo).toContainText(/Economía Popular/);
 });
 
 test('previous button is not visible on first question', async ({ page }) => {
