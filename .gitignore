@@ -21,6 +21,5 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# tmp files
-# /**/.~lock*
+# libreoffice tmp files
 .~lock*
