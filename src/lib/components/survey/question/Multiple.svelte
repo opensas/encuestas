@@ -68,10 +68,14 @@
 	</div>
 
 	{#if question.allowOther}
+		{@const { titleOther: title, placeholderOther: placeholder = 'Otra opción' } = question}
 		<div class="flex items-center space-x-3">
 			<Checkbox id="opcion_otra" bind:checked={checkedOther} class="--self-start" />
 			<div class="w-full space-y-1">
-				<Input bind:value={other} --disabled placeholder="otra opción" />
+				{#if title}
+					<Label for="text-other">{title}</Label>
+				{/if}
+				<Input bind:value={other} {placeholder} />
 			</div>
 		</div>
 	{/if}

@@ -102,7 +102,7 @@
 			<div></div>
 		{/if}
 		{#if question.allowOther}
-			<Label class="w-full pl-4 text-center">Otra opción</Label>
+			<Label class="w-full pl-4 text-center">{question.titleOther || 'Otra opción'}</Label>
 		{/if}
 	</div>
 
@@ -131,9 +131,10 @@
 				</div>
 			{/if}
 			{#if question.allowOther}
+				{@const placeholder = question.placeholderOther || 'Otra opcion'}
 				<div class="flex w-full items-center space-x-2 pl-4">
 					<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
-					<Input bind:value={other[title]} placeholder="Otra opción" />
+					<Input bind:value={other[title]} {placeholder} />
 				</div>
 			{/if}
 		</Radio.Root>
