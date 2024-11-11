@@ -1,387 +1,29 @@
 import type { Survey } from '$lib/types';
 
-export const survey_upep_v1: Survey = {
-	id: 'surv_upep_v1',
-	code: 'upep_v1',
-	title: 'Relevamiento de Unidades Productivas de la Economía Popular - Prueba piloto',
-	intro: `
-
-	Bienvenido al Registro de Unidades Productivas de la Economía Popular
-
-	Las Unidades Productivas de la Economía Popular (UPEPs) son clave para la producción y generación de ingresos, pero su informalidad dificulta su identificación.
-
-	Por tal motivo, nos proponemos crear un registro público para impulsar la productividad y formalidad de estas unidades, comenzando con las que participan en el Programa Volver al Trabajo.
-
-	Por favor, completa el formulario adjunto para ayudarnos a conocer más sobre tu unidad productiva y contribuir al desarrollo de la economía popular.
-	`,
-	questions: [
-		{
-			id: 'ques_0',
-			code: 'P0',
-			title: 'Ingresá tus datos de contacto: nombre, apellido y celular',
-			kind: 'grid-text',
-			items: [
-				{ title: 'Nombre', maxlength: 50, required: true },
-				{ title: 'Apellido', maxlength: 50, required: true },
-				{ title: 'Celular', maxlength: 50 },
-			],
-		},
-		{
-			id: 'ques_1',
-			code: 'P1',
-			title:
-				'¿Hacés alguna actividad laboral en una organización comunitaria, barrial, social, familiar o cooperativa?',
-			kind: 'single',
-			options: ['Sí', 'No'],
-		},
-		{
-			id: 'ques_2',
-			code: 'P2',
-			title: '¿Cuál es el nombre de la unidad productiva/emprendimiento donde trabajas?',
-			kind: 'text',
-			control: 'input',
-		},
-		{
-			id: 'ques_3',
-			code: 'P3',
-			title: 'Esa actividad, la realizás de manera…',
-			kind: 'single',
-			options: ['Colectiva, con otras personas', 'Individual'],
-		},
-		{
-			id: 'ques_4',
-			code: 'P4',
-			title:
-				'En la unidad productiva, ¿Quién toma las decisiones? Marque todas las opciones que correspondan',
-			kind: 'multiple',
-			options: ['Un referente', 'Un patrón o patrona', 'Un coordinador/a', 'Una asamblea'],
-			allowOther: true,
-			placeholderOther: 'Otro referente con poder de decisión',
-		},
-		{
-			id: 'ques_5',
-			code: 'P5',
-			title: '¿Cuántas personas trabajan en la unidad productiva/emprendimiento, aproximadamente?',
-			kind: 'text',
-			control: 'input',
-			maxlength: 4,
-		},
-		{
-			id: 'ques_6',
-			code: 'P6',
-			title: '¿Cuál es la forma de organización de la unidad productiva / emprendimiento ?',
-			kind: 'single',
-			options: [
-				'Cooperativa',
-				'Cooperativa - Empresa recuperada',
-				'Polo - Cooperativa de Liberados',
-				'Pequeño emprendimiento familiar',
-				'Pequeño emprendimiento no familiar',
-				'Organización comunitaria / social',
-				'Cuadrilla municipal',
-			],
-			allowOther: true,
-		},
-		{
-			id: 'ques_7_1',
-			code: 'P7.1',
-			title: 'La unidad productiva/emprendimiento, ¿tiene relación con alguna organización social?',
-			kind: 'single',
-			options: ['No'],
-			allowOther: true,
-			placeholderOther: 'En caso afirmativo especifique el nombre de la organización social',
-		},
-		{
-			id: 'ques_7_2',
-			code: 'P7.2',
-			title: 'La unidad productiva/emprendimiento, ¿tiene relación con una organización religiosa?',
-			kind: 'single',
-			options: ['No'],
-			allowOther: true,
-			placeholderOther: 'En caso afirmativo especifique el nombre de la organización religiosa',
-		},
-		{
-			id: 'ques_7_3',
-			code: 'P7.3',
-			title: 'La unidad productiva/emprendimiento, ¿tiene relación con un gobierno municipal?',
-			kind: 'single',
-			options: ['No'],
-			allowOther: true,
-			placeholderOther: 'En caso afirmativo especifique el nombre del Municipio',
-		},
-		{
-			id: 'ques_8',
-			code: 'P8',
-			title: '¿En qué provincia se encuentra localizada la unidad productiva?',
-			kind: 'single',
-			control: 'select',
-			options: [
-				'Buenos Aires',
-				'CABA',
-				'Catamarca',
-				'Chaco',
-				'Chubut',
-				'Corrientes',
-				'Entre Rios',
-				'Formosa',
-				'Jujuy',
-				'La Pampa',
-				'La Rioja',
-				'Mendoza',
-				'Misiones',
-				'Neuquen',
-				'Rio Negro',
-				'Salta',
-				'San Juan',
-				'San Luis',
-				'Santa Cruz',
-				'Santa Fe',
-				'Santiago del Estero',
-				'Tierra del Fuego',
-				'Tucuman',
-			],
-		},
-		{
-			id: 'ques_8_1',
-			code: 'P8_1',
-			title: '¿Cuál es el domicilio de la unidad productiva/emprendimiento?',
-			description:
-				'Complete los que correspondan. Si la unidad tiene más de un domicilio, por favor indique el más importante.',
-			kind: 'grid-text',
-			items: [
-				'Calle',
-				'Manzana',
-				'Torre',
-				'Lote',
-				'Código Postal',
-				'Departamento/ Partido',
-				'Número',
-				'Monoblock',
-				'Piso / Depto',
-				'Entre calles',
-				'Localidad',
-				'Comunidad',
-			],
-		},
-		{
-			id: 'ques_9',
-			code: 'P9',
-			title: '¿A qué se dedica o qué produce la unidad productiva/emprendimiento ?',
-			kind: 'single',
-			options: [
-				{
-					title: '1. Comercio popular y trabajos en espacios públicos',
-					description: 'Ferias, venta ambulante, cuidado de coches, etc.',
-					next: 'ques_9_1',
-				},
-				{
-					title: '2. Recuperación, Reciclado y Servicios ambientales',
-					description: 'Recolección de cartones y otros materiales, reciclado de residuos, etc.',
-					next: 'ques_9_2',
-				},
-				{
-					title: '3. Construcción e infraestructura social y Mejoramiento ambiental',
-					next: 'ques_9_3',
-				},
-				{
-					title: '4. Industria manufacturera',
-					description: 'Elaboración de productos',
-					next: 'ques_9_4',
-				},
-				{
-					title: '5. Servicios socio comunitarios',
-					description:
-						'Comedores, merenderos, clubes barriales, salud comunitaria, cuidado de personas, apoyo escolar, medios comunitarios, espacios culturales, etc.',
-					next: 'ques_9_5',
-				},
-				{ title: '6. Agricultura familiar y campesina', next: 'ques_9_6' },
-				{ title: '7. Transporte', next: 'ques_9_7' },
-			],
-		},
-		{
-			id: 'ques_9_1',
-			code: 'P9.1',
-			next: null,
-			title: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
-			description:
-				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
-			options: [
-				'Artesano/a',
-				'Artista Callejero',
-				'Cuida Coche',
-				'Feriante',
-				{
-					title: 'Intermediación solidaria',
-					description: 'Ferias, mercado, Almacenes, Nodos, Galpones, Logística, etc.',
-				},
-				'Limpia vidrio //vehículos',
-				'Mensajería / Delivery',
-				'Vendedor/a ambulante',
-				'Venta directa',
-			],
-			allowOther: true,
-		},
-
-		{
-			id: 'ques_9_2',
-			code: 'P9.2',
-			next: null,
-			title: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
-			description:
-				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
-			options: [
-				'Carrero/a',
-				'Cartonero/reciclador/a',
-				'Chofer de camión',
-				'Forestación',
-				'Operario/a de plantas recicladora',
-				'Promotor/a ambiental',
-				'Reciclador/a de basura',
-				'Recolectores/as de residuos en villas',
-				'Trabajador/a de limpieza de terrenos y espacios verdes',
-			],
-			allowOther: true,
-		},
-
-		{
-			id: 'ques_9_3',
-			code: 'P9.3',
-			next: null,
-			title: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
-			description:
-				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
-			options: [
-				'Albañil / Durlero',
-				'Ayudante / Auxiliar en obras de construcción',
-				'Electricista',
-				'Gasista',
-				'Herrería',
-				'Pintor/a',
-				'Plomero/a / Fontanero/a / Instalador/a de redes de agua potable y tuberías',
-				'Soldador/a',
-				'Techista / Zinguero / Zanjero',
-				'Vidriero/a',
-			],
-			allowOther: true,
-		},
-		{
-			id: 'ques_9_4',
-			code: 'P9.4',
-			next: null,
-			title: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
-			description:
-				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
-			options: [
-				'Producción de alimentos',
-				'Fabricación de calzados',
-				'Extracción y manufactura de minerales',
-				'Indumentaria y Textil',
-				'Producción de productos de tocador y limpieza',
-				'Fabricante de Bloques / Ladrillero',
-				'Carpintería y Zinguería',
-				'Producción de productos sanitarios',
-			],
-			allowOther: true,
-		},
-
-		{
-			id: 'ques_9_5',
-			code: 'P9.5',
-			next: null,
-			title: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
-			description:
-				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
-			options: [
-				'Acompañamiento de reinserción de liberados/as y recuperados/as',
-				{
-					title: 'Asistente Socio Educativo',
-					description: 'Bachillerato Popular, Jardín Comunitario, Clases de apoyo escolar',
-				},
-				'Atención de Comedores y Merenderos Comunitarios',
-				{
-					title: 'Cuidados',
-					description: 'Niños/as, enfermos/as, personas con discapacidad, ancianos/as',
-				},
-				'Promotor/a contra la violencia de género',
-				'Promotor/a de salud',
-				{
-					title: 'Trabajador/a de Cultura Comunitaria',
-					description: 'Talleres, Orquestas, Espacios Culturales',
-				},
-				'Trabajador/a de Medio de Comunicación Comunitaria',
-				'Trabajador/a de deportes y recreación',
-			],
-			allowOther: true,
-		},
-
-		{
-			id: 'ques_9_6',
-			code: 'P9.6',
-			next: null,
-			title: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
-			description:
-				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
-			options: [
-				'Agroindustria',
-				'Agricultura',
-				'Ganadería',
-				'Pesca y Acuicultura',
-				'Turismo rural',
-				'Viveros y Huertas Urbanas',
-			],
-			allowOther: true,
-		},
-
-		{
-			id: 'ques_9_7',
-			code: 'P9.7',
-			next: null,
-			title: 'En la unidad productiva/emprendimiento, ¿Cuál es tu ocupación?',
-			description:
-				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
-			options: ['Carga de mercadería', 'Flete', 'Mensajería / Delivery', 'Transporte de pasajeros'],
-			allowOther: true,
-		},
-	],
-};
-
 export const survey_upep: Survey = {
 	id: 'surv_upep',
 	code: 'upep',
-	title: 'Relevamiento de Unidades Productivas de la Economía Popular - Prueba piloto',
+	title: 'Relevamiento de Unidades Productivas de la Economía Popular',
 	intro: `
 
 	Bienvenido al Registro de Unidades Productivas de la Economía Popular
 
-	Las Unidades Productivas de la Economía Popular (UPEPs) son clave para la producción y generación de ingresos, pero su informalidad dificulta su identificación.
+	Si trabajas dentro de la economía popular, podes ayudarnos a conocer mejor el sector para poder implementar acciones que promuevan el crecimiento de la productividad y sus ingresos.
 
-	Por tal motivo, nos proponemos crear un registro público para impulsar la productividad y formalidad de estas unidades, comenzando con las que participan en el Programa Volver al Trabajo.
+	El Ministerio de Capital Humano de la Nación está realizando un relevamiento de las unidades productivas de la economía popular.
+	Este cuestionario puede ser completado tanto por los titulares del Programa Volver al Trabajo (u otro) como por aquellos que aún no estén inscriptos en ningún programa.
 
-	Por favor, completa el formulario adjunto para ayudarnos a conocer más sobre tu unidad productiva y contribuir al desarrollo de la economía popular.
+	La información será confidencial y no modifica tu situación respecto a los programas sociales y de empleo vigentes.
 
-	(formulario fuente: https://forms.gle/iQpbSzGAioPUdTHu7)
+	Este relevamiento es importante porque las actividades productivas desarrolladas por trabajadores organizados en el marco de la economía popular tienen un rol relevante en la generación de trabajo y en la elaboración de bienes y servicios demandados por la sociedad.
+	`,
+	outro: `
+
+	FIN DEL CUESTIONARIO
+
+	Muchas gracias por tu participación
 	`,
 	questions: [
-		{
-			id: 'ques_0',
-			code: 'P0',
-			title: 'Ingresá tus datos de contacto: nombre, apellido y celular',
-			kind: 'grid-text',
-			items: [
-				{ title: 'Email', maxlength: 50 },
-				{ title: 'Nombre', maxlength: 50 },
-				{ title: 'Apellido', maxlength: 50 },
-				{ title: 'Celular', maxlength: 50 },
-			],
-			required: true,
-		},
 		{
 			id: 'ques_1',
 			code: 'P1',
@@ -393,7 +35,8 @@ export const survey_upep: Survey = {
 		{
 			id: 'ques_2',
 			code: 'P2',
-			title: '¿Cuál es el nombre de la unidad productiva/emprendimiento donde trabajas?',
+			title: '¿Cuál es el nombre de la unidad productiva/emprendimiento?',
+			description: '(ejemplo: “Comedor Nueva Esperanza”)',
 			kind: 'text',
 			control: 'input',
 		},
@@ -420,7 +63,13 @@ export const survey_upep: Survey = {
 			title:
 				'En la unidad productiva, ¿Quién toma las decisiones? Marque todas las opciones que correspondan',
 			kind: 'multiple',
-			options: ['Un referente', 'Un patrón o patrona', 'Un coordinador/a', 'Una asamblea'],
+			options: [
+				'Un referente',
+				'Un patrón o patrona',
+				'Un coordinador/a',
+				'Una asamblea',
+				'Yo mismo',
+			],
 			allowOther: true,
 			placeholderOther: 'Otro referente con poder de decisión',
 		},
@@ -431,7 +80,7 @@ export const survey_upep: Survey = {
 			kind: 'single',
 			options: [
 				'Cooperativa',
-				'Cooperativa - Empresa recuperada',
+				'Empresa recuperada',
 				'Polo - Cooperativa de Liberados',
 				'Pequeño emprendimiento familiar',
 				'Pequeño emprendimiento no familiar',
@@ -541,41 +190,51 @@ export const survey_upep: Survey = {
 		{
 			id: 'ques_9',
 			code: 'P9',
+			title: 'La unidad productiva ¿tiene número de CUIT?',
+			kind: 'single',
+			options: ['Sí, pero no recuerdo el número', 'No sabe', 'No'],
+			allowOther: true,
+			titleOther: 'Sí. CUIT número:',
+			placeholderOther: 'Número de CUIT de la unidad productiva',
+		},
+		{
+			id: 'ques_10',
+			code: 'P10',
 			title: '¿A qué se dedica o qué produce la unidad productiva/emprendimiento ?',
 			kind: 'single',
 			options: [
 				{
 					title: '1. Comercio popular y trabajos en espacios públicos',
 					description: 'Ferias, venta ambulante, cuidado de coches, etc.',
-					next: 'ques_9_1',
+					next: 'ques_10_1',
 				},
 				{
 					title: '2. Recuperación, Reciclado y Servicios ambientales',
 					description: 'Recolección de cartones y otros materiales, reciclado de residuos, etc.',
-					next: 'ques_9_2',
+					next: 'ques_10_2',
 				},
 				{
 					title: '3. Construcción e infraestructura social y Mejoramiento ambiental',
-					next: 'ques_9_3',
+					next: 'ques_10_3',
 				},
 				{
 					title: '4. Industria manufacturera',
 					description: 'Elaboración de productos',
-					next: 'ques_9_4',
+					next: 'ques_10_4',
 				},
 				{
 					title: '5. Servicios socio comunitarios',
 					description:
 						'Comedores, merenderos, clubes barriales, salud comunitaria, cuidado de personas, apoyo escolar, medios comunitarios, espacios culturales, etc.',
-					next: 'ques_9_5',
+					next: 'ques_10_5',
 				},
-				{ title: '6. Agricultura familiar y campesina', next: 'ques_9_6' },
-				{ title: '7. Transporte', next: 'ques_9_7' },
+				{ title: '6. Agricultura familiar y campesina', next: 'ques_10_6' },
+				{ title: '7. Transporte', next: 'ques_10_7' },
 			],
 		},
 		{
-			id: 'ques_9_1',
-			code: 'P9.1',
+			id: 'ques_10_1',
+			code: 'P10.1',
 			next: null,
 			title: 'Ocupación Comercio popular y trabajos en espacios públicos',
 			description:
@@ -596,8 +255,8 @@ export const survey_upep: Survey = {
 		},
 
 		{
-			id: 'ques_9_2',
-			code: 'P9.2',
+			id: 'ques_10_2',
+			code: 'P10.2',
 			next: null,
 			title: 'Recuperación, reciclado y servicios ambientales',
 			description:
@@ -617,8 +276,8 @@ export const survey_upep: Survey = {
 		},
 
 		{
-			id: 'ques_9_3',
-			code: 'P9.3',
+			id: 'ques_10_3',
+			code: 'P10.3',
 			next: null,
 			title: 'Construcción e infraestructura social y Mejoramiento ambiental',
 			description:
@@ -638,8 +297,8 @@ export const survey_upep: Survey = {
 			],
 		},
 		{
-			id: 'ques_9_4',
-			code: 'P9.4',
+			id: 'ques_10_4',
+			code: 'P10.4',
 			next: null,
 			title: 'Industria manufacturera',
 			description:
@@ -659,8 +318,8 @@ export const survey_upep: Survey = {
 		},
 
 		{
-			id: 'ques_9_5',
-			code: 'P9.5',
+			id: 'ques_10_5',
+			code: 'P10.5',
 			next: null,
 			title: 'Servicios socio comunitarios',
 			description:
@@ -691,8 +350,8 @@ export const survey_upep: Survey = {
 		},
 
 		{
-			id: 'ques_9_6',
-			code: 'P9.6',
+			id: 'ques_10_6',
+			code: 'P10.6',
 			next: null,
 			title: 'Agricultura familiar y campesina',
 			description:
@@ -711,8 +370,8 @@ export const survey_upep: Survey = {
 		},
 
 		{
-			id: 'ques_9_7',
-			code: 'P9.7',
+			id: 'ques_10_7',
+			code: 'P10.7',
 			next: null,
 			title: 'Transporte',
 			description:
