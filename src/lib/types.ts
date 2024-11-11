@@ -46,9 +46,10 @@ export type Question = {
 			kind: 'single';
 			options: Array<Option | string>;
 			allowOther?: boolean;
+			titleOther?: string;
 			placeholderOther?: string;
-			control?: 'radio' | 'select';
 			nextOther?: Question['next'];
+			control?: 'radio' | 'select';
 			answer?: string;
 			required?: boolean;
 	  }
@@ -57,9 +58,10 @@ export type Question = {
 			items: Array<SingleItem | string>;
 			options: Array<Option | string>;
 			allowOther?: boolean;
+			titleOther?: string;
 			placeholderOther?: string;
-			control?: 'radio' | 'select';
 			nextOther?: Question['next'];
+			control?: 'radio' | 'select';
 			answer?: Record<string, string>;
 			required?: boolean;
 	  }
@@ -67,6 +69,7 @@ export type Question = {
 			kind: 'multiple';
 			options: Array<Option | string>;
 			allowOther?: boolean;
+			titleOther?: string;
 			placeholderOther?: string;
 			nextOther?: Question['next'];
 			answer?: string[];

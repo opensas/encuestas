@@ -71,10 +71,14 @@
 		</div>
 	{/if}
 	{#if question.allowOther}
+		{@const { titleOther: title, placeholderOther: placeholder = 'Otra opción' } = question}
 		<div class="flex items-center space-x-3">
 			<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
 			<div class="w-full space-y-1">
-				<Input bind:value={other} placeholder="Otra opción" />
+				{#if title}
+					<Label for="text-other">{title}</Label>
+				{/if}
+				<Input id="text-other" bind:value={other} {placeholder} />
 			</div>
 		</div>
 	{/if}
