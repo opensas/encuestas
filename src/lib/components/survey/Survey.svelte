@@ -21,7 +21,7 @@
 
 	$: current = questions.length + 1; // index of the current question
 
-	let saved = false;
+	let confirmed = false; // user pressed next on current question, used to display errors
 	let isValid = false;
 	let shake = false;
 	$: isError = saved && !isValid;
@@ -196,7 +196,7 @@
 				{#if question.kind === 'single'}
 					<Single bind:isValid {question} {onupdate} />
 				{:else if question.kind === 'grid-single'}
-					<GridSingle bind:isValid {question} {saved} {onupdate} />
+					<GridSingle bind:isValid {confirmed} {question} {onupdate} />
 				{:else if question.kind === 'multiple'}
 					<Multiple bind:isValid {question} {onupdate} />
 				{:else if question.kind === 'rating'}
@@ -204,7 +204,7 @@
 				{:else if question.kind === 'text'}
 					<Text bind:isValid {question} {onupdate} />
 				{:else if question.kind === 'grid-text'}
-					<GridText bind:isValid {question} {saved} {onupdate} />
+					<GridText bind:isValid {confirmed} {question} {onupdate} />
 				{/if}
 			{/key}
 
