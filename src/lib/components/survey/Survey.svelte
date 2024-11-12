@@ -7,7 +7,7 @@
 	import { cn } from '$lib/utils';
 
 	import { GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
-	import { Message, toOption } from '.';
+	import { DEFAULT_OUTRO, Message, toOption } from '.';
 
 	export let survey: Survey;
 	export let onsave: (survey: Survey) => void = () => {};
@@ -30,7 +30,7 @@
 	$: isError = confirmed && !isValid;
 
 	let intro = !!survey.intro;
-	// let outro = false; // #TODO!
+	let outro = survey.outro || DEFAULT_OUTRO;
 
 	// already answered question, this will bew the question history path
 	let questions: Question[] = [];
@@ -126,15 +126,13 @@
 		// check for required answer and update survey with the effectively answered questions (question history path)
 		if (!goNext()) return;
 		finished = true;
-		if (!survey.outro) {
+		if (!outro) {
 			save();
 			close();
 		}
 	}
 
 	function save() {
-		// check for required answer and update survey with the effectively answered questions (question history path)
-		if (!goNext()) return;
 		const updated = { ...survey, questions };
 		onsave(updated);
 		saved = true;
@@ -163,8 +161,8 @@
 					<Button on:click={() => (intro = false)}>Comenzar</Button>
 				</div>
 			</Message>
-		{:else if finished && survey.outro}
-			<Message text={survey.outro}>
+		{:else if finished && outro}
+			<Message text={outro}>
 				<div slot="footer" class="flex justify-center pt-4">
 					{#if !saved}
 						<Button on:click={save}>Grabar respuesta</Button>
