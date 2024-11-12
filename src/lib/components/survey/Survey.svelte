@@ -11,6 +11,7 @@
 
 	export let survey: Survey;
 	export let onsave: (survey: Survey) => void = () => {};
+	export let onclose: (survey: Survey) => void = () => {};
 
 	let className = '';
 	export { className as class };
@@ -22,9 +23,11 @@
 	$: current = questions.length + 1; // index of the current question
 
 	let confirmed = false; // user pressed next on current question, used to display errors
+	let finished = false;
+	let saved = false; // current survey has been correctly saved
 	let isValid = false;
 	let shake = false;
-	$: isError = saved && !isValid;
+	$: isError = confirmed && !isValid;
 
 	let intro = !!survey.intro;
 	// let outro = false; // #TODO!
@@ -35,13 +38,13 @@
 	$: required = !('required' in question) || question.required;
 
 	function goNext() {
-		if (!validate()) return;
-		saved = false;
+		if (!validate()) return false;
+		confirmed = false;
 
 		// contesté una nueva pregunta
 		questions = [...questions, question];
 
-		if (next === null) return; // end of survey
+		if (next === null) return true; // end of survey
 
 		const historyIndex = questions.findIndex((q) => q.id === next);
 		// the next question is in the history, check for loops
@@ -57,6 +60,8 @@
 		}
 
 		question = survey.questions.find((p) => p.id === next)!; // calculate next question
+
+		return true;
 	}
 
 	function calculateNext(question: Question, survey: Survey) {
@@ -101,7 +106,7 @@
 	}
 
 	function goPrev() {
-		saved = false;
+		confirmed = false;
 
 		if (questions.length <= 0) return;
 		question = questions.at(-1)!;
@@ -109,7 +114,7 @@
 	}
 
 	function validate() {
-		saved = true;
+		confirmed = true;
 		if (!isValid) {
 			shake = true;
 			setTimeout(() => (shake = false), 1000);
@@ -117,24 +122,27 @@
 		return isValid;
 	}
 
-	function parseText(text: string) {
-		const CR = '\n';
-		const TAB = '\t';
-
-		let parsed = text
-			.replaceAll(TAB, '') // cleanup
-			.split(CR) // split
-			.filter(Boolean); // remove empty lines
-
-		const [header, ...body] = parsed;
-		return { header, body };
+	function finish() {
+		// check for required answer and update survey with the effectively answered questions (question history path)
+		if (!goNext()) return;
+		finished = true;
+		if (!survey.outro) {
+			save();
+			close();
+		}
 	}
 
 	function save() {
-		// update survey with the effectively answered questions (question history path)
-		goNext();
+		// check for required answer and update survey with the effectively answered questions (question history path)
+		if (!goNext()) return;
 		const updated = { ...survey, questions };
 		onsave(updated);
+		saved = true;
+	}
+
+	function close() {
+		const updated = { ...survey, questions };
+		onclose(updated);
 	}
 
 	function onupdate(answer: Survey['questions'][number]['answer']) {
@@ -212,10 +220,10 @@
 				<Button class={current <= 1 ? 'invisible' : ''} variant="outline" on:click={goPrev}>
 					Anterior
 				</Button>
-				{#if next !== null}
-					<Button on:click={goNext}>Siguiente</Button>
+				{#if next === null}
+					<Button on:click={finish}>Finalizar</Button>
 				{:else}
-					<Button on:click={save}>Finalizar</Button>
+					<Button on:click={goNext}>Siguiente</Button>
 				{/if}
 			</div>
 		{/if}
