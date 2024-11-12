@@ -7,7 +7,7 @@
 	import { cn } from '$lib/utils';
 
 	import { GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
-	import { toOption } from '.';
+	import { Message, toOption } from '.';
 
 	export let survey: Survey;
 	export let onsave: (survey: Survey) => void = () => {};
@@ -150,16 +150,21 @@
 >
 	<div class="space-y-6 p-6 sm:p-10 md:block">
 		{#if intro && survey.intro}
-			{@const { header, body } = parseText(survey.intro)}
-			<div class="space-y-0.5">
-				<h3 class="text-xl font-medium">{header}</h3>
-			</div>
-			{#each body as paragraph}
-				<p class="--text-muted-foreground text-base">{paragraph}</p>
-			{/each}
-			<div class="flex justify-end pt-4">
-				<Button on:click={() => (intro = false)}>Comenzar</Button>
-			</div>
+			<Message text={survey.intro}>
+				<div slot="footer" class="flex justify-center pt-4">
+					<Button on:click={() => (intro = false)}>Comenzar</Button>
+				</div>
+			</Message>
+		{:else if finished && survey.outro}
+			<Message text={survey.outro}>
+				<div slot="footer" class="flex justify-center pt-4">
+					{#if !saved}
+						<Button on:click={save}>Grabar respuesta</Button>
+					{:else}
+						<Button on:click={close}>Ok</Button>
+					{/if}
+				</div>
+			</Message>
 		{:else}
 			<div class="space-y-1">
 				<h2 class="text-xl font-bold tracking-tight">
