@@ -315,6 +315,10 @@ export const survey_short: Survey = {
 	id: 'surv_short',
 	code: 'short',
 	title: 'Encuesta breve',
+	outro: `
+		FIN DEL CUESTIONARIO
+		Muchas gracias por tu participación
+	`,
 	questions: [
 		{
 			id: 'ques_grid_text',
@@ -349,7 +353,6 @@ export const survey_short: Survey = {
 				{ title: 'pregunta 3', required: undefined },
 			],
 			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
-			answer: { 'pregunta 1': 'opcion 1', 'pregunta 2': 'opcion 2', 'pregunta 3': 'opcion 3' },
 			allowOther: true,
 			titleOther: 'titleOther',
 			required: false,

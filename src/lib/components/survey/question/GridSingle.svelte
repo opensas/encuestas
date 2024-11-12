@@ -10,7 +10,7 @@
 	export let question: GridSingleQuestion;
 	export let onupdate: (answer: Answer) => void = () => {};
 	export let isValid = true;
-	export let saved = false;
+	export let confirmed = false;
 
 	let items: SingleItem[];
 
@@ -107,7 +107,7 @@
 	</div>
 
 	{#each items as { title }}
-		{@const className = saved && !valid[title] ? 'text-destructive' : ''}
+		{@const className = confirmed && !valid[title] ? 'text-destructive' : ''}
 		<Label class="self-center text-base {className}">
 			{title}
 			{#if required[title]}

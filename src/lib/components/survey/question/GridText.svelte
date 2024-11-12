@@ -9,7 +9,7 @@
 	export let question: GridTextQuestion;
 	export let onupdate: (answer: Answer) => void = () => {};
 	export let isValid = true;
-	export let saved = false;
+	export let confirmed = false;
 
 	let items: TextItem[];
 
@@ -66,7 +66,7 @@
 	>
 		{#each items as { title, description, placeholder, control = 'input', maxlength, allowedChars }, index}
 			{@const id = `text_${index}`}
-			{@const className = saved && !valid[title] ? 'text-destructive' : ''}
+			{@const className = confirmed && !valid[title] ? 'text-destructive' : ''}
 
 			<div class="grid w-full gap-1.5">
 				<Label class={className} for={id}>
