@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Survey } from '$lib/components/survey/index.js';
+	import { Survey } from '$lib/components/survey';
 
 	export let data;
 
@@ -9,10 +9,12 @@
 		const response = { survey, reference, params };
 
 		if (callback) {
-			await fetch(callback, {
+			const res = await fetch(callback, {
 				method: 'POST',
 				body: JSON.stringify(response),
 			});
+			const body = await res.json();
+			console.log(`test !!! returned body from ${callback}:`, { body });
 		}
 
 		// called from a popup
@@ -23,6 +25,7 @@
 		}
 
 		// called from a redirect
+		// #TODO: send via querystring the reference, params, and the id of the new answer
 		if (redirect) {
 			window.location.href = redirect;
 			return;
