@@ -36,13 +36,10 @@
 			.map(({ key, value }) => encodeURIComponent(key) + '=' + encodeURIComponent(value))
 			.join('&');
 
-		console.log('!!!', { query, queryParams });
 		if (queryParams) queryParams = `?${queryParams}`;
 
 		return `${SURVEY_URL}${code}${queryParams}`;
 	}
-
-	$: console.log({ url, callback, reference, params });
 </script>
 
 <div class="flex h-screen items-center justify-center px-2 sm:px-10">
