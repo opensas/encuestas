@@ -36,3 +36,17 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+### Using docker
+
+Compile and create docker image
+
+```bash
+docker build -t encuestas-app .
+```
+
+Run app in docker
+
+```bash
+docker run -p 3000:3000 encuestas-app
+```
