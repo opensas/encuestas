@@ -339,7 +339,6 @@ export const survey_short: Survey = {
 			kind: 'text',
 			control: 'textarea',
 			answer: 'ingrese su respuesta',
-			allowedChars: 'digits',
 			required: true,
 		},
 		{

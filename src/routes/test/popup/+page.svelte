@@ -43,7 +43,7 @@
 		{/if}
 		<select bind:value={code} class="h-10 rounded-lg px-4">
 			{#each surveys as option}
-				<option value={option.code}>option.code}</option>
+				<option value={option.code}>{option.code}</option>
 			{/each}
 		</select>
 
