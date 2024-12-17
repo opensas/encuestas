@@ -1,3 +1,1 @@
-# Sistema encuestas 
-
-## Introducción
+# Sistema encuestas
