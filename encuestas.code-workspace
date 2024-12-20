@@ -3,6 +3,9 @@
 		{
 			"path": ".",
 		},
+		{
+			"path": "../tmp",
+		},
 	],
 	"settings": {
 		"cSpell.words": [
@@ -31,11 +34,15 @@
 			"direccion",
 			"durlero",
 			"Durlero",
+			"escalabilidad",
+			"Escalabilidad",
 			"Escaneá",
 			"ficcion",
 			"Fletero",
 			"fruticultor",
 			"Hacés",
+			"iisnode",
+			"iisreset",
 			"Indicanos",
 			"Ingresá",
 			"inscriptos",
@@ -61,7 +68,9 @@
 			"redireccionará",
 			"redirecciones",
 			"redirigiéndolo",
+			"reescritura",
 			"remisero",
+			"rewrited",
 			"shadcn",
 			"tailwindcss",
 			"Techista",

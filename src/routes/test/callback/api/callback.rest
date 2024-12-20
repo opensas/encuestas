@@ -1,0 +1,15 @@
+
+@api_url = https://encuestas-online.vercel.app 
+
+POST {{api_url}}/test/callback/api
+Content-Type: application/json
+
+{
+	"content": "Testing!"
+}
+
+###
+curl --request POST \
+  --url https://encuestas-online.vercel.app/test/callback/api \
+  --header 'content-type: application/json' \
+  --data '{"content": "Testing!"}'
