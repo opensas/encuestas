@@ -12,7 +12,8 @@ const config = {
 	kit: {
 		// see https://github.com/Vuferen/sveltekit-adapter-node-iis for IIS adapter
 		adapter: adapter({
-			includePackage: false,
+			includePackage: true,
+			buildNodeModules: true,
 		}),
 	},
 };
