@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { GridSingleQuestion, Option, SingleItem } from '$lib/types';
+	import type { GridSingleQuestion, SingleItem } from '$lib/types';
 
 	import { Select } from '$lib/components/select';
 	import { toOption } from '$lib/components/survey';
@@ -7,35 +7,36 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
-	export let question: GridSingleQuestion;
-	export let onupdate: (answer: Answer) => void = () => {};
-	export let isValid = true;
-	export let confirmed = false;
+	type Answer = NonNullable<GridSingleQuestion['answer']>;
 
-	let items: SingleItem[];
+	type Props = {
+		question: GridSingleQuestion;
+		onupdate?: (answer: Answer) => void;
+		isValid?: boolean;
+		confirmed?: boolean;
+	};
 
-	type Answer = GridSingleQuestion['answer'];
+	let {
+		question,
+		onupdate = () => {},
+		isValid = $bindable(true),
+		confirmed = false,
+	}: Props = $props();
 
-	let options: Option[];
-	let checked: NonNullable<Answer>;
-	let answer: Answer;
+	let options = $derived(question.options.map(toOption));
+	let items = $derived(question.items.map(toItem));
+	let required = $derived(calculateRequired(question, items));
 
-	let valid: Record<string, boolean> = {};
-	let required: Record<string, boolean> = {};
+	let checked: Answer = $state({});
 
 	const OTHER_VALUE = '__OTHER__';
-	let other: NonNullable<Answer>;
-	let control = question.control || 'radio';
+	let other: Answer = $state({});
+	let control = $derived(question.control || 'radio');
 
-	let templateCols = '';
+	let templateCols = $state('');
 
 	// init checked from answer
 	function initState() {
-		checked = {};
-		other = {};
-		options = question.options.map(toOption);
-		items = question.items.map((item) => (typeof item === 'string' ? { title: item } : item));
-
 		for (const { title } of items) {
 			const answer = question?.answer?.[title] || '';
 			other[title] = '';
@@ -54,37 +55,36 @@
 		templateCols = `grid-template-columns: repeat(${cols},1fr) ${otherCol}`;
 	}
 
-	function updateAnswer(_checked: typeof checked, _other: typeof other) {
+	function toItem(value: string | SingleItem): SingleItem {
+		return typeof value === 'string' ? { title: value } : value;
+	}
+
+	function calculateRequired(q: typeof question, it: typeof items) {
+		let ret: Record<string, boolean> = {};
+		// take item.required, then question.required, then default to false (not required)
+		for (const { title, required } of it) ret[title] = required ?? q.required ?? false;
+		return ret;
+	}
+
+	function isValidItem(title: string) {
+		if (!required[title]) return true; // not required
+		if (checked[title] === OTHER_VALUE && !other[title]) return false; // other value checked, but empty
+		return !!checked[title];
+	}
+
+	// reactive on checked, other
+	// calculate answer from each radio button and update isValid prop
+	$effect(() => {
 		let answer: Answer = {};
-		for (const [key, value] of Object.entries(_checked)) {
-			answer[key] = value === OTHER_VALUE ? _other[key] : value;
-		}
-		return answer;
-	}
+		for (const [key, value] of Object.entries(checked))
+			answer[key] = value === OTHER_VALUE ? other[key] : value;
 
-	$: required = _required(question, items);
-	$: valid = _valid(required, answer);
-	$: isValid = Object.values(valid).every(Boolean);
+		isValid = Object.keys(checked).every(isValidItem);
 
-	function _required(q: typeof question, it: typeof items) {
-		let ret: typeof required = {};
-		for (const { title, required } of it) {
-			ret[title] = required ?? q.required ?? false; // by default, it's not required
-		}
-		return ret;
-	}
-
-	function _valid(req: typeof required, ans: typeof answer) {
-		let ret: typeof valid = {};
-		for (const [title, required] of Object.entries(req)) {
-			ret[title] = !required || (required && !!ans && !!ans[title]);
-		}
-		return ret;
-	}
+		onupdate(answer);
+	});
 
 	initState();
-	$: answer = updateAnswer(checked, other);
-	$: onupdate(answer);
 </script>
 
 <!-- title row -->
@@ -107,7 +107,7 @@
 	</div>
 
 	{#each items as { title }}
-		{@const className = confirmed && !valid[title] ? 'text-destructive' : ''}
+		{@const className = confirmed && !isValidItem(title) ? 'text-destructive' : ''}
 		<Label class="self-center text-base {className}">
 			{title}
 			{#if required[title]}

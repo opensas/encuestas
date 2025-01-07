@@ -6,42 +6,37 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
 
-	export let question: TextQuestion;
-	export let onupdate: (answer: string) => void = () => {};
-	export let isValid = true;
+	type Props = {
+		question: TextQuestion;
+		onupdate?: (answer: string) => void;
+		isValid?: boolean;
+	};
 
-	let answer = question.answer || '';
+	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
-	$: ({ title, description, placeholder, control = 'textarea', maxlength } = question);
+	let { title, description, placeholder, control = 'textarea', maxlength } = $derived(question);
+	let required = $derived(question.required ?? true); // required by default
 
-	$: required = question.required ?? true;
-	$: isValid = !required || (required && !!answer);
+	let answer = $state(question.answer || '');
 
-	function keypress(event: KeyboardEvent) {
-		if (!isAllowedChar(event.key, question.allowedChars)) event.preventDefault();
+	function onchange(answer: string) {
+		isValid = !required || (required && answer.length > 0);
+		onupdate(answer);
 	}
 
-	$: onupdate(answer);
+	$effect(() => onchange(answer));
+
+	function onkeypress(event: KeyboardEvent) {
+		if (!isAllowedChar(event.key, question.allowedChars)) event.preventDefault();
+	}
 </script>
 
 <div class="grid w-full gap-1.5">
 	<Label for="text-question">{title}</Label>
 	{#if control === 'textarea'}
-		<Textarea
-			id="text-question"
-			bind:value={answer}
-			{maxlength}
-			{placeholder}
-			on:keypress={keypress}
-		/>
+		<Textarea id="text-question" bind:value={answer} {maxlength} {placeholder} {onkeypress} />
 	{:else if control === 'input'}
-		<Input
-			id="text-question"
-			bind:value={answer}
-			{maxlength}
-			{placeholder}
-			on:keypress={keypress}
-		/>
+		<Input id="text-question" bind:value={answer} {maxlength} {placeholder} {onkeypress} />
 	{/if}
 	{#if description}
 		<p class="text-sm text-muted-foreground">{description}</p>

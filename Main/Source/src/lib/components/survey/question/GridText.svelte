@@ -6,46 +6,48 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
 
-	export let question: GridTextQuestion;
-	export let onupdate: (answer: Answer) => void = () => {};
-	export let isValid = true;
-	export let confirmed = false;
+	// export let question: GridTextQuestion;
+	// export let onupdate: (answer: Answer) => void = () => {};
+	// export let isValid = true;
+	// export let confirmed = false;
 
-	let items: TextItem[];
+	// let items: TextItem[];
 
-	type Answer = GridTextQuestion['answer'];
+	type Answer = NonNullable<GridTextQuestion['answer']>;
 
-	let answer: NonNullable<Answer> = {};
-	let valid: Record<string, boolean> = {};
-	let required: Record<string, boolean> = {};
+	type Props = {
+		question: GridTextQuestion;
+		onupdate?: (answer: Answer) => void;
+		isValid?: boolean;
+		confirmed?: boolean;
+	};
+
+	let {
+		question,
+		onupdate = () => {},
+		isValid = $bindable(true),
+		confirmed = false,
+	}: Props = $props();
+
+	let items = $derived(question.items.map(toItem));
+	let required = $derived(calculateRequired(question, items));
+
+	let answer: Answer = $state({});
 
 	// init checked from respuesta
 	function initState() {
-		items = question.items.map((item) => (typeof item === 'string' ? { title: item } : item));
-
 		answer = {};
 		for (const { title } of items) answer[title] = question.answer?.[title] || '';
-
-		onupdate(answer);
 	}
 
-	$: required = _required(question, items);
-	$: valid = _valid(required, answer);
-	$: isValid = Object.values(valid).every(Boolean);
-
-	function _required(q: typeof question, it: typeof items) {
-		let ret: typeof required = {};
-		for (const { title, required } of it) {
-			ret[title] = required ?? q.required ?? false; // by default, it's not required
-		}
-		return ret;
+	function toItem(value: string | TextItem): TextItem {
+		return typeof value === 'string' ? { title: value } : value;
 	}
 
-	function _valid(req: typeof required, ans: typeof answer) {
-		let ret: typeof valid = {};
-		for (const [title, required] of Object.entries(req)) {
-			ret[title] = !required || (required && !!ans[title]);
-		}
+	function calculateRequired(q: typeof question, it: typeof items) {
+		let ret: Record<string, boolean> = {};
+		// take item.required, then question.required, then default to false (not required)
+		for (const { title, required } of it) ret[title] = required ?? q.required ?? false;
 		return ret;
 	}
 
@@ -53,9 +55,20 @@
 		if (!isAllowedChar(event.key, allowedChars)) event.preventDefault();
 	}
 
-	initState();
+	function isValidItem(title: string) {
+		if (!required[title]) return true; // not required
+		return !!answer[title];
+	}
 
-	$: onupdate(answer);
+	// reactive on answer
+	// calculate answer from each radio button and update isValid prop
+	$effect(() => {
+		isValid = Object.keys(answer).every(isValidItem);
+
+		onupdate(answer);
+	});
+
+	initState();
 </script>
 
 <div class="space-y-4">
@@ -64,9 +77,17 @@
 		class:lg:columns-3={items.length >= 12}
 		class:md:columns-2={items.length >= 8}
 	>
-		{#each items as { title, description, placeholder, control = 'input', maxlength, allowedChars }, index}
+		{#each items as item, index}
+			{@const {
+				title,
+				description,
+				placeholder,
+				control = 'input',
+				maxlength,
+				allowedChars,
+			} = item}
 			{@const id = `text_${index}`}
-			{@const className = confirmed && !valid[title] ? 'text-destructive' : ''}
+			{@const className = confirmed && !isValidItem(title) ? 'text-destructive' : ''}
 
 			<div class="grid w-full gap-1.5">
 				<Label class={className} for={id}>
@@ -81,7 +102,7 @@
 						bind:value={answer[title]}
 						{maxlength}
 						{placeholder}
-						on:keypress={(e) => keypress(e, allowedChars)}
+						onkeypress={(e) => keypress(e, allowedChars)}
 					/>
 				{:else if control === 'input'}
 					<Input
@@ -89,7 +110,7 @@
 						bind:value={answer[title]}
 						{maxlength}
 						{placeholder}
-						on:keypress={(e) => keypress(e, allowedChars)}
+						onkeypress={(e) => keypress(e, allowedChars)}
 					/>
 				{/if}
 				{#if description}

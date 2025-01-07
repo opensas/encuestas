@@ -1,5 +1,10 @@
 <script lang="ts">
-	export let text: string;
+	import type { Snippet } from 'svelte';
+
+	type Props = { text: string; footer?: Snippet };
+	let { text, footer }: Props = $props();
+
+	let { header, body } = $derived(parseText(text));
 
 	function parseText(text: string) {
 		const CR = '\n';
@@ -13,12 +18,10 @@
 		const [header, ...body] = parsed;
 		return { header, body };
 	}
-
-	$: ({ header, body } = parseText(text));
 </script>
 
 <h3 class="text-xl font-medium">{header}</h3>
 {#each body as paragraph}
 	<p>{paragraph}</p>
 {/each}
-<slot name="footer"></slot>
+{@render footer?.()}
