@@ -6,18 +6,26 @@
 
 	import { Minus, Plus } from 'lucide-svelte';
 
-	export let question: RatingQuestion;
-	export let onupdate: (respuesta: number) => void = () => {};
-	export let isValid = true;
+	type Props = {
+		question: RatingQuestion;
+		onupdate?: (answer: number) => void;
+		isValid?: boolean;
+	};
 
-	let answer = question.answer || 0;
-	let slider = [answer];
+	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
-	$: required = question.required ?? true;
-	$: isValid = !required || (required && answer !== undefined);
+	let slider = $state([question.answer || 0]);
+	let answer = $derived(slider[0]);
 
-	$: answer = slider[0];
-	$: onupdate(answer);
+	let required = $derived(question.required ?? true);
+
+	function onchange(answer: number) {
+		isValid = !required || (required && answer !== undefined);
+
+		onupdate(answer);
+	}
+
+	$effect(() => onchange(answer));
 
 	function updateSlider(value: number) {
 		slider = [answer + value];

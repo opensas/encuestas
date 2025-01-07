@@ -44,7 +44,6 @@ export type Question = {
 	title: string;
 	next?: Question['id'] | undefined | null; // null ends the survey
 	description?: string;
-	// tipo: TipoPregunta; // 'unica' | 'multiple' | 'puntaje' | 'libre'
 } & (
 	| {
 			kind: 'single';

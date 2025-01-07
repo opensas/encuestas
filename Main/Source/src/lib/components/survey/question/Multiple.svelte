@@ -1,49 +1,52 @@
 <script lang="ts">
-	import type { MultipleQuestion, Option } from '$lib/types';
+	import type { MultipleQuestion } from '$lib/types';
 
 	import { toOption } from '$lib/components/survey';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 
-	export let question: MultipleQuestion;
-	export let onupdate: (answer: string[]) => void = () => {};
-	export let isValid = true;
+	type Props = {
+		question: MultipleQuestion;
+		onupdate?: (answer: string[]) => void;
+		isValid?: boolean;
+	};
 
-	let options: Option[];
-	let answer: string[];
+	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
-	let checked: boolean[];
-	let checkedOther: boolean;
-	let other: string;
+	let options = $derived(question.options.map(toOption));
+	let required = $derived(question.required ?? true); // required by default
+
+	let checked: boolean[] = $state([]);
+	let checkedOther = $state(false);
+	let other = $state('');
 
 	// init checked from respuesta
 	function initState() {
-		answer = question.answer || [];
-		onupdate(answer);
+		const answer = question.answer || [];
 
-		options = question.options.map(toOption);
-		const titulos = options.map((option) => option.title);
+		const titles = options.map((option) => option.title);
 
-		checked = titulos.map((titulo) => answer.includes(titulo));
-		other = answer.find((r) => !titulos.includes(r)) || '';
+		checked = titles.map((title) => answer.includes(title));
+		other = answer.find((r) => !titles.includes(r)) || '';
 		checkedOther = !!other;
-	}
-
-	function updateAnswer(checked: boolean[], checkedOther: boolean, other: string) {
-		answer = checked
-			.map((check, index) => (check ? options[index].title : null))
-			.filter((resp) => resp !== null); // remove unchecked items
-		if (checkedOther && other) answer.push(other);
-		onupdate(answer);
 	}
 
 	initState();
 
-	$: required = question.required ?? true;
-	$: isValid = !required || (required && answer.length > 0);
+	function onchange(checked: boolean[], checkedOther: boolean, other: string) {
+		const answer = checked
+			.map((check, index) => (check ? options[index].title : null))
+			.filter((resp) => resp !== null); // remove unchecked items
 
-	$: updateAnswer(checked, checkedOther, other);
+		if (checkedOther && other) answer.push(other);
+
+		isValid = !required || (required && answer.length > 0);
+
+		onupdate(answer);
+	}
+
+	$effect(() => onchange(checked, checkedOther, other));
 </script>
 
 <div class="space-y-4">

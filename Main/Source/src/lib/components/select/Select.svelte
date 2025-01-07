@@ -4,18 +4,27 @@
 
 	import type { Selected } from 'bits-ui';
 
-	export let value: string | undefined = undefined;
-	export let options: Array<string | Item>;
+	type Props = {
+		value?: string;
+		options: Array<string | Item>;
+		placeholder?: string;
+		id?: string;
+		name?: string;
+		label?: string;
+		onchange?: (value?: string) => void;
+		class?: string;
+	};
 
-	export let placeholder: string | undefined = 'Elija una opción';
-	export let id: string | undefined = undefined;
-	export let name: string | undefined = undefined;
-	export let label: string | undefined = undefined;
-
-	export let onchange: (value: string | undefined) => void = () => {};
-
-	let className = '';
-	export { className as class };
+	let {
+		value = $bindable(),
+		options,
+		placeholder = 'Elija una opción',
+		id,
+		name,
+		label,
+		onchange = () => {},
+		class: className = '',
+	}: Props = $props();
 
 	type Item = Selected<string>;
 
@@ -26,9 +35,9 @@
 	}
 
 	// bug, should work ok with undefined
+	let items = $derived(options.map(toItem));
 	const NONE = { value: '' };
-	$: items = options.map(toItem);
-	$: selected = items.find((item) => item.value === value) || NONE;
+	let selected = $derived(items.find((item) => item.value === value) || NONE);
 
 	function onSelectedChange(item?: Item) {
 		value = item?.value || undefined;

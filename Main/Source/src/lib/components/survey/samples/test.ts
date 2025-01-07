@@ -1,5 +1,173 @@
 import type { Survey } from '$lib/types';
 
+export const survey_test: Survey = {
+	id: 'surv_test',
+	code: 'test',
+	title: 'Encuesta de muestra de los distintos tipos de pregunta',
+	intro: `
+		Bienvenido a la encuesta de muestra
+		Te damos al bienvenida a esta encuesta de muestra
+		Esperamos que te resulte útil
+	`,
+	outro: `
+		Muchas gracias por tu participación
+	`,
+	questions: [
+		{
+			id: 'ques_grid_single',
+			title: 'grid-single - varias preguntas que aceptan un solo valor',
+			code: 'P1',
+			kind: 'grid-single',
+			// items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
+			items: [
+				{ title: 'pregunta 1', required: true },
+				{ title: 'pregunta 2', required: true },
+				{ title: 'pregunta 3', required: undefined },
+			],
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			allowOther: true,
+			titleOther: 'titleOther',
+			placeholderOther: 'placeholderOther',
+			required: false,
+		},
+		{
+			id: 'ques_grid_text',
+			title: 'grid-text - pregunta que acepta múltiples inputs',
+			code: 'P2',
+			kind: 'grid-text',
+			// items: 'nombre, apellido, direccion'.split(', '),
+			items: [
+				{ title: 'nombre' },
+				{ title: 'apellido', required: true },
+				{ title: 'direccion', required: true },
+				{ title: 'dni', required: true, allowedChars: 'digits' },
+			],
+			answer: { nombre: 'nombre...' },
+			required: false,
+		},
+		{
+			id: 'ques_rating',
+			title: 'rating - pregunta que acepta un puntaje',
+			code: 'P3',
+			kind: 'rating',
+			required: true,
+		},
+		{
+			id: 'ques_text',
+			title: 'text - pregunta que acepta un texto libre',
+			code: 'P4',
+			kind: 'text',
+			control: 'textarea',
+			answer: 'ingrese su respuesta',
+			required: true,
+		},
+		{
+			id: 'ques_single',
+			title: 'single - pregunta que acepta un solo valor',
+			code: 'P5',
+			kind: 'single',
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			allowOther: true,
+			titleOther: 'titleOther',
+			placeholderOther: 'placeholderOther',
+		},
+		{
+			id: 'ques_multiple',
+			title: 'multiple - pregunta que acepta múltiples valores',
+			code: 'P6',
+			kind: 'multiple',
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			answer: ['opcion 2', 'opcion 3'],
+			allowOther: true,
+			titleOther: 'titleOther',
+			placeholderOther: 'placeholderOther',
+			required: false,
+		},
+		{
+			id: 'ques_grid_single_select',
+			title: 'grid-single, control: select - varias preguntas que aceptan un solo valor',
+			code: 'P7',
+			kind: 'grid-single',
+			control: 'select',
+			items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			answer: {
+				'pregunta 1': 'opcion 2',
+				'pregunta 2': 'opcion 3',
+				'pregunta 3': 'opcion 2',
+			},
+			allowOther: true,
+			titleOther: 'titleOther',
+			placeholderOther: 'placeholderOther',
+		},
+		{
+			id: 'ques_single_combo',
+			title: 'single, control: combo - pregunta que acepta un solo valor',
+			code: 'P8',
+			kind: 'single',
+			control: 'select',
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4, opcion 5, opcion 6'.split(', '),
+			answer: 'opcion 2',
+			allowOther: true,
+			titleOther: 'titleOther',
+			placeholderOther: 'placeholderOther',
+		},
+	],
+};
+
+export const survey_short: Survey = {
+	id: 'surv_short',
+	code: 'short',
+	title: 'Encuesta breve',
+	outro: `
+		FIN DEL CUESTIONARIO
+		Muchas gracias por tu participación
+	`,
+	questions: [
+		{
+			id: 'ques_grid_text',
+			title: 'grid-text - pregunta que acepta múltiples inputs',
+			kind: 'grid-text',
+			// items: 'nombre, apellido, direccion'.split(', '),
+			items: [
+				{ title: 'nombre' },
+				{ title: 'apellido', required: true },
+				{ title: 'direccion', required: true },
+			],
+			answer: {
+				nombre: 'nombre...',
+				apellido: 'apellido...',
+				direccion: 'direccion...',
+			},
+			required: false,
+		},
+		{
+			id: 'ques_text',
+			title: 'text - pregunta que acepta un texto libre',
+			kind: 'text',
+			control: 'textarea',
+			answer: 'ingrese su respuesta',
+			required: true,
+		},
+		{
+			id: 'ques_grid_single',
+			title: 'grid-single - varias preguntas que aceptan un solo valor',
+			kind: 'grid-single',
+			control: 'select',
+			// items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
+			items: [
+				{ title: 'pregunta 1', required: true },
+				{ title: 'pregunta 2', required: true },
+				{ title: 'pregunta 3', required: undefined },
+			],
+			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			allowOther: true,
+			titleOther: 'titleOther',
+			required: false,
+		},
+	],
+};
+
 export const survey_ingles: Survey = {
 	id: 'surv_ingles_experiencia',
 	code: 'ingles',
@@ -18,7 +186,7 @@ export const survey_ingles: Survey = {
 				'Recomendación de un amigo',
 				'Anuncio en línea',
 			],
-			answer: 'otra opcion',
+			answer: 'otra opción',
 			allowOther: true,
 		},
 		{
@@ -46,7 +214,7 @@ export const survey_ingles: Survey = {
 				'Más contenido de lectura',
 				'Más contenido de escritura',
 			],
-			answer: ['Más contenido de lectura', 'Más contenido de escritura', 'otra opcion nueva'],
+			answer: ['Más contenido de lectura', 'Más contenido de escritura', 'otra opción nueva'],
 			allowOther: true,
 		},
 		{
@@ -103,7 +271,6 @@ export const survey_cine: Survey = {
 			],
 			allowOther: false,
 		},
-
 		{
 			id: 'ques_genero',
 			code: '3',
@@ -123,7 +290,6 @@ export const survey_cine: Survey = {
 			placeholderOther: 'Ingresa aquí el género de tu preferencia',
 			nextOther: 'ques_genero_otros',
 		},
-
 		{
 			id: 'ques_genero_ciencia',
 			code: '3.1',
@@ -141,7 +307,6 @@ export const survey_cine: Survey = {
 			placeholderOther: 'Ingresa aquí tu película de ciencia ficción favorita',
 			nextOther: 'ques_feedback',
 		},
-
 		{
 			id: 'ques_genero_ciencia_star',
 			code: '3.1.1',
@@ -154,7 +319,6 @@ export const survey_cine: Survey = {
 				'El retorno del Jedi (VI)',
 			],
 		},
-
 		{
 			id: 'ques_genero_accion',
 			code: '3.2',
@@ -164,7 +328,6 @@ export const survey_cine: Survey = {
 			options: ['Indiana Jones', 'James Bond', 'Duro de matar', 'Mad max'],
 			allowOther: true,
 		},
-
 		{
 			id: 'ques_genero_otros',
 			code: '3.3',
@@ -172,7 +335,6 @@ export const survey_cine: Survey = {
 			title: '¿Qué película de ese género es tu favorita?',
 			kind: 'text',
 		},
-
 		{
 			id: 'ques_feedback',
 			code: '4',
@@ -186,7 +348,6 @@ export const survey_cine: Survey = {
 			],
 			allowOther: true,
 		},
-
 		{
 			id: 'ques_final',
 			code: '5',
@@ -198,171 +359,6 @@ export const survey_cine: Survey = {
 				{ title: 'Me equivoqué de género', next: 'ques_genero' },
 				{ title: 'La quiero hacer de nuevo', next: 'ques_inicio' },
 			],
-		},
-	],
-};
-
-export const survey_test: Survey = {
-	id: 'surv_test',
-	code: 'test',
-	title: 'Encuesta de muestra de los distintos tipos de pregunta',
-	intro: `
-	Bienvenido a la encuesta de muestra
-	Te damos al bienvenida a esta encuesta de muestra
-	Esperamos que te resulte útil
-	`,
-	questions: [
-		{
-			id: 'ques_grid_single',
-			title: 'grid-single - varias preguntas que aceptan un solo valor',
-			code: 'P1',
-			kind: 'grid-single',
-			// items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
-			items: [
-				{ title: 'pregunta 1', required: true },
-				{ title: 'pregunta 2', required: true },
-				{ title: 'pregunta 3', required: undefined },
-			],
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
-			allowOther: true,
-			titleOther: 'titleOther',
-			placeholderOther: 'placeholderOther',
-			required: false,
-		},
-		{
-			id: 'ques_grid_text',
-			title: 'grid-text - pregunta que acepta múltiples inputs',
-			code: 'P2',
-			kind: 'grid-text',
-			// items: 'nombre, apellido, direccion'.split(', '),
-			items: [
-				{ title: 'nombre' },
-				{ title: 'apellido', required: true },
-				{ title: 'direccion', required: true },
-			],
-			answer: { nombre: 'nombre...' },
-			required: false,
-		},
-		{
-			id: 'ques_rating',
-			title: 'rating - pregunta que acepta un puntaje',
-			code: 'P3',
-			kind: 'rating',
-			required: true,
-		},
-		{
-			id: 'ques_text',
-			title: 'text - pregunta que acepta un texto libre',
-			code: 'P4',
-			kind: 'text',
-			control: 'textarea',
-			answer: 'ingrese su respuesta',
-			required: true,
-		},
-		{
-			id: 'ques_single',
-			title: 'single - pregunta que acepta un solo valor',
-			code: 'P5',
-			kind: 'single',
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
-			allowOther: true,
-			titleOther: 'titleOther',
-			placeholderOther: 'placeholderOther',
-		},
-		{
-			id: 'ques_multiple',
-			title: 'multiple - pregunta que acepta múltiples valores',
-			code: 'P6',
-			kind: 'multiple',
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
-			answer: ['opcion 2', 'opcion 3'],
-			allowOther: true,
-			titleOther: 'titleOther',
-			placeholderOther: 'placeholderOther',
-			required: false,
-		},
-
-		{
-			id: 'ques_grid_single_select',
-			title: 'grid-single, control: select - varias preguntas que aceptan un solo valor',
-			code: 'P7',
-			kind: 'grid-single',
-			control: 'select',
-			items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
-			answer: {
-				'pregunta 1': 'opcion 2',
-				'pregunta 2': 'opcion 3',
-				'pregunta 3': 'opcion 2',
-			},
-			allowOther: true,
-			titleOther: 'titleOther',
-			placeholderOther: 'placeholderOther',
-		},
-
-		{
-			id: 'ques_single_combo',
-			title: 'single, control: combo - pregunta que acepta un solo valor',
-			code: 'P8',
-			kind: 'single',
-			control: 'select',
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4, opcion 5, opcion 6'.split(', '),
-			answer: 'opcion 2',
-			allowOther: true,
-			titleOther: 'titleOther',
-			placeholderOther: 'placeholderOther',
-		},
-	],
-};
-
-export const survey_short: Survey = {
-	id: 'surv_short',
-	code: 'short',
-	title: 'Encuesta breve',
-	outro: `
-		FIN DEL CUESTIONARIO
-		Muchas gracias por tu participación
-	`,
-	questions: [
-		{
-			id: 'ques_grid_text',
-			title: 'grid-text - pregunta que acepta múltiples inputs',
-			kind: 'grid-text',
-			// items: 'nombre, apellido, direccion'.split(', '),
-			items: [
-				{ title: 'nombre' },
-				{ title: 'apellido', required: true },
-				{ title: 'direccion', required: true },
-			],
-			answer: {
-				nombre: 'nombre...',
-				apellido: 'apellido...',
-				direccion: 'direccion...',
-			},
-			required: false,
-		},
-		{
-			id: 'ques_text',
-			title: 'text - pregunta que acepta un texto libre',
-			kind: 'text',
-			control: 'textarea',
-			answer: 'ingrese su respuesta',
-			required: true,
-		},
-		{
-			id: 'ques_grid_single',
-			title: 'grid-single - varias preguntas que aceptan un solo valor',
-			kind: 'grid-single',
-			// items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
-			items: [
-				{ title: 'pregunta 1', required: true },
-				{ title: 'pregunta 2', required: true },
-				{ title: 'pregunta 3', required: undefined },
-			],
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
-			allowOther: true,
-			titleOther: 'titleOther',
-			required: false,
 		},
 	],
 };

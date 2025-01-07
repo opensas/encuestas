@@ -9,33 +9,36 @@
 	import { GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
 	import { DEFAULT_OUTRO, Message, toOption } from '.';
 
-	export let survey: Survey;
-	export let onsave: (survey: Survey) => void = () => {};
-	export let onclose: (survey: Survey) => void = () => {};
+	type Props = {
+		survey: Survey;
+		onsave?: (survey: Survey) => void;
+		onclose?: (survey: Survey) => void;
+		class: string;
+	};
 
-	let className = '';
-	export { className as class };
+	let { survey, onsave = () => {}, onclose = () => {}, class: className }: Props = $props();
 
 	// current question
-	let question: Question = survey.questions[0];
-	$: next = calculateNext(question, survey);
+	let question: Question = $state(survey.questions[0]);
+	let next = $derived(calculateNext(question, survey));
 
-	$: current = questions.length + 1; // index of the current question
+	// already answered question, this will be the question history path
+	let questions: Question[] = $state([]);
 
-	let confirmed = false; // user pressed next on current question, used to display errors
-	let finished = false;
-	let saved = false; // current survey has been correctly saved
-	let isValid = false;
-	let shake = false;
-	$: isError = confirmed && !isValid;
+	let current = $derived(questions.length + 1); // index of the current question
 
-	let intro = !!survey.intro;
+	let confirmed = $state(false); // user pressed next on current question, used to display errors
+	let finished = $state(false);
+	let saved = $state(false); // current survey has been correctly saved
+	let isValid = $state(false);
+	let shake = $state(false);
+
+	let isError = $derived(confirmed && !isValid);
+
+	let intro = $state(!!survey.intro);
 	let outro = survey.outro || DEFAULT_OUTRO;
 
-	// already answered question, this will bew the question history path
-	let questions: Question[] = [];
-
-	$: required = !('required' in question) || question.required;
+	let required = $derived(!('required' in question) || question.required);
 
 	function goNext() {
 		if (!validate()) return false;
@@ -145,8 +148,6 @@
 
 	function onupdate(answer: Survey['questions'][number]['answer']) {
 		question.answer = answer;
-		survey = survey;
-		// survey.preguntas[current].respuesta = respuesta;
 	}
 </script>
 
@@ -157,19 +158,23 @@
 	<div class="space-y-6 p-6 sm:p-10 md:block">
 		{#if intro && survey.intro}
 			<Message text={survey.intro}>
-				<div slot="footer" class="flex justify-center pt-4">
-					<Button on:click={() => (intro = false)}>Comenzar</Button>
-				</div>
+				{#snippet footer()}
+					<div class="flex justify-center pt-4">
+						<Button onclick={() => (intro = false)}>Comenzar</Button>
+					</div>
+				{/snippet}
 			</Message>
 		{:else if finished && outro}
 			<Message text={outro}>
-				<div slot="footer" class="flex justify-center pt-4">
-					{#if !saved}
-						<Button on:click={save}>Grabar respuesta</Button>
-					{:else}
-						<Button on:click={close}>Ok</Button>
-					{/if}
-				</div>
+				{#snippet footer()}
+					<div class="flex justify-center pt-4">
+						{#if !saved}
+							<Button onclick={save}>Grabar respuesta</Button>
+						{:else}
+							<Button onclick={close}>Ok</Button>
+						{/if}
+					</div>
+				{/snippet}
 			</Message>
 		{:else}
 			<div class="space-y-1">
@@ -215,13 +220,13 @@
 			{/key}
 
 			<div class="flex justify-between pt-4">
-				<Button class={current <= 1 ? 'invisible' : ''} variant="outline" on:click={goPrev}>
+				<Button class={current <= 1 ? 'invisible' : ''} variant="outline" onclick={goPrev}>
 					Anterior
 				</Button>
 				{#if next === null}
-					<Button on:click={finish}>Finalizar</Button>
+					<Button onclick={finish}>Finalizar</Button>
 				{:else}
-					<Button on:click={goNext}>Siguiente</Button>
+					<Button onclick={goNext}>Siguiente</Button>
 				{/if}
 			</div>
 		{/if}
