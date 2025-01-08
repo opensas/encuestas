@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Option, SingleQuestion } from '$lib/types';
+	import type { SingleQuestion } from '$lib/types';
 
 	import { Select } from '$lib/components/select';
 	import { toOption } from '$lib/components/survey';
@@ -7,20 +7,25 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
-	export let question: SingleQuestion;
-	export let onupdate: (answer: string) => void = () => {};
-	export let isValid = true;
+	type Props = {
+		question: SingleQuestion;
+		onupdate?: (answer: string) => void;
+		isValid?: boolean;
+	};
 
-	let options: Option[];
-	let checked: string;
+	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
+
+	let options = $derived(question.options.map(toOption));
+	let required = $derived(question.required ?? true); // required by default
+
+	let checked = $state('');
 
 	const OTHER_VALUE = '__OTHER__';
-	let other = '';
+	let other = $state('');
 
 	// init checked from answer
 	function initState() {
 		checked = question.answer || '';
-		options = question.options.map(toOption);
 
 		// check is it's an other option
 		const answer = question.answer || '';
@@ -36,11 +41,15 @@
 
 	initState();
 
-	$: required = question.required ?? true;
-	$: isValid = !required || (required && !!answer);
+	function onchange(checked: string) {
+		const answer = checked === OTHER_VALUE ? other : checked;
 
-	$: answer = checked === OTHER_VALUE ? other : checked;
-	$: onupdate(answer);
+		isValid = !required || (required && answer.length > 0);
+
+		onupdate(answer);
+	}
+
+	$effect(() => onchange(checked));
 </script>
 
 <Radio.Root bind:value={checked} class="gap-0 space-y-4">

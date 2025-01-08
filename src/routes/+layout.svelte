@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import '../app.css';
 
 	import { Button } from '$lib/components/ui/button';
@@ -7,13 +7,17 @@
 	import { ModeWatcher, toggleMode } from 'mode-watcher';
 
 	import EncuestasQrDialog from './qr/EncuestasQRDialog.svelte';
+
+	type Props = { children?: import('svelte').Snippet };
+
+	let { children }: Props = $props();
 </script>
 
 <ModeWatcher />
 
 <EncuestasQrDialog />
 
-<Button class="absolute right-4 top-4 z-10" size="icon" variant="outline" on:click={toggleMode}>
+<Button class="absolute right-4 top-4 z-10" size="icon" variant="outline" onclick={toggleMode}>
 	<Sun
 		class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
 	/>
@@ -23,4 +27,4 @@
 	<span class="sr-only">Toggle theme</span>
 </Button>
 
-<slot></slot>
+{@render children?.()}

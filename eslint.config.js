@@ -1,18 +1,23 @@
+import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 
 import prettier from 'eslint-config-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
+import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
+const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
+export default ts.config(
+	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
 	...ts.configs.recommended,
 	...svelte.configs['flat/recommended'],
-	{ plugins: { 'simple-import-sort': simpleImportSort } },
 	{
+		plugins: {
+			'simple-import-sort': simpleImportSort,
+		},
 		rules: {
 			// override/add rules settings here, such as:
 			// 'svelte/rule-name': 'error'
@@ -108,6 +113,7 @@ export default [
 	},
 	{
 		files: ['**/*.svelte'],
+
 		languageOptions: {
 			parserOptions: {
 				parser: ts.parser,
@@ -124,5 +130,5 @@ export default [
 		rules: {
 			'@typescript-eslint/no-unused-vars': 'off',
 		},
-	},
-];
+	}
+);

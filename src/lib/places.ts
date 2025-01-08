@@ -83,7 +83,7 @@ export const flat = [
 		provincia: 'Buenos Aires',
 		departamentoId: '001-001',
 		departamento: '25 de mayo',
-		ocalidadId: '001-001-002',
+		localidadId: '001-001-002',
 		localidad: 'Agustin Mosconi',
 	},
 ];
