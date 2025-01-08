@@ -10,10 +10,15 @@ export type Survey = {
 
 export type QuestionKind = Question['kind'];
 
-export type Option = { title: string; description?: string; next?: Question['next'] };
+export type Option = {
+	title: string;
+	description?: string;
+	next?: Question['next'];
+};
 
 export type SingleQuestion = Extract<Question, { kind: 'single' }>;
 export type GridSingleQuestion = Extract<Question, { kind: 'grid-single' }>;
+export type GridApiQuestion = Extract<Question, { kind: 'grid-api' }>;
 export type MultipleQuestion = Extract<Question, { kind: 'multiple' }>;
 export type RatingQuestion = Extract<Question, { kind: 'rating' }>;
 export type TextQuestion = Extract<Question, { kind: 'text' }>;
@@ -34,13 +39,20 @@ export type SingleItem = {
 	required?: boolean;
 };
 
+export type ApiItem = {
+	title: string;
+	required?: boolean;
+	idField: string; // ej: id
+	descriptionField?: string; // ej: nombre, same as idField by default
+	endpoint: string; // ej /api/provincias/{01}/departamentos/{02}/localidades
+};
+
 export type Question = {
 	id: `ques_${string}`;
 	code?: string;
 	title: string;
 	next?: Question['id'] | undefined | null; // null ends the survey
 	description?: string;
-	// tipo: TipoPregunta; // 'unica' | 'multiple' | 'puntaje' | 'libre'
 } & (
 	| {
 			kind: 'single';
@@ -62,6 +74,12 @@ export type Question = {
 			placeholderOther?: string;
 			nextOther?: Question['next'];
 			control?: 'radio' | 'select';
+			answer?: Record<string, string>;
+			required?: boolean;
+	  }
+	| {
+			kind: 'grid-api';
+			items: ApiItem[];
 			answer?: Record<string, string>;
 			required?: boolean;
 	  }

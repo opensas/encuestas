@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Survey } from '$lib/components/survey';
 
-	export let data;
+	let { data } = $props();
 
-	$: ({ survey, callback, redirect, reference, params } = data);
+	let survey = $state(data.survey); // reactive variable
 
 	async function onsave(survey: import('$lib/types').Survey) {
+		const { callback, redirect, reference, params } = data;
+
 		const response = { survey, reference, params };
 
 		if (callback) {

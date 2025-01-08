@@ -6,22 +6,21 @@
 
 	import { Minus, Plus } from 'lucide-svelte';
 
-	export let question: RatingQuestion;
-	export let onupdate: (respuesta: number) => void = () => {};
-	export let isValid = true;
+	type Props = {
+		question: RatingQuestion;
+		onupdate?: (answer: number) => void;
+		isValid?: boolean;
+	};
 
-	let answer = question.answer || 0;
-	let slider = [answer];
+	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
-	$: required = question.required ?? true;
-	$: isValid = !required || (required && answer !== undefined);
+	let answer = $state(question.answer || 0);
 
-	$: answer = slider[0];
-	$: onupdate(answer);
-
-	function updateSlider(value: number) {
-		slider = [answer + value];
-	}
+	$effect(() => {
+		const required = question.required ?? true;
+		isValid = !required || (required && answer !== undefined);
+		onupdate(answer);
+	});
 </script>
 
 <div class="space-y-2 p-4 pb-0">
@@ -31,7 +30,7 @@
 			disabled={answer <= 0}
 			size="icon"
 			variant="outline"
-			on:click={() => updateSlider(-1)}
+			onclick={() => answer--}
 		>
 			<Minus class="h-4 w-4" />
 			<span class="sr-only">Sumar 1</span>
@@ -47,11 +46,11 @@
 			disabled={answer >= 10}
 			size="icon"
 			variant="outline"
-			on:click={() => updateSlider(1)}
+			onclick={() => answer++}
 		>
 			<Plus class="h-4 w-4" />
 			<span class="sr-only">Restar 1</span>
 		</Button>
 	</div>
-	<Slider bind:value={slider} max={10} step={1} />
+	<Slider bind:value={answer} max={10} step={1} type="single" />
 </div>
