@@ -3,12 +3,16 @@
 
 	import type { HTMLAttributes } from 'svelte/elements';
 
-	type $$Props = HTMLAttributes<HTMLDivElement>;
+	import type { WithElementRef } from 'bits-ui';
 
-	let className: $$Props['class'] = undefined;
-	export { className as class };
+	let {
+		ref = $bindable(null),
+		class: className,
+		children,
+		...restProps
+	}: WithElementRef<HTMLAttributes<HTMLDivElement>> = $props();
 </script>
 
-<div class={cn('p-6', className)} {...$$restProps}>
-	<slot />
+<div bind:this={ref} class={cn('p-6', className)} {...restProps}>
+	{@render children?.()}
 </div>

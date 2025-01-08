@@ -6,7 +6,7 @@
 
 	import { cn } from '$lib/utils';
 
-	import { GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
+	import { GridApi, GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
 	import { DEFAULT_OUTRO, Message, toOption } from '.';
 
 	type Props = {
@@ -208,6 +208,8 @@
 					<Single bind:isValid {question} {onupdate} />
 				{:else if question.kind === 'grid-single'}
 					<GridSingle bind:isValid {confirmed} {question} {onupdate} />
+				{:else if question.kind === 'grid-api'}
+					<GridApi bind:isValid {confirmed} {question} {onupdate} />
 				{:else if question.kind === 'multiple'}
 					<Multiple bind:isValid {question} {onupdate} />
 				{:else if question.kind === 'rating'}

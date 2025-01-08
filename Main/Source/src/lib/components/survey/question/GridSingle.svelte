@@ -3,6 +3,7 @@
 
 	import { Select } from '$lib/components/select';
 	import { toOption } from '$lib/components/survey';
+	import { calculateRequired } from '$lib/components/survey/question';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
@@ -57,13 +58,6 @@
 
 	function toItem(value: string | SingleItem): SingleItem {
 		return typeof value === 'string' ? { title: value } : value;
-	}
-
-	function calculateRequired(q: typeof question, it: typeof items) {
-		let ret: Record<string, boolean> = {};
-		// take item.required, then question.required, then default to false (not required)
-		for (const { title, required } of it) ret[title] = required ?? q.required ?? false;
-		return ret;
 	}
 
 	function isValidItem(title: string) {

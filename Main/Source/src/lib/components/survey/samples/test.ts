@@ -4,19 +4,54 @@ export const survey_test: Survey = {
 	id: 'surv_test',
 	code: 'test',
 	title: 'Encuesta de muestra de los distintos tipos de pregunta',
-	intro: `
-		Bienvenido a la encuesta de muestra
-		Te damos al bienvenida a esta encuesta de muestra
-		Esperamos que te resulte útil
-	`,
+	// intro: `
+	// 	Bienvenido a la encuesta de muestra
+	// 	Te damos al bienvenida a esta encuesta de muestra
+	// 	Esperamos que te resulte útil
+	// `,
 	outro: `
 		Muchas gracias por tu participación
 	`,
 	questions: [
 		{
+			id: 'ques_grid_api',
+			title: 'grid-api, obtengo las opciones de una api',
+			code: 'p00',
+			kind: 'grid-api',
+			items: [
+				{
+					title: 'provincia',
+					required: true,
+					idField: 'id',
+					descriptionField: 'nombre',
+					endpoint: '/api/provincias',
+				},
+				{
+					title: 'departamento',
+					required: true,
+					idField: 'id',
+					descriptionField: 'nombre',
+					endpoint: '/api/provincias/{provincia}/departamentos',
+				},
+				{
+					title: 'localidad',
+					required: false,
+					idField: 'id',
+					descriptionField: 'nombre',
+					endpoint: '/api/provincias/{provincia}/departamentos/{departamento}/localidades',
+				},
+			],
+			answer: {
+				provincia: 'tucuman',
+				departamento: 'rio-chico',
+				localidad: 'santa-ana',
+			},
+		},
+
+		{
 			id: 'ques_grid_single',
 			title: 'grid-single - varias preguntas que aceptan un solo valor',
-			code: 'P1',
+			code: 'p1',
 			kind: 'grid-single',
 			// items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
 			items: [
@@ -33,7 +68,7 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_grid_text',
 			title: 'grid-text - pregunta que acepta múltiples inputs',
-			code: 'P2',
+			code: 'p2',
 			kind: 'grid-text',
 			// items: 'nombre, apellido, direccion'.split(', '),
 			items: [
@@ -48,14 +83,14 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_rating',
 			title: 'rating - pregunta que acepta un puntaje',
-			code: 'P3',
+			code: 'p3',
 			kind: 'rating',
 			required: true,
 		},
 		{
 			id: 'ques_text',
 			title: 'text - pregunta que acepta un texto libre',
-			code: 'P4',
+			code: 'p4',
 			kind: 'text',
 			control: 'textarea',
 			answer: 'ingrese su respuesta',
@@ -64,7 +99,7 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_single',
 			title: 'single - pregunta que acepta un solo valor',
-			code: 'P5',
+			code: 'p5',
 			kind: 'single',
 			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
 			allowOther: true,
@@ -74,7 +109,7 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_multiple',
 			title: 'multiple - pregunta que acepta múltiples valores',
-			code: 'P6',
+			code: 'p6',
 			kind: 'multiple',
 			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
 			answer: ['opcion 2', 'opcion 3'],
@@ -86,7 +121,7 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_grid_single_select',
 			title: 'grid-single, control: select - varias preguntas que aceptan un solo valor',
-			code: 'P7',
+			code: 'p7',
 			kind: 'grid-single',
 			control: 'select',
 			items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
@@ -103,7 +138,7 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_single_combo',
 			title: 'single, control: combo - pregunta que acepta un solo valor',
-			code: 'P8',
+			code: 'p8',
 			kind: 'single',
 			control: 'select',
 			options: 'opcion 1, opcion 2, opcion 3, opcion 4, opcion 5, opcion 6'.split(', '),
@@ -173,7 +208,7 @@ export const survey_ingles: Survey = {
 	code: 'ingles',
 	title: 'Evaluación de la experiencia en el curso de inglés',
 	description:
-		'Por favor, responda a las siguientes preguntas para ayudarnos a mejorar nuestro curso de inglés',
+		'por favor, responda a las siguientes preguntas para ayudarnos a mejorar nuestro curso de inglés',
 	questions: [
 		{
 			id: 'ques_1',
@@ -281,10 +316,10 @@ export const survey_cine: Survey = {
 				{ title: 'Ciencia ficción', next: 'ques_genero_ciencia' },
 				{
 					title: 'Acción',
-					description: 'Películas para ver tiros y piñas',
+					description: 'películas para ver tiros y piñas',
 					next: 'ques_genero_accion',
 				},
-				{ title: 'Drama', description: 'Películas para llorar' },
+				{ title: 'Drama', description: 'películas para llorar' },
 			],
 			allowOther: true,
 			placeholderOther: 'Ingresa aquí el género de tu preferencia',
@@ -341,7 +376,7 @@ export const survey_cine: Survey = {
 			title: '¿Qué mejorarías de esta entrevista?',
 			kind: 'multiple',
 			options: [
-				'Preguntar por otros géneros',
+				'preguntar por otros géneros',
 				'Hacerla más larga',
 				'Hacerla más corta',
 				'No haría este tipo de entrevistas',

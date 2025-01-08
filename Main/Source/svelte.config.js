@@ -1,4 +1,4 @@
-// import adapter from '@sveltejs/adapter-auto';
+// import adapter from '@sveltejs/adapter-auto'; // uncomment for running pnpm test:e2e, adapter-node-iis won't work with playwright
 import adapter from 'sveltekit-adapter-node-iis';
 
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
@@ -10,6 +10,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
+		// adapter: adapter(), // uncomment for running pnpm test:e2e,
 		// see https://github.com/Vuferen/sveltekit-adapter-node-iis for IIS adapter
 		adapter: adapter({
 			includePackage: true,
