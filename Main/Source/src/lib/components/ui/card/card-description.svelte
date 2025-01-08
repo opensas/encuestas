@@ -3,12 +3,16 @@
 
 	import type { HTMLAttributes } from 'svelte/elements';
 
-	type $$Props = HTMLAttributes<HTMLParagraphElement>;
+	import type { WithElementRef } from 'bits-ui';
 
-	let className: $$Props['class'] = undefined;
-	export { className as class };
+	let {
+		ref = $bindable(null),
+		class: className,
+		children,
+		...restProps
+	}: WithElementRef<HTMLAttributes<HTMLParagraphElement>> = $props();
 </script>
 
-<p class={cn('text-sm text-muted-foreground', className)} {...$$restProps}>
-	<slot />
+<p bind:this={ref} class={cn('text-sm text-muted-foreground', className)} {...restProps}>
+	{@render children?.()}
 </p>

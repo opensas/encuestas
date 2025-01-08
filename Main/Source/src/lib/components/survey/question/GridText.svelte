@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GridTextQuestion, TextItem } from '$lib/types';
 
-	import { isAllowedChar } from '$lib/components/survey/question';
+	import { calculateRequired, isAllowedChar } from '$lib/components/survey/question';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Textarea } from '$lib/components/ui/textarea';
@@ -42,13 +42,6 @@
 
 	function toItem(value: string | TextItem): TextItem {
 		return typeof value === 'string' ? { title: value } : value;
-	}
-
-	function calculateRequired(q: typeof question, it: typeof items) {
-		let ret: Record<string, boolean> = {};
-		// take item.required, then question.required, then default to false (not required)
-		for (const { title, required } of it) ret[title] = required ?? q.required ?? false;
-		return ret;
 	}
 
 	function keypress(event: KeyboardEvent, allowedChars: TextItem['allowedChars']) {
