@@ -7,6 +7,8 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
+	import { titleCase } from '$lib/utils/string';
+
 	type Answer = NonNullable<GridSingleQuestion['answer']>;
 
 	type Props = {
@@ -37,16 +39,16 @@
 
 	// init checked from answer
 	function initState() {
-		for (const { title } of items) {
-			const answer = question?.answer?.[title] || '';
-			other[title] = '';
+		for (const { id } of items) {
+			const answer = question?.answer?.[id] || '';
+			other[id] = '';
 			if (!answer) {
-				checked[title] = '';
+				checked[id] = '';
 			} else if (options.find((option) => option.title === answer)) {
-				checked[title] = answer;
+				checked[id] = answer;
 			} else {
-				checked[title] = OTHER_VALUE;
-				other[title] = answer;
+				checked[id] = OTHER_VALUE;
+				other[id] = answer;
 			}
 		}
 
@@ -56,7 +58,7 @@
 	}
 
 	function toItem(value: string | SingleItem): SingleItem {
-		return typeof value === 'string' ? { title: value } : value;
+		return typeof value === 'string' ? { id: value } : value;
 	}
 
 	function isValidItem(title: string) {
@@ -99,16 +101,16 @@
 		{/if}
 	</div>
 
-	{#each items as { title }}
-		{@const className = confirmed && !isValidItem(title) ? 'text-destructive' : ''}
+	{#each items as { id, label = id }}
+		{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
 		<Label class="self-center text-base {className}">
-			{title}
-			{#if required[title]}
+			{titleCase(label)}
+			{#if required[id]}
 				<span class="text-destructive">*</span>
 			{/if}
 		</Label>
 		<Radio.Root
-			bind:value={checked[title]}
+			bind:value={checked[id]}
 			style={templateCols}
 			class="grid items-center gap-4"
 			orientation="horizontal"
@@ -120,14 +122,14 @@
 			{:else}
 				{@const items = options.map((o) => ({ value: o.title }))}
 				<div class="w-full space-y-1">
-					<Select bind:value={checked[title]} options={items} />
+					<Select bind:value={checked[id]} options={items} />
 				</div>
 			{/if}
 			{#if question.allowOther}
 				{@const placeholder = question.placeholderOther || 'Otra opcion'}
 				<div class="flex w-full items-center space-x-2 pl-4">
 					<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
-					<Input bind:value={other[title]} {placeholder} />
+					<Input bind:value={other[id]} {placeholder} />
 				</div>
 			{/if}
 		</Radio.Root>

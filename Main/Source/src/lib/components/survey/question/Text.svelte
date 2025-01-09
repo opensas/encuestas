@@ -13,7 +13,7 @@
 	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
 	let {
-		title,
+		label,
 		description,
 		placeholder,
 		control = 'textarea',
@@ -33,7 +33,9 @@
 </script>
 
 <div class="grid w-full gap-1.5">
-	<Label for="text-question">{title}</Label>
+	{#if label}
+		<Label for="text-question">{label}</Label>
+	{/if}
 	{#if control === 'textarea'}
 		<Textarea id="text-question" bind:value={answer} {allowedChars} {maxlength} {placeholder} />
 	{:else if control === 'input'}

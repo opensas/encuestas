@@ -198,8 +198,8 @@
 				{#if isError}
 					<p class="text-sm text-destructive">Debe completar esta pregunta</p>
 				{/if}
-				{#if question.description}
-					<p class="text-sm text-muted-foreground">{question.description}</p>
+				{#if question.subtitle}
+					<p class="text-sm text-muted-foreground">{question.subtitle}</p>
 				{/if}
 			</div>
 
