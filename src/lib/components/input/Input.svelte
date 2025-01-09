@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { type AllowedChars, isAllowedChar } from '$lib/components/survey';
+	import { type AllowedChars, isAllowedChar, onlyAllowedChars } from '$lib/components/survey';
 	import { Input } from '$lib/components/ui/input';
 
 	import type { ComponentProps } from 'svelte';
@@ -12,24 +12,33 @@
 		ref = $bindable(null),
 		value = $bindable(),
 		allowedChars,
-		onkeydown,
-		onbeforeinput,
+		onkeydown: _onkeydown, // allow caller to set its own handler
+		onbeforeinput: _onbeforeinput,
+		oninput: _oninput,
 		...restProps
 	}: Props = $props();
 
-	type OnkeydownEvent = Parameters<NonNullable<Props['onkeydown']>>[0];
-	type OnbeforeinputEvent = Parameters<NonNullable<Props['onbeforeinput']>>[0];
+	const onkeydown: Props['onkeydown'] = (e) => {
+		if (allowedChars && !isAllowedChar(e.key, allowedChars)) e.preventDefault();
+		_onkeydown?.(e);
+	};
 
-	function _onkeydown(event: OnkeydownEvent) {
-		if (allowedChars && !isAllowedChar(event.key, allowedChars)) event.preventDefault();
-		if (onkeydown) return onkeydown(event);
-	}
-
-	function _onbeforeinput(event: OnbeforeinputEvent) {
-		if (allowedChars && event.data && !isAllowedChar(event.data, allowedChars))
-			event.preventDefault();
-		if (onbeforeinput) return onbeforeinput(event);
-	}
+	const onbeforeinput: Props['onbeforeinput'] = (e) => {
+		if (allowedChars && e.data && !isAllowedChar(e.data, allowedChars)) e.preventDefault();
+		_onbeforeinput?.(e);
+	};
+	const oninput: Props['oninput'] = (e) => {
+		const target = e.currentTarget;
+		if (target.value) {
+			const clean = onlyAllowedChars(target.value, allowedChars);
+			if (clean !== target.value) {
+				const position = target.selectionStart;
+				target.value = value = clean; // we need to also update value to restore selectionRage
+				if (position) target.setSelectionRange(position - 1, position - 1);
+			}
+		}
+		_oninput?.(e);
+	};
 </script>
 
-<Input bind:ref bind:value {...restProps} onbeforeinput={_onbeforeinput} onkeydown={_onkeydown} />
+<Input bind:ref bind:value {...restProps} {onbeforeinput} {oninput} {onkeydown} />

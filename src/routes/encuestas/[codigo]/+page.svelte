@@ -33,10 +33,10 @@
 			return;
 		}
 
-		const answers = survey.questions.map((p) => [p.title, p.answer]);
+		const answers = survey.questions.map((p) => [p.id, p.answer]);
 		console.log('!survey saved!', { survey, respuestas: answers });
 		const LF = '\r\n\r\n';
-		const message = survey.questions.map((p) => `${p.title}: ${toString(p.answer)}`).join(LF);
+		const message = survey.questions.map((p) => `${p.id}: ${toString(p.answer)}`).join(LF);
 		alert(`Felicitaciones! completaste la encuesta.${LF}${message}`);
 	}
 
