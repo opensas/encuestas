@@ -46,13 +46,13 @@ export function onlyAllowedChars(text: string, allowed?: AllowedChars) {
 type Question = { required?: boolean };
 
 type Item = {
-	title: string;
+	id: string;
 	required?: boolean;
 };
 
 export function calculateRequired(question: Question, items: Item[]) {
-	const ret: Record<Item['title'], boolean> = {};
+	const ret: Record<Item['id'], boolean> = {};
 	// take item.required, then question.required, then default to false (not required)
-	for (const { title, required } of items) ret[title] = required ?? question.required ?? false;
+	for (const { id, required } of items) ret[id] = required ?? question.required ?? false;
 	return ret;
 }

@@ -25,12 +25,12 @@
 		confirmed = false,
 	}: Props = $props();
 
-	type Title = ApiItem['title'];
+	type Id = ApiItem['id'];
 
 	let items = $derived(question.items);
-	let required = $state({} as Record<Title, boolean>);
-	let parents = $state({} as Record<Title, Title[]>);
-	let options = $state({} as Record<Title, SelectItem[]>);
+	let required = $state({} as Record<Id, boolean>);
+	let parents = $state({} as Record<Id, Id[]>);
+	let options = $state({} as Record<Id, SelectItem[]>);
 
 	let answer: Answer = $state({});
 
@@ -39,9 +39,9 @@
 		required = calculateRequired(question, items);
 		parents = calculateParents(items);
 
-		for (const { title } of items) answer[title] = question?.answer?.[title] || '';
+		for (const { id } of items) answer[id] = question?.answer?.[id] || '';
 
-		for (const { title } of items) fetchOptions(answer, title);
+		for (const { id } of items) fetchOptions(answer, id);
 
 		isValid = Object.keys(answer).every(isValidItem);
 	}
@@ -68,18 +68,18 @@
 	}
 
 	function calculateParents(it: typeof items) {
-		let ret: Record<Title, Title[]> = {};
+		let ret: Record<Id, Id[]> = {};
 		const regex = /{([^}]+)}/g;
 
-		for (const { title, endpoint } of it) {
+		for (const { id, endpoint } of it) {
 			const matches = endpoint.match(regex);
-			ret[title] = matches ? matches.map((match) => match.replace(/{|}/g, '')) : [];
+			ret[id] = matches ? matches.map((match) => match.replace(/{|}/g, '')) : [];
 		}
 		return ret;
 	}
 
-	async function fetchOptions(selected: Answer, title: Title) {
-		const item = items.find((item) => item.title === title);
+	async function fetchOptions(selected: Answer, title: Id) {
+		const item = items.find((item) => item.id === title);
 		if (!item) return;
 
 		// if there's any parent empty, the select will be empty, and disabled
@@ -123,22 +123,22 @@
 		<div></div>
 	</div>
 
-	{#each items as { title }}
-		{@const className = confirmed && !isValidItem(title) ? 'text-destructive' : ''}
-		{@const currentOptions = options[title] || []}
+	{#each items as { id, label = id }}
+		{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
+		{@const currentOptions = options[id] || []}
 		<Label class="self-center text-base {className}">
-			{titleCase(title)}
-			{#if required[title]}
+			{titleCase(label)}
+			{#if required[id]}
 				<span class="text-destructive">*</span>
 			{/if}
 		</Label>
 		<div class="grid items-center gap-4">
 			<div class="w-full space-y-1">
 				<Select
-					value={answer[title]}
+					value={answer[id]}
 					disabled={currentOptions.length === 0}
 					options={currentOptions}
-					onchange={(value) => onchange(title, value)}
+					onchange={(value) => onchange(id, value)}
 				/>
 			</div>
 		</div>
