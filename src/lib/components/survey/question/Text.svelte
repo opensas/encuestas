@@ -1,10 +1,8 @@
 <script lang="ts">
 	import type { TextQuestion } from '$lib/types';
 
-	import { isAllowedChar } from '$lib/components/survey/question';
-	import { Input } from '$lib/components/ui/input';
+	import { Input, Textarea } from '$lib/components';
 	import { Label } from '$lib/components/ui/label';
-	import { Textarea } from '$lib/components/ui/textarea';
 
 	type Props = {
 		question: TextQuestion;
@@ -14,7 +12,14 @@
 
 	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
-	let { title, description, placeholder, control = 'textarea', maxlength } = $derived(question);
+	let {
+		title,
+		description,
+		placeholder,
+		control = 'textarea',
+		maxlength,
+		allowedChars,
+	} = $derived(question);
 	let required = $derived(question.required ?? true); // required by default
 
 	let answer = $state(question.answer || '');
@@ -25,18 +30,14 @@
 	}
 
 	$effect(() => onchange(answer));
-
-	function onkeypress(event: KeyboardEvent) {
-		if (!isAllowedChar(event.key, question.allowedChars)) event.preventDefault();
-	}
 </script>
 
 <div class="grid w-full gap-1.5">
 	<Label for="text-question">{title}</Label>
 	{#if control === 'textarea'}
-		<Textarea id="text-question" bind:value={answer} {maxlength} {placeholder} {onkeypress} />
+		<Textarea id="text-question" bind:value={answer} {allowedChars} {maxlength} {placeholder} />
 	{:else if control === 'input'}
-		<Input id="text-question" bind:value={answer} {maxlength} {placeholder} {onkeypress} />
+		<Input id="text-question" bind:value={answer} {allowedChars} {maxlength} {placeholder} />
 	{/if}
 	{#if description}
 		<p class="text-sm text-muted-foreground">{description}</p>

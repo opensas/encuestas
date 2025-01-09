@@ -6,7 +6,7 @@
 
 	import { cn } from '$lib/utils';
 
-	import { GridApi, GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
+	import { GridApi, GridSingle, GridText, Multiple, Rating, Single, Text } from '.';
 	import { DEFAULT_OUTRO, Message, toOption } from '.';
 
 	type Props = {
