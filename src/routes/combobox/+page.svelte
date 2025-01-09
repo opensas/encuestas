@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { Combobox } from '$lib/components/combobox';
-	import { Select } from '$lib/components/select';
+	import { Combobox, Select } from '$lib/components';
 
 	const options = [
 		{ value: 'sveltekit', label: 'SvelteKit' },
 		{ value: 'next.js', label: 'Next.js' },
-		{ value: 'nuxt.js', label: 'Nuxt.js' },
-		{ value: 'remix', label: 'Remix' },
+		{ value: 'remix1', label: 'Remix1' },
+		{ value: 'remix2', label: 'Remix2' },
+		{ value: 'remix3', label: 'Remix3' },
+		{ value: 'remix4', label: 'Remix4' },
 		{ value: 'astro', label: 'Astro' },
 		{ value: 'astro1', label: 'Astro1' },
 		{ value: 'astro2', label: 'Astro2' },

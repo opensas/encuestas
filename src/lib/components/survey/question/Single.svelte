@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { SingleQuestion } from '$lib/types';
 
-	import { Select } from '$lib/components/select';
+	import { Select } from '$lib/components';
 	import { toOption } from '$lib/components/survey';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
