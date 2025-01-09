@@ -27,7 +27,8 @@ export type TextQuestion = Extract<Question, { kind: 'text' }>;
 export type GridTextQuestion = Extract<Question, { kind: 'grid-text' }>;
 
 export type TextItem = {
-	title: string;
+	id: string;
+	label?: string;
 	description?: string;
 	placeholder?: string;
 	control?: 'textarea' | 'input';
@@ -37,12 +38,14 @@ export type TextItem = {
 };
 
 export type SingleItem = {
-	title: string;
+	id: string;
+	label?: string;
 	required?: boolean;
 };
 
 export type ApiItem = {
-	title: string;
+	id: string;
+	label?: string;
 	required?: boolean;
 	idField: string; // ej: id
 	descriptionField?: string; // ej: nombre, same as idField by default
@@ -53,8 +56,8 @@ export type Question = {
 	id: `ques_${string}`;
 	code?: string;
 	title: string;
+	subtitle?: string;
 	next?: Question['id'] | undefined | null; // null ends the survey
-	description?: string;
 } & (
 	| {
 			kind: 'single';

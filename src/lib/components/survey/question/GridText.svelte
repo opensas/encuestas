@@ -5,6 +5,8 @@
 	import { calculateRequired } from '$lib/components/survey';
 	import { Label } from '$lib/components/ui/label';
 
+	import { titleCase } from '$lib/utils/string';
+
 	type Answer = NonNullable<GridTextQuestion['answer']>;
 
 	type Props = {
@@ -26,16 +28,14 @@
 
 	let answer: Answer = $state({});
 
-	let _log = $state('logging...');
-
 	// init checked from respuesta
 	function initState() {
 		answer = {};
-		for (const { title } of items) answer[title] = question.answer?.[title] || '';
+		for (const { id } of items) answer[id] = question.answer?.[id] || '';
 	}
 
 	function toItem(value: string | TextItem): TextItem {
-		return typeof value === 'string' ? { title: value } : value;
+		return typeof value === 'string' ? { id: value } : value;
 	}
 
 	function isValidItem(title: string) {
@@ -62,28 +62,28 @@
 	>
 		{#each items as item, index}
 			{@const {
-				title,
+				id,
+				label = id,
 				description,
 				placeholder,
 				control = 'input',
 				maxlength,
 				allowedChars,
 			} = item}
-			{@const id = `text_${index}`}
-			{@const className = confirmed && !isValidItem(title) ? 'text-destructive' : ''}
+			{@const idx = `text_${index}`}
+			{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
 
 			<div class="grid w-full gap-1.5">
-				<Label>{_log}</Label>
-				<Label class={className} for={id}>
-					{title}!!
-					{#if required[title]}
+				<Label class={className} for={idx}>
+					{titleCase(label)}
+					{#if required[id]}
 						<span class="text-destructive">*</span>
 					{/if}
 				</Label>
 				{#if control === 'textarea'}
-					<Textarea {id} bind:value={answer[title]} {allowedChars} {maxlength} {placeholder} />
+					<Textarea id={idx} bind:value={answer[id]} {allowedChars} {maxlength} {placeholder} />
 				{:else if control === 'input'}
-					<Input {id} bind:value={answer[title]} {allowedChars} {maxlength} {placeholder} />
+					<Input id={idx} bind:value={answer[id]} {allowedChars} {maxlength} {placeholder} />
 				{/if}
 				{#if description}
 					<p class="text-sm text-muted-foreground">{description}</p>

@@ -36,7 +36,7 @@ export const survey_upep: Survey = {
 			id: 'ques_2',
 			code: 'P2',
 			title: '¿Cuál es el nombre de la unidad productiva/emprendimiento?',
-			description: '(ejemplo: “Comedor Nueva Esperanza”)',
+			subtitle: '(ejemplo: “Comedor Nueva Esperanza”)',
 			kind: 'text',
 			control: 'input',
 		},
@@ -140,21 +140,21 @@ export const survey_upep: Survey = {
 			kind: 'grid-api',
 			items: [
 				{
-					title: 'provincia',
+					id: 'provincia',
 					required: true,
 					idField: 'id',
 					descriptionField: 'nombre',
 					endpoint: '/api/provincias',
 				},
 				{
-					title: 'departamento',
+					id: 'departamento',
 					required: true,
 					idField: 'id',
 					descriptionField: 'nombre',
 					endpoint: '/api/provincias/{provincia}/departamentos',
 				},
 				{
-					title: 'localidad',
+					id: 'localidad',
 					required: false,
 					idField: 'id',
 					descriptionField: 'nombre',
@@ -167,17 +167,20 @@ export const survey_upep: Survey = {
 			id: 'ques_8b',
 			code: 'P8b',
 			title: '¿Cuál es el domicilio de la unidad productiva/emprendimiento?',
-			description:
+			subtitle:
 				'Complete los que correspondan. Si la unidad tiene más de un domicilio, por favor indique el más importante.',
 			kind: 'grid-text',
 			items: [
-				'Calle',
-				'Número',
-				'Manzana',
-				'Piso / departamento',
-				'Entre calles',
-				'Comunidad (completar únicamente si pertenece a una comunidad de un pueblo originario)',
-				'Código Postal',
+				'calle',
+				{ id: 'numero', label: 'Número' },
+				'manzana',
+				{ id: 'piso-depto', label: 'Piso / departamento' },
+				{ id: 'entre-calles', label: 'Entre calles' },
+				{
+					id: 'comunidad',
+					description: 'completar únicamente si pertenece a una comunidad de un pueblo originario',
+				},
+				{ id: 'codigo-postal', label: 'Código Postal' },
 			],
 		},
 		{
@@ -230,7 +233,7 @@ export const survey_upep: Survey = {
 			code: 'P10.1',
 			next: null,
 			title: 'Ocupación Comercio popular y trabajos en espacios públicos',
-			description:
+			subtitle:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'multiple',
 			options: [
@@ -252,7 +255,7 @@ export const survey_upep: Survey = {
 			code: 'P10.2',
 			next: null,
 			title: 'Recuperación, reciclado y servicios ambientales',
-			description:
+			subtitle:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'multiple',
 			options: [
@@ -273,7 +276,7 @@ export const survey_upep: Survey = {
 			code: 'P10.3',
 			next: null,
 			title: 'Construcción e infraestructura social y Mejoramiento ambiental',
-			description:
+			subtitle:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'multiple',
 			options: [
@@ -294,7 +297,7 @@ export const survey_upep: Survey = {
 			code: 'P10.4',
 			next: null,
 			title: 'Industria manufacturera',
-			description:
+			subtitle:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'multiple',
 			options: [
@@ -315,7 +318,7 @@ export const survey_upep: Survey = {
 			code: 'P10.5',
 			next: null,
 			title: 'Servicios socio comunitarios',
-			description:
+			subtitle:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'multiple',
 			options: [
@@ -347,7 +350,7 @@ export const survey_upep: Survey = {
 			code: 'P10.6',
 			next: null,
 			title: 'Agricultura familiar y campesina',
-			description:
+			subtitle:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'multiple',
 			options: [
@@ -367,7 +370,7 @@ export const survey_upep: Survey = {
 			code: 'P10.7',
 			next: null,
 			title: 'Transporte',
-			description:
+			subtitle:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
 			kind: 'multiple',
 			options: ['Mensajería / delivery', 'Fletero', 'Chofer / remisero', 'Changarín'],
