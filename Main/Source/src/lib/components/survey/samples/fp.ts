@@ -11,7 +11,7 @@ export const survey_fp: Survey = {
 			id: 'ques_001',
 			title:
 				'¿El curso/taller de orientación laboral le pareció útil para aumentar sus posibilidades de encontrar empleo?',
-			description: 'Contanos que tan conforme estas con el desarrollo del programa',
+			subtitle: 'Contanos que tan conforme estas con el desarrollo del programa',
 			kind: 'single',
 			options: ['Sí', 'Medianamente útil', 'NO'],
 		},
@@ -19,7 +19,7 @@ export const survey_fp: Survey = {
 			id: 'ques_002',
 			title:
 				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
-			description: '',
+			subtitle: '',
 			kind: 'single',
 			options: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
 		},
@@ -27,7 +27,7 @@ export const survey_fp: Survey = {
 			id: 'ques_003',
 			title:
 				'¿El capacitador del curso/taller de orientación laboral respondió a sus dudas o consultas cuando Ud. lo requirió?',
-			description: '',
+			subtitle: '',
 			kind: 'single',
 			options: ['Sí', 'A veces', 'NO', 'No había docente/capacitador'],
 		},
@@ -35,7 +35,7 @@ export const survey_fp: Survey = {
 			id: 'ques_004',
 			title:
 				'En caso de que el curso/taller de orientación laboral haya sido virtual ¿pudo acceder al campus/plataforma y a los materiales fácilmente?',
-			description: '',
+			subtitle: '',
 			kind: 'single',
 			options: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
 		},
@@ -43,7 +43,7 @@ export const survey_fp: Survey = {
 			id: 'ques_005',
 			title:
 				'En caso que el curso/taller de orientación laboral haya sido presencial ¿le facilitaron los insumos, herramientas o equipos necesarios para el desarrollo del mismo?',
-			description: '',
+			subtitle: '',
 			kind: 'single',
 			options: ['Sí', 'Parcialmente', 'NO', 'No corresponde'],
 		},
@@ -51,7 +51,7 @@ export const survey_fp: Survey = {
 			id: 'ques_006',
 			title:
 				'Percibe que luego del curso/taller de orientación laboral, ¿tiene mayor confianza sobre su propio trabajo y sus habilidades?',
-			description: '',
+			subtitle: '',
 			kind: 'single',
 			options: ['Sí', 'Parcialmente', 'NO'],
 		},
@@ -69,7 +69,7 @@ export const survey_fp_auto: Survey = {
 		{
 			id: 'ques_001',
 			title: '¿El curso le pareció útil para aumentar sus posibilidades de encontrar empleo?',
-			description: 'Contanos que tan conforme estas con el desarrollo del programa',
+			subtitle: 'Contanos que tan conforme estas con el desarrollo del programa',
 			kind: 'single',
 			options: ['Sí', 'Medianamente útil', 'NO'],
 			allowOther: false,
@@ -78,7 +78,7 @@ export const survey_fp_auto: Survey = {
 			id: 'ques_002',
 			title:
 				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
-			description: '',
+			subtitle: '',
 			kind: 'single',
 			options: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
 			allowOther: false,
@@ -86,7 +86,7 @@ export const survey_fp_auto: Survey = {
 		{
 			id: 'ques_003',
 			title: '¿Pudo acceder al campus y a los materiales fácilmente?',
-			description: '',
+			subtitle: '',
 			kind: 'single',
 			options: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
 			allowOther: false,

@@ -9,7 +9,7 @@ export const survey_manos: Survey = {
 		{
 			id: 'ques_001',
 			title: '¿Qué tan conforme está con la gestión del programa?',
-			description: 'Indicanos que tan conforme estas con el desarrollo del programa',
+			subtitle: 'Indicanos que tan conforme estas con el desarrollo del programa',
 			kind: 'single',
 			options: ['mucho', 'bastante', 'normal', 'poco', 'nada conforme'],
 			allowOther: false,
