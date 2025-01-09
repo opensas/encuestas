@@ -254,7 +254,7 @@ export const survey_upep: Survey = {
 			title: 'Recuperación, reciclado y servicios ambientales',
 			description:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
+			kind: 'multiple',
 			options: [
 				'Cartonero/reciclador/a',
 				'Carrero/a',
@@ -275,7 +275,7 @@ export const survey_upep: Survey = {
 			title: 'Construcción e infraestructura social y Mejoramiento ambiental',
 			description:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
+			kind: 'multiple',
 			options: [
 				'Electricista',
 				'Gasista',
@@ -296,7 +296,7 @@ export const survey_upep: Survey = {
 			title: 'Industria manufacturera',
 			description:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
+			kind: 'multiple',
 			options: [
 				'Producción de alimentos',
 				'Fabricación de indumentaria / tejidos / hilados',
@@ -317,7 +317,7 @@ export const survey_upep: Survey = {
 			title: 'Servicios socio comunitarios',
 			description:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
+			kind: 'multiple',
 			options: [
 				'Atención de Comedores y Merenderos Comunitarios',
 				{
@@ -349,7 +349,7 @@ export const survey_upep: Survey = {
 			title: 'Agricultura familiar y campesina',
 			description:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
+			kind: 'multiple',
 			options: [
 				'Agricultor / horticultor / floricultor / fruticultor',
 				'Cría de animales',
@@ -369,7 +369,7 @@ export const survey_upep: Survey = {
 			title: 'Transporte',
 			description:
 				'En la unidad productiva, ¿cuál es tu ocupación? Seleccione las opciones que más se aproximen a las tareas que realizás',
-			kind: 'single',
+			kind: 'multiple',
 			options: ['Mensajería / delivery', 'Fletero', 'Chofer / remisero', 'Changarín'],
 		},
 	],

@@ -30,4 +30,4 @@ jobs:
         run: pnpm exec playwright install
 
       - name: Integration tests
-        run: pnpm test:integration
+        run: pnpm test:e2e

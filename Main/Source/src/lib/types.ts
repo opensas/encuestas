@@ -1,3 +1,5 @@
+import type { AllowedChars } from '$lib/components/survey';
+
 export type Survey = {
 	id: `surv_${string}`;
 	code: string;
@@ -29,7 +31,7 @@ export type TextItem = {
 	description?: string;
 	placeholder?: string;
 	control?: 'textarea' | 'input';
-	allowedChars?: 'digits' | 'numbers' | string | RegExp;
+	allowedChars?: AllowedChars;
 	maxlength?: number;
 	required?: boolean;
 };
@@ -44,7 +46,7 @@ export type ApiItem = {
 	required?: boolean;
 	idField: string; // ej: id
 	descriptionField?: string; // ej: nombre, same as idField by default
-	endpoint: string; // ej /api/provincias/{01}/departamentos/{02}/localidades
+	endpoint: string; // ej /api/provincias/{parentTitle1}/departamentos/{parentTitle2}/localidades
 };
 
 export type Question = {

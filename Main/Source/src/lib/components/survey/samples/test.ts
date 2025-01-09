@@ -74,7 +74,7 @@ export const survey_test: Survey = {
 			items: [
 				{ title: 'nombre' },
 				{ title: 'apellido', required: true },
-				{ title: 'direccion', required: true },
+				{ title: 'direccion', required: true, control: 'textarea' },
 				{ title: 'dni', required: true, allowedChars: 'digits' },
 			],
 			answer: { nombre: 'nombre...' },

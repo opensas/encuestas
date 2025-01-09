@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { ApiItem, GridApiQuestion } from '$lib/types';
 
-	import { Select } from '$lib/components/select';
-	import type { SelectItem } from '$lib/components/select/Select.svelte';
-	import { calculateRequired } from '$lib/components/survey/question';
+	import { Select, type SelectItem } from '$lib/components';
+	import { calculateRequired } from '$lib/components/survey';
 	import { Label } from '$lib/components/ui/label';
 
 	import { titleCase } from '$lib/utils/string';
