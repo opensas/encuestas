@@ -1,17 +1,9 @@
 <script lang="ts">
 	import type { GridTextQuestion, TextItem } from '$lib/types';
 
-	import { calculateRequired, isAllowedChar } from '$lib/components/survey/question';
-	import { Input } from '$lib/components/ui/input';
+	import { Input, Textarea } from '$lib/components';
+	import { calculateRequired } from '$lib/components/survey';
 	import { Label } from '$lib/components/ui/label';
-	import { Textarea } from '$lib/components/ui/textarea';
-
-	// export let question: GridTextQuestion;
-	// export let onupdate: (answer: Answer) => void = () => {};
-	// export let isValid = true;
-	// export let confirmed = false;
-
-	// let items: TextItem[];
 
 	type Answer = NonNullable<GridTextQuestion['answer']>;
 
@@ -34,6 +26,8 @@
 
 	let answer: Answer = $state({});
 
+	let _log = $state('logging...');
+
 	// init checked from respuesta
 	function initState() {
 		answer = {};
@@ -42,10 +36,6 @@
 
 	function toItem(value: string | TextItem): TextItem {
 		return typeof value === 'string' ? { title: value } : value;
-	}
-
-	function keypress(event: KeyboardEvent, allowedChars: TextItem['allowedChars']) {
-		if (!isAllowedChar(event.key, allowedChars)) event.preventDefault();
 	}
 
 	function isValidItem(title: string) {
@@ -83,28 +73,17 @@
 			{@const className = confirmed && !isValidItem(title) ? 'text-destructive' : ''}
 
 			<div class="grid w-full gap-1.5">
+				<Label>{_log}</Label>
 				<Label class={className} for={id}>
-					{title}
+					{title}!!
 					{#if required[title]}
 						<span class="text-destructive">*</span>
 					{/if}
 				</Label>
 				{#if control === 'textarea'}
-					<Textarea
-						{id}
-						bind:value={answer[title]}
-						{maxlength}
-						{placeholder}
-						onkeypress={(e) => keypress(e, allowedChars)}
-					/>
+					<Textarea {id} bind:value={answer[title]} {allowedChars} {maxlength} {placeholder} />
 				{:else if control === 'input'}
-					<Input
-						{id}
-						bind:value={answer[title]}
-						{maxlength}
-						{placeholder}
-						onkeypress={(e) => keypress(e, allowedChars)}
-					/>
+					<Input {id} bind:value={answer[title]} {allowedChars} {maxlength} {placeholder} />
 				{/if}
 				{#if description}
 					<p class="text-sm text-muted-foreground">{description}</p>

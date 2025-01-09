@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { GridSingleQuestion, SingleItem } from '$lib/types';
 
-	import { Select } from '$lib/components/select';
-	import { toOption } from '$lib/components/survey';
-	import { calculateRequired } from '$lib/components/survey/question';
+	import { Select } from '$lib/components';
+	import { calculateRequired, toOption } from '$lib/components/survey';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
