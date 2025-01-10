@@ -149,7 +149,7 @@ export const survey_upep: Survey = {
 				},
 				{
 					id: 'departamento',
-					required: true,
+					required: false,
 					idField: 'id',
 					descriptionField: 'nombre',
 					endpoint: '/api/provincias/{provincia}/departamentos',
