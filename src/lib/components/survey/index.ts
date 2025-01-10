@@ -14,7 +14,9 @@ export { default as GridSingle } from './question/GridSingle.svelte';
 export { default as GridApi } from './question/GridApi.svelte';
 
 export function toOption(value: string | Option): Option {
-	return typeof value === 'string' ? { title: value } : value;
+	const option = typeof value === 'string' ? { id: value } : { ...value };
+	option.label = option.label || option.id;
+	return option;
 }
 
 export const DEFAULT_OUTRO = `
@@ -35,16 +37,24 @@ export function isAllowedChar(char: string, allowed?: AllowedChars) {
 	return false;
 }
 
+export function onlyAllowedChars(text: string, allowed?: AllowedChars) {
+	if (!text || !allowed) return text;
+	return text
+		.split('')
+		.filter((char) => isAllowedChar(char, allowed))
+		.join('');
+}
+
 type Question = { required?: boolean };
 
 type Item = {
-	title: string;
+	id: string;
 	required?: boolean;
 };
 
 export function calculateRequired(question: Question, items: Item[]) {
-	const ret: Record<Item['title'], boolean> = {};
+	const ret: Record<Item['id'], boolean> = {};
 	// take item.required, then question.required, then default to false (not required)
-	for (const { title, required } of items) ret[title] = required ?? question.required ?? false;
+	for (const { id, required } of items) ret[id] = required ?? question.required ?? false;
 	return ret;
 }
