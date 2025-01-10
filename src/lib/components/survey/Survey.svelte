@@ -85,7 +85,7 @@
 	function _next(question: Question) {
 		if (!question) return undefined;
 
-		const { kind, answer, next } = question;
+		const { type, answer, next } = question;
 
 		if (!answer) return next;
 
@@ -95,13 +95,15 @@
 			const options = question.options.map(toOption);
 			for (const option of options) {
 				let isSelected = false;
-				if (kind === 'single' && option.title === answer) isSelected = true;
-				if (kind === 'multiple' && answer.includes(option.title)) isSelected = true;
+				if (type === 'single' && option.id === answer) isSelected = true;
+				if (type === 'multiple' && answer.includes(option.id)) isSelected = true;
 
 				if (isSelected) return option.next === undefined ? next : option.next;
 			}
 			// check for other selected, answer is not empty, but it doesn't match any option
-			if (answer && question.nextOther) return question.nextOther;
+			if (answer && typeof question.other === 'object' && question.other.next) {
+				return question.other.next;
+			}
 		}
 
 		// for other kind of questions return next
@@ -204,19 +206,19 @@
 			</div>
 
 			{#key question.id}
-				{#if question.kind === 'single'}
+				{#if question.type === 'single'}
 					<Single bind:isValid {question} {onupdate} />
-				{:else if question.kind === 'grid-single'}
+				{:else if question.type === 'grid-single'}
 					<GridSingle bind:isValid {confirmed} {question} {onupdate} />
-				{:else if question.kind === 'grid-api'}
+				{:else if question.type === 'grid-api'}
 					<GridApi bind:isValid {confirmed} {question} {onupdate} />
-				{:else if question.kind === 'multiple'}
+				{:else if question.type === 'multiple'}
 					<Multiple bind:isValid {question} {onupdate} />
-				{:else if question.kind === 'rating'}
+				{:else if question.type === 'rating'}
 					<Rating bind:isValid {question} {onupdate} />
-				{:else if question.kind === 'text'}
+				{:else if question.type === 'text'}
 					<Text bind:isValid {question} {onupdate} />
-				{:else if question.kind === 'grid-text'}
+				{:else if question.type === 'grid-text'}
 					<GridText bind:isValid {confirmed} {question} {onupdate} />
 				{/if}
 			{/key}

@@ -10,21 +10,22 @@ export type Survey = {
 	questions: Question[];
 };
 
-export type QuestionKind = Question['kind'];
+export type QuestionType = Question['type'];
 
 export type Option = {
-	title: string;
+	id: string;
+	label?: string;
 	description?: string;
 	next?: Question['next'];
 };
 
-export type SingleQuestion = Extract<Question, { kind: 'single' }>;
-export type GridSingleQuestion = Extract<Question, { kind: 'grid-single' }>;
-export type GridApiQuestion = Extract<Question, { kind: 'grid-api' }>;
-export type MultipleQuestion = Extract<Question, { kind: 'multiple' }>;
-export type RatingQuestion = Extract<Question, { kind: 'rating' }>;
-export type TextQuestion = Extract<Question, { kind: 'text' }>;
-export type GridTextQuestion = Extract<Question, { kind: 'grid-text' }>;
+export type SingleQuestion = Extract<Question, { type: 'single' }>;
+export type GridSingleQuestion = Extract<Question, { type: 'grid-single' }>;
+export type GridApiQuestion = Extract<Question, { type: 'grid-api' }>;
+export type MultipleQuestion = Extract<Question, { type: 'multiple' }>;
+export type RatingQuestion = Extract<Question, { type: 'rating' }>;
+export type TextQuestion = Extract<Question, { type: 'text' }>;
+export type GridTextQuestion = Extract<Question, { type: 'grid-text' }>;
 
 export type TextItem = {
 	id: string;
@@ -35,6 +36,16 @@ export type TextItem = {
 	allowedChars?: AllowedChars;
 	maxlength?: number;
 	required?: boolean;
+};
+
+type OtherTextItem = {
+	allow?: boolean;
+	next?: Question['next'];
+	label?: string;
+	description?: string;
+	placeholder?: string;
+	allowedChars?: AllowedChars;
+	maxlength?: number;
 };
 
 export type SingleItem = {
@@ -60,57 +71,48 @@ export type Question = {
 	next?: Question['id'] | undefined | null; // null ends the survey
 } & (
 	| {
-			kind: 'single';
+			type: 'single';
 			options: Array<Option | string>;
-			allowOther?: boolean;
-			titleOther?: string;
-			placeholderOther?: string;
-			nextOther?: Question['next'];
+			other?: OtherTextItem | boolean;
 			control?: 'radio' | 'select';
 			answer?: string;
 			required?: boolean;
 	  }
 	| {
-			kind: 'grid-single';
+			type: 'grid-single';
 			items: Array<SingleItem | string>;
 			options: Array<Option | string>;
-			allowOther?: boolean;
-			titleOther?: string;
-			placeholderOther?: string;
-			nextOther?: Question['next'];
+			other?: OtherTextItem | boolean;
 			control?: 'radio' | 'select';
 			answer?: Record<string, string>;
 			required?: boolean;
 	  }
 	| {
-			kind: 'grid-api';
+			type: 'grid-api';
 			items: ApiItem[];
 			answer?: Record<string, string>;
 			required?: boolean;
 	  }
 	| {
-			kind: 'multiple';
+			type: 'multiple';
 			options: Array<Option | string>;
-			allowOther?: boolean;
-			titleOther?: string;
-			placeholderOther?: string;
-			nextOther?: Question['next'];
+			other?: OtherTextItem | boolean;
 			answer?: string[];
 			required?: boolean;
 	  }
 	| {
-			kind: 'grid-text';
+			type: 'grid-text';
 			items: Array<TextItem | string>;
 			answer?: Record<string, string>;
 			required?: boolean;
 	  }
 	| {
-			kind: 'rating';
+			type: 'rating';
 			answer?: number;
 			required?: boolean;
 	  }
 	| ({
-			kind: 'text';
+			type: 'text';
 			answer?: string;
 	  } & TextItem)
 );

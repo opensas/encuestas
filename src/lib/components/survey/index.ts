@@ -14,7 +14,9 @@ export { default as GridSingle } from './question/GridSingle.svelte';
 export { default as GridApi } from './question/GridApi.svelte';
 
 export function toOption(value: string | Option): Option {
-	return typeof value === 'string' ? { title: value } : value;
+	const option = typeof value === 'string' ? { id: value } : { ...value };
+	option.label = option.label || option.id;
+	return option;
 }
 
 export const DEFAULT_OUTRO = `
