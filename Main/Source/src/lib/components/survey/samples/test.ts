@@ -30,7 +30,7 @@ export const survey_test: Survey = {
 				{
 					id: 'departamento',
 					label: 'Depto',
-					required: true,
+					required: false,
 					idField: 'id',
 					descriptionField: 'nombre',
 					endpoint: '/api/provincias/{provincia}/departamentos',
