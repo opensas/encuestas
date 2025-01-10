@@ -12,7 +12,7 @@ export const survey_aept: Survey = {
 			code: 'P1',
 			title:
 				'¿Cuán satisfecho estás con el Programa de Entrenamiento para el Trabajo brindado por la STEySS/SSEyFL?',
-			kind: 'single',
+			type: 'single',
 			options: ['Muy satisfecho', 'Satisfecho', 'Indistinto', 'Insatisfecho', 'Muy insatisfecho'],
 		},
 		{
@@ -20,7 +20,7 @@ export const survey_aept: Survey = {
 			code: 'P2',
 			title:
 				'¿Cómo fue tu experiencia en relación a los siguientes aspectos de la gestión para acceder al Entrenamiento para el Trabajo?',
-			kind: 'grid-single',
+			type: 'grid-single',
 			items: [
 				'Registro en el Portal Empleo',
 				'Búsqueda de la oferta de EPT',
@@ -34,7 +34,7 @@ export const survey_aept: Survey = {
 			code: 'P3',
 			title:
 				'¿En qué medida acordás con las siguientes afirmaciones sobre la participación en la práctica de Entrenamiento para el Trabajo?',
-			kind: 'grid-single',
+			type: 'grid-single',
 			items: [
 				'Me permitió adquirir nuevos conocimientos y habilidades',
 				'Mejora mis posibilidades de conseguir empleo',
@@ -53,7 +53,7 @@ export const survey_aept: Survey = {
 			code: 'P4',
 			title:
 				'¿La empresa cumplió con los siguientes compromisos establecidos en el Acuerdo de Entrenamiento para el Trabajo?',
-			kind: 'multiple',
+			type: 'multiple',
 			options: [
 				'Cantidad de horas',
 				'Días y horarios',
@@ -67,8 +67,8 @@ export const survey_aept: Survey = {
 			code: 'P5',
 			next: 'ques_6',
 			title: '¿Participaste en algún otro programa de la STEySS/SSEyFL?',
-			kind: 'single',
-			options: [{ title: 'Sí', next: 'ques_5_1' }, 'No'],
+			type: 'single',
+			options: [{ id: 'Sí', next: 'ques_5_1' }, 'No'],
 		},
 
 		{
@@ -76,10 +76,11 @@ export const survey_aept: Survey = {
 			code: 'P5.1',
 			next: 'ques_5_2',
 			title: '¿En cuál programa de la STEySS/SSEyFL participaste?',
-			kind: 'single',
+			type: 'single',
 			options: ['Cursos', 'Programa de Inserción Laboral', 'Programa de Empleo Independiente'],
-			allowOther: true,
-			placeholderOther: 'En qué otros programas participaste?',
+			other: {
+				placeholder: 'En qué otros programas participaste?',
+			},
 		},
 
 		{
@@ -87,7 +88,7 @@ export const survey_aept: Survey = {
 			code: 'P5.2',
 			next: 'ques_6',
 			title: '¿Considerás que la experiencia en esos programas...?',
-			kind: 'multiple',
+			type: 'multiple',
 			options: [
 				'Resultó una buena preparación para participar del entrenamiento',
 				'Complementa la formación obtenida durante el entrenamiento',
@@ -99,7 +100,7 @@ export const survey_aept: Survey = {
 			code: 'P6',
 			title:
 				'Para acceder al Entrenamiento para el trabajo ¿contaste con la asistencia de alguna Oficina de Empleo o Agencia Territorial?',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'No'],
 		},
 	],
