@@ -6188,23 +6188,7 @@ export const data = [
 	{
 		id: 'ciudad-autonoma-de-buenos-aires',
 		nombre: 'CIUDAD AUTONOMA DE BUENOS AIRES',
-		departamentos: [
-			{
-				id: 'ciudad-de-buenos-aires',
-				nombre: 'CIUDAD DE BUENOS AIRES',
-				localidades: [],
-			},
-			{
-				id: 'comuna-1',
-				nombre: 'COMUNA 1',
-				localidades: [
-					{
-						id: 'constitucion',
-						nombre: 'CONSTITUCION',
-					},
-				],
-			},
-		],
+		departamentos: [],
 	},
 	{
 		id: 'cordoba',
