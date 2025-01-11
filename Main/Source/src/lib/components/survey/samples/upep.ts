@@ -139,6 +139,7 @@ export const survey_upep: Survey = {
 			title:
 				'¿En qué provincia, localidad y departamento se encuentra localizada la unidad productiva?',
 			type: 'grid-api',
+			control: 'combobox',
 			items: [
 				{
 					id: 'provincia',
