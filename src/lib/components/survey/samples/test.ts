@@ -18,10 +18,12 @@ export const survey_test: Survey = {
 			title: 'grid-api, obtengo las opciones de una api',
 			code: 'p0',
 			type: 'grid-api',
+			control: 'combobox',
 			items: [
 				{
 					id: 'provincia',
 					label: 'Nombre provincia',
+					control: 'select',
 					required: true,
 					idField: 'id',
 					descriptionField: 'nombre',

@@ -2,6 +2,7 @@
 	import type { ApiItem, GridApiQuestion } from '$lib/types';
 
 	import { Select, type SelectItem } from '$lib/components';
+	import Combobox from '$lib/components/combobox/Combobox.svelte';
 	import { calculateRequired } from '$lib/components/survey';
 	import { Label } from '$lib/components/ui/label';
 
@@ -123,9 +124,10 @@
 		<div></div>
 	</div>
 
-	{#each items as { id, label = id }}
+	{#each items as { id, label = id, control: _control }}
 		{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
 		{@const currentOptions = options[id] || []}
+		{@const control = _control || question.control || 'select'}
 		<Label class="self-center text-base {className}">
 			{titleCase(label)}
 			{#if required[id]}
@@ -134,12 +136,21 @@
 		</Label>
 		<div class="grid items-center gap-4">
 			<div class="w-full space-y-1">
-				<Select
-					value={answer[id]}
-					disabled={currentOptions.length === 0}
-					options={currentOptions}
-					onchange={(value) => onchange(id, value)}
-				/>
+				{#if control === 'select'}
+					<Select
+						value={answer[id]}
+						disabled={currentOptions.length === 0}
+						options={currentOptions}
+						onchange={(value) => onchange(id, value)}
+					/>
+				{:else if control === 'combobox'}
+					<Combobox
+						value={answer[id]}
+						disabled={currentOptions.length === 0}
+						options={currentOptions}
+						onchange={(value) => onchange(id, value)}
+					/>
+				{/if}
 			</div>
 		</div>
 	{/each}

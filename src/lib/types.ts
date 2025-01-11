@@ -57,6 +57,7 @@ export type SingleItem = {
 export type ApiItem = {
 	id: string;
 	label?: string;
+	control?: 'select' | 'combobox';
 	required?: boolean;
 	idField: string; // ej: id
 	descriptionField?: string; // ej: nombre, same as idField by default
@@ -90,6 +91,7 @@ export type Question = {
 	| {
 			type: 'grid-api';
 			items: ApiItem[];
+			control?: 'select' | 'combobox';
 			answer?: Record<string, string>;
 			required?: boolean;
 	  }

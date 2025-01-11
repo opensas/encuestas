@@ -2,7 +2,7 @@
 	import { Combobox, Select } from '$lib/components';
 
 	const options = [
-		{ value: 'sveltekit', label: 'SvelteKit' },
+		{ value: 'sveltekit', label: 'SvelteKit!!' },
 		{ value: 'next.js', label: 'Next.js' },
 		{ value: 'remix1', label: 'Remix1' },
 		{ value: 'remix2', label: 'Remix2' },
@@ -19,8 +19,8 @@
 
 <div class="--items-center mt-[20%] grid h-screen w-full justify-center">
 	<div class="space-y-4">
-		<Combobox {options} />
+		<Combobox label="label!!!" {options} />
 		<hr />
-		<Select {options} />
+		<Select label="label!!!" {options} />
 	</div>
 </div>
