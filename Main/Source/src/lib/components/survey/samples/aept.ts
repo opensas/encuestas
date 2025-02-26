@@ -3,9 +3,9 @@ import type { Survey } from '$lib/types';
 export const survey_aept: Survey = {
 	id: 'surv_aept',
 	code: 'aept',
-	title: 'Evaluación de participantes de Acciones de Entrenamiento para el Trabajo (AEPT)',
+	title: 'Satisfacción de participantes de Acciones de Entrenamiento para el Trabajo (AEPT)',
 	description:
-		'Encuesta online para evaluar la satisfacción y experiencia de los participantes en el Programa de Entrenamiento para el Trabajo brindado por la Secretaría de Trabajo, Empleo y Seguridad Social (STEySS) / Subsecretarías de Empleo y Formación Laboral(SSEyFL).',
+		'Encuesta de satisfacción y experiencia de los participantes en el Programa de Entrenamiento para el Trabajo brindado por la Subsecretaría de Empleo y Formación Laboral (SSEyFL) - Secretaría de Trabajo, Empleo y Seguridad Social (STEySS).',
 	questions: [
 		{
 			id: 'ques_1',
@@ -87,10 +87,14 @@ export const survey_aept: Survey = {
 			code: 'P5.2',
 			next: 'ques_6',
 			title: '¿Considerás que la experiencia en esos programas...?',
-			kind: 'multiple',
-			options: [
+			kind: 'grid-single',
+			items: [
 				'Resultó una buena preparación para participar del entrenamiento',
 				'Complementa la formación obtenida durante el entrenamiento',
+			],
+			options: [
+				'Si',
+				'No',
 			],
 		},
 

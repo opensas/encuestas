@@ -3,9 +3,9 @@ import type { Survey } from '$lib/types';
 export const survey_fp: Survey = {
 	id: 'surv_001',
 	code: 'fp',
-	title: 'Satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL',
+	title: 'Satisfacción de participantes de Cursos de Formación Laboral y Talleres de Orientación Laboral.',
 	description:
-		'Encuesta de satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL de Formación Profesional presencial y semi-presencial Fomentar/VAT (NO - Auto asistidos)',
+		'Modalidades: presencial, semipresencial, a distancia (salvo auto asistida). Todos los destinatarios.',
 	questions: [
 		{
 			id: 'ques_001',
@@ -62,9 +62,9 @@ export const survey_fp_auto: Survey = {
 	id: 'surv_001',
 	code: 'fp-autoasistido',
 	title:
-		'Satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL - Auto asistidos',
+		'Satisfacción de participantes de Cursos de Formación Laboral y Talleres de Orientación Laboral.',
 	description:
-		'Encuesta de satisfacción de participantes de cursos y TALLERES DE ORIENTACIÓN LABORAL de Formación Profesional presencial y semi-presencial Fomentar/VAT - Auto asistidos',
+		'Modalidad: a distancia auto asistida. Todos los destinatarios.',
 	questions: [
 		{
 			id: 'ques_001',
@@ -88,7 +88,7 @@ export const survey_fp_auto: Survey = {
 			title: '¿Pudo acceder al campus y a los materiales fácilmente?',
 			subtitle: '',
 			kind: 'single',
-			options: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
+			options: ['Sí', 'Con algunas dificultades', 'NO'],
 			allowOther: false,
 		},
 	],
