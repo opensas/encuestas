@@ -54,7 +54,7 @@ type Item = {
 
 export function calculateRequired(question: Question, items: Item[]) {
 	const ret: Record<Item['id'], boolean> = {};
-	// take item.required, then question.required, then default to false (not required)
-	for (const { id, required } of items) ret[id] = required ?? question.required ?? false;
+	// take item.required, then question.required, then default to false (not required) <= change Lea to true
+	for (const { id, required } of items) ret[id] = required ?? question.required ?? true;	
 	return ret;
 }
