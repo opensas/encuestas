@@ -8,7 +8,7 @@ export const survey_upep: Survey = {
 
 	Bienvenido al Registro de Unidades Productivas de la Economía Popular
 
-	Si trabajas dentro de la economía popular, podes ayudarnos a conocer mejor el sector para poder implementar acciones que promuevan el crecimiento de la productividad y sus ingresos.
+	Si trabajás dentro de la economía popular, podés ayudarnos a conocer mejor el sector para poder implementar acciones que promuevan el crecimiento de la productividad y sus ingresos.
 
 	El Ministerio de Capital Humano de la Nación está realizando un relevamiento de las unidades productivas de la economía popular.
 	Este cuestionario puede ser completado tanto por los titulares del Programa Volver al Trabajo (u otro) como por aquellos que aún no estén inscriptos en ningún programa.

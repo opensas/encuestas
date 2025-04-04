@@ -148,8 +148,9 @@
 		onclose(updated);
 	}
 
-	function onupdate(answer: Survey['questions'][number]['answer']) {
+	function onupdate(answer: Survey['questions'][number]['answer'], score?: number) {
 		question.answer = answer;
+		if (score !== undefined && 'weight' in question) question.score = score;
 	}
 </script>
 

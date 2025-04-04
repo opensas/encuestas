@@ -8,6 +8,7 @@ export type Survey = {
 	outro?: string;
 	description?: string;
 	questions: Question[];
+	score?: number;
 };
 
 export type QuestionType = Question['type'];
@@ -16,6 +17,7 @@ export type Option = {
 	id: string;
 	label?: string;
 	description?: string;
+	score?: number;
 	next?: Question['next'];
 };
 
@@ -78,6 +80,8 @@ export type Question = {
 			control?: 'radio' | 'select';
 			answer?: string;
 			required?: boolean;
+			weight?: number;
+			score?: number;
 	  }
 	| {
 			type: 'grid-single';
@@ -101,6 +105,8 @@ export type Question = {
 			other?: OtherTextItem | boolean;
 			answer?: string[];
 			required?: boolean;
+			weight?: number;
+			score?: number;
 	  }
 	| {
 			type: 'grid-text';
@@ -112,6 +118,11 @@ export type Question = {
 			type: 'rating';
 			answer?: number;
 			required?: boolean;
+			min?: number;
+			max?: number;
+			weight?: number;
+			score?: number;
+			scores?: Array<{ value: number; score: number }>;
 	  }
 	| ({
 			type: 'text';
