@@ -6,9 +6,11 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
+	import { round } from '$lib/utils/number';
+
 	type Props = {
 		question: SingleQuestion;
-		onupdate?: (answer: string) => void;
+		onupdate?: (answer: string, score?: number) => void;
 		isValid?: boolean;
 	};
 
@@ -16,6 +18,7 @@
 
 	let options = $derived(question.options.map(toOption));
 	let required = $derived(question.required ?? true); // required by default
+	let weight = $derived(question.weight || 0);
 
 	let checked = $state('');
 
@@ -45,7 +48,13 @@
 
 		isValid = !required || (required && answer.length > 0);
 
-		onupdate(answer);
+		let score = undefined;
+		if (weight !== undefined) {
+			const s = options.find((option) => option.id === answer)?.score ?? 0; // question score
+			score = round(s * weight, 8); // survey score, rounded to 4 decimals
+		}
+
+		onupdate(answer, score);
 	}
 
 	$effect(() => onchange(checked));
