@@ -6,7 +6,7 @@ test('home page has expected h3', async ({ page }) => {
 	// titulo
 	const titulo = page.locator('h3');
 	await expect(titulo).toBeVisible();
-	await expect(titulo).toContainText(/Economía Popular/);
+	await expect(titulo).toContainText(/Bienvenido/);
 });
 
 test('previous button is not visible on first question', async ({ page }) => {
@@ -20,12 +20,18 @@ test('previous button is not visible on first question', async ({ page }) => {
 	const comenzar = await page.$('button:has-text("Comenzar")');
 	expect(comenzar).not.toBeNull();
 
-	// const siguiente = await page.$('button:has-text("Siguiente")');
-	// expect(siguiente).not.toBeNull();
+	// click con Comenzar button
+	await comenzar!.click();
+	await page.waitForSelector('h3', { timeout: 5000 });
 
-	// const anterior = await page.$('button:has-text("Anterior")');
-	// expect(anterior).not.toBeNull();
+	// Next and Previous button should be present
+	const siguiente = await page.$('button:has-text("Siguiente")');
+	expect(siguiente).not.toBeNull();
 
-	// const isVisible = await anterior!.isVisible();
-	// expect(isVisible).toBeFalsy();
+	const anterior = await page.$('button:has-text("Anterior")');
+	expect(anterior).not.toBeNull();
+
+	// but previous button should be invisible
+	const isVisible = await anterior!.isVisible();
+	expect(isVisible).toBeFalsy();
 });
