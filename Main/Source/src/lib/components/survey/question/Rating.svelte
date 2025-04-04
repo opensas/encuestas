@@ -4,22 +4,34 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Slider } from '$lib/components/ui/slider';
 
+	import { round } from '$lib/utils/number';
+
 	import { Minus, Plus } from 'lucide-svelte';
 
 	type Props = {
 		question: RatingQuestion;
-		onupdate?: (answer: number) => void;
+		onupdate?: (answer: number, score?: number) => void;
 		isValid?: boolean;
 	};
 
 	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
-	let answer = $state(question.answer || 0);
+	const min = question.min ?? 0;
+	const max = question.max ?? min + 10;
+	let weight = $derived(question.weight || 0);
+	let answer = $state(question.answer || min);
 
 	$effect(() => {
 		const required = question.required ?? true;
 		isValid = !required || (required && answer !== undefined);
-		onupdate(answer);
+
+		let score = undefined;
+		if (weight !== undefined && 'scores' in question && question.scores) {
+			const s = question.scores.find((score) => score.value === answer)?.score ?? 0; // question score
+			score = round(s * weight, 8); // survey score, rounded to 4 decimals
+		}
+
+		onupdate(answer, score);
 	});
 </script>
 
@@ -27,7 +39,7 @@
 	<div class="flex items-center justify-center space-x-2">
 		<Button
 			class="h-8 w-8 shrink-0 rounded-full"
-			disabled={answer <= 0}
+			disabled={answer <= min}
 			size="icon"
 			variant="outline"
 			onclick={() => answer--}
@@ -43,7 +55,7 @@
 		</div>
 		<Button
 			class="h-8 w-8 shrink-0 rounded-full"
-			disabled={answer >= 10}
+			disabled={answer >= max}
 			size="icon"
 			variant="outline"
 			onclick={() => answer++}
@@ -52,5 +64,5 @@
 			<span class="sr-only">Restar 1</span>
 		</Button>
 	</div>
-	<Slider bind:value={answer} max={10} step={1} type="single" />
+	<Slider bind:value={answer} {max} {min} step={1} type="single" />
 </div>

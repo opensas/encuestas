@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { Survey } from '$lib/components/survey';
 
+	import { round } from '$lib/utils/number.js';
+
 	let { data } = $props();
 
 	let survey = $state(data.survey); // reactive variable
@@ -36,7 +38,22 @@
 		const answers = survey.questions.map((p) => [p.id, p.answer]);
 		console.log('!survey saved!', { survey, respuestas: answers });
 		const LF = '\r\n\r\n';
-		const message = survey.questions.map((p) => `${p.id}: ${toString(p.answer)}`).join(LF);
+
+		let score: undefined | number = undefined;
+		let message = survey.questions
+			.map((question) => {
+				let text = `${question.id}: ${toString(question.answer)}`;
+				if ('score' in question) {
+					score = (score ?? 0) + (question.score || 0);
+					text += ` (puntaje: ${question.score})`;
+				}
+				return text;
+			})
+			.join(LF);
+		if (score !== undefined) {
+			message += `${LF}puntaje: ${round(score, 8)}`;
+		}
+
 		alert(`Felicitaciones! completaste la encuesta.${LF}${message}`);
 	}
 

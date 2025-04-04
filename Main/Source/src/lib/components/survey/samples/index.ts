@@ -1,4 +1,5 @@
 import { survey_aept } from './aept';
+import { survey_autotest } from './autotest';
 import { survey_fp, survey_fp_auto } from './fp';
 import { survey_manos } from './manos';
 import { survey_cine, survey_ingles, survey_short, survey_test } from './test';
@@ -14,5 +15,6 @@ export const surveys = [
 	survey_cine,
 	survey_test,
 	survey_short,
+	survey_autotest,
 ];
-export const DEFAULT_SURVEY = survey_upep;
+export const DEFAULT_SURVEY = survey_autotest;

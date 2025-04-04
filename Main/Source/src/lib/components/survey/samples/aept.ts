@@ -88,15 +88,12 @@ export const survey_aept: Survey = {
 			code: 'P5.2',
 			next: 'ques_6',
 			title: '¿Considerás que la experiencia en esos programas...?',
-			kind: 'grid-single',
+			type: 'grid-single',
 			items: [
 				'Resultó una buena preparación para participar del entrenamiento',
 				'Complementa la formación obtenida durante el entrenamiento',
 			],
-			options: [
-				'Si',
-				'No',
-			],
+			options: ['Si', 'No'],
 		},
 
 		{
