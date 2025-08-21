@@ -1,0 +1,406 @@
+######
+
+# see: https://platform.openai.com/api-keys
+@api_key = {{$dotenv GROQ_KEY}}
+
+@api_url = https://api.groq.com/openai/v1
+
+@transcription_model = whisper-large-v3
+# @transcription_model = distil-whisper-large-v3-en
+@model = llama3-8b-8192
+
+@speech_file = ./ejemplo4.webm
+# size: 12.9 MB, conversation: 13:17 min, transcription time: 9.6 secs, chars: 10353, words: 1951
+# @speech_file = ../voice-care/medical-conversation-01.m4a
+
+# ffmpeg compression time: 4sec, original size: 12.9 MB, reduced size 6.6 MB
+# conversation: 13:17 min, transcription time: 5.8 secs, chars: 10365, words: 1947
+# @speech_file = ../voice-care/medical-conversation-01-reduced.m4a
+@speech_file = ../voice-care/medical-conversation-01-reduced.webm
+
+Note: estimated minutes for a 25MB file: 45min
+
+### tools
+
+# groq playground: https://console.groq.com/playground
+
+# https://console.groq.com/settings/limits
+
+| ID                                    | Req x Min | Req x Day  | Tokens x Min | Tokens x Day |
+| ------------------------------------- | --------- | ---------- | ------------ | ------------ |
+| gemma-7b-it                           | 30        | 14,400     | 15,000       | (No limit)   |
+| gemma2-9b-it                          | 30        | 14,400     | 15,000       | (No limit)   |
+| llama-3.1-70b-versatile               | 30        | 14,400     | 20,000       | 1,000,000    |
+| llama-3.1-8b-instant                  | 30        | 14,400     | 20,000       | 1,000,000    |
+| llama-guard-3-8b                      | 30        | 14,400     | 15,000       | (No limit)   |
+| llama3-70b-8192                       | 30        | 14,400     | 6,000        | (No limit)   |
+| llama3-8b-8192                        | 30        | 14,400     | 30,000       | (No limit)   |
+| llama3-groq-70b-8192-tool-use-preview | 30        | 14,400     | 15,000       | (No limit)   |
+| llama3-groq-8b-8192-tool-use-preview  | 30        | 14,400     | 15,000       | (No limit)   |
+| llava-v1.5-7b-4096-preview            | 30        | 14,400     | 30,000       | (No limit)   |
+| mixtral-8x7b-32768                    | 30        | 14,400     | 5,000        | (No limit)   |
+
+
+| ID                         | Req x Min | Req x Day | Audio Sec x Hour | Audio Sec x Day     |
+| --------------------       | --------- | --------- | ---------------- | ------------------- |
+| distil-whisper-large-v3-en | 20        | 2,000     | 7,200 (120min)   | 28,800 (460min, 8h) |
+| whisper-large-v3           | 20        | 2,000     | 7,200 (120min)   | 28,800 (460min, 8h) |
+
+---
+
+# speech transcription doc: https://console.groq.com/docs/speech-text
+
+Audio File Limitations
+
+	Max File Size: 25 MB
+	Minimum File Length: .01 seconds
+	Supported File Types: mp3, mp4, mpeg, mpga, m4a, wav, webm
+	Single Audio Track
+	Supported Response Formats: json, verbose_json, text
+
+# https://console.groq.com/docs/speech-text#preprocessing-audio-files
+
+Our speech-to-text models will downsample audio to 16,000 Hz mono before transcribing. This preprocessing can be performed client-side to reduce file size and allow longer files to be uploaded to Groq.
+
+The following ffmpeg command can be used to reduce file size:
+
+```
+ffmpeg \
+  -i <your file> \
+  -ar 16000 \
+  -ac 1 \
+  -map 0:a: \
+  <output file name>
+```
+
+ffmpeg \
+  -i medical-conversation-01.webm \
+  -ar 16000 \
+  -ac 1 \
+  -map 0:a: \
+  medical-conversation-01-reduced.webm
+
+---
+
+# chat completion doc: https://console.groq.com/docs/text-chat
+
+```shell
+ffmpeg \
+  -i uso-de-la-ia-en-educacion-short.webm \
+  -ar 16000 \
+  -ac 1 \
+  -map 0:a: \
+	uso-de-la-ia-en-educacion-short-out.webm
+ffmpeg -i uso-de-la-ia-en-educacion-short.webm -ar 16000 -ac 1 -map 0:a: uso-de-la-ia-en-educacion-short-out.webm
+```
+
+---
+
+services suporting Speaker Diarization (recognition of different speakers)
+
+
+| API                             | Free    | Pricing       |
+| ------------------------------- | ------- | ------------- |
+| Google Cloud Speech-to-Text     | 60 min  | $0.006 x min  |
+| IBM Watson Speech to Text       | 100 min | $0.02 x min   |
+| Microsoft Azure Speech Services | 5 hr    | $1.50 x hr    |
+| Amazon Transcribe               | 60 min  | $0.0004 x sec |
+| Trint                           | 3 hr    | $0.25 x hr    |
+| Sonix                           | 30 min  | $0.10 x min   |
+| Speechmatics                    | 30 min  | $0.07 x min   |
+| Voci                            | 100 min | $0.05 x min   |
+
+---
+
+curl --request POST \
+  --url https://api.groq.com/openai/v1/audio/transcriptions \
+  -H "Authorization: bearer {{api_key}}" \
+  -F "file=@./ejemplo4.webm" \
+  -F model=whisper-large-v3 \
+  -F temperature=0 \
+  -F response_format=text \
+  -F language=es | jq
+
+curl -s --request POST \
+  --url https://api.groq.com/openai/v1/audio/transcriptions \
+  -H "Authorization: bearer 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" \
+  -F "file=@../voice-care/medical-conversation-01.m4a" \
+  -F model=distil-whisper-large-v3-en \
+  -F temperature=0 \
+  -F response_format=text \
+  -F language=en | jq
+
+# youtube to webm converter: https://www.acethinker.com/youtube-to-webm#pills-profile
+
+###
+
+###
+
+POST {{api_url}}/audio/transcriptions
+Authorization: Bearer {{api_key}}
+Content-Type: multipart/form-data; boundary=__boundary__
+
+--__boundary__
+Content-Disposition: form-data; name="response_format"
+
+text
+--__boundary__
+Content-Disposition: form-data; name="temperature"
+
+0
+--__boundary__
+Content-Disposition: form-data; name="language"
+
+en
+--__boundary__
+Content-Disposition: form-data; name="model"
+
+{{transcription_model}}
+--__boundary__
+Content-Disposition: form-data; name="file"; filename="{{speech_file}}"
+Content-Type: audio/webm
+
+< {{speech_file}}
+--__boundary__--
+
+###
+
+###
+
+POST {{api_url}}/chat/completions
+Authorization: Bearer {{api_key}}
+Content-Type: application/json
+
+{
+	"messages": [
+		{
+			"role": "user", 
+			"content": "Explain the importance of fast language models"
+		}
+	], 
+	"model": "{{model}}"
+}
+
+
+###
+# create transcription API: https://platform.openai.com/docs/api-reference/audio/createTranscription
+
+curl https://api.openai.com/v1/audio/transcriptions \
+  -H "Authorization: Bearer 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" \
+  -H "Content-Type: multipart/form-data" \
+  -F file="@uso-de-la-ia-en-educacion-short.ogg" \
+  -F model="whisper-1" \
+  -F language="es" \
+  -F response_format="text"
+
+###
+
+POST {{api_url}}/audio/transcriptions
+Authorization: Bearer {{api_key}}
+Content-Type: multipart/form-data; boundary=__boundary__
+
+--__boundary__
+Content-Disposition: form-data; name="response_format"
+
+text
+--__boundary__
+Content-Disposition: form-data; name="language"
+
+es
+--__boundary__
+Content-Disposition: form-data; name="model"
+
+whisper-1
+--__boundary__
+Content-Disposition: form-data; name="file"; filename="{{speech_file}}"
+Content-Type: video/webm
+
+< {{speech_file}}
+--__boundary__--
+
+###
+POST {{api_url}}/chat/completions
+Authorization: Bearer {{api_key}}
+Content-Type: application/json
+
+{
+	"messages": [
+		{
+			"role": "system",
+			"content": "1. You are a medical assistant working with transcripts from medical conversations between patients and doctors.\n\n2. You will receive the written transcription of a medical interview between a patient and his doctor. The transcription doesn't specify\n\n3. Your task involves\n\n- recognize the speaker. the transcription doesn't specify who is talking. Analyze the context to recognize whether the doctor or the patient is speaking\n\n- gather detailed information about the following aspects, organizing them in a bullet-list of one short sentence:\n\n - \"History of Present Illness\"\n - \"Associated Symptoms\"\n - \"Assessment\" of the illness as expressed by the doctor\n - \"Plan\" of action as expressed by the doctor\n\n- gather the following information from the speakers\n\n - \"name\" of the doctor\n - \"name\" of the patient\n - \"insurance\" service of the patience\n\n- create a Summary shortly exposing the illness and symptoms mentioned during the interview\n- create a short \"Title\" for the interview\n- create a \"Comments\" section with any information you find relevant to the interview\n\n4. You should only taking into account the information from the interview. Any information that you cannot reliably gather you should just leave it empty. In order to prevent hallucination or making false claims or conclusions, you will provide a brief explanation of the process involved to gather the information.\n\n5. Make sure the output is a valid JSON string that can be correctly parsed. Do not add any content outside of the JSON structure. You will return the information in a JSON format like this:\n\n<JSON output example>\n{\n \"title\": \"Doug Anders - pain in the knees worsened recently\",\n \"summary\": \"Patient reports joint pain, particularly in the knees, persisting for the last 3-4 months. Pain has progressively worsened recently.\",\n \n \"doctor\": \"\",\n \"patient\": \"Doug Anders\",\n \"insurance\": \"CareShield Health\",\n\n \"illness_history\": [\n \"Onset of knee pain approximately 3-4 months ago, with increasing severity over time.\",\n \"Patient denies any acute injury or trauma to the knees.\",\n \"Reports feeling generally unwell ('under the weather').\"\n ],\n \n \"associated_symptoms\": [\"No significant weakness, fatigue, or headaches reported.\"],\n\n \"physical_examination\": [\n \"Tenderness in the knee joints upon palpation.\",\n \"Pain elicited when patient puts weight on the knees.\",\n \"No evidence of fractures or structural abnormalities.\"\n ],\n\n \"assessment\": [\n \"Likely knee inflammation, possibly due to overuse or mild arthritis. No signs of acute injury or structural damage.\"\n ],\n\n \"plan\": [\n \"Recommend NSAIDs (ibuprofen or aspirin) for pain management and to reduce inflammation.\",\n \"Advise rest and avoidance of high-impact activities until pain subsides.\",\n \"Follow up if symptoms persist or worsen, or if new symptoms develop.\"\n ],\n\n \"comments\": \"...\", // provide any information you find relevant to the interview\n\n \"_explanation\": \"...\" // Brief explanation of the process involved to gather the information\n}\n</JSON output example>\n\nThis is the TypeScript type that the output should strictly follow:\n\n<TypeScript definition>\ntype MedicalInterview = {\n title: string;\n summary: string;\n\n doctor: string;\n patient: string;\n insurance: string;\n\n illness_history: string[];\n associated_symptoms: string[];\n physical_examination: string[];\n assessment: string[];\n plan: string[];\n \n comments: string; // provide any information you find relevant to the interview\n _explanation: string; // brief explanation of the process involved to gather the information\n};\n</TypeScript definition>\n\n6. Use a professional yet accessible tone."
+		},
+		{
+			"role": "user",
+			"content": " Come in. Ms. Bellamy? Yes. Hi, I'm Connie Harris. I'll be your doctor today. Let me just wash my hands really quick. Would you prefer Ms. Bellamy or would you...can I call you Pat? Pat's fine. Great. Well, it's nice to meet you. Nice to meet you. Can you tell me why you're here today? I have a terrible headache. It looks really bad. Yeah, yes. Is there anything else besides your headache that you want to address here today at the clinical point? No, it's just that, except I am concerned. I just recently changed insurance companies and I'm not sure this is going to be covered yet. Alright. Was there anything, because what we can do is while we're talking and I'm doing your history and physical, I will have my office secretary look into the insurance plan that you have. Alright. So you don't have to worry about that. Yeah, that sounds good. Okay, sounds great. Is there anything else? No, I just, this is just really bad. Okay. So what I'd like to do today is let's take a look at what's causing your headache. I will go over history, physical, and then we'll do, again, a physical exam. And then we will look into your insurance policy and make sure that's all taken care of. Does that sound like a good plan for you? Yeah, that's good. Perfect. So tell me a little bit more about this, the head pain that you're having. Well, it started about three days ago and nothing has helped. It's just laid me flat. I haven't been able to go to work. Nothing's helped. It's all over. It's really bad when I move, so I'm trying not to move too much. And the light is bothering me a lot. Okay. Unfortunately, I can't dim the lights in this room. I'll try to go quickly. Would it be okay if I took some notes? Oh, sure. All right. So you said this headache started about three days ago? Yeah. Okay. Was there anything that brought it on, anything unusual that happened maybe three days ago? Not really, no. Okay. Can you tell me anything that makes it better? Well, nothing's made it better. I took some Tylenol, I tried Motrin, nothing. I just try not to move too much. All right. Is there anything that makes it worse? Yeah, movement and light. It's just constant though. It's just constant. It's all over. Okay. So if you had to rate it on a pain scale, zero being no pain, ten being the worst pain you ever had. A 10. I've never had a headache like this. Okay. Yeah, that sounds really bad. Now, as far as radiation, does it move? You said the pain is all up here in the front of your head. It's kind of all over. But also, I've got this shooting pain down my neck, and my neck is very stiff. But it's the entire head. Entire head Okay As far as in the timing you said that it started three days ago but you said it a constant Yeah, it started gradually, but once it got there, it hasn't gone away. It doesn't get better, it doesn't get worse, it's just the same. So do you, what I want to get is your perception of what you think is going on. Oh, I don't know. I just, I can hardly think. It's so painful. I just, because it's so bad, I was afraid my neighbor had a headache and ignored it last year. And he suddenly started having seizures, and it turns out he had a brain tumor. so I thought I just should come in and look at that. Yeah, I can understand your concern. How is it impacting your daily life? I can't go to work. Okay. I can't do anything, yeah. Okay. So it sounds like it's really impacting your life. Yeah, I can't do that. If it's okay, I would like to go talk a little bit about your medical history and your social history. All right. Can you tell me as far as your medical history, Do you have any medical conditions I should be aware of? I was diagnosed with high blood pressure about three years ago, but we've been addressing it with diet changes. Okay, so it's controlled with diet? Yeah, I go in yearly. I had been just, and it's been well controlled. So I haven't been on medication. No meds for that? But other than that, I haven't had any problems. Okay. Any surgical history? No. Any hospitalizations? No. All right. And you said the only medicine you were taking was Tylenol and Maltran, but it doesn't help? Yeah, and they didn't help. Okay. I just wanted to verify. Do you have any drug allergies? No. Okay. What about family history? Do you have any medical history of headaches or? In my family? Right. You know, my mom said she used to get migraines when she was in her 20s and 30s. Okay. But I don't remember her saying anything else about it. My sister, I have one sister, she's healthy. My dad, he has high blood pressure. Other than that, he's healthy, and that's about it. I don't have any kids. All right. I would like to ask you some social history questions that just for there are records. Do you smoke? Yeah, I do. Okay. Is it cigarettes or chewing gum? Yeah, cigarettes. And how much do you smoke? About a half a pack a day. Okay. What about alcohol? I don't drink. Okay. Also, are you married? Yeah, I'm married. Okay. And children? Are you married? Yeah, I'm married. Okay. And children? No. Okay. And just some additional questions is looking at your kind of GYN history are you in the last menstrual period Oh I in menopause Okay So going back into the history again have you you said your mom had migraines earlier on Have you been around, and no other, you haven't been nauseous, or have you been? Yeah, I've been nauseous. Okay. In fact, I threw up twice early on. Okay. Because when I move it makes me nauseous. Nothing out of the ordinary over the past couple of weeks? Have you been on any trips or anything? Actually, a week ago I was in North Carolina for a family reunion and there was a four-year-old who was sick there. I don't know what they had, but I guess they ended up taking him into emergency. So let me just summarize to make sure I've got everything straight so far is you started having an onset of a severe headache about three days ago. It's worse with movement, light really makes it hurt bad. It's a 10 out of 10 pain and you're also complaining of a stiff neck with that. It came on gradually and it's been constant pain in the frontal area. Medical history, you have high blood pressure but that's controlled with diet. No surgical history, no really hospitalizations. The pain though isn't really impacting your day to day living, your daily life. You tried Tylenol and Motrin, it didn't help, otherwise no medications. You've got the family history of your mom with migraines, otherwise your family is healthy. You smoke about a half a pack a day, you don't drink. And then you were, you said you took a trip about a week ago? Yeah. Or two weeks ago? Yeah. Okay. It was a family reunion a week ago. And you might have been pregnant with somebody who was sick? Yeah, I don't know. It was in North Carolina. All right. Yeah, I can understand your concern about your friend. You said that he was having seizures. I've just never had this kind of pain before. Yeah. And I can understand that. And, you know, so what I would like to do is we've pretty much gone over the history. What I'd like to do is complete a physical exam. Okay. Do some testing. All right. And I want to ask, too, if there's any other concerns I need to address before we get to that final exam. Okay. That sounds good. Okay. Sounds great. Okay. All right. Hi, I'm Deb. I'm your standardized patient. Right. Nice job. I'm going to give you some feedback on your communication skills in this encounter, but before I do, how did you feel it went? It was pretty good. I was nervous at first, I think, and just trying to make sure that I was getting all your patient information so we could make sure we got the correct tests. Yeah. How did you feel when you walked in? You feel pretty comfortable? I think I got more comfortable as we sat down and got to talking. I could see that. Yeah Good Okay Well I thought you did a nice job You had an appropriate introduction introduced yourself first and last name shook hands I think you have a very warm demeanor and you're comfortable, which makes me as a patient comfortable. You did elicit my chief complaint and asked about any other concerns. And that's when I told you I was also concerned about my insurance so that was another thing on the agenda so you did set a mutual agenda asked me if I agreed and so we had a clear roadmap going forward so you did you hit all those real well you your first question tell me about this pain or that was a nice open-ended question so it allowed me to then tell my story followed up with some more pointed questions just for clarification on and you're an active listener, had good eye contact, and could do a little bit more reflective listening, just little points where you could verify, check for accuracy, maybe paraphrase as I'm going through. You did a nice summary in the middle. That's good, but just a little bit more reflection to let me know as a patient that you're hearing me. You asked my perspective of what I thought was going on and then you got the story of my fear that I've got a brain tumor. Oh no. Yeah. So I thought you had nice flow, logical sequence of questioning. A little bit of signposting. We just covered this and now we're going to do that. I heard that once. And as these interviews get longer, you're going to want to signpost between each section. I've taken your history. Now I'd like to go into a physical exam, that kind of thing. Did a nice summary in the middle. You moved through quickly, so you attended to the timeline. You did ask permission to ask some social questions. maybe you want to mention social questions may not be a flag for me that this is this could be personal or uncomfortable maybe I'm going to ask a little more some personal questions here is that all right with you just so I'm social question sounds fine to me until you start asking something that might sound personal so you might use the word some more personal okay perfect questions here uh not non-judgmental didn't you know didn't bat an eye when when I said I smoke half a pack. You have nice vocal range, eye contact, comfortable demeanor, so that felt real good. And then you did a summary at the end and asked, did you ask anything else? Okay. So anything else before we do a physical exam. So it was very nice, nice encounter. Well, thank you so much. Uh-huh. Nice meeting you. You too."
+		}
+	],
+	"model": "llama3-8b-8192",
+	"temperature": 0,
+	"max_tokens": 1024,
+	"top_p": 1,
+	"stream": false,
+	"response_format": {
+		"type": "json_object"
+	},
+	"stop": null
+}
+
+###
+
+###
+POST {{api_url}}/chat/completions
+Authorization: Bearer {{api_key}}
+Content-Type: application/json
+
+{
+	"messages": [
+		{
+			"role": "system",
+			"content": "* Su rol\n\n1. Usted es un asistente tecnológico que trabaja con transcripciones de conversaciones entre un analista de sistemas y un usuario. El analista de sistemas está recopilando requisitos e información para una nueva aplicación o para características o correcciones de una aplicación existente.\n\n* La entrada\n\n1. Usted recibirá la transcripción escrita de una entrevista de recopilación de requisitos entre un analista de sistemas y un usuario. La transcripción no especifica quién pronuncia cada oración.\n\n* Su tarea\n\n1. Reconocer al hablante. Analice el contexto para determinar si el analista de sistemas o el usuario está hablando.\n\n2. Recopile información detallada sobre los siguientes aspectos, organizándolos en una lista de una oración corta:\n\t- \"Sistemas actuales o nuevos involucrados\"\n\t- \"Problemas que presenta la situación actual\"\n\t- \"Características requeridas\"\n\t- \"Requisitos funcionales\"\n\t- \"Requisitos no funcionales\"\n\t- \"Tecnologías involucradas o mencionadas durante la entrevista\"\n\n3. Recopile la siguiente información de los hablantes\n\t- \"Nombre\" del analista de sistemas\n\t- \"Nombre\" del usuario\n\t- \"Negocio u organización del usuario\"\n\t- \"Departamento/Equipo\" del usuario\n\n4. Cree un campo \"summary\" que describa brevemente los requisitos y preocupaciones principales discutidos durante la entrevista.\n\n5. Cree un campo \"title\" con el título corto para la entrevista\n\n6. Cree un campo \"comments\" con una lista de informaciones que considere relevante para la entrevista\n\n7. Cree un campo \"tags\" con una lista de palabras claves que permitan clasificar y reconocer los temas tratados en la entrevista.\n\n* Pautas\n\n\t- Solo considere la información de la transcripción de la entrevista.\n\t- Deje en blanco cualquier información que no pueda ser recopilada de manera fiable.\n\t- Proporcione una breve explicación del proceso involucrado para recopilar la información en el campo \"_explanation\".\n\n* Ejemplo de salida\n\n<JSON output example>\n{\n  \"title\": \"Mejora del Sistema de Gestión de Inventarios\",\n  \"summary\": \"El usuario requiere mejoras al sistema actual de gestión de inventarios, incluyendo la automatización de actualizaciones de stock y alertas para niveles de stock bajos.\",\n\n  \"analyst\": \"Emiliano Gutierrez\",\n  \"user\": \"Alfredo Giménez\",\n  \"department\": \"Logística\",\n\n  \"systems\": [\n    \"Sistema de inventario.\",\n    \"Sistema de control de gestión - Gesoft.\"\n  ],\n\n  \"problems\": [\n    \"Actualizaciones manuales que consumen tiempo.\",\n    \"Fallas en el control de stock debido a alertas retrasadas.\"\n  ],\n\n  \"requiredFeatures\": [\n    \"Actualizaciones de inventario automatizadas.\",\n    \"Alertas de stock bajo vía correo electrónico/SMS.\"\n  ],\n\n  \"functionalRequirements\": [\n    \"El sistema debe actualizar los niveles de inventario en tiempo real.\",\n    \"El sistema debe enviar alertas cuando el stock caiga por debajo del umbral.\"\n  ],\n\n  \"nonFunctionalRequirements\": [\n    \"El sistema debe ser escalable para manejar inventarios aumentados.\",\n    \"El sistema debe garantizar la seguridad de los datos.\"\n  ],\n\t\n  \"technologies\": [\n    \"PostgreSQL\", \"pgvector plugin\", \"open llama\", \"Gesoft\", \"free software\"\n\t],\n\t\t\n  \"tags\": [\n    \"logística\", \"inventario\", \"stock\", \"alertas\" , \"automatización\"\n\t],\n\t\t\n\t// proporcionar cualquier información que considere relevante para la entrevista\n\t\"comments\": [\n\t\t\"El analista acordó una próxima reunión en la semana entrante.\",\n\t\t\"El analista elaborará un informe y lo enviara por email a las partes.\",\n\t\t\"Se consultará al departamento de recursos humanos para conseguir más programadores para el proyecto.\",\n\t],\n  \"_explanation\": \"...\" // breve explicación del proceso involucrado para recopilar la información\n}\n</JSON output example>\n\n* Formato de salida\n\nDevuelva la información en formato JSON, siguiendo estrictamente esta estructura:\n\n<TypeScript definition>\ntype RequirementsInterview = {\n  title: string;\n  summary: string;\n\n  analyst: string;\n  user: string;\n  organization: string;\n  department: string;\n\n  systems: string[];\n  problems: string[];\n  requiredFeatures: string[];\n  functionalRequirements: string[];\n  nonFunctionalRequirements: string[];\n  \n\ttags: string[]; // palabras claves que ayuden a reconocer los temas tratados\n\n  comments: string[]; // proporcionar cualquier información que considere relevante para la entrevista\n\t\n  _explanation: string; // breve explicación del proceso involucrado para recopilar la información\n};\n</TypeScript definition>\n\n* Tono\n\n- Utilice un tono profesional y accesible."
+		},
+		{
+			"role": "user",
+			"content": "¿Qué tal? Contanos un poco como esto va a ser. Bueno, mi nombre es Sebastian Escarano y lo que yo estoy necesitando es un sistema para poder demostrar las cosas que se pueden lograr con inteligencia artificial. Ajá. Muy bien, ¿y en qué estamos pensando en particular? Yo lo que necesito es una aplicación web que me permita grabar lo que una persona está hablando y después aplicar mi inteligencia artificial para procesarlo y obtener distintas cuestiones. por ejemplo un resumen o un listado con los puntos más importantes la idea sería mostrar la utilidad que podemos obtener de la inteligencia artificial y no hasta integrarlo con una API nuestra, nuestro propio demo ¿Y dónde pensás que se puede aplicar? Bueno, en la Secretaría de Trabajo de la Nación Argentina donde actualmente estamos trabajando Bien, ¿en qué tecnología te gustaría implementar? Y puede ser tecnología libre, puede ser tecnología con SOCs lo estamos pensando aplicar desde el monsweep que nos parece que es genial y moderno y también necesitaríamos que corra sobre base de datos del postgre y opcionalmente también sería importante que podamos alojarlo en algún servidor con moverse, algo que verdaderamente sea muy fácil y dinámico bueno, está bien, creo que con esto tenemos bastante como para arrancar ¿Tenés actualmente algún sistema que haga algo parecido? y actualmente lo que estamos haciendo es manejarnos de manera manual con planillas excel o archivos de texto y se vuelve muy trabajoso poder hacerlo bueno, te vamos a elaborar un informe y te lo vamos a enviar lo antes posible\n"
+		}
+	],
+	"model": "llama3-8b-8192",
+	"temperature": 0,
+	"max_tokens": 1024,
+	"top_p": 1,
+	"stream": false,
+	"response_format": {
+		"type": "json_object"
+	},
+	"stop": null
+}
+
+###
+
+
+https://platform.openai.com/playground/chat?models=gpt-4o
+
+
+prompt modelo
+
+Eres un asistente inteligente cuya tarea es transcribir y resumir entrevistas orales de manera fidedigna
+
+para hacer recibirás:
+
+- una transcripcion de una entrevista tomada de una grabación oral
+
+tendrás que
+
+1. reconocer cada pregunta y cuando está preguntando el entrevistado y cuando está respondiendo el entrevistador
+
+2. reproducir de manera textual el contenido de la introducción y cierre de la entrevista
+
+3. reproducir de manera textual el contenido de cada pregunta y cada respuesta
+
+4. cada texto deberás reescribirlo en registro escrito, siguiendo un tono claro, formal y profesional, corrgiendo faltas gramaticales, elimminando repeticiones, muletillas, titubeos, interrucciones
+
+5. cada texto tendrás que resumirlo en una oración que capte su sentido principal
+
+tendrás que retornas la información según esta estructura
+
+cada texto responderá a esta estructura definida en TypeScript
+
+type Texto = {
+	transcripcion: string, // transcripcion literal del texto tal cual fue pronunciado por el entrevistador o entrevistador
+	texto: string, // texto en registrop escrito, con un tono formal y profesional
+	resumen: string, // resumen del texto de no más de un párrafo
+}
+
+type Entrevista = {
+	id: string, // identificador unico de la entrevista
+	entrevistador: string, // nombre del entrevistador, si pudiste inferirlo del texto, por defecto será 'Entrevistador desconocido'.
+	
+	entrevistado: string, // nombre del entrevistado, si pudiste inferirlo del texto, por defecto será 'Entrevistado desconocido'. Si surge del texto, agrega también un breve presentación del entrevistador que tenga información como: su puesto, logros, campo en el cual es experto, por qué se lo entrevista, etc.
+
+	introduccion: Texto, // introducción de la entrevista
+	cierre: Texto, // cierre o sludo final de la entrevista
+
+	preguntas: Array<{
+		pregunta: Texto,
+		respuesta: Texto
+	}>
+
+	abstract: string, // resumen de la totalidad de la entrevista, máxima 4 párrafos
+
+	punteo: string[], // punteo con los temas principales abordados en la entrevista
+}
+
+
+transcripcion:
+
+{
+  "text": "Bueno, y ahora vamos a tener un conversatorio también con Pablo Guarino, que es director de sistemas de la Secretaría de Trabajo, y claro, en el marco de esta jornada que estamos dedicando a la inteligencia artificial y dentro de lo que es el Estado, le vamos a preguntar sobre todo respecto a qué desafíos presenta el uso de la inteligencia artificial. ¿Qué tal, Pablo? ¿Cómo estás? Bueno, para empezar un poco con la charla te queríamos preguntar qué riesgos implican, qué riesgos conlleva el uso de la inteligencia artificial en el Estado desde el punto de vista de la confidencialidad de los datos y el tratamiento de la información pública que como organismos públicos tenemos que hacer. Bueno, ¿qué tal, Liliana? ¿Cómo estás? Los riesgos que implica son los riesgos generales que implica toda la información que maneja el Estado. El Estado es un actor preponderante y que como tal tiene una responsabilidad extra en la información porque no es una información de un privado, no es información de un tercero, sino que es información de toda la sociedad. Al respecto, hay una normativa que establece cuáles son los parámetros a utilizar en cuanto a la confidencialidad, en cuanto a los datos sensibles, en cuanto a la información que brindamos, en cuanto al procesamiento y cómo almacenamos esa información. Así que se aplican los mismos criterios con el agravante de que la inteligencia artificial lo que va a hacer es que esta información sufra más cambios y que además hay un actor que interviene en el cual modifica y actúa sobre los datos. O sea, lo que podemos tener es que además que tenemos que asegurar la confidencialidad tenemos que ver que los mismos no se adulteren, que sean permaneciendo fieles y el gran desafío es que efectivamente uno cuando introduce inteligencia artificial quiere efectivamente trabajar sobre los datos. O sea que yo diría que el principal desafío es cómo hacer para que la inteligencia artificial agregue valor a esa información que tenemos, pero al mismo tiempo poder asegurar que efectivamente no se introduzcan ruidos, no se adulteren la información. Muy bien, y qué precauciones te parece que se pueden tomar al respecto. Bueno, lo que hay que hacer es acompañar los procesos automatizados, los procesos que surgen de estos grandes modelos de datos con algún tipo de revisión que permita aseverar la validez de lo que ha efectuado. Esto seguramente con el tiempo se va a ir afinando, vamos a ir entendiendo y aprendiendo a confiar en lo que devuelve la inteligencia artificial, pero en un principio va a requerir que nosotros podamos establecer algún proceso mediante el cual se hace una revisión manual por parte de usuarios calificados que verdaderamente entiendan y que no sólo puedan validar la salida que nos brindan estos modelos, sino que además sirva para realimentar y para que estos modelos cada vez sean más eficientes y fidedignos con la información que nosotros les damos para tratar. Y bueno, y en el marco de estas iniciativas, ¿están trabajando en alguna iniciativa para aplicar inteligencia artificial en el organismo actualmente? Bueno, estamos en una fase exploratoria. Lo que estamos haciendo es probar mediante los distintos servicios que se encuentran disponibles, cómo podemos hacer para interactuar desde aplicaciones, cómo podemos agregarle inteligencia a nuestras aplicaciones. Todos seguramente habrán usado chat GPT y otras alternativas en las cuales es un asistente conversacional por el cual nosotros podemos interactuar. Bueno, nosotros estamos dando un paso más adelante y usamos esos mismos servicios, pero a través de aplicaciones. Son aplicaciones que integran esta inteligencia en ciertos pasos. Y el segundo paso que estamos dando es verificar al mismo tiempo que avanzamos en estos pasos, verificar que la misma experiencia la podemos replicar de manera local, con nuestros propios servidores, con nuestra información, sin depender de servicios de terceros. Y las pruebas que hicimos hasta el momento son muy alentadoras. La verdad que conseguimos resultados muy similares, pudiendo contar con nuestros propios equipos. Y esto, bueno, se conecta con lo que habíamos hablado en la primera pregunta, que es la confidencialidad y el tratamiento de los datos. Bueno, nosotros como organismo público no podemos confiar nuestra información en un tercero, no podemos asegurar qué pasa con eso. Así que es casi un imperativo esto, es algo que no podemos dejar de hacer. Pero bueno, al respecto tenemos algunas pruebas que hemos hecho. Tenemos un aplicativo que para jugar lo que hace genera formularios, preguntas sobre cualquier tema que le digamos con un distinto nivel de complejidad y utilizamos inteligencia artificial. Eso fue más que nada un juego para ver la solución técnica, para ver la API, cómo nos comunicamos con la API de OpenAI y sobre todo también para ver cómo podíamos replicar esto con un modelo conversacional corriendo localmente nuestros servidores. Y después lo que hicimos fue una aplicación que lo que hace recibe registros orales y lo que hace primero los transcribe utilizando la inteligencia artificial para transcribirlos, por lo cual tiene un alto nivel de fidelidad y después lo que hace es los analiza para pasarlos de un registro oral, un registro escrito, eliminando faltas gramaticales, muletillas, expresiones, titubeos, repeticiones y lo transcribe en un lenguaje formal escrito y después lo que hace lo resume. Resume cada una de las ideas, va generando un checklist y después hace un abstract general. Eso nos parece que es una aplicación que puede tener una gran utilidad casi de inmediato, pero que además nos va a permitir ir viendo cómo estas APIs funcionan y cómo podemos replicarlo localmente. Así que bueno estamos en ese camino estamos. Bueno muchas gracias Pablo por tu atención. Muchas gracias a vos.
+
+	respuesta:
+
+```javascript
+{
+  id: "1",
+  entrevistador: "Liliana",
+  entrevistado: "Pablo Guarino, director de sistemas de la Secretaría de Trabajo",
+  introduccion: {
+    transcripcion: "Bueno, y ahora vamos a tener un conversatorio también con Pablo Guarino, que es director de sistemas de la Secretaría de Trabajo, y claro, en el marco de esta jornada que estamos dedicando a la inteligencia artificial y dentro de lo que es el Estado, le vamos a preguntar sobre todo respecto a qué desafíos presenta el uso de la inteligencia artificial. ¿Qué tal, Pablo? ¿Cómo estás?",
+    texto: "Ahora vamos a tener un conversatorio con Pablo Guarino, director de sistemas de la Secretaría de Trabajo. En el marco de esta jornada dedicada a la inteligencia artificial en el Estado, le preguntaremos sobre los desafíos que presenta el uso de la inteligencia artificial. ¿Qué tal, Pablo? ¿Cómo estás?",
+    resumen: "Introducción a la entrevista con Pablo Guarino, director de sistemas de la Secretaría de Trabajo, sobre los desafíos del uso de la inteligencia artificial en el Estado."
+  },
+  
+  cierre: {
+    transcripcion: "Bueno muchas gracias Pablo por tu atención. Muchas gracias a vos.",
+    texto: "Muchas gracias, Pablo, por tu atención. Muchas gracias a ti.",
+    resumen: "Agradecimientos y cierre de la entrevista."
+  },
+  
+  preguntas: [
+    {
+      pregunta: {
+        transcripcion: "Bueno, para empezar un poco con la charla te queríamos preguntar qué riesgos implican, qué riesgos conlleva el uso de la inteligencia artificial en el Estado desde el punto de vista de la confidencialidad de los datos y el tratamiento de la información pública que como organismos públicos tenemos que hacer.",
+        texto: "Para comenzar, queríamos preguntarte qué riesgos implica el uso de la inteligencia artificial en el Estado desde el punto de vista de la confidencialidad de los datos y el tratamiento de la información pública que los organismos públicos deben manejar.",
+        resumen: "Pregunta sobre los riesgos del uso de la inteligencia artificial en el Estado en términos de confidencialidad de datos y tratamiento de información pública."
+      },
+      respuesta: {
+        transcripcion: "Bueno, ¿qué tal, Liliana? ¿Cómo estás? Los riesgos que implica son los riesgos generales que implica toda la información que maneja el Estado. El Estado es un actor preponderante y que como tal tiene una responsabilidad extra en la información porque no es una información de un privado, no es información de un tercero, sino que es información de toda la sociedad. Al respecto, hay una normativa que establece cuáles son los parámetros a utilizar en cuanto a la confidencialidad, en cuanto a los datos sensibles, en cuanto a la información que brindamos, en cuanto al procesamiento y cómo almacenamos esa información. Así que se aplican los mismos criterios con el agravante de que la inteligencia artificial lo que va a hacer es que esta información sufra más cambios y que además hay un actor que interviene en el cual modifica y actúa sobre los datos. O sea, lo que podemos tener es que además que tenemos que asegurar la confidencialidad tenemos que ver que los mismos no se adulteren, que sean permaneciendo fieles y el gran desafío es que efectivamente uno cuando introduce inteligencia artificial quiere efectivamente trabajar sobre los datos. O sea que yo diría que el principal desafío es cómo hacer para que la inteligencia artificial agregue valor a esa información que tenemos, pero al mismo tiempo poder asegurar que efectivamente no se introduzcan ruidos, no se adulteren la información.",
+        texto: "Hola, Liliana. Los riesgos que implica son los riesgos generales que conlleva toda la información que maneja el Estado. El Estado es un actor preponderante y, como tal, tiene una responsabilidad extra en la información porque no es información de un privado o de un tercero, sino de toda la sociedad. Existe una normativa que establece los parámetros a utilizar en cuanto a la confidencialidad, los datos sensibles, la información que brindamos, el procesamiento y el almacenamiento de esa información. Se aplican los mismos criterios, con el agravante de que la inteligencia artificial hará que esta información sufra más cambios y que haya un actor que interviene y modifica los datos. Debemos asegurar la confidencialidad y evitar que la información se adultere, manteniéndola fiel. El principal desafío es cómo hacer que la inteligencia artificial agregue valor a la información sin introducir ruidos ni adulterarla.",
+        resumen: "El principal desafío del uso de la inteligencia artificial en el Estado es agregar valor a la información sin comprometer su confidencialidad ni adulterarla."
+      }
+    },
+    {
+      pregunta: {
+        transcripcion: "Muy bien, y qué precauciones te parece que se pueden tomar al respecto.",
+        texto: "Muy bien, ¿qué precauciones crees que se pueden tomar al respecto?",
+        resumen: "Pregunta sobre las precauciones que se pueden tomar respecto al uso de la inteligencia artificial en el Estado."
+      },
+      respuesta: {
+        transcripcion: "Bueno, lo que hay que hacer es acompañar los procesos automatizados, los procesos que surgen de estos grandes modelos de datos con algún tipo de revisión que permita aseverar la validez de lo que ha efectuado. Esto seguramente con el tiempo se va a ir afinando, vamos a ir entendiendo y aprendiendo a confiar en lo que devuelve la inteligencia artificial, pero en un principio va a requerir que nosotros podamos establecer algún proceso mediante el cual se hace una revisión manual por parte de usuarios calificados que verdaderamente entiendan y que no sólo puedan validar la salida que nos brindan estos modelos, sino que además sirva para realimentar y para que estos modelos cada vez sean más eficientes y fidedignos con la información que nosotros les damos para tratar.",
+        texto: "Lo que hay que hacer es acompañar los procesos automatizados y los que surgen de estos grandes modelos de datos con algún tipo de revisión que permita aseverar la validez de lo que se ha efectuado. Con el tiempo, esto se irá afinando y aprenderemos a confiar en lo que devuelve la inteligencia artificial. Inicialmente, requerirá establecer un proceso de revisión manual por parte de usuarios calificados que puedan validar la salida de estos modelos y realimentarlos para que sean cada vez más eficientes y fidedignos con la información que tratamos.",
+        resumen: "Es necesario acompañar los procesos automatizados con revisiones manuales por parte de usuarios calificados para validar y mejorar la eficiencia y fidelidad de los modelos de inteligencia artificial."
+      }
+    },
+    {
+      pregunta: {
+        transcripcion: "Y bueno, y en el marco de estas iniciativas, ¿están trabajando en alguna iniciativa para aplicar inteligencia artificial en el organismo actualmente?",
+        texto: "En el marco de estas iniciativas, ¿están trabajando en alguna aplicación de inteligencia artificial en el organismo actualmente?",
+        resumen: "Pregunta sobre las iniciativas actuales para aplicar inteligencia artificial en el organismo."
+      },
+      respuesta: {
+        transcripcion: "Bueno, estamos en una fase exploratoria. Lo que estamos haciendo es probar mediante los distintos servicios que se encuentran disponibles, cómo podemos hacer para interactuar desde aplicaciones, cómo podemos agregarle inteligencia a nuestras aplicaciones. Todos seguramente habrán usado chat GPT y otras alternativas en las cuales es un asistente conversacional por el cual nosotros podemos interactuar. Bueno, nosotros estamos dando un paso más adelante y usamos esos mismos servicios, pero a través de aplicaciones. Son aplicaciones que integran esta inteligencia en ciertos pasos. Y el segundo paso que estamos dando es verificar al mismo tiempo que avanzamos en estos pasos, verificar que la misma experiencia la podemos replicar de manera local, con nuestros propios servidores, con nuestra información, sin depender de servicios de terceros. Y las pruebas que hicimos hasta el momento son muy alentadoras. La verdad que conseguimos resultados muy similares, pudiendo contar con nuestros propios equipos. Y esto, bueno, se conecta con lo que habíamos hablado en la primera pregunta, que es la confidencialidad y el tratamiento de los datos. Bueno, nosotros como organismo público no podemos confiar nuestra información en un tercero, no podemos asegurar qué pasa con eso. Así que es casi un imperativo esto, es algo que no podemos dejar de hacer. Pero bueno, al respecto tenemos algunas pruebas que hemos hecho. Tenemos un aplicativo que para jugar lo que hace genera formularios, preguntas sobre cualquier tema que le digamos con un distinto nivel de complejidad y utilizamos inteligencia artificial. Eso fue más que nada un juego para ver la solución técnica, para ver la API, cómo nos comunicamos con la API de OpenAI y sobre todo también para ver cómo podíamos replicar esto con un modelo conversacional corriendo localmente nuestros servidores. Y después lo que hicimos fue una aplicación que lo que hace recibe registros orales y lo que hace primero los transcribe utilizando la inteligencia artificial para transcribirlos, por lo cual tiene un alto nivel de fidelidad y después lo que hace es los analiza para pasarlos de un registro oral, un registro escrito, eliminando faltas gramaticales, muletillas, expresiones, titubeos, repeticiones y lo transcribe en un lenguaje formal escrito y después lo que hace lo resume. Resume cada una de las ideas, va generando un checklist y después hace un abstract general. Eso nos parece que es una aplicación que puede tener una gran utilidad casi de inmediato, pero que además nos va a permitir ir viendo cómo estas APIs funcionan y cómo podemos replicarlo localmente. Así que bueno estamos en ese camino estamos.",
+        texto: "Estamos en una fase exploratoria. Estamos probando distintos servicios disponibles para ver cómo podemos interactuar desde aplicaciones y agregarles inteligencia. Todos habrán usado chat GPT y otras alternativas como asistentes conversacionales. Nosotros estamos dando un paso más adelante y usamos esos mismos servicios a través de aplicaciones que integran esta inteligencia en ciertos pasos. El segundo paso es verificar que la misma experiencia se pueda replicar de manera local, con nuestros propios servidores y nuestra información, sin depender de servicios de terceros. Las pruebas hasta el momento son muy alentadoras, obteniendo resultados similares con nuestros propios equipos. Esto se conecta con la confidencialidad y el tratamiento de los datos. Como organismo público, no podemos confiar nuestra información a un tercero, por lo que es imperativo replicar estos servicios localmente. Hemos hecho algunas pruebas, como un aplicativo que genera formularios y preguntas sobre cualquier tema con distintos niveles de complejidad utilizando inteligencia artificial. Esto fue un juego para ver la solución técnica y cómo nos comunicamos con la API de OpenAI, y también para replicarlo con un modelo conversacional en nuestros servidores. Otra aplicación recibe registros orales, los transcribe utilizando inteligencia artificial con un alto nivel de fidelidad, los analiza y los pasa de un registro oral a uno escrito, eliminando faltas gramaticales, muletillas, expresiones, titubeos y repeticiones, y los transcribe en un lenguaje formal escrito. Luego, resume cada idea, genera un checklist y hace un abstract general. Esta aplicación puede tener una gran utilidad inmediata y nos permitirá ver cómo funcionan estas APIs y cómo podemos replicarlas localmente. Estamos en ese camino.",
+        resumen: "Actualmente, están en una fase exploratoria probando servicios de inteligencia artificial para integrarlos en aplicaciones y replicar la experiencia localmente, con resultados alentadores hasta el momento."
+      }
+    }
+  ],
+
+  abstract: "En esta entrevista, Pablo Guarino, director de sistemas de la Secretaría de Trabajo, aborda los desafíos y precauciones del uso de la inteligencia artificial en el Estado. Destaca la importancia de mantener la confidencialidad y fidelidad de la información pública, y la necesidad de acompañar los procesos automatizados con revisiones manuales por parte de usuarios calificados. Además, menciona las iniciativas actuales en fase exploratoria para aplicar inteligencia artificial en el organismo, con pruebas alentadoras que buscan replicar la experiencia localmente sin depender de servicios de terceros.",
+  
+  punteo: [
+    "Desafíos del uso de la inteligencia artificial en el Estado.",
+    "Importancia de la confidencialidad y fidelidad de la información pública.",
+    "Necesidad de revisiones manuales en procesos automatizados.",
+    "Iniciativas actuales para aplicar inteligencia artificial en el organismo.",
+    "Pruebas alentadoras para replicar la experiencia localmente."
+  ]
+};
+```

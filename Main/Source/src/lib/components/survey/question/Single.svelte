@@ -51,7 +51,7 @@
 		let score = undefined;
 		if (weight !== undefined) {
 			const s = options.find((option) => option.id === answer)?.score ?? 0; // question score
-			score = round(s * weight, 8); // survey score, rounded to 4 decimals
+			score = round(s * weight, 4); // survey score, rounded to 4 decimals
 		}
 
 		onupdate(answer, score);

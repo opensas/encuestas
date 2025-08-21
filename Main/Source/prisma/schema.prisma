@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../src/generated/prisma"
+  output   = "../node_modules/@prisma-app/client"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Respuesta {
+  respuestaId Int @id @default(autoincrement())
+
+  tipoEncuestaId String @db.VarChar(50)
+
+  referencia String? @db.VarChar(100)
+
+  encuesta String @default("") @db.VarChar(Max)
+
+  // SurveyState
+  estado         String  @default("creado") @db.VarChar(20)
+  respuestas     String? @default("") @db.VarChar(Max)
+  preguntaActiva String? @db.VarChar(50)
+  puntaje        Float?
+
+  inicio DateTime  @default(now())
+  fin    DateTime?
+
+  fechaInsert DateTime @default(now())
+  fechaUpdate DateTime @default(now())
+
+  @@index([tipoEncuestaId, fechaInsert], name: "IX_Respuesta_tipoEncuestaId")
+  @@index([referencia, fechaInsert], name: "IX_Respuesta_referencia")
+  @@index([estado, fechaInsert], name: "IX_Respuesta_estado")
+  @@index([fechaInsert], name: "IX_Respuesta_fechaInsert")
+}

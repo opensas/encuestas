@@ -1,5 +1,8 @@
 import type { AllowedChars } from '$lib/components/survey';
 
+// db types
+export type { Respuesta } from '@prisma-app/client';
+
 export type Survey = {
 	id: `surv_${string}`;
 	code: string;
@@ -66,12 +69,16 @@ export type ApiItem = {
 	endpoint: string; // ej /api/provincias/{parentTitle1}/departamentos/{parentTitle2}/localidades
 };
 
+export type Answer = Pick<Question, 'id' | 'code' | 'answer' | 'score'>;
+
 export type Question = {
 	id: `ques_${string}`;
 	code?: string;
 	title: string;
 	subtitle?: string;
+	required?: boolean;
 	next?: Question['id'] | undefined | null; // null ends the survey
+	score?: number;
 } & (
 	| {
 			type: 'single';
@@ -79,7 +86,6 @@ export type Question = {
 			other?: OtherTextItem | boolean;
 			control?: 'radio' | 'select';
 			answer?: string;
-			required?: boolean;
 			weight?: number;
 			score?: number;
 	  }
@@ -90,21 +96,18 @@ export type Question = {
 			other?: OtherTextItem | boolean;
 			control?: 'radio' | 'select';
 			answer?: Record<string, string>;
-			required?: boolean;
 	  }
 	| {
 			type: 'grid-api';
 			items: ApiItem[];
 			control?: 'select' | 'combobox';
 			answer?: Record<string, string>;
-			required?: boolean;
 	  }
 	| {
 			type: 'multiple';
 			options: Array<Option | string>;
 			other?: OtherTextItem | boolean;
 			answer?: string[];
-			required?: boolean;
 			weight?: number;
 			score?: number;
 	  }
@@ -112,12 +115,10 @@ export type Question = {
 			type: 'grid-text';
 			items: Array<TextItem | string>;
 			answer?: Record<string, string>;
-			required?: boolean;
 	  }
 	| {
 			type: 'rating';
 			answer?: number;
-			required?: boolean;
 			min?: number;
 			max?: number;
 			weight?: number;

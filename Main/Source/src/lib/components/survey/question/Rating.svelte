@@ -28,7 +28,7 @@
 		let score = undefined;
 		if (weight !== undefined && 'scores' in question && question.scores) {
 			const s = question.scores.find((score) => score.value === answer)?.score ?? 0; // question score
-			score = round(s * weight, 8); // survey score, rounded to 4 decimals
+			score = round(s * weight, 4); // survey score, rounded to 4 decimals
 		}
 
 		onupdate(answer, score);
