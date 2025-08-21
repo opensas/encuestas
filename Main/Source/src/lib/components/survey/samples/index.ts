@@ -18,3 +18,5 @@ export const surveys = [
 	survey_autotest,
 ];
 export const DEFAULT_SURVEY = survey_autotest;
+
+export const SURVEY_IDS = surveys.map((e) => e.id);

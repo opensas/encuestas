@@ -25,3 +25,5 @@ vite.config.ts.timestamp-*
 
 # libreoffice tmp files
 .~lock*
+
+/prisma/src/generated/prisma

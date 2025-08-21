@@ -1,17 +1,6 @@
 import type { Option } from '$lib/types';
 
 export * from './samples';
-export { default as Survey } from './Survey.svelte';
-export { default as Message } from './Message.svelte';
-
-// questions types
-export { default as Single } from './question/Single.svelte';
-export { default as Multiple } from './question/Multiple.svelte';
-export { default as Rating } from './question/Rating.svelte';
-export { default as Text } from './question/Text.svelte';
-export { default as GridText } from './question/GridText.svelte';
-export { default as GridSingle } from './question/GridSingle.svelte';
-export { default as GridApi } from './question/GridApi.svelte';
 
 export function toOption(value: string | Option): Option {
 	const option = typeof value === 'string' ? { id: value } : { ...value };
