@@ -75,7 +75,7 @@
 			<Command.List>
 				<Command.Empty>No se han encontrado opciones.</Command.Empty>
 				<Command.Group heading={label}>
-					{#each items as item}
+					{#each items as item (item.label)}
 						<Command.Item value={item.value} onSelect={() => onSelect(item)}>
 							<Check class={cn(value !== item.value && 'text-transparent')} />
 							{item.label}

@@ -88,7 +88,7 @@
 	<div style={templateCols} class="grid items-center gap-4">
 		{#if control === 'radio'}
 			<!-- each option as a radio -->
-			{#each options as { label }}
+			{#each options as { label } (label)}
 				<Label class="justify-self-center text-center">{label}</Label>
 			{/each}
 		{:else}
@@ -101,7 +101,7 @@
 		{/if}
 	</div>
 
-	{#each items as { id, label = id }}
+	{#each items as { id, label = id } (id)}
 		{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
 		<Label class="self-center text-base {className}">
 			{titleCase(label)}
@@ -116,7 +116,7 @@
 			orientation="horizontal"
 		>
 			{#if control === 'radio'}
-				{#each options as { id }}
+				{#each options as { id } (id)}
 					<Radio.Item value={id} class="justify-self-center" />
 				{/each}
 			{:else}
