@@ -124,7 +124,7 @@
 		<div></div>
 	</div>
 
-	{#each items as { id, label = id, control: _control }}
+	{#each items as { id, label = id, control: _control } (id)}
 		{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
 		{@const currentOptions = options[id] || []}
 		{@const control = _control || question.control || 'select'}

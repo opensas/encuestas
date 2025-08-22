@@ -60,7 +60,7 @@
 		class:lg:columns-3={items.length >= 12}
 		class:md:columns-2={items.length >= 8}
 	>
-		{#each items as item, index}
+		{#each items as item, index (item.id)}
 			{@const {
 				id,
 				label = id,

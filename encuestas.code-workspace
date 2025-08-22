@@ -2,9 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../github"
 		}
 	],
 	"settings": {
@@ -102,6 +99,7 @@
 			"VARCHAR",
 			"vercel",
 			"vinculacion",
+			"volta",
 			"wwwroot",
 			"xcopy",
 			"zinguería"

@@ -39,8 +39,7 @@
 	<Select.Content preventScroll={true}>
 		<Select.Group>
 			{#if label}<Select.GroupHeading>{label}</Select.GroupHeading>{/if}
-			{#each items as item}
-				{@const { value, label } = item}
+			{#each items as { value, label } (label)}
 				<Select.Item {value} {label}>{label}</Select.Item>
 			{/each}
 		</Select.Group>

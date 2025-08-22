@@ -67,7 +67,7 @@
 			class:lg:columns-3={options.length >= 12}
 			class:md:columns-2={options.length >= 8}
 		>
-			{#each options as { id, label, description }, index}
+			{#each options as { id, label, description }, index (id)}
 				{@const idx = `opcion_${index}`}
 				<div class="flex items-center space-x-3">
 					<!-- mt-1 compensates for the leading-snug, to have both aligned to the top -->

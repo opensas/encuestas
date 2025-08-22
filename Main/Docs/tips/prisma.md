@@ -60,3 +60,24 @@ And then you would import your Prisma client like so:
 
 import { PrismaClient } from '@prisma-app/client';
 ```
+
+---
+
+warn Prisma would have added DATABASE_URL but it already exists in .env
+warn You already have a .gitignore file. Don't forget to add `.env` in it to not commit any private information.
+
+Next steps:
+
+1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
+2. Run prisma db pull to turn your database schema into a Prisma schema.
+3. Run prisma generate to generate the Prisma Client. You can then start querying your database.
+4. Tip: Explore how you can extend the ORM with scalable connection pooling, global caching, and a managed serverless Postgres database. Read: https://pris.ly/cli/beyond-orm
+
+---
+
+╭ Warning ───────────────────────────────────────────────────────────────────────────────────╮
+│ │
+│ Ignored build scripts: @prisma/client, @tailwindcss/oxide. │
+│ Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts. │
+│ │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯

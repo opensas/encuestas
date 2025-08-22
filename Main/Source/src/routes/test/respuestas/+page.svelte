@@ -22,7 +22,7 @@
 				</tr>
 			</thead>
 			<tbody class="bg-white">
-				{#each respuestas as { respuestaId, tipoEncuestaId, encuesta, estado, respuestas: _respuestas }}
+				{#each respuestas as { respuestaId, tipoEncuestaId, encuesta, estado, respuestas: _respuestas } (respuestaId)}
 					<tr
 						class="cursor-pointer border-b border-gray-200 bg-white even:bg-gray-100 hover:bg-gray-200"
 						onclick={() => goto(`/test/respuestas/${respuestaId}`)}

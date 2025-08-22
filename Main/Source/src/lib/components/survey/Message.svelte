@@ -21,7 +21,7 @@
 </script>
 
 <h3 class="text-xl font-medium">{header}</h3>
-{#each body as paragraph}
+{#each body as paragraph, index (index)}
 	<p>{paragraph}</p>
 {/each}
 {@render footer?.()}
