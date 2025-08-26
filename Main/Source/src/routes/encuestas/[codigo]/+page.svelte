@@ -15,13 +15,15 @@
 	async function saveState(state: SurveyState) {
 		const { status: estado, answers: respuestas, current: preguntaActiva, score: puntaje } = state;
 
-		await putRespuesta({
+		const result = await putRespuesta({
 			respuestaId: data.respuestaId,
 			estado,
 			respuestas: JSON.stringify(respuestas),
 			preguntaActiva,
 			puntaje,
 		});
+
+		if (!result.ok) console.error(result.error);
 	}
 
 	async function onsave(state: SurveyState) {
@@ -35,7 +37,7 @@
 			respuestaId,
 			referencia,
 			status,
-			survey,
+			survey: updateSurvey(survey, answers),
 			answers,
 			score,
 			current,
@@ -52,7 +54,6 @@
 
 			// callback output can overwrite redirect
 			if (body.redirect) redirect = body;
-			console.log(`test !!! returned body from ${callback}:`, { body });
 		}
 
 		// called from a popup
@@ -103,6 +104,15 @@
 				.join(', ');
 		}
 		return value.toString();
+	}
+
+	// actualiza la encuesta con las respuestas
+	function updateSurvey(encuesta: typeof survey, answers: Answer[]) {
+		for (const answer of answers) {
+			const question = encuesta.questions.find((q) => q.id === answer.id);
+			if (question) question.answer = answer.answer;
+		}
+		return encuesta;
 	}
 </script>
 

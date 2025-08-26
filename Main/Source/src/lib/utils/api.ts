@@ -1,6 +1,6 @@
 import { DEFAULT_PAGE_LIMIT } from '$lib/constants/app';
 import { INTERNAL_ERROR, OK } from '$lib/constants/http';
-import { appError, type AppProblem, toError } from '$lib/utils/errors';
+import { type AppError, appError, toAppError, toError } from '$lib/utils/errors';
 import { err, ok, type Result } from '$lib/utils/result';
 
 import { json } from '@sveltejs/kit';
@@ -21,7 +21,7 @@ export type QueryResponse<Entity> = {
  * Creates a JSON API response from a service Result
  */
 export function jsonApi<T>(
-	result: Result<T, AppProblem>,
+	result: Result<T, AppError>,
 	options: { successStatus?: number; errorStatus?: number } | number = {}
 ) {
 	if (typeof options === 'number') options = { successStatus: options };
@@ -91,73 +91,84 @@ export function parseUrlQuery(url: URL) {
 	return parsed;
 }
 
-type Options = RequestInit & { fetchFn?: FetchFn };
-
-// ### TODO: usar Result<Ok | Error>
-export async function jsonFetch1<T>(url: string, options: Options = {}) {
-	const fetchFn = options.fetchFn || fetch;
-	delete options.fetchFn;
-	options.headers = { 'Content-Type': 'application/json', ...options.headers };
-
-	const response = await fetchFn(url, options);
-	const result = await response.json();
-	return result as T;
-}
+export type HttpOptions = RequestInit & { fetch?: FetchFn };
 
 function toBody(body: unknown) {
 	if (typeof body === 'string') return body;
 	return JSON.stringify(body);
 }
 
-export const api = {
-	get: <T>(url: string, options: Options = {}) => jsonFetch<T>(url, { ...options, method: 'GET' }),
-	post: <T>(url: string, body: unknown, options: Options = {}) =>
+export const http = {
+	get: <T>(url: string, options: HttpOptions = {}) =>
+		jsonFetch<T>(url, { ...options, method: 'GET' }),
+	post: <T>(url: string, body: unknown, options: HttpOptions = {}) =>
 		jsonFetch<T>(url, { ...options, method: 'POST', body: toBody(body) }),
-	put: <T>(url: string, body: unknown, options: Options = {}) =>
+	put: <T>(url: string, body: unknown, options: HttpOptions = {}) =>
 		jsonFetch<T>(url, { ...options, method: 'PUT', body: toBody(body) }),
-	del: <T>(url: string, options: Options = {}) =>
+	del: <T>(url: string, options: HttpOptions = {}) =>
 		jsonFetch<T>(url, { ...options, method: 'DELETE' }),
 };
 
-export async function jsonFetch<T>(url: string, options: Options = {}): Promise<Result<T, string>> {
-	const fetchFn = options.fetchFn || fetch;
-	delete options.fetchFn;
+export async function jsonFetch<T>(
+	url: string,
+	options: HttpOptions = {}
+): Promise<Result<T, AppError>> {
+	const fetchFn = options.fetch || fetch;
+	delete options.fetch;
 
-	options.headers = { 'Content-Type': 'application/json', ...options.headers };
+	options.headers = { 'content-type': 'application/json', ...options.headers };
 
 	try {
 		const response = await fetchFn(url, options);
 		const text = await response.text();
 
-		// Handle non-2xx responses
-		if (!response.ok) {
-			const message = text || response.statusText;
-			return err(`HTTP ${response.status}: ${message}`);
-		}
-
-		// Empty body handling
-		if (!text) {
-			if (options.method?.toUpperCase() === 'DELETE') {
-				return ok<T>(null as unknown as T); // only DELETE can return null
-			} else {
-				return err('Empty response body, expected JSON');
-			}
-		}
-
 		// Content-Type check
 		const contentType = response.headers.get('content-type') || '';
+
+		// Handle non-2xx responses
+		if (!response.ok) {
+			// check for json error
+			if (contentType.includes('application/json')) {
+				// try to Parse JSON error
+				try {
+					const data = JSON.parse(text) as unknown;
+					return err(toAppError(data));
+				} catch (parseError) {
+					return err(toAppError(`Failed to parse JSON error: ${(parseError as Error).message}`));
+				}
+			}
+			const message = text || response.statusText;
+			return err(toAppError(`HTTP ${response.status}: ${message}`));
+		}
+
 		if (!contentType.includes('application/json')) {
-			return err(`Expected JSON response but got: ${contentType}`);
+			return err(toAppError(`Expected JSON response but got: ${contentType}`));
 		}
 
 		// Parse JSON
 		try {
 			const data = JSON.parse(text) as T;
+
 			return ok(data);
 		} catch (parseError) {
-			return err(`Failed to parse JSON: ${(parseError as Error).message}`);
+			return err(toAppError(`Failed to parse JSON: ${(parseError as Error).message}`));
 		}
 	} catch (fetchError) {
-		return err(`Fetch failed: ${(fetchError as Error).message}`);
+		return err(toAppError(`Fetch failed: ${(fetchError as Error).message}`));
 	}
+}
+
+export async function getFirst<T>(
+	url: string,
+	conditions: Record<string, string> = {},
+	opt: HttpOptions
+) {
+	const cond = { ...conditions, _limit: '1' }; // force to get a single record
+	const result = await http.get<QueryResponse<T>>(`${url}?${toQueryString(cond)}`, opt);
+	if (!result.ok) return result;
+
+	const query = result.data;
+	if (query.data.length === 0) return err(toAppError('No se ha encontrado el registro'));
+
+	return ok(query.data[0]);
 }

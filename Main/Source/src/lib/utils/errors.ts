@@ -8,20 +8,21 @@ export const APP_ERROR_CODES = ['VALIDATION_ERROR', 'BAD_REQUEST', 'INTERNAL_ERR
 type APP_ERROR_CODE = (typeof APP_ERROR_CODES)[number];
 
 // inspired on https://www.rfc-editor.org/rfc/rfc9457
-export type AppProblem = {
+export type AppError = {
 	code: APP_ERROR_CODE;
 	title: string;
 	detail?: string;
 	status: HTTP_STATUS;
-	errors?: Array<{ field: string; reason: string; value?: unknown }>;
+	errors?: AppErrorItem[];
 };
 
-export type AppError = NonNullable<AppProblem['errors']>[number];
+type AppErrorItem = { field: string; reason: string; value?: unknown };
+export type AppErrors = AppErrorItem[];
 
 /**
  * Maps AppError codes to appropriate HTTP status codes
  */
-function defaultStatus(code: AppProblem['code']): HTTP_STATUS {
+function defaultStatus(code: AppError['code']): HTTP_STATUS {
 	switch (code) {
 		case 'VALIDATION_ERROR':
 		case 'BAD_REQUEST':
@@ -35,18 +36,18 @@ function defaultStatus(code: AppProblem['code']): HTTP_STATUS {
 }
 
 type AppErrorOptions = {
-	code?: AppProblem['code'];
+	code?: AppError['code'];
 	title: string;
 	detail?: string;
 	status?: number;
-	errors?: AppError[];
+	errors?: AppErrors;
 };
 
 export function appError(
 	options?: AppErrorOptions | string,
 	code?: string,
-	errors?: AppError[]
-): AppProblem {
+	errors?: AppErrors
+): AppError {
 	if (!options) options = 'Error desconocido';
 	if (typeof options === 'string') options = { title: options };
 	if (code) options.code = code;
@@ -62,23 +63,25 @@ export function appError(
 /**
  * Type guard for AppProblem
  */
-export function isAppError(value: unknown): value is AppProblem {
+export function isAppError(value: unknown): value is AppError {
 	return (
 		!!value &&
-		typeof value === 'object' &&
+		typeof value === 'object' && // required
 		'title' in value &&
-		typeof value.title === 'string' &&
+		typeof value.title === 'string' && // required
 		'code' in value &&
-		typeof value.code === 'string' &&
+		typeof value.code === 'string' && // required
 		'status' in value &&
-		typeof value.status === 'number' // not mandatory
+		typeof value.status === 'number' && // not required
+		'errors' in value &&
+		Array.isArray(value.errors) // not required
 	);
 }
 
 /**
  * Universal normalizer: takes anything and produces an AppProblem
  */
-export function toAppError(input: unknown): AppProblem {
+export function toAppError(input: unknown): AppError {
 	// Case 1: already an AppProblem
 	if (isAppError(input)) return input;
 
@@ -90,6 +93,8 @@ export function toAppError(input: unknown): AppProblem {
 
 	// Case 4: Plain object
 	if (input && typeof input === 'object') {
+		if (isAppError(input)) return input;
+
 		const obj = input as Record<string, unknown>;
 
 		const title =
@@ -98,14 +103,17 @@ export function toAppError(input: unknown): AppProblem {
 			(typeof obj.title === 'string' && obj.title) ||
 			'Error desconocido';
 
-		const code: AppProblem['code'] =
+		const code: AppError['code'] =
 			typeof obj.code === 'string' && includes(APP_ERROR_CODES, obj.code)
 				? obj.code
 				: 'INTERNAL_ERROR';
 
 		const status = typeof obj.status === 'number' ? obj.status : undefined;
 
-		return appError({ title, code, status });
+		const errors =
+			typeof obj.errors === 'object' && Array.isArray(obj.errors) ? obj.errors : undefined;
+
+		return appError({ title, code, status, errors });
 	}
 
 	// Case 5: everything else (number, boolean, null, undefined, symbol…)

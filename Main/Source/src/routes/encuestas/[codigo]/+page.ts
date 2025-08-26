@@ -3,6 +3,7 @@ import type { Answer, Respuesta, Survey } from '$lib/types.js';
 import { DEFAULT_SURVEY, surveys } from '$lib/components/survey';
 import type { SurveyState } from '$lib/components/survey/Survey.svelte';
 
+// import { API } from '$lib/api/api.js';
 import { getRespuesta, getRespuestaById, postRespuesta } from '$lib/api/respuesta';
 import { BAD_REQUEST, INTERNAL_ERROR, NOT_FOUND } from '$lib/constants/http.js';
 
@@ -17,7 +18,9 @@ export async function load({ params, url, fetch }) {
 
 	// get an existing respuesta by id
 	if (respuestaId) {
-		const res = await getRespuestaById(Number(respuestaId), fetch);
+		const res = await getRespuestaById(Number(respuestaId), { fetch });
+
+		// const res = await API['respuestas/:id'].get(Number(respuestaId), { fetch });
 		if (!res.ok)
 			return error(NOT_FOUND, `No se ha encontrado la respuesta con respuestaId '${respuestaId}'`);
 		respuesta = res.data;
@@ -25,7 +28,9 @@ export async function load({ params, url, fetch }) {
 
 	// check if there is an existing respuesta with the same referencia
 	if (!respuesta && referencia) {
-		const res = await getRespuesta({ referencia }, fetch);
+		const res = await getRespuesta({ referencia }, { fetch });
+
+		// const res = await API['respuestas'].get({ referencia }, { fetch });
 		if (res.ok) respuesta = res.data;
 	}
 
@@ -44,7 +49,8 @@ export async function load({ params, url, fetch }) {
 			respuestas: JSON.stringify([]),
 		};
 
-		const res = await postRespuesta(newRespuesta, fetch);
+		// const res = await API['respuestas'].post(newRespuesta, { fetch });
+		const res = await postRespuesta(newRespuesta, { fetch });
 		if (!res.ok) {
 			console.error(res.error);
 			throw error(INTERNAL_ERROR, res.error.title);

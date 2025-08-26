@@ -19,7 +19,7 @@ export const survey_autotest: Survey = {
 		// Formación
 		{
 			id: 'ques_educacion_formal',
-			// title: 'Formación - Educación formal!!!',
+			// title: 'Formación - Educación formal',
 			code: '1',
 			title: 'Marca el mayor grado educativo que conseguiste',
 			type: 'single',

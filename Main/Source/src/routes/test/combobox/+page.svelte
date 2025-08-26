@@ -19,8 +19,8 @@
 
 <div class="--items-center mt-[20%] grid h-screen w-full justify-center">
 	<div class="space-y-4">
-		<Combobox label="label!!!" {options} />
+		<Combobox label="label!" {options} />
 		<hr />
-		<Select label="label!!!" {options} />
+		<Select label="label!" {options} />
 	</div>
 </div>
