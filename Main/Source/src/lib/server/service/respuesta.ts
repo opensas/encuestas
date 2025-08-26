@@ -5,7 +5,7 @@ import { SURVEY_IDS } from '$lib/components/survey';
 import prisma from '$lib/server/db';
 import type { ReadParams, ServiceDefinition } from '$lib/server/service/service';
 import { filterFields, parseRead, parseWhere, serviceError } from '$lib/server/service/service';
-import { type AppError, appError } from '$lib/utils/errors';
+import { appError, type AppErrors } from '$lib/utils/errors';
 import { err, ok } from '$lib/utils/result';
 import { validDate, validIsOneOf, validProps } from '$lib/utils/valid';
 
@@ -100,7 +100,7 @@ export async function updateRespuesta(respuestaId: number, data: UpdateRespuesta
 
 // Validation functions
 async function validCreate(data: CreateRespuesta) {
-	const errors: AppError[] = [];
+	const errors: AppErrors = [];
 
 	// propiedades adicionales
 	validProps(errors, filterFields(DEF.fields, 'create'), data);
@@ -120,7 +120,7 @@ async function validCreate(data: CreateRespuesta) {
 }
 
 async function validUpdate(respuestaId: Respuesta['respuestaId'], data: UpdateRespuesta) {
-	const errors: AppError[] = [];
+	const errors: AppErrors = [];
 
 	// propiedades adicionales
 	validProps(errors, filterFields(DEF.fields, 'update'), data);
@@ -149,7 +149,7 @@ async function validUpdate(respuestaId: Respuesta['respuestaId'], data: UpdateRe
 }
 
 async function validReferencia(
-	errors: AppError[],
+	errors: AppErrors,
 	referencia?: Respuesta['referencia'],
 	respuestaId?: Respuesta['respuestaId']
 ) {

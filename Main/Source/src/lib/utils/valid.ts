@@ -1,4 +1,4 @@
-import type { AppError } from '$lib/utils/errors';
+import type { AppErrors } from '$lib/utils/errors';
 import { includes } from '$lib/utils/object';
 
 export function isValidDate(value: string) {
@@ -18,7 +18,7 @@ function invalidProps(data: Record<string, unknown>, fields: readonly string[]) 
 }
 
 export function validProps(
-	errors: AppError[],
+	errors: AppErrors,
 	props: readonly string[],
 	value: Record<string, unknown>
 ) {
@@ -32,7 +32,7 @@ export function validProps(
 }
 
 export function validDate(
-	errors: AppError[],
+	errors: AppErrors,
 	field: string,
 	value?: string | Date | null | undefined,
 	{ required = false } = {}
@@ -54,7 +54,7 @@ export function validDate(
 }
 
 export function validIsOneOf(
-	errors: AppError[],
+	errors: AppErrors,
 	field: string,
 	value: string | undefined,
 	list: readonly string[],
