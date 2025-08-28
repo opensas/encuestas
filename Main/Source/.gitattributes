@@ -1,0 +1,23 @@
+# Prettier on Linux uses LF line endings, Git for Windows defaults to converting them to CRLF. 
+# This caused false "modified file" warnings when switching between OSes.
+# This file ensures consistent LF line endings for all text files across Linux and Windows.
+# It prevents Git from performing automatic line ending conversion
+
+# DEFAULT: Treat everything as binary (no processing)
+* -text
+
+# EXCEPTIONS: These are text files and should use LF endings
+*.js text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.css text eol=lf
+*.svelte text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.html text eol=lf
+*.txt text eol=lf
+
+# Special case: Windows files that actually need CRLF
+*.cmd text eol=crlf
+*.bat text eol=crlf
