@@ -21,8 +21,7 @@ export async function load({ params, url, fetch }) {
 		const res = await getRespuestaById(Number(respuestaId), { fetch });
 
 		// const res = await API['respuestas/:id'].get(Number(respuestaId), { fetch });
-		if (!res.ok)
-			return error(NOT_FOUND, `No se ha encontrado la respuesta con respuestaId '${respuestaId}'`);
+		if (!res.ok) error(NOT_FOUND, `No se ha encontrado la respuesta con id '${respuestaId}'`);
 		respuesta = res.data;
 	}
 
@@ -39,7 +38,7 @@ export async function load({ params, url, fetch }) {
 		const codigo = params.codigo || DEFAULT_SURVEY.code;
 
 		const survey = surveys.find((e) => e.code === codigo) || null;
-		if (!survey) throw error(BAD_REQUEST, `Imposible crear una encuesta del tipo '${codigo}'`);
+		if (!survey) error(BAD_REQUEST, `No existe una encuesta del tipo '${codigo}'`);
 
 		const newRespuesta = {
 			tipoEncuestaId: survey.id,
@@ -53,35 +52,23 @@ export async function load({ params, url, fetch }) {
 		const res = await postRespuesta(newRespuesta, { fetch });
 		if (!res.ok) {
 			console.error(res.error);
-			throw error(INTERNAL_ERROR, res.error.title);
+			error(INTERNAL_ERROR, res.error.title);
 		}
 
 		respuesta = res.data;
 	}
 
-	if (!respuesta) throw error(INTERNAL_ERROR, 'No se pudo crear o recuperar la respuesta'); // should not reach here
+	if (!respuesta) error(INTERNAL_ERROR, 'No se pudo crear o recuperar la respuesta'); // should not reach here
 
 	const survey = JSON.parse(respuesta.encuesta) as Survey;
-	const {
-		estado: status,
-		respuestas: answers,
-		preguntaActiva: current,
-		puntaje: score,
-	} = respuesta;
+	const { estado, respuestas, preguntaActiva, puntaje } = respuesta;
 	const state = {
-		status,
-		answers: answers ? (JSON.parse(answers) as Answer[]) : undefined,
-		current,
-		score: score ?? undefined,
+		status: estado,
+		answers: respuestas ? (JSON.parse(respuestas) as Answer[]) : undefined,
+		current: preguntaActiva,
+		score: puntaje ?? undefined,
 	} as SurveyState;
 
-	return {
-		respuestaId: respuesta.respuestaId,
-		referencia,
-		survey,
-		state,
-		callback,
-		redirect,
-		params: search,
-	};
+	const id = respuesta.respuestaId;
+	return { respuestaId: id, referencia, survey, state, callback, redirect, params: search };
 }
