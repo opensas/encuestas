@@ -15,6 +15,7 @@ const config = {
 		adapter: adapter({
 			includePackage: true,
 			buildNodeModules: true,
+			transferEnv: true,
 		}),
 	},
 };
