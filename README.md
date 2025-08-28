@@ -34,6 +34,23 @@ $ xcopy /s /h /i /y "\\ministerio.trabajo.gov.ar\aplicaciones\Historial de Cambi
     - .NET CLR version: No Managed Code
     - otorgar permisos sobre la carpeta `build` a la cuenta del pool de aplicaciones: Advanced Settings, Process Model, Identity
 
+- Configurar la aplicación
+
+Copiar el archivo Main/Source/.env.example a Main/Source/.env
+
+Configurar el string de conexión según el siguiente formato:
+
+```shell
+sqlserver://HOST[:PORT];database=DATABASE;user=USER;password=PASSWORD;encrypt=true;trustServerCertificate=true
+```
+
+por ejemplo
+
+```shell
+# S1-DIXX-SQL07 - desarrollo
+DATABASE_URL="sqlserver://S1-DIXX-SQL07;database=Encuestas;user=AppEncuestasDesa;password=12345678;encrypt=true;trustServerCertificate=true"
+```
+
 - Probar la aplicación
 
 ```shell
@@ -58,8 +75,15 @@ $ cd encuestas/Main/Source
 # traer la ultima versión de la aplicación
 $ git pull
 
+# limpiar la carpeta `node_modules` en caso de estar corriendo en una instalación previa
+# powershell version: Remove-Item -Path node_modules -Recurse -Force
+rmdir /s /q node_modules
+
 # instalar dependencias
 $ npm ci
+
+# generar el cliente de prisma
+$ npm run db:generate
 
 # compilar la aplicación
 # en la carpeta `build` quedará la aplicación compilada y el archivo web.config
@@ -78,7 +102,7 @@ $ start http://localhost:3000
 
 ## Ejecución en desarrollo
 
-- instalar Node LTS (actualmente la versión es v22.12.0) [link de descarga](https://nodejs.org/dist/v22.12.0/node-v22.12.0-x64.msi)
+- instalar Node LTS (actualmente la versión es v22.18.0) [link de descarga](https://nodejs.org/dist/v22.18.0/node-v22.18.0-x64.msi)
 
 - instalar pnpm (desde una consola de Power-shell ejecutar `Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression`)
 
@@ -89,9 +113,22 @@ $ cd encuestas/Main/Source
 
 $ pnpm install
 
+$ pnpm db:generate
+
 $ pnpm dev
 
   ➜  Local:   http://localhost:5173/
 ```
 
-Navegar a `http://localhost:5173/` (o apretarla tecla `o`)
+Navegar a `http://localhost:5173/` (o apretar la tecla `o`)
+
+## Versiones de herramientas de desarrollo
+
+```shell
+$ node --version
+v22.18.0
+$ npm --version
+11.5.2
+$pnpm --version
+9.15.1
+```
