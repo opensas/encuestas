@@ -10,7 +10,7 @@ File sharing con el código compilado: `\\ministerio.trabajo.gov.ar\aplicaciones
 
 ## Puesta en producción
 
-- instalar Node LTS (actualmente la versión es v22.18.0) [link de descarga](https://nodejs.org/dist/v22.18.0/node-v22.18.0-x64.msi)
+- instalar Node LTS (actualmente la versión es v22.18.0) - [link de descarga](https://nodejs.org/dist/v22.18.0/node-v22.18.0-x64.msi)
 
 - instalar pnpm (desde una consola de Power-shell ejecutar `Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression`)
 
@@ -61,13 +61,20 @@ $ start http://localhost:3000
 
 - instalar git for windows - [link de descarga](https://github.com/git-for-windows/git/releases/download/v2.47.1.windows.1/Git-2.47.1-64-bit.exe)
 
+````shell
+> winget install Git.Git
+
+> git --version
+git version 2.51.0.windows.1
+```
+
 - clonar el repositorio en una carpeta de trabajo
 
 ```shell
 $ git clone https://devops.trabajo.gob.ar/DGIIT/encuestas
 
 $ cd encuestas/Main/Source
-```
+````
 
 - instalar dependencias y compilar aplicación
 
@@ -102,6 +109,26 @@ $ start http://localhost:3000
 
 ## Ejecución en desarrollo
 
+Puede utilizar volta para gestionar las versiones de node, npm y pnpm
+
+Volta lee la información del archivo package.json y al ejecutar cada herramienta baja la versión especificada
+
+Instalar volta
+
+````shell
+> winget install --id Volta.Volta -e --silent
+> volta --version
+2.0.2
+> node --version
+v22.18.0
+> pnpm --version
+9.15.1
+> npm --version
+11.5.2
+```
+
+O puede instalar cada herramienta de manera manual:
+
 - instalar Node LTS (actualmente la versión es v22.18.0) [link de descarga](https://nodejs.org/dist/v22.18.0/node-v22.18.0-x64.msi)
 
 - instalar pnpm (desde una consola de Power-shell ejecutar `Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression`)
@@ -132,3 +159,4 @@ $ npm --version
 $pnpm --version
 9.15.1
 ```
+````
