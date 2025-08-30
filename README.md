@@ -10,7 +10,7 @@ File sharing con el código compilado: `\\ministerio.trabajo.gov.ar\aplicaciones
 
 ## Puesta en producción
 
-- instalar Node LTS (actualmente la versión es v22.12.0) - [link de descarga](https://nodejs.org/dist/v22.12.0/node-v22.12.0-x64.msi)
+- instalar Node LTS (actualmente la versión es v22.18.0) [link de descarga](https://nodejs.org/dist/v22.18.0/node-v22.18.0-x64.msi)
 
 - instalar pnpm (desde una consola de Power-shell ejecutar `Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression`)
 
