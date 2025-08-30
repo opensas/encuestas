@@ -2,6 +2,18 @@
 
 ## remove feature branches that have already been merged
 
+TLDR: one liners
+
+```shell
+git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs --no-run-if-empty git branch --delete
+```
+
+```shell
+git fetch --prune && git branch -vv | awk '/: gone]/{print $1}' | xargs --no-run-if-empty git branch --delete --force
+```
+
+explanation
+
 ```shell
 # In Git workflows (like GitHub Flow or GitLab Flow), feature branches are usually
 # created for new tasks, merged into the main branch (e.g. master or main) via
@@ -20,7 +32,7 @@ git branch --verbose --verbose \
   | xargs --no-run-if-empty git branch --delete
 ```
 
-If git says `error: The branch is not fully merged.` you can run the same commant with `--force`
+If git says `error: The branch is not fully merged.` you can run the same command with `--force`
 
 ```shell
 git branch --verbose --verbose \
