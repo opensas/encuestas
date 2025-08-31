@@ -1,15 +1,15 @@
 export type ParsedCondition =
-	| { field: string; operator: 'EQUAL'; value: string }
-	| { field: string; operator: 'NOT_EQUAL'; value: string }
-	| { field: string; operator: 'BEGINS_WITH'; value: string }
-	| { field: string; operator: 'ENDS_WITH'; value: string }
-	| { field: string; operator: 'CONTAINS'; value: string }
-	| { field: string; operator: 'BETWEEN'; min: string; max: string }
-	| { field: string; operator: 'GREATER_THAN'; value: string }
-	| { field: string; operator: 'LESS_THAN'; value: string }
-	| { field: string; operator: 'GREATER_OR_EQUAL'; value: string }
-	| { field: string; operator: 'LESS_OR_EQUAL'; value: string }
-	| { field: string; operator: 'IN'; values: string[] };
+	| { field: string; operator: 'EQUAL'; value: string } // field=value
+	| { field: string; operator: 'NOT_EQUAL'; value: string } // field=!=value or field<>value
+	| { field: string; operator: 'BEGINS_WITH'; value: string } // field=Joh*
+	| { field: string; operator: 'ENDS_WITH'; value: string } // field=*hn
+	| { field: string; operator: 'CONTAINS'; value: string } // field=*oh*
+	| { field: string; operator: 'BETWEEN'; min: string; max: string } // field=min..max
+	| { field: string; operator: 'GREATER_THAN'; value: string } // field>value
+	| { field: string; operator: 'LESS_THAN'; value: string } // field<value
+	| { field: string; operator: 'GREATER_OR_EQUAL'; value: string } // field>=value
+	| { field: string; operator: 'LESS_OR_EQUAL'; value: string } // field<=value
+	| { field: string; operator: 'IN'; values: string[] }; // field=books;electronics
 
 const REGEX = {
 	BETWEEN: /^(.+)\.\.(.+)$/,

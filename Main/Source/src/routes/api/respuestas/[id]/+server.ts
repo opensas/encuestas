@@ -3,7 +3,7 @@ import {
 	readRespuestaById,
 	type UpdateRespuesta,
 	updateRespuesta,
-} from '$lib/server/service/respuesta';
+} from '$lib/server/services/respuesta';
 import { jsonApi, jsonError } from '$lib/utils/api';
 
 import { json, type RequestHandler } from '@sveltejs/kit';

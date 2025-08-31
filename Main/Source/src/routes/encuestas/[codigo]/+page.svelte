@@ -4,7 +4,7 @@
 	import Survey, { type SurveyState } from '$lib/components/survey/Survey.svelte';
 
 	import { putRespuesta } from '$lib/api/respuesta.js';
-	import type { RespuestaEstado } from '$lib/server/service/respuesta';
+	import type { RespuestaEstado } from '$lib/server/services/respuesta';
 	import { round } from '$lib/utils/number.js';
 
 	let { data } = $props();

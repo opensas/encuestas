@@ -3,10 +3,11 @@ import type { Respuesta } from '$lib/types';
 import { SURVEY_IDS } from '$lib/components/survey';
 
 import prisma from '$lib/server/db';
-import type { ReadParams, ServiceDefinition } from '$lib/server/service/service';
-import { filterFields, parseRead, parseWhere, serviceError } from '$lib/server/service/service';
 import { appError, type AppErrors } from '$lib/utils/errors';
 import { err, ok } from '$lib/utils/result';
+import { buildQuery, buildWhere } from '$lib/utils/service/prisma/prisma';
+import type { ReadParams, ServiceDefinition } from '$lib/utils/service/service';
+import { filterFields, serviceError } from '$lib/utils/service/service';
 import { validDate, validIsOneOf, validProps } from '$lib/utils/valid';
 
 // types
@@ -34,12 +35,12 @@ export async function readRespuestaById(id: Respuesta['respuestaId']): Promise<R
 }
 
 export async function readRespuestas(params: ReadParams = {}) {
-	const query = parseRead(params, DEF);
+	const query = buildQuery(params, DEF);
 	return await prisma.respuesta.findMany(query);
 }
 
 export async function countRespuestas({ conditions }: ReadParams = {}) {
-	const where = parseWhere(conditions, DEF.fields);
+	const where = buildWhere(conditions, DEF.fields);
 	return await prisma.respuesta.count({ where });
 }
 

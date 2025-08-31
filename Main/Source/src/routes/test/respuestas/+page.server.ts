@@ -1,4 +1,4 @@
-import { readRespuestas } from '$lib/server/service/respuesta';
+import { readRespuestas } from '$lib/server/services/respuesta';
 
 export async function load() {
 	const respuestas = await readRespuestas();

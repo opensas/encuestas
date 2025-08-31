@@ -13,7 +13,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Separator } from '$lib/components/ui/separator';
 
-	import type { RespuestaEstado } from '$lib/server/service/respuesta';
+	import type { RespuestaEstado } from '$lib/server/services/respuesta';
 	import { cn } from '$lib/utils';
 	import { round } from '$lib/utils/number';
 	import { deepCopy } from '$lib/utils/object';

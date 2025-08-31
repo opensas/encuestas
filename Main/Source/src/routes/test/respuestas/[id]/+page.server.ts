@@ -1,4 +1,4 @@
-import { readRespuestaById } from '$lib/server/service/respuesta';
+import { readRespuestaById } from '$lib/server/services/respuesta';
 
 import { fail } from '@sveltejs/kit';
 

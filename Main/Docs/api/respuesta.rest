@@ -16,6 +16,13 @@ GET {{url}}/respuestas?_fields=respuestaId,tipoEncuestaId,referencia,estado,punt
 
 ### respuesta.all
 GET {{url}}/respuestas?respuestaId=2&estado=finalizado&tipoEncuestaId=surv_short&_fields=respuestaId,tipoEncuestaId,referencia,estado,puntaje
+### respuesta.all
+
+GET {{url}}/respuestas?_fields=respuestaId,estado&estado=*ad*&respuestaId=>=10
+
+
+###
+GET http://localhost:5173/api/respuestas?_limit=1&_fields=respuestaId
 
 ### respuesta.create
 # @name createRespuesta

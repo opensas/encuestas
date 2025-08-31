@@ -1,7 +1,7 @@
 // conditionParser.test.ts
 import { describe, expect, it } from 'vitest';
 
-import { parseConditions } from './conditions';
+import { parseConditions } from '../conditions';
 
 describe('conditionParser', () => {
 	it('should parse EQUAL conditions', () => {
