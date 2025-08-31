@@ -3,8 +3,8 @@
 ## Configurar variables de entorno para usar el proxy
 
 ```shell
-setx HTTP_PROXY "http://<USER>:<PASSWORD>>@fortiproxy.ministerio.trabajo.gov.ar:8080" /M
-setx HTTPS_PROXY "http://<USER>:<PASSWORD>>@fortiproxy.ministerio.trabajo.gov.ar:8080" /M
+setx HTTP_PROXY "http://<USER>:<PASSWORD>@fortiproxy.ministerio.trabajo.gov.ar:8080" /M
+setx HTTPS_PROXY "http://<USER>:<PASSWORD>@fortiproxy.ministerio.trabajo.gov.ar:8080" /M
 setx NO_PROXY "localhost,127.0.0.1,::1" /M
 ```
 
@@ -28,6 +28,15 @@ Para nvm
 
 ```shell
 nvm proxy fortiproxy.ministerio.trabajo.gov.ar:8080
+```
+
+Para vscode, editar la configuración de vscode
+
+```json
+	"http.proxy": "http://<USER>:<PASSWORD>@fortiproxy.ministerio.trabajo.gov.ar:8080",
+	"http.proxyStrictSSL": false,
+	"http.proxyAuthorization": null,
+	"http.proxySupport": "override"
 ```
 
 #TODO hacer funcionar volta en windows

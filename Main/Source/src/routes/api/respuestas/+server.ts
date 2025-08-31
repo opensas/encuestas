@@ -5,7 +5,7 @@ import {
 	type CreateRespuesta,
 	createRespuesta,
 	readRespuestas,
-} from '$lib/server/service/respuesta';
+} from '$lib/server/services/respuesta';
 import { jsonApi, jsonError, jsonQuery, parseUrlQuery } from '$lib/utils/api';
 
 export const GET = async ({ url }) => {

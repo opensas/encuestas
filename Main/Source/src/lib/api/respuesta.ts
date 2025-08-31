@@ -1,6 +1,6 @@
 import type { Respuesta } from '$lib/types';
 
-import type { CreateRespuesta, UpdateRespuesta } from '$lib/server/service/respuesta';
+import type { CreateRespuesta, UpdateRespuesta } from '$lib/server/services/respuesta';
 import { getFirst, http, type HttpOptions } from '$lib/utils/api';
 
 export async function getRespuestaById(id: Respuesta['respuestaId'], opt: HttpOptions) {
