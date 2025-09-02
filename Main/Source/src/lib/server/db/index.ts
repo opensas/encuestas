@@ -1,6 +1,6 @@
 import { prismaLog, prismaLogEvent } from '$lib/utils/service/prisma/log';
 
-import { PrismaClient } from '@prisma-app/client';
+import { PrismaClient } from '@prisma/client';
 
 import { DATABASE_URL } from '$env/static/private';
 
