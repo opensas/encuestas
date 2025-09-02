@@ -31,20 +31,23 @@ type ConditionType = string | number;
 export function buildWhere(conditions: ReadParams['conditions'], serviceFields: ServiceFields) {
 	if (!conditions) return undefined;
 
-	const keys = filterFields(serviceFields, 'filter');
-	checkInvalidFields(Object.keys(conditions), keys);
-
 	const parsed = parseConditions(conditions);
+
+	const fields = parsed.map((condition) => condition.field);
+	const allowedFields = filterFields(serviceFields, 'filter');
+	checkInvalidFields(fields, allowedFields);
+
 	const where = [];
 
 	for (const condition of parsed) {
 		const config = serviceFields[condition.field];
 
 		// Skip if field doesn't exist or filtering is disabled
+		// should already have been checked by checkInvalidFields
 		if (!config || config.filter === false) continue;
 
-		const fieldCondition = buildFieldCondition(condition, config.type);
-		if (fieldCondition) where.push({ [condition.field]: fieldCondition });
+		const prismaCondition = buildFieldCondition(condition, config.type);
+		if (prismaCondition) where.push({ [condition.field]: prismaCondition });
 	}
 
 	// If no conditions were added, return empty object
@@ -57,7 +60,7 @@ type PrismaCondition =
 	| { not: ConditionType } // NOT_EQUAL
 	| { startsWith: ConditionType } // BEGINS_WITH
 	| { endsWith: ConditionType } // ENDS_WITH
-	| { contains: ConditionType } // CONTAINS
+	| { contains: ConditionType } // CONTAINS and LIKE
 	| { gt: ConditionType } // GREATER_THAN
 	| { lt: ConditionType } // LESS_THAN
 	| { gte: ConditionType; lte: ConditionType } // BETWEEN
@@ -83,6 +86,7 @@ function buildFieldCondition(
 		if (op === 'GREATER_OR_EQUAL') return { gte: value };
 		if (op === 'LESS_OR_EQUAL') return { lte: value };
 
+		if (op === 'LIKE') return { contains: value }; // parseConditions already returns % as wildcard
 		if (op === 'BEGINS_WITH') return { startsWith: value };
 		if (op === 'ENDS_WITH') return { endsWith: value };
 		if (op === 'CONTAINS') return { contains: value };
