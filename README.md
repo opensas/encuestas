@@ -89,11 +89,12 @@ rmdir /s /q node_modules
 # instalar dependencias
 $ npm ci
 
-# generar el cliente de prisma
-$ npm run db:generate
+# si no existe, crear un archivo .env válido
+# el compilador verifica que estén las variables de entorno necesarias
+$  cp .\.env.example .\.env
 
 # compilar la aplicación
-# en la carpeta `build` quedará la aplicación compilada y el archivo web.config
+# en la carpeta `build` quedará la aplicación compilada, el archivo web.config y el archivo .env
 $ npm run build
 ```
 
