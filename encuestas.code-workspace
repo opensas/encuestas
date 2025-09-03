@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../sveltekit-adapter-node-iis"
 		}
 	],
 	"settings": {
@@ -40,6 +43,8 @@
 			"dedicacion",
 			"Demarchi",
 			"Desa",
+			"devel",
+			"dgiit",
 			"direccion",
 			"DIXX",
 			"durlero",
@@ -69,6 +74,7 @@
 			"onsave",
 			"onskip",
 			"opcion",
+			"opensas",
 			"organizacion",
 			"outro",
 			"pkey",

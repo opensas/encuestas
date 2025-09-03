@@ -1,6 +1,8 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../node_modules/@prisma/client" // this is the default location
+  // explicitly set to default location because pnpm saves them in ./node_modules/.pnpm/@prisma+client@5.2....
+  // output   = "../node_modules/.prisma/client" // see https://github.com/prisma/prisma/issues/20948
+  // no need for this fix, added prisma to production dependencies (not devDependencies)
 }
 
 datasource db {
