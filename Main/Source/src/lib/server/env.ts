@@ -26,7 +26,7 @@ export function loadEnv() {
 		errors.push(`❌ invalid DATABASE_URL: cannot be empty.`);
 	} else if (!DATABASE_URL.startsWith('sqlserver://')) {
 		errors.push(
-			`❌ invalid DATABASE_URL: required format: sqlserver://SERVER[:PORT];database=DATABASE_NAME;user=USER;password=PASS;[param1=value1][;param2=value2][;...].`
+			`❌ invalid DATABASE_URL: required format: sqlserver://HOST[:PORT];database=DB;user=USER;password=PASS;encrypt=true;[param1=value1][;param2=value2][;...].`
 		);
 	}
 	const keys = DATABASE_URL.split(';').map((key) => key.split('=')[0]);
