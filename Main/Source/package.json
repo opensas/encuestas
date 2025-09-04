@@ -13,8 +13,9 @@
 		"npm": "11.5.2"
 	},
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --port 3000",
 		"build": "vite build",
+		"build:exe": "cross-env ADAPTER=exe vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -36,6 +37,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.2.8",
 		"@eslint/js": "^9.33.0",
+		"@jesterkit/exe-sveltekit": "^0.1.4",
 		"@opensas/sveltekit-adapter-node-iis": "0.3.0",
 		"@playwright/test": "^1.51.1",
 		"@sveltejs/adapter-auto": "^3.3.1",
@@ -45,6 +47,8 @@
 		"autoprefixer": "^10.4.21",
 		"bits-ui": "1.0.0-next.77",
 		"clsx": "^2.1.1",
+		"cross-env": "^10.0.0",
+		"dotenv": "^17.2.2",
 		"eslint": "^9.23.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
