@@ -1,8 +1,8 @@
+import { DATABASE_URL } from '$lib/server/env';
+
 import { PrismaClient } from '@prisma/client';
 
-import { DATABASE_URL } from '$env/static/private';
-
-const SQL_LOG_LEVEL = 'QUERY' as 'NONE' | 'QUERY' | 'INFO';
+const SQL_LOG_LEVEL = 'NONE' as 'NONE' | 'QUERY' | 'INFO';
 
 const prisma = new PrismaClient({
 	datasourceUrl: DATABASE_URL,
