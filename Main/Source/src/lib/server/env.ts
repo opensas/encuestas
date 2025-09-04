@@ -50,7 +50,6 @@ function loadEnvFile(appName = 'encuestas', maxDepth = 10) {
 	while (depth < maxDepth) {
 		const envFile = join(currentDir, '.env');
 		if (existsSync(envFile)) {
-			dotenv.config({ path: envFile });
 			const res = dotenv.config({ path: envFile, quiet: true });
 			console.log();
 
