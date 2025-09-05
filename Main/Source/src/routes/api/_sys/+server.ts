@@ -1,29 +1,19 @@
 // src/routes/api/system/+server.ts
+import { NOT_FOUND } from '$lib/constants/http';
 import prisma from '$lib/server/db';
+import { APP_ENV } from '$lib/server/env';
 import { formatDuration } from '$lib/utils/date';
 
-import { json } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
 
 import { execSync } from 'child_process';
 import os from 'os';
 
 import pkg from '../../../../package.json';
 
-function exec(cmd: string): string | null {
-	try {
-		return execSync(cmd).toString().trim();
-	} catch {
-		return null;
-	}
-}
-
-function maskDatabaseUrl(url: string | undefined): string | undefined {
-	if (!url) return undefined;
-	// replace password=xxxxxx with password=********
-	return url.replace(/password=([^;]+)/i, 'password=********');
-}
-
 export async function GET() {
+	if (APP_ENV === 'prod') error(NOT_FOUND);
+
 	// Versions
 	const npmVersion = exec('npm -v');
 	const pnpmVersion = exec('pnpm -v');
@@ -73,9 +63,12 @@ export async function GET() {
 			computerName: process.env.COMPUTERNAME,
 			os: process.env.OS,
 			arch: process.env.PROCESSOR_ARCHITECTURE,
-			homeDir: (process.env.USERPROFILE || `${process.env.HOMEDRIVE || ''}${process.env.HOMEPATH || ''}`) || undefined,
-			tempDir: process.env.TEMP || process.env.TMP
-		}
+			homeDir:
+				process.env.USERPROFILE ||
+				`${process.env.HOMEDRIVE || ''}${process.env.HOMEPATH || ''}` ||
+				undefined,
+			tempDir: process.env.TEMP || process.env.TMP,
+		},
 	});
 }
 
@@ -100,6 +93,21 @@ async function dbInfo() {
 	}
 
 	return { version, tables };
+}
+
+function exec(cmd: string): string | null {
+	try {
+		return execSync(cmd).toString().trim();
+	} catch {
+		return null;
+	}
+}
+
+function maskDatabaseUrl(url: string | undefined): string | undefined {
+	if (!url) return undefined;
+	// replace password=xxxxxx with password=********
+	//# DATABASE_URL = "sqlserver://localhost:1433;database=encuestas;user=sa;password=Dev.1234!;encrypt=true;trustServerCertificate=true"
+	return url.replace(/password=([^;]+)/i, 'password=********');
 }
 
 function filterDependencies<Deps extends Record<string, string>>(

@@ -1,0 +1,13 @@
+# Sample requests to create, update, read and delete respuestas
+
+## Variables
+
+@url = http://localhost:3000/api
+
+### respuesta.all
+# @name health
+GET {{url}}/health
+
+### respuesta.all
+# @name _sys
+GET {{url}}/_sys
