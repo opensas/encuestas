@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 
 	let { data } = $props();
 
@@ -17,21 +18,17 @@
 					<th class="px-6 py-3">ID</th>
 					<th class="px-6 py-3">Código</th>
 					<th class="px-6 py-3">Estado</th>
-					<th class="px-6 py-3">Encuesta</th>
-					<th class="px-6 py-3">Respuestas</th>
 				</tr>
 			</thead>
 			<tbody class="bg-white">
-				{#each respuestas as { respuestaId, tipoEncuestaId, encuesta, estado, respuestas: _respuestas } (respuestaId)}
+				{#each respuestas as { respuestaId, tipoEncuestaId, estado } (respuestaId)}
 					<tr
 						class="cursor-pointer border-b border-gray-200 bg-white even:bg-gray-100 hover:bg-gray-200"
-						onclick={() => goto(`/test/respuestas/${respuestaId}`)}
+						onclick={() => goto(resolve('/test/respuestas/[id]', { id: respuestaId.toString() }))}
 					>
 						<td class="px-6 py-4">{respuestaId}</td>
 						<td class="px-6 py-4">{tipoEncuestaId}</td>
 						<td class="px-6 py-4">{estado}</td>
-						<td class="px-6 py-4">{encuesta}</td>
-						<td class="px-6 py-4">{_respuestas}</td>
 					</tr>
 				{/each}
 			</tbody>
