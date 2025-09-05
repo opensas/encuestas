@@ -15,6 +15,9 @@ export const NOT_FOUND = 404;
 /// Server error
 export const INTERNAL_ERROR = 500;
 
+/// Service unavailable
+export const SERVICE_UNAVAILABLE = 503;
+
 export const HTTP_STATUSES = [
 	OK,
 	CREATED,
@@ -23,6 +26,7 @@ export const HTTP_STATUSES = [
 	FORBIDDEN,
 	NOT_FOUND,
 	INTERNAL_ERROR,
+	SERVICE_UNAVAILABLE,
 ];
 
 export type HTTP_STATUS = (typeof HTTP_STATUSES)[number];
