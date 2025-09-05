@@ -7,10 +7,11 @@ export const survey_autotest: Survey = {
 	code: 'autotest',
 	title: 'Test del emprendedor',
 	intro: `
-		Bienvenido al test del emprendedor
-		<Breve explicación del test el emprendedor>
-		Te damos al bienvenida a esta encuesta
-		Esperamos que te resulte útil
+		¡Bienvenido al Autotest!
+		El objetivo de este cuestionario de autoevaluación es obtener una visión de tu perfil como emprendedor/a, para identificar posibles herramientas de acompañamiento.
+		Es importante que respondas las preguntas con sinceridad para obtener una mejor percepción de tu nivel de desarrollo emprendedor. Al final del cuestionario te realizaremos una devolución.
+		Son 30 preguntas y responderlo te tomará entre 10-15 minutos.
+		¡Muchas gracias por este tiempo y esperamos sea una herramienta valiosa para vos!
 	`,
 	outro: `
 		Muchas gracias por tu participación
@@ -384,7 +385,7 @@ export const survey_autotest: Survey = {
 			// title: 'Tolerancia a la frustración: Actitud frente a la frustración',
 			code: '20',
 			title:
-				'¿Cómo reaccionas cuando algo a lo que le dedicaste mucho esfuerzo o le tenias muchas esperanza, no sale como lo esperabas ? Elegí la opción que más te representa',
+				'¿Cómo reaccionás cuando algo a lo que le dedicaste mucho esfuerzo o le tenías muchas esperanza, no sale como lo esperabas ? Elegí la opción que más te representa',
 			type: 'single',
 			weight: round(0.1 * 0.5, 8), // tolerancia a la frustración: 10% + actitud frente a la frustración: 50%
 			options: [
@@ -405,7 +406,7 @@ export const survey_autotest: Survey = {
 			id: 'ques_liderazgo_rol_social',
 			// title: 'Liderazgo y Dedicación: Rol que ocupa en los grupos sociales que frecuenta',
 			code: '21',
-			title: 'En tu grupo de amigos / as / en tu entorno, te calificarían como:',
+			title: 'En tu grupo de amigos/as / en tu entorno, te calificarían como:',
 			type: 'single',
 			weight: round(0.2 * 0.1, 8), // liderazgo: 20% + rol social: 10%
 			options: [
@@ -444,7 +445,7 @@ export const survey_autotest: Survey = {
 			// title: 'Liderazgo y Dedicación: ¿Te consideras un líder?',
 			code: '23',
 			title:
-				'¿Cómo te consideras en una escala de 1 a 5 cuando tienes que asumir un rol de liderazgo en cualquier ámbito de tu vida (deportivo, educativo, laboral, familiar)? Donde 5 es que te consideras un/a líder nato/a y 1 es que no crees que puedas ocupar un rol de líder',
+				'¿Cómo te considerás en una escala de 1 a 5 cuando tienes que asumir un rol de liderazgo en cualquier ámbito de tu vida (deportivo, educativo, laboral, familiar)? Donde 5 es que te consideras un/a líder nato/a y 1 es que no crees que puedas ocupar un rol de líder',
 			type: 'rating',
 			min: 1,
 			max: 5,
