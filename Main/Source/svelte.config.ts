@@ -10,15 +10,15 @@ const buildAdapter: 'iis' | 'exe' = process.env.ADAPTER === 'exe' ? 'exe' : 'iis
 let adapter: Adapter | undefined = undefined;
 
 if (buildAdapter === 'exe') {
-	console.info(`running on ${platform()}, using '@jesterkit/exe-sveltekit'\r\n`);
+	console.info(`[encuestas] running on ${platform()}, using '@jesterkit/exe-sveltekit'\r\n`);
 	adapter = exeAdapter({ binaryName: 'encuestas' });
 } else if (buildAdapter === 'iis') {
-	console.info(`running on ${platform()}, using '@opensas/sveltekit-adapter-node-iis'\r\n`);
+	console.info(`[encuestas] running on ${platform()}, using '@opensas/sveltekit-adapter-node-iis'\r\n`);
 	adapter = iisAdapter({
 		includePackage: true,
 		buildNodeModules: true,
 		packageManager: 'pnpm',
-		copyFiles: ['.env', 'prisma/schema.prisma'],
+		copyFiles: ['.env', 'prisma/schema.prisma', { src: 'docs/iis', dest: '/' }],
 	});
 }
 

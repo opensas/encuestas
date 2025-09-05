@@ -57,8 +57,8 @@ function loadEnvFile(appName = 'encuestas', maxDepth = 10) {
 				console.warn(`⚠️ Could not read .env file at ${envFile}`, res.error);
 			} else if (res.parsed) {
 				const keys = Object.keys(res.parsed);
-				console.info(`✅ Loaded ${keys.length} keys from ${envFile}`);
-				console.info(`Keys loaded ${keys.join(', ')}\r\n`);
+				console.info(`[encuestas] ✅ Loaded ${keys.length} keys from ${envFile}`);
+				console.info(`[encuestas] Keys loaded ${keys.join(', ')}\r\n`);
 			}
 
 			return envFile;
