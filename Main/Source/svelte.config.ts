@@ -13,7 +13,9 @@ if (buildAdapter === 'exe') {
 	console.info(`[encuestas] running on ${platform()}, using '@jesterkit/exe-sveltekit'\r\n`);
 	adapter = exeAdapter({ binaryName: 'encuestas' });
 } else if (buildAdapter === 'iis') {
-	console.info(`[encuestas] running on ${platform()}, using '@opensas/sveltekit-adapter-node-iis'\r\n`);
+	console.info(
+		`[encuestas] running on ${platform()}, using '@opensas/sveltekit-adapter-node-iis'\r\n`
+	);
 	adapter = iisAdapter({
 		includePackage: true,
 		buildNodeModules: true,

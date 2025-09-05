@@ -9,16 +9,16 @@ const prisma = new PrismaClient({
 	log:
 		SQL_LOG_LEVEL === 'QUERY'
 			? [
-				{ emit: 'event', level: 'query' },
-				{ emit: 'stdout', level: 'error' },
-			]
-			: SQL_LOG_LEVEL === 'INFO'
-				? [
 					{ emit: 'event', level: 'query' },
 					{ emit: 'stdout', level: 'error' },
-					{ emit: 'stdout', level: 'info' },
-					{ emit: 'stdout', level: 'warn' },
 				]
+			: SQL_LOG_LEVEL === 'INFO'
+				? [
+						{ emit: 'event', level: 'query' },
+						{ emit: 'stdout', level: 'error' },
+						{ emit: 'stdout', level: 'info' },
+						{ emit: 'stdout', level: 'warn' },
+					]
 				: [], // NONE or default, // configure logging
 });
 
