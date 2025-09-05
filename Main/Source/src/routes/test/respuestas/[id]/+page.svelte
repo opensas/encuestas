@@ -19,7 +19,7 @@
 				</tr>
 				{@render row('Id', respuestaId)}
 				{@render row('Tipo', tipoEncuestaId)}
-				{@render row('Contenido', encuesta)}
+				{@render row('Encuesta', encuesta)}
 				{@render row('Estado', estado)}
 				{@render row('Respuestas', respuestas)}
 				{@render row('Creación', fechaInsert)}
