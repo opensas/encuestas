@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Answer } from '$lib/types.js';
 
-	import Survey, { type SurveyState } from '$lib/components/survey/Survey.svelte';
+	import { Survey, type SurveyState } from '$lib/components/survey';
 
 	import { putRespuesta } from '$lib/api/respuesta.js';
 	import type { RespuestaEstado } from '$lib/server/services/respuesta';

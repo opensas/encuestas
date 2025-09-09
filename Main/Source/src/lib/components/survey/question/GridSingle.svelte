@@ -2,11 +2,12 @@
 	import type { GridSingleQuestion, SingleItem } from '$lib/types';
 
 	import { Input, Select } from '$lib/components';
-	import { calculateRequired, toOption } from '$lib/components/survey';
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
 	import { titleCase } from '$lib/utils/string';
+
+	import { calculateRequired, toOption } from '../common';
 
 	type Answer = NonNullable<GridSingleQuestion['answer']>;
 

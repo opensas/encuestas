@@ -2,7 +2,7 @@
 	import type { MultipleQuestion } from '$lib/types';
 
 	import { Input } from '$lib/components';
-	import { toOption } from '$lib/components/survey';
+	import { toOption } from '$lib/components/survey/common';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
 

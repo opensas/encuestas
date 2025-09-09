@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { type AllowedChars, isAllowedChar, onlyAllowedChars } from '$lib/components/survey';
+	import {
+		type AllowedChars,
+		isAllowedChar,
+		onlyAllowedChars,
+	} from '$lib/components/survey/common';
 	import { Textarea } from '$lib/components/ui/textarea';
 
 	import type { ComponentProps } from 'svelte';

@@ -18,15 +18,10 @@
 	import { round } from '$lib/utils/number';
 	import { deepCopy } from '$lib/utils/object';
 
-	import GridApi from './question/GridApi.svelte';
-	import GridSingle from './question/GridSingle.svelte';
-	import GridText from './question/GridText.svelte';
-	import Multiple from './question/Multiple.svelte';
-	import Rating from './question/Rating.svelte';
-	import Single from './question/Single.svelte';
-	import Text from './question/Text.svelte';
+	import { DEFAULT_OUTRO, toOption } from './common';
 	import Message from './Message.svelte';
-	import { DEFAULT_OUTRO, toOption } from '.';
+	import Progress from './Progress.svelte';
+	import { GridApi, GridSingle, GridText, Multiple, Rating, Single, Text } from './question';
 
 	type Props = {
 		survey: Survey;
@@ -315,7 +310,7 @@
 				{/if}
 			</div>
 
-			<Separator class="my-6" />
+			<Separator />
 
 			<div class="space-y-0.5">
 				<h3 class="text-lg font-medium" class:text-destructive={isError}>
@@ -360,6 +355,10 @@
 					<Button onclick={goNext}>Siguiente</Button>
 				{/if}
 			</div>
+
+			{#if survey.progressBar}
+				<Progress current={answerNumber(question)} total={questions.length} />
+			{/if}
 		{/if}
 	</div>
 </div>
