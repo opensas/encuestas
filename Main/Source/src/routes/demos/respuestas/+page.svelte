@@ -24,7 +24,7 @@
 				{#each respuestas as { respuestaId, tipoEncuestaId, estado } (respuestaId)}
 					<tr
 						class="cursor-pointer border-b border-gray-200 bg-white even:bg-gray-100 hover:bg-gray-200"
-						onclick={() => goto(resolve('/test/respuestas/[id]', { id: respuestaId.toString() }))}
+						onclick={() => goto(resolve('/demos/respuestas/[id]', { id: respuestaId.toString() }))}
 					>
 						<td class="px-6 py-4">{respuestaId}</td>
 						<td class="px-6 py-4">{tipoEncuestaId}</td>

@@ -16,6 +16,7 @@ export const survey_autotest: Survey = {
 	outro: `
 		Muchas gracias por tu participación
 	`,
+	progressBar: true,
 	questions: [
 		// Formación
 		{

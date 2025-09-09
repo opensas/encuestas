@@ -2,7 +2,7 @@
 	import type { GridTextQuestion, TextItem } from '$lib/types';
 
 	import { Input, Textarea } from '$lib/components';
-	import { calculateRequired } from '$lib/components/survey';
+	import { calculateRequired } from '$lib/components/survey/common';
 	import { Label } from '$lib/components/ui/label';
 
 	import { titleCase } from '$lib/utils/string';

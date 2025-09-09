@@ -10,6 +10,7 @@ export type Survey = {
 	intro?: string;
 	outro?: string;
 	description?: string;
+	progressBar?: boolean;
 	questions: Question[];
 	score?: number;
 };

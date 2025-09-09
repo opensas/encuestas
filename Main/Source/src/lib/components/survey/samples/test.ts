@@ -12,6 +12,7 @@ export const survey_test: Survey = {
 	outro: `
 		Muchas gracias por tu participación
 	`,
+	progressBar: true,
 	questions: [
 		{
 			id: 'ques_grid_api',
@@ -213,6 +214,7 @@ export const survey_short: Survey = {
 		FIN DEL CUESTIONARIO
 		Muchas gracias por tu participación
 	`,
+	progressBar: true,
 	questions: [
 		{
 			id: 'ques_grid_text',
@@ -331,6 +333,7 @@ export const survey_cine: Survey = {
 	code: 'cine',
 	title: 'Encuesta cinéfila',
 	description: 'Encuesta de prueba para probar caminos condicionales',
+	progressBar: true,
 	questions: [
 		{
 			id: 'ques_inicio',

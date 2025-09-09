@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { Survey, type SurveyState } from '$lib/components/survey';
 	import { survey_short } from '$lib/components/survey/samples/test';
-	import Survey, { type SurveyState } from '$lib/components/survey/Survey.svelte';
 
 	import { log } from '$lib/utils/utils.svelte';
 

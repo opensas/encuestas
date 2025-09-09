@@ -2,7 +2,7 @@
 	import type { SingleQuestion } from '$lib/types';
 
 	import { Input, Select } from '$lib/components';
-	import { toOption } from '$lib/components/survey';
+	import { toOption } from '$lib/components/survey/common';
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 

@@ -3,7 +3,7 @@
 
 	import { Select, type SelectItem } from '$lib/components';
 	import Combobox from '$lib/components/combobox/Combobox.svelte';
-	import { calculateRequired } from '$lib/components/survey';
+	import { calculateRequired } from '$lib/components/survey/common';
 	import { Label } from '$lib/components/ui/label';
 
 	import { titleCase } from '$lib/utils/string';
