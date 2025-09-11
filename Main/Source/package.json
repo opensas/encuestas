@@ -1,7 +1,7 @@
 {
 	"name": "encuestas",
 	"private": true,
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"type": "module",
 	"packageManager": "pnpm@9.15.1",
 	"engines": {
@@ -23,7 +23,7 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
-		"test": "pnpm run test:unit -- --run && pnpm run test:e2e",
+		"test": "pnpm run test:unit --run && pnpm run test:e2e",
 		"test:e2e": "playwright test",
 		"db:start": "docker-compose -f docker/docker-compose.yaml up",
 		"db:purge": "docker-compose -f docker/docker-compose.yaml down -v",

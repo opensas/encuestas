@@ -114,6 +114,29 @@ O puede crear la base desde cero. Primero debe crear una base `encuestas` y lueg
 pnpm prisma deploy
 ```
 
+### Pruebas
+
+```shell
+
+# run unit tests in watch mode
+pnpm test:unit
+
+# run unit tests with no watch mode
+pnpm test:unit --run
+
+# run playwright e2e test
+pnpm test:e2e
+
+# run all tests
+pnpm test
+
+# filter by file name
+pnpm test:unit --run examples
+
+# filter by test name
+pnpm test:unit --run  -t condition
+```
+
 ## Entornos
 
 - Desarrollo: `\\S1-DIXX-WEB14\W3-Sites2\EncuestasDesa`

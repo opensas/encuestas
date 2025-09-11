@@ -1,14 +1,20 @@
+import { dev } from '$app/environment';
+import { env } from '$env/dynamic/private';
 import dotenv from 'dotenv';
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'path';
 
+import { LOAD_DOTENV_IN_PROD } from '../../config';
+
 // force loading .env file using dotenv
 // node-adapter does NOT load .env files in production, see https://svelte.dev/docs/kit/adapter-node#Environment-variables
-loadEnvFile('encuestas');
+if (LOAD_DOTENV_IN_PROD && !dev && process.env.NODE_ENV === 'production') {
+	loadEnvFile('encuestas');
+}
 
-export const DATABASE_URL = process.env.DATABASE_URL || '';
-export const APP_ENV = process.env.APP_ENV || '';
+export const DATABASE_URL = env.DATABASE_URL || process.env.DATABASE_URL || '';
+export const APP_ENV = env.APP_ENV || process.env.APP_ENV || '';
 
 export function loadEnv() {
 	const errors: string[] = [];
@@ -57,7 +63,7 @@ function loadEnvFile(appName = 'encuestas', maxDepth = 10) {
 				console.warn(`⚠️ Could not read .env file at ${envFile}`, res.error);
 			} else if (res.parsed) {
 				const keys = Object.keys(res.parsed);
-				console.info(`[encuestas] ✅ Loaded ${keys.length} keys from ${envFile}`);
+				console.info(`[encuestas] ✅ Loaded ${keys.length} keys from ${envFile} using dotenv`);
 				console.info(`[encuestas] Keys loaded ${keys.join(', ')}\r\n`);
 			}
 

@@ -12,7 +12,7 @@
 	<!-- Progress bar with question counter -->
 	<div class="mb-2 flex items-center justify-between">
 		<div class="flex-1">
-			<Progress value={percentage} class="--bg-gray-200 h-2 dark:bg-inherit" />
+			<Progress value={percentage} class="h-2 bg-gray-200 dark:bg-zinc-800" />
 		</div>
 		<div class="ml-4 min-w-fit text-sm font-medium text-gray-500">
 			{current} / {total}

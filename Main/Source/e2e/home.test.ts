@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('home page has expected h3', async ({ page }) => {
-	await page.goto('/');
+	await page.goto('/encuestas/test');
 
 	// titulo
 	const titulo = page.locator('h3');
@@ -10,7 +10,7 @@ test('home page has expected h3', async ({ page }) => {
 });
 
 test('previous button is not visible on first question', async ({ page }) => {
-	await page.goto('/');
+	await page.goto('/encuestas/test');
 
 	// titulo
 	const question = page.locator('h3');
