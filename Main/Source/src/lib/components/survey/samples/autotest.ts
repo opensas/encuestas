@@ -19,26 +19,26 @@ export const survey_autotest: Survey = {
 	progressBar: true,
 	questions: [
 		// Formación
-		{
-			id: 'ques_educacion_formal',
-			// title: 'Formación - Educación formal',
-			code: '1',
-			title: 'Marca el mayor grado educativo que conseguiste',
-			type: 'single',
-			weight: round(0.1 * 0.2, 8), // formación: 10% + educación formal: 20%
-			options: [
-				{ id: 'Primaria incompleta', score: 0 },
-				{ id: 'Primaria completa', score: 20 },
-				{ id: 'Secundaria incompleta', score: 40 },
-				{ id: 'Secundaria completa', score: 60 },
-				{ id: 'Terciaria / universitaria incompleta', score: 80 },
-				{ id: 'Terciaria / universitaria completa', score: 100 },
-			],
-		},
+		// {
+		// 	id: 'ques_educacion_formal',
+		// 	// title: 'Formación - Educación formal',
+		// 	code: '1',
+		// 	title: 'Marca el mayor grado educativo que conseguiste',
+		// 	type: 'single',
+		// 	weight: round(0.1 * 0.2, 8), // formación: 10% + educación formal: 20%
+		// 	options: [
+		// 		{ id: 'Primaria incompleta', score: 0 },
+		// 		{ id: 'Primaria completa', score: 20 },
+		// 		{ id: 'Secundaria incompleta', score: 40 },
+		// 		{ id: 'Secundaria completa', score: 60 },
+		// 		{ id: 'Terciaria / universitaria incompleta', score: 80 },
+		// 		{ id: 'Terciaria / universitaria completa', score: 100 },
+		// 	],
+		// },
 		{
 			id: 'ques_educacion_oficio',
 			// title: 'Formación - Educación en oficio',
-			code: '2',
+			code: '1',
 			title:
 				'¿Tomaste cursos en oficios que te brindaron herramientas para ejercer alguna actividad por tu cuenta?',
 			type: 'single',
@@ -51,7 +51,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_educacion_continua',
 			// title: 'Formación - Formación continua / disposición a aprender',
-			code: '3',
+			code: '2',
 			title: '¿Con qué frecuencia buscas incorporar nuevos conocimientos / aprender cosas nuevas?',
 			type: 'single',
 			weight: round(0.1 * 0.4, 8), // formación: 10% + educación continua: 40%
@@ -67,7 +67,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_experiencia_rubro',
 			// title: 'Experiencia - Experiencia previa en el rubro',
-			code: '4',
+			code: '3',
 			title:
 				'¿Trabajaste anteriormente en algún oficio / empleo que te gustaría poder ejercer  por tu cuenta?',
 			type: 'single',
@@ -82,7 +82,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_experiencia_emprendiendo',
 			// title: 'Experiencia - Experiencia previa emprendiendo',
-			code: '5',
+			code: '4',
 			title:
 				'¿Tuviste algún emprendimiento o empleo independiente anteriormente ? ¿lo mantenés actualmente ?',
 			type: 'single',
@@ -96,7 +96,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_experiencia_familiar',
 			// title: 'Experiencia - Experiencia emprendedora intra familiar',
-			code: '6',
+			code: '5',
 			title:
 				'¿Algún familiar directo tiene o tuvo un emprendimiento propio o empleo independiente o trabaja por cuenta propia ? si es asi, ¿trabajaste con él ?',
 			type: 'single',
@@ -112,7 +112,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_organizacion_cumplimiento',
 			// title: 'Organización - Organización personal: orden y cumplimiento',
-			code: '7',
+			code: '6',
 			title:
 				'En general, con respecto al orden y cumplimiento de plazos en tus compromisos, ¿Cómo te calificarías de 1 a 5, siendo 5 en muy ordenado y cumplidor / a con los plazos y compromisos y 1 muy poco ordenado y poco cumplidor/a Escala de 1 a 5',
 			type: 'rating',
@@ -130,7 +130,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_organizacion_planificacion',
 			// title: 'Organización - Organización personal: planificación',
-			code: '8',
+			code: '7',
 			title:
 				'¿Cómo calificarías en tu caso la siguiente expresión: "Planifico en detalle todo lo que tengo que hacer si quiero conseguir un resultado, organizo las acciones en el tiempo y preveo posibles cosas que puedan afectarlas"',
 			type: 'single',
@@ -145,7 +145,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_organizacion_trabajo_equipo',
 			// title: 'Organización - Organización y trabajo en equipos',
-			code: '9',
+			code: '8',
 			title:
 				'¿Cómo te calificarías respecto al trabajo en equipo en los distintos ámbitos de tu vida (deportes, actividades recreativas, educativas, laboral)?',
 			type: 'single',
@@ -168,7 +168,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_comercial_perfil_ventas',
 			// title: 'Orientación comercial: experiencia en ventas',
-			code: '10',
+			code: '9',
 			title: '¿Alguna vez trabajaste en ventas / fuiste vendedor ?',
 			type: 'single',
 			weight: round(0.15 * 0.5, 8), // comercial: 15% + experiencia en ventas: 50%
@@ -186,7 +186,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_comercial_tipo_vendedor',
 			// title: 'Orientación comercial: tipo de vendedor',
-			code: '11',
+			code: '10',
 			title: '¿Qué tipo de vendedor/a te consideras?',
 			type: 'single',
 			weight: round(0.15 * 0.25, 8), // comercial: 15% + tipo de vendedor: 25%
@@ -201,7 +201,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_comercial_red_vinculacion',
 			// title: 'Orientación comercial: Red / vinculación / capacidad de relacionamiento',
-			code: '12',
+			code: '11',
 			title:
 				'¿Cómo dirías que es tu red cercana de personas amigas, allegadas y conocidas ? Indica la opción que más te represente',
 			type: 'single',
@@ -226,7 +226,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_motivacion_autonomia',
 			// title: 'Motivación e iniciativa: Autonomía / Proactividad',
-			code: '13',
+			code: '12',
 			title:
 				'¿Cómo te identificas a la hora de tomar decisiones ? Indica la opción que más te represente',
 			type: 'single',
@@ -254,7 +254,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_motivacion_proactividad',
 			// title: 'Motivación e iniciativa: Autonomía / Proactividad',
-			code: '14',
+			code: '13',
 			title:
 				'Una vez que decidís hacer algo o querés iniciar una actividad o un proyecto, ¿Qué actitud tomas? Elegí la opción que más te representa',
 			type: 'single',
@@ -278,7 +278,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_motivacion_compromiso',
 			// title: 'Motivación e iniciativa: Compromiso',
-			code: '15',
+			code: '14',
 			title:
 				'Una vez que tomas una decisión o inicias una nueva actividad, ¿cómo indicarías que es tu comportamiento en el tiempo ? Indica la opción que más te represente',
 			type: 'single',
@@ -299,7 +299,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_motivacion_innovacion',
 			// title: 'Motivación e iniciativa: Innovación / actualización permanente',
-			code: '16',
+			code: '15',
 			title:
 				'Cuanto te representa la siguiente frase: "Siempre estoy actualizado sobre nuevas tecnologías herramientas digitales, redes sociales"',
 			type: 'single',
@@ -319,7 +319,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_motivacion_creatividad',
 			// title: 'Motivación e iniciativa: Creatividad',
-			code: '17',
+			code: '16',
 			title:
 				'¿Cuán creativo/a te considerás, en una escala de 1 a 5 siendo 5 muy creativo/a y 1 poco creativo/a?',
 			type: 'rating',
@@ -337,7 +337,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_motivacion_creatividad_2',
 			// title: 'Motivación e iniciativa: Creatividad',
-			code: '18',
+			code: '17',
 			title:
 				'Cuando tenés que tomar una decisión o resolver un problema .... Elegí la opción que más te representa',
 			type: 'single',
@@ -360,7 +360,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_tolerancia_frustracion_persistencia',
 			// title: 'Tolerancia a la frustración: Persistencia',
-			code: '19',
+			code: '18',
 			title:
 				'¿Cómo calificarías tu actitud para lograr lo que querés? Elegí la opción que más te represente',
 			type: 'single',
@@ -384,9 +384,9 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_tolerancia_frustracion_actitud',
 			// title: 'Tolerancia a la frustración: Actitud frente a la frustración',
-			code: '20',
+			code: '19',
 			title:
-				'¿Cómo reaccionás cuando algo a lo que le dedicaste mucho esfuerzo o le tenías muchas esperanza, no sale como lo esperabas ? Elegí la opción que más te representa',
+				'Cuando le dedicás mucho esfuerzo a algo y no sale como lo esperabas, ¿cómo reaccionás?. Elegí la opción que más te representa:…',
 			type: 'single',
 			weight: round(0.1 * 0.5, 8), // tolerancia a la frustración: 10% + actitud frente a la frustración: 50%
 			options: [
@@ -406,7 +406,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_liderazgo_rol_social',
 			// title: 'Liderazgo y Dedicación: Rol que ocupa en los grupos sociales que frecuenta',
-			code: '21',
+			code: '20',
 			title: 'En tu grupo de amigos/as / en tu entorno, te calificarían como:',
 			type: 'single',
 			weight: round(0.2 * 0.1, 8), // liderazgo: 20% + rol social: 10%
@@ -425,7 +425,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_liderazgo_actitud_grupos_nuevos',
 			// title: 'Liderazgo y Dedicación: Actitud frente a grupos nuevos',
-			code: '22',
+			code: '21',
 			title: '¿Cómo es tu actitud frente a grupos de personas que no conocés?',
 			type: 'single',
 			weight: round(0.2 * 0.05, 8), // liderazgo: 20% + actitud frente a grupos nuevos: 5%
@@ -444,7 +444,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_liderazgo_lider',
 			// title: 'Liderazgo y Dedicación: ¿Te consideras un líder?',
-			code: '23',
+			code: '22',
 			title:
 				'¿Cómo te considerás en una escala de 1 a 5 cuando tienes que asumir un rol de liderazgo en cualquier ámbito de tu vida (deportivo, educativo, laboral, familiar)? Donde 5 es que te consideras un/a líder nato/a y 1 es que no crees que puedas ocupar un rol de líder',
 			type: 'rating',
@@ -462,7 +462,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_liderazgo_ambicion',
 			// title: 'Liderazgo y Dedicación: Ambición',
-			code: '24',
+			code: '23',
 			title:
 				'¿Te consideras una persona ambiciosa? Alguien que desea fuertemente tener éxito económico/profesional, dedicando lo que tenga que dedicar a eso. Califica de 1 a 5, siendo 1 muy ambicioso y 5 para nada ambicioso',
 			type: 'rating',
@@ -480,7 +480,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_liderazgo_autoestima',
 			// title: 'Liderazgo y Dedicación: Autoestima',
-			code: '25',
+			code: '24',
 			title: '¿Con cuál de las siguientes afirmaciones te identificas más?',
 			type: 'single',
 			weight: round(0.2 * 0.15, 8), // liderazgo: 20% + autoestima: 15%
@@ -502,7 +502,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_liderazgo_opinion_externa',
 			// title: 'Liderazgo y Dedicación: Opinión Externa',
-			code: '26',
+			code: '25',
 			title:
 				'¿Qué tan importante es para vos la opinión que los demás tienen sobre vos? Califica de 1 a 5 siendo 5 muy importante y 1 para nada importante',
 			type: 'rating',
@@ -520,7 +520,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_liderazgo_dedicacion',
 			// title: 'Liderazgo y Dedicación: Dedicación',
-			code: '27',
+			code: '26',
 			title: '¿Cuándo te comprometes con algo, cuánto esfuerzo y tiempo dedicas para realizarlo?',
 			type: 'single',
 			weight: round(0.2 * 0.2, 8), // liderazgo: 20% + dedicación: 20%
@@ -542,7 +542,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_riesgo_actitud_incertidumbre',
 			// title: 'Propensión al Riesgo: Actitud frente a incertidumbre',
-			code: '28',
+			code: '27',
 			title:
 				'Ante una situación compleja, nueva, que tendrá impacto en tu vida cotidiana pero, donde no sabes lo que va a pasar o de qué forma te puede impactar',
 			type: 'single',
@@ -566,7 +566,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_riesgo_opinion_riesgo',
 			// title: 'Propensión al Riesgo: Opinión sobre el riesgo',
-			code: '29',
+			code: '28',
 			title: '¿Con cuál de las dos afirmaciones siguientes te sientes más identificado?',
 			type: 'single',
 			weight: round(0.15 * 0.15, 8), // riesgo: 15% + opinión sobre el riesgo: 15%
@@ -585,7 +585,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_riesgo_predisposicion_accion',
 			// title: 'Propensión al Riesgo: Predisposición de acción',
-			code: '30',
+			code: '29',
 			title: '¿Con cuál de las siguientes afirmaciones te sientes más identificado/a?',
 			type: 'single',
 			weight: round(0.15 * 0.25, 8), // riesgo: 15% + predisposición de acción: 25%
@@ -601,7 +601,7 @@ export const survey_autotest: Survey = {
 		{
 			id: 'ques_riesgo_reaccion_imprevistos',
 			// title: 'Propensión al Riesgo: Reacción ante imprevistos',
-			code: '31',
+			code: '30',
 			title:
 				'¿Cómo reaccionas cuando estás haciendo algo y surge algún obstáculo no previsto o se presenta un problema de repente?',
 			type: 'single',
