@@ -47,13 +47,26 @@
 		if (callback) {
 			const res = await fetch(callback, {
 				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(response),
 			});
 
-			const body = await res.json();
+			// Si el servidor respondió con JSON válido:
+			let body: unknown = null;
+			const text = await res.text();
+			try {
+				body = text ? JSON.parse(text) : null;
+			} catch {
+				body = text;
+			}
 
 			// callback output can overwrite redirect
-			if (body.redirect) redirect = body;
+			// Permitir que el callback reemplace el redirect
+			if (body && typeof body === 'object' && (body as any).redirect) {
+				redirect = (body as any).redirect;
+			} else if (typeof body === 'string' && body.startsWith('http')) {
+				redirect = body;
+			}
 		}
 
 		// called from a popup
@@ -66,8 +79,14 @@
 		// called from a redirect
 		// #TODO: send via querystring the reference, params, and the id of the new answer
 		if (redirect) {
-			window.location.href = redirect;
-			return;
+			// redirect = objeto
+			if (typeof redirect === 'object' && (redirect as any).redirect) {
+				redirect = (redirect as any).redirect;
+			}
+			if (typeof redirect === 'string') {
+				window.location.href = redirect;
+				return;
+			}
 		}
 
 		message(answers, status); // debug
