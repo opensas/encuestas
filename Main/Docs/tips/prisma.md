@@ -2,6 +2,24 @@
 
 ## migrations
 
+### running migrations
+
+```shell
+# npm script: run db:migrate:sync
+# generates new migrations when your schema changes
+# can reset db if needed
+# interactive, dev-only
+bun prisma migrate dev
+```
+
+```shell
+# npm script: run db:migrate:apply
+# only runs already generated and pending migrations
+# does not generate new migrations
+# does not generate the prisma client
+bun prisma migrate deploy
+```
+
 ### create a new migration without running it
 
 ```shell
