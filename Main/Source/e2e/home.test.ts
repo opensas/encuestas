@@ -17,21 +17,21 @@ test('previous button is not visible on first question', async ({ page }) => {
 	await expect(question).toBeVisible();
 	await expect(question).toContainText(/^Bienvenido/);
 
-	const comenzar = await page.$('button:has-text("Comenzar")');
-	expect(comenzar).not.toBeNull();
+	// Use locator instead of elementHandle for better reliability
+	const comenzar = page.locator('button:has-text("Comenzar")');
+	await expect(comenzar).toBeVisible();
 
 	// click con Comenzar button
-	await comenzar!.click();
+	await comenzar.click();
 	await page.waitForSelector('h3', { timeout: 5000 });
 
 	// Next and Previous button should be present
-	const siguiente = await page.$('button:has-text("Siguiente")');
-	expect(siguiente).not.toBeNull();
+	const siguiente = page.locator('button:has-text("Siguiente")');
+	await expect(siguiente).toBeVisible();
 
-	const anterior = await page.$('button:has-text("Anterior")');
-	expect(anterior).not.toBeNull();
+	const anterior = page.locator('button:has-text("Anterior")');
+	await expect(anterior).toBeAttached();
 
 	// but previous button should be invisible
-	const isVisible = await anterior!.isVisible();
-	expect(isVisible).toBeFalsy();
+	await expect(anterior).not.toBeVisible();
 });

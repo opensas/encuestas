@@ -6,9 +6,11 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
 
+	import { round } from '$lib/utils/number';
+
 	type Props = {
 		question: MultipleQuestion;
-		onupdate?: (answer: string[]) => void;
+		onupdate?: (answer: string[], score?: number) => void;
 		isValid?: boolean;
 	};
 
@@ -16,6 +18,7 @@
 
 	let options = $derived(question.options.map(toOption));
 	let required = $derived(question.required ?? true); // required by default
+	let weight = $derived(question.weight);
 
 	let checked: boolean[] = $state([]);
 	let checkedOther = $state(false);
@@ -43,7 +46,20 @@
 
 		isValid = !required || (required && answer.length > 0);
 
-		onupdate(answer);
+		let score = undefined;
+		if (weight !== undefined) {
+			// Calculate combined score for all selected options
+			const totalScore = checked.reduce((sum, check, index) => {
+				if (check) {
+					const optionScore = options[index].score ?? 0;
+					return sum + optionScore;
+				}
+				return sum;
+			}, 0);
+			score = round(totalScore * weight, 4); // survey score, rounded to 4 decimals
+		}
+
+		onupdate(answer, score);
 	}
 
 	$effect(() => onchange(checked, checkedOther, other));

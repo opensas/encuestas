@@ -93,15 +93,21 @@
 
 		const url = fill(endpoint, selected);
 
-		const response = await fetch(url);
-		const data = await response.json();
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
 
-		const opts = data.map((row: Record<string, string>) => ({
-			value: row[idField],
-			label: row[descriptionField || idField],
-		}));
+			const opts = data.map((row: Record<string, string>) => ({
+				value: row[idField],
+				label: row[descriptionField || idField],
+			}));
 
-		options[title] = opts;
+			options[title] = opts;
+		} catch (error) {
+			// Handle API errors gracefully by setting empty options
+			console.error(`Failed to fetch options for ${title}:`, error);
+			options[title] = [];
+		}
 		return;
 	}
 

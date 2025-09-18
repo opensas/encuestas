@@ -6,7 +6,7 @@ export const survey_test: Survey = {
 	title: 'Encuesta de muestra de los distintos tipos de pregunta',
 	intro: `
 		Bienvenido 
-		Te damos al bienvenida a esta encuesta de muestra
+		Te damos la bienvenida a esta encuesta de muestra
 		Esperamos que te resulte útil
 	`,
 	outro: `
@@ -16,14 +16,14 @@ export const survey_test: Survey = {
 	questions: [
 		{
 			id: 'ques_grid_api',
-			title: 'grid-api, obtengo las opciones de una api',
+			title: 'grid-api - obtengo las opciones de una API',
 			code: 'p0',
 			type: 'grid-api',
 			control: 'combobox',
 			items: [
 				{
 					id: 'provincia',
-					label: 'Nombre provincia',
+					label: 'Nombre de provincia',
 					control: 'select',
 					required: true,
 					idField: 'id',
@@ -32,7 +32,7 @@ export const survey_test: Survey = {
 				},
 				{
 					id: 'departamento',
-					label: 'Depto',
+					label: 'Departamento',
 					required: false,
 					idField: 'id',
 					descriptionField: 'nombre',
@@ -40,6 +40,7 @@ export const survey_test: Survey = {
 				},
 				{
 					id: 'localidad',
+					label: 'Localidad',
 					required: false,
 					idField: 'id',
 					descriptionField: 'nombre',
@@ -59,9 +60,9 @@ export const survey_test: Survey = {
 			type: 'grid-single',
 			// items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
 			items: [
-				{ id: 'pregunta 1', label: 'Primer pregunta', required: true },
-				{ id: 'pregunta 2', required: true },
-				{ id: 'pregunta 3', required: undefined },
+				{ id: 'pregunta 1', label: 'Primera pregunta', required: true },
+				{ id: 'pregunta 2', label: 'Segunda pregunta', required: true },
+				{ id: 'pregunta 3', label: 'Tercera pregunta', required: undefined },
 			],
 			options: [
 				{ id: '1', label: 'Opción 1' },
@@ -79,17 +80,17 @@ export const survey_test: Survey = {
 		},
 		{
 			id: 'ques_grid_text',
-			title: 'grid-text - pregunta que acepta múltiples inputs',
+			title: 'grid-text - pregunta que acepta múltiples campos de entrada',
 			code: 'p2',
 			type: 'grid-text',
 			// items: 'nombre, apellido, direccion'.split(', '),
 			items: [
-				{ id: 'nombre' },
-				{ id: 'apellido', required: true },
-				{ id: 'direccion', required: true, control: 'textarea' },
+				{ id: 'nombre', label: 'Nombre' },
+				{ id: 'apellido', label: 'Apellido', required: true },
+				{ id: 'direccion', label: 'Dirección', required: true, control: 'textarea' },
 				{
 					id: 'dni',
-					label: 'número de DNI',
+					label: 'Número de DNI',
 					description: '##.###.###',
 					required: true,
 					allowedChars: 'digits',
@@ -108,10 +109,10 @@ export const survey_test: Survey = {
 		},
 		{
 			id: 'ques_text',
-			title: 'text - pregunta que acepta un texto libre (title)',
-			subtitle: 'Contanos un poco acerca de tí (subtitle)',
-			label: 'Respuesta (label)',
-			description: 'Máximo 200 caracteres (description)',
+			title: 'text - pregunta que acepta un texto libre (título)',
+			subtitle: 'Contanos un poco acerca de ti (subtítulo)',
+			label: 'Respuesta (etiqueta)',
+			description: 'Máximo 200 caracteres (descripción)',
 			code: 'p4',
 			type: 'text',
 			control: 'textarea',
@@ -121,15 +122,15 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_single',
 			title: 'single - pregunta que acepta un solo valor',
-			subtitle: 'elija una opción',
+			subtitle: 'elige una opción',
 			code: 'p5',
 			type: 'single',
 			options: [
-				...'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
-				{ id: 'opcion 5', description: 'última opcion' },
+				...'opción 1, opción 2, opción 3, opción 4'.split(', '),
+				{ id: 'opción 5', description: 'última opción' },
 			],
 			other: {
-				label: 'label other option',
+				label: 'etiqueta otra opción',
 				placeholder: 'ingrese otra opción',
 				allowedChars: '0123456789-',
 				description: 'ingrese solamente números y guiones',
@@ -138,11 +139,11 @@ export const survey_test: Survey = {
 		{
 			id: 'ques_multiple',
 			title: 'multiple - pregunta que acepta múltiples valores',
-			subtitle: 'elija una o varias opciones',
+			subtitle: 'elige una o varias opciones',
 			code: 'p6',
 			type: 'multiple',
 			options: [
-				{ id: '0', label: 'opcion 0', description: 'primera opción' },
+				{ id: '0', label: 'opción 0', description: 'primera opción' },
 				{ id: '1', label: 'opción 1' },
 				{ id: '2', label: 'opción 2' },
 				{ id: '3', label: 'opción 3', description: 'última opción' },
@@ -150,8 +151,8 @@ export const survey_test: Survey = {
 			],
 			answer: ['0', '2'],
 			other: {
-				label: 'cuit',
-				placeholder: 'ingrese su cuit',
+				label: 'CUIT',
+				placeholder: 'ingrese su CUIT',
 				allowedChars: '01234567890-',
 				maxlength: 13,
 				description: '##-#######-#',
@@ -160,7 +161,7 @@ export const survey_test: Survey = {
 		},
 		{
 			id: 'ques_grid_single_select',
-			title: 'grid-single, control: select',
+			title: 'grid-single, control: selección',
 			subtitle: 'varias preguntas que aceptan un solo valor',
 			code: 'p7',
 			type: 'grid-single',
@@ -169,16 +170,16 @@ export const survey_test: Survey = {
 				...'pregunta 1, pregunta 2, pregunta 3'.split(', '),
 				{ id: 'pregunta 4', label: 'última pregunta', required: true },
 			],
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			options: 'opción 1, opción 2, opción 3, opción 4'.split(', '),
 			answer: {
-				'pregunta 1': 'opcion 2',
-				'pregunta 2': 'opcion 3',
-				'pregunta 3': 'opcion 2',
+				'pregunta 1': 'opción 2',
+				'pregunta 2': 'opción 3',
+				'pregunta 3': 'opción 2',
 				'pregunta 4': 'otra opción',
 			},
 			other: {
-				label: 'labelOther',
-				placeholder: 'placeholderOther',
+				label: 'etiquetaOtra',
+				placeholder: 'marcadorOtra',
 			},
 		},
 		{
@@ -191,16 +192,16 @@ export const survey_test: Survey = {
 			options: [
 				{
 					id: '1',
-					label: 'opcion 1',
+					label: 'opción 1',
 					description: 'la descripción no es visible usando select como control',
 				},
-				{ id: '2', label: 'opcion 2' },
+				{ id: '2', label: 'opción 2' },
 				'todas',
 			],
-			answer: 'opcion 2',
+			answer: 'opción 2',
 			other: {
-				label: 'labelOther',
-				placeholder: 'placeholderOther',
+				label: 'etiquetaOtra',
+				placeholder: 'marcadorOtra',
 			},
 		},
 	],
@@ -218,18 +219,18 @@ export const survey_short: Survey = {
 	questions: [
 		{
 			id: 'ques_grid_text',
-			title: 'grid-text - pregunta que acepta múltiples inputs',
+			title: 'grid-text - pregunta que acepta múltiples campos de entrada',
 			type: 'grid-text',
 			// items: 'nombre, apellido, direccion'.split(', '),
 			items: [
-				{ id: 'nombre' },
-				{ id: 'apellido', required: true },
-				{ id: 'direccion', required: true },
+				{ id: 'nombre', label: 'Nombre' },
+				{ id: 'apellido', label: 'Apellido', required: true },
+				{ id: 'direccion', label: 'Dirección', required: true },
 			],
 			answer: {
 				nombre: 'nombre...',
 				apellido: 'apellido...',
-				direccion: 'direccion...',
+				direccion: 'dirección...',
 			},
 			required: false,
 		},
@@ -248,14 +249,14 @@ export const survey_short: Survey = {
 			control: 'select',
 			// items: 'pregunta 1, pregunta 2, pregunta 3'.split(', '),
 			items: [
-				{ id: 'pregunta 1', required: true },
-				{ id: 'pregunta 2', required: true },
-				{ id: 'pregunta 3', required: undefined },
+				{ id: 'pregunta 1', label: 'Pregunta 1', required: true },
+				{ id: 'pregunta 2', label: 'Pregunta 2', required: true },
+				{ id: 'pregunta 3', label: 'Pregunta 3', required: undefined },
 			],
-			options: 'opcion 1, opcion 2, opcion 3, opcion 4'.split(', '),
+			options: 'opción 1, opción 2, opción 3, opción 4'.split(', '),
 			other: {
-				label: 'labelOther',
-				placeholder: 'placeholderOther',
+				label: 'etiquetaOtra',
+				placeholder: 'marcadorOtra',
 			},
 			required: false,
 		},
@@ -267,7 +268,7 @@ export const survey_ingles: Survey = {
 	code: 'ingles',
 	title: 'Evaluación de la experiencia en el curso de inglés',
 	description:
-		'por favor, responda a las siguientes preguntas para ayudarnos a mejorar nuestro curso de inglés',
+		'Por favor, responde a las siguientes preguntas para ayudarnos a mejorar nuestro curso de inglés',
 	questions: [
 		{
 			id: 'ques_1',
@@ -323,7 +324,7 @@ export const survey_ingles: Survey = {
 			id: 'ques_6',
 			title: '¿Tienes alguna sugerencia para mejorar el curso?',
 			type: 'text',
-			answer: 'agregar mas horarios',
+			answer: 'agregar más horarios',
 		},
 	],
 };
@@ -338,7 +339,7 @@ export const survey_cine: Survey = {
 		{
 			id: 'ques_inicio',
 			code: '1',
-			title: 'Contanos un poco acerca de tí',
+			title: 'Contanos un poco acerca de ti',
 			subtitle: 'Algunos datos para conocerte mejor',
 			type: 'grid-text',
 			items: [
@@ -346,9 +347,10 @@ export const survey_cine: Survey = {
 				'Apellido',
 				{
 					id: 'Bio',
+					label: 'Biografía',
 					description: 'Contanos quién sos',
 					control: 'textarea',
-					placeholder: 'a short bio',
+					placeholder: 'una breve biografía',
 				},
 			],
 		},
@@ -359,7 +361,7 @@ export const survey_cine: Survey = {
 			type: 'single',
 			options: [
 				'Sí',
-				'más o menos',
+				'Más o menos',
 				'Muy poco',
 				{ id: 'Ir al final', next: 'ques_final' },
 				{ id: 'Terminar esto ya', next: null },
@@ -382,7 +384,7 @@ export const survey_cine: Survey = {
 				{ id: 'Drama', description: 'películas para llorar' },
 			],
 			other: {
-				label: 'labelOther',
+				label: 'Otro género',
 				placeholder: 'Ingresa aquí el género de tu preferencia',
 				next: 'ques_genero_otros',
 			},
@@ -394,14 +396,14 @@ export const survey_cine: Survey = {
 			title: '¿Qué película de ciencia ficción es tu favorita?',
 			type: 'single',
 			options: [
-				{ id: 'Star wars', next: 'ques_genero_ciencia_star' },
-				'Blade runner',
-				'2001',
+				{ id: 'Star Wars', next: 'ques_genero_ciencia_star' },
+				'Blade Runner',
+				'2001: Una odisea del espacio',
 				'Dune',
-				'Mad max',
+				'Mad Max',
 			],
 			other: {
-				label: 'labelOther',
+				label: 'Otra película',
 				placeholder: 'Ingresa aquí tu película de ciencia ficción favorita',
 				next: 'ques_feedback',
 			},
@@ -410,11 +412,11 @@ export const survey_cine: Survey = {
 			id: 'ques_genero_ciencia_star',
 			code: '3.1.1',
 			next: 'ques_feedback',
-			title: '¿Qué película de la saga de Star wars es tu favorita?',
+			title: '¿Qué película de la saga de Star Wars es tu favorita?',
 			type: 'single',
 			options: [
 				'Una nueva esperanza (IV)',
-				'El imperio contra-ataca (V)',
+				'El imperio contraataca (V)',
 				'El retorno del Jedi (VI)',
 			],
 		},
@@ -424,7 +426,7 @@ export const survey_cine: Survey = {
 			next: 'ques_feedback',
 			title: '¿Qué película de acción es tu favorita?',
 			type: 'single',
-			options: ['Indiana Jones', 'James Bond', 'Duro de matar', 'Mad max'],
+			options: ['Indiana Jones', 'James Bond', 'Duro de matar', 'Mad Max'],
 			other: true,
 		},
 		{
@@ -437,13 +439,13 @@ export const survey_cine: Survey = {
 		{
 			id: 'ques_feedback',
 			code: '4',
-			title: '¿Qué mejorarías de esta entrevista?',
+			title: '¿Qué mejorarías de esta encuesta?',
 			type: 'multiple',
 			options: [
-				'preguntar por otros géneros',
+				'Preguntar por otros géneros',
 				'Hacerla más larga',
 				'Hacerla más corta',
-				'No haría este tipo de entrevistas',
+				'No haría este tipo de encuestas',
 			],
 			other: true,
 		},
