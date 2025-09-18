@@ -29,7 +29,7 @@
 		onsave?: (state: SurveyState) => void;
 		onclose?: (state: SurveyState) => void;
 		onskip?: (state: SurveyState) => void;
-		class: string;
+		class?: string;
 	};
 
 	let {

@@ -45,7 +45,7 @@
 			onclick={() => answer--}
 		>
 			<Minus class="h-4 w-4" />
-			<span class="sr-only">Sumar 1</span>
+			<span class="sr-only">Restar 1</span>
 		</Button>
 		<div class="flex-1 text-center">
 			<div class="text-7xl font-bold tracking-tighter">
@@ -61,7 +61,7 @@
 			onclick={() => answer++}
 		>
 			<Plus class="h-4 w-4" />
-			<span class="sr-only">Restar 1</span>
+			<span class="sr-only">Sumar 1</span>
 		</Button>
 	</div>
 	<Slider bind:value={answer} {max} {min} step={1} type="single" />

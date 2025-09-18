@@ -1,35 +1,51 @@
 <script lang="ts">
-	import { Survey, type SurveyState } from '$lib/components/survey';
-	import { survey_short } from '$lib/components/survey/samples/test';
+	import DemosCard from '../DemosCard.svelte';
 
-	import { log } from '$lib/utils/utils.svelte';
-
-	const onsave = (surveyState: SurveyState) => console.log('onsave', { surveyState });
-	const onskip = (surveyState: SurveyState) => log('onskip!', { surveyState });
-
-	const survey = survey_short;
-
-	const state = {
-		status: 'en proceso',
-		answers: [
-			{
-				id: 'ques_grid_text',
-				answer: {
-					nombre: 'state',
-					apellido: 'state',
-					direccion: 'state',
-				},
-			},
-			{
-				id: 'ques_text',
-				answer: 'state!',
-			},
-		],
-		current: 'ques_grid_single',
-		score: 0,
-	} satisfies SurveyState;
+	const demos = [
+		{
+			name: 'Survey Examples',
+			href: '/demos/survey/survey-examples',
+			description:
+				'Complete survey examples organized by type - test real surveys, custom demos, and feature showcases',
+		},
+		{
+			name: 'Text Questions',
+			href: '/demos/survey/text',
+			description: 'Text input components with validation, character filtering, and formatting',
+		},
+		{
+			name: 'Single Choice',
+			href: '/demos/survey/single',
+			description: 'Single-choice question component with radio buttons and dropdown options',
+		},
+		{
+			name: 'Multiple Choice',
+			href: '/demos/survey/multiple',
+			description: 'Multiple-choice question component with checkboxes and multi-selection options',
+		},
+		{
+			name: 'Rating Questions',
+			href: '/demos/survey/rating',
+			description: 'Interactive rating component with customizable scales and scoring systems',
+		},
+		{
+			name: 'Grid Text Questions',
+			href: '/demos/survey/grid-text',
+			description: 'Grid-based text input component for collecting multiple related text fields',
+		},
+		{
+			name: 'Grid API Questions',
+			href: '/demos/survey/grid-api',
+			description:
+				'Dynamic grid component that loads options from API endpoints with dependency chains',
+		},
+	] as const;
 </script>
 
-<div class="flex h-screen items-center justify-center px-2 sm:px-10">
-	<Survey class="max-w-4xl" {state} {survey} {onsave} {onskip} />
+<div class="container mx-auto max-w-2xl p-8">
+	<DemosCard
+		{demos}
+		description="Explore different survey components and question types used in the survey system."
+		title="Survey Demos"
+	/>
 </div>

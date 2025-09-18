@@ -30,6 +30,10 @@ const config: Config = {
 	kit: {
 		adapter,
 	},
+
+	vitePlugin: {
+		inspector: true, // see: https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/inspector.md
+	},
 };
 
 export default config;

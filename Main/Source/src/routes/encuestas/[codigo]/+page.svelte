@@ -52,21 +52,8 @@
 			});
 
 			// Si el servidor respondió con JSON válido:
-			let body: unknown = null;
-			const text = await res.text();
-			try {
-				body = text ? JSON.parse(text) : null;
-			} catch {
-				body = text;
-			}
-
-			// callback output can overwrite redirect
-			// Permitir que el callback reemplace el redirect
-			if (body && typeof body === 'object' && (body as any).redirect) {
-				redirect = (body as any).redirect;
-			} else if (typeof body === 'string' && body.startsWith('http')) {
-				redirect = body;
-			}
+			const body = await parseResponse(res);
+			if (isRedirect(body.redirect)) redirect = body.redirect;
 		}
 
 		// called from a popup
@@ -79,18 +66,33 @@
 		// called from a redirect
 		// #TODO: send via querystring the reference, params, and the id of the new answer
 		if (redirect) {
-			// redirect = objeto
-			if (typeof redirect === 'object' && (redirect as any).redirect) {
-				redirect = (redirect as any).redirect;
-			}
-			if (typeof redirect === 'string') {
-				window.location.href = redirect;
-				return;
-			}
+			window.location.href = redirect;
+			return;
 		}
 
 		message(answers, status); // debug
 	}
+
+	type ResponseBody = { redirect?: string };
+
+	async function parseResponse(response: Response) {
+		let body: ResponseBody = {};
+		const text = await response.text();
+		// try to parse response body as json
+		try {
+			body = text ? JSON.parse(text) : {};
+		} catch {
+			body.redirect = text;
+		}
+		if (body.redirect && !isRedirect(body.redirect)) {
+			console.error('warning, bad redirect specified', body.redirect);
+			body.redirect = undefined;
+		}
+		return body;
+	}
+
+	const isRedirect = (text: unknown): text is `http${string}` =>
+		typeof text === 'string' && text.startsWith('http');
 
 	function message(answers: Answer[], estado: RespuestaEstado) {
 		const respuestas = survey.questions.map((p) => [p.id, p.answer]);

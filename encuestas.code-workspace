@@ -11,6 +11,7 @@
 		"cSpell.words": [
 			"accion",
 			"acordás",
+			"aeiou",
 			"aept",
 			"Ambato",
 			"ambicion",
@@ -22,6 +23,7 @@
 			"autonomia",
 			"autotest",
 			"Bolson",
+			"caba",
 			"CABA",
 			"Catamarca",
 			"chacinados",
@@ -74,11 +76,13 @@
 			"inscriptos",
 			"jesterkit",
 			"Jujuy",
+			"kiro",
 			"leñeros",
 			"libreoffice",
 			"lider",
 			"mantenés",
 			"maxlength",
+			"miguel",
 			"Mosconi",
 			"motivacion",
 			"mssql",
@@ -125,12 +129,14 @@
 			"VARCHAR",
 			"vercel",
 			"vinculacion",
+			"vitest",
 			"volta",
 			"Vuferen",
 			"winget",
 			"wwwroot",
 			"xcopy",
 			"zinguería"
-		]
+		],
+		"kiroAgent.configureMCP": "Disabled"
 	},
 }
