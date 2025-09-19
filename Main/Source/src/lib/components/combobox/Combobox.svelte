@@ -8,8 +8,7 @@
 
 	import { tick } from 'svelte';
 
-	import Check from 'lucide-svelte/icons/check';
-	import ChevronsUpDown from 'lucide-svelte/icons/chevrons-up-down';
+	import { Check, ChevronsUpDown } from '@lucide/svelte/icons';
 
 	type Props = {
 		value?: string;

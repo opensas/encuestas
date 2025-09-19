@@ -56,7 +56,7 @@
 
 <div class="space-y-4">
 	<div
-		class="gap-x-2 space-y-4"
+		class="space-y-4 gap-x-2"
 		class:lg:columns-3={items.length >= 12}
 		class:md:columns-2={items.length >= 8}
 	>

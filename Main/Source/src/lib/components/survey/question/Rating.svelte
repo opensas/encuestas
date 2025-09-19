@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { RatingQuestion } from '$lib/types';
 
-	import { Button } from '$lib/components/ui/button';
+	import { Button } from '$lib/components';
 	import { Slider } from '$lib/components/ui/slider';
 
 	import { round } from '$lib/utils/number';
 
-	import { Minus, Plus } from 'lucide-svelte';
+	import { Minus, Plus } from '@lucide/svelte/icons';
 
 	type Props = {
 		question: RatingQuestion;
@@ -38,29 +38,29 @@
 <div class="space-y-2 p-4 pb-0">
 	<div class="flex items-center justify-center space-x-2">
 		<Button
-			class="h-8 w-8 shrink-0 rounded-full"
+			class="size-8 shrink-0 rounded-full"
 			disabled={answer <= min}
 			size="icon"
 			variant="outline"
 			onclick={() => answer--}
 		>
-			<Minus class="h-4 w-4" />
+			<Minus class="size-4" />
 			<span class="sr-only">Restar 1</span>
 		</Button>
 		<div class="flex-1 text-center">
 			<div class="text-7xl font-bold tracking-tighter">
 				{answer}
 			</div>
-			<div class="text-[0.70rem] uppercase text-muted-foreground">Puntaje</div>
+			<div class="text-[0.70rem] text-muted-foreground uppercase">Puntaje</div>
 		</div>
 		<Button
-			class="h-8 w-8 shrink-0 rounded-full"
+			class="size-8 shrink-0 rounded-full"
 			disabled={answer >= max}
 			size="icon"
 			variant="outline"
 			onclick={() => answer++}
 		>
-			<Plus class="h-4 w-4" />
+			<Plus class="size-4" />
 			<span class="sr-only">Sumar 1</span>
 		</Button>
 	</div>

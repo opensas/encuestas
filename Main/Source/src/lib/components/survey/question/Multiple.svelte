@@ -67,7 +67,7 @@
 
 <div class="space-y-4">
 	<div
-		class="gap-x-2 space-y-4"
+		class="space-y-4 gap-x-2"
 		class:lg:columns-3={options.length >= 12}
 		class:md:columns-2={options.length >= 8}
 	>
@@ -75,8 +75,8 @@
 			{@const idx = `opcion_${index}`}
 			<div class="flex items-center space-x-3">
 				<!-- mt-1 compensates for the leading-snug, to have both aligned to the top -->
-				<Checkbox id={idx} bind:checked={checked[index]} class="mt-1 self-start" />
-				<Label class="flex flex-col space-y-1 leading-snug" for={idx}>
+				<Checkbox id={idx} bind:checked={checked[index]} class="mt-1 self-start border-primary" />
+				<Label class="flex flex-col items-start gap-1 leading-snug" for={idx}>
 					<div>{label}</div>
 					{#if description}
 						<div class="text-xs font-normal text-muted-foreground">{description}</div>
@@ -90,7 +90,7 @@
 		{@const _other = question.other === true ? {} : question.other}
 		{@const { label, description, placeholder = 'Otra opción', allowedChars, maxlength } = _other}
 		<div class="flex items-center space-x-3">
-			<Checkbox id="opcion_otra" bind:checked={checkedOther} class="--self-start" />
+			<Checkbox id="opcion_otra" bind:checked={checkedOther} class="border-primary" />
 			<div class="w-full space-y-1">
 				{#if label}
 					<Label for="text-other">{label}</Label>

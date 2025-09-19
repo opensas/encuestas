@@ -9,7 +9,7 @@ import { LOAD_DOTENV_IN_PROD } from '../../config';
 
 // force loading .env file using dotenv
 // node-adapter does NOT load .env files in production, see https://svelte.dev/docs/kit/adapter-node#Environment-variables
-if (LOAD_DOTENV_IN_PROD && !dev && process.env.NODE_ENV === 'production') {
+if (LOAD_DOTENV_IN_PROD && !dev && (process.env.NODE_ENV || 'production') === 'production') {
 	loadEnvFile('encuestas');
 }
 

@@ -11,4 +11,10 @@
 	}: RadioGroupPrimitive.RootProps = $props();
 </script>
 
-<RadioGroupPrimitive.Root bind:ref bind:value class={cn('grid gap-2', className)} {...restProps} />
+<RadioGroupPrimitive.Root
+	bind:ref
+	bind:value
+	class={cn('grid gap-3', className)}
+	data-slot="radio-group"
+	{...restProps}
+/>

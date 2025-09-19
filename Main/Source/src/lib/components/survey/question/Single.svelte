@@ -71,8 +71,8 @@
 				{@const idx = `opcion_${index}`}
 				<div class="flex items-center space-x-3">
 					<!-- mt-1 compensates for the leading-snug, to have both aligned to the top -->
-					<Radio.Item id={idx} value={id} class="mt-1 self-start" />
-					<Label class="flex flex-col space-y-1 leading-snug" for={idx}>
+					<Radio.Item id={idx} value={id} class="mt-1 self-start border-primary" />
+					<Label class="flex flex-col items-start gap-1 leading-snug" for={idx}>
 						<div>{label}</div>
 						{#if description}
 							<div class="text-xs font-normal text-muted-foreground">{description}</div>
@@ -84,14 +84,14 @@
 	{:else}
 		{@const items = options.map(({ id, label }) => ({ value: id, label }))}
 		<div class="space-y-1">
-			<Select bind:value={checked} options={items} />
+			<Select bind:value={checked} class="w-full" options={items} />
 		</div>
 	{/if}
 	{#if question.other}
 		{@const _other = question.other === true ? {} : question.other}
 		{@const { label, description, placeholder = 'Otra opción', allowedChars, maxlength } = _other}
 		<div class="flex items-center space-x-3">
-			<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
+			<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start border-primary" />
 			<div class="w-full space-y-1">
 				{#if label}
 					<Label for="text-other">{label}</Label>

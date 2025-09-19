@@ -1,5 +1,6 @@
 import type { Selected } from 'bits-ui';
 
+export { default as Button } from './button/Button.svelte';
 export { default as Combobox } from './combobox/Combobox.svelte';
 export { default as Input } from './input/Input.svelte';
 export { default as Select } from './select/Select.svelte';
