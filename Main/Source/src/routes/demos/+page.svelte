@@ -3,14 +3,10 @@
 
 	const demos = [
 		{
-			name: 'Combobox',
-			href: '/demos/combobox',
-			description: 'Searchable dropdown with autocomplete functionality and API integration',
-		},
-		{
-			name: 'Progress',
-			href: '/demos/progress',
-			description: 'Visual progress indicators and loading states for user feedback',
+			name: 'Components',
+			href: '/demos/components',
+			description:
+				'UI components including combobox, progress indicators, and other interactive elements',
 		},
 		{
 			name: 'Respuestas',

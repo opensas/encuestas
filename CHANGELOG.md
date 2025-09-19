@@ -2,6 +2,43 @@
 
 Todos los cambios relevantes de `encuestas` serán documentados en este archivo.
 
+## [1.3.0] - 2025-09-19
+
+### Actualizaciones importantes
+
+- Se migró el proyecto a shadcn-svelte 1.0.7 y Tailwind CSS 4 para mejorar la experiencia de desarrollo y el rendimiento.
+- Se actualizó bits-ui a la última versión para mayor compatibilidad.
+
+### Nuevas características
+
+- Se crearon páginas de demos para los distintos tipos de pregunta y componentes de la aplicación.
+
+### Mejoras técnicas
+
+- Se actualizó la configuración de componentes shadcn para la nueva versión.
+- Se migró a la configuración vía CSS de Tailwind 4.
+- Se actualizó la configuración de Vite para usar node-adapter-auto en modo de desarrollo y el adaptador IIS para el build.
+
+## [1.2.5] - 2025-09-15
+
+### Nuevas características
+
+- Se implementaron pruebas automatizadas con Vitest Browser para mejorar la calidad del código.
+- Se agregaron pruebas unitarias para componentes del servidor.
+- Se implementaron pruebas de interfaz de usuario con navegador real.
+
+### Pruebas implementadas
+
+- Rating, Survey, GridApi, Multiple, Single, Text, GridText, Progress, página de demos
+
+### Comandos de pruebas disponibles
+
+- `pnpm test:unit` - Ejecuta pruebas unitarias del servidor
+- `pnpm test:ui` - Ejecuta pruebas de interfaz de usuario con navegador
+- `pnpm test:vite` - Ejecuta todas las pruebas de Vitest con navegador
+- `pnpm test:e2e` - Ejecuta pruebas end-to-end con Playwright
+- `pnpm test:all` - Ejecuta todas las pruebas incluyendo Playwright
+
 ## [1.2.3] - 2025-09-09
 
 ### Nuevas características

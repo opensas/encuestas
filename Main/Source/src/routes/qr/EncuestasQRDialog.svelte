@@ -2,15 +2,15 @@
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 
-	import { QrCode } from 'lucide-svelte';
+	import { QrCode } from '@lucide/svelte/icons';
 
 	import EncuestasQr from './EncuestasQR.svelte';
 </script>
 
 <Dialog.Root>
 	<Dialog.Trigger>
-		<Button class="absolute left-4 top-4 z-10" size="icon" variant="outline">
-			<QrCode class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 " />
+		<Button class="absolute top-4 left-4 z-10" size="icon" variant="outline">
+			<QrCode class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:-rotate-90 " />
 			<span class="sr-only">Escaneá el código QR</span>
 		</Button>
 	</Dialog.Trigger>

@@ -10,7 +10,7 @@
 <script lang="ts">
 	import type { Question, Survey } from '$lib/types';
 
-	import { Button } from '$lib/components/ui/button';
+	import { Button } from '$lib/components';
 	import { Separator } from '$lib/components/ui/separator';
 
 	import type { RespuestaEstado } from '$lib/server/services/respuesta';

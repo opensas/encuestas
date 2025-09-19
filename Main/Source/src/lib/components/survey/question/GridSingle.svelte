@@ -98,7 +98,7 @@
 		{/if}
 		{#if question.other}
 			{@const label = (question.other === true ? {} : question.other)?.label}
-			<Label class="w-full pl-4 text-center">{label || 'Otra opción'}</Label>
+			<Label class="mx-auto pl-4">{label || 'Otra opción'}</Label>
 		{/if}
 	</div>
 
@@ -118,19 +118,19 @@
 		>
 			{#if control === 'radio'}
 				{#each options as { id } (id)}
-					<Radio.Item value={id} class="justify-self-center" />
+					<Radio.Item value={id} class="justify-self-center border-primary" />
 				{/each}
 			{:else}
 				{@const items = options.map(({ id, label }) => ({ value: id, label }))}
 				<div class="w-full space-y-1">
-					<Select bind:value={checked[id]} options={items} />
+					<Select bind:value={checked[id]} class="w-full" options={items} />
 				</div>
 			{/if}
 			{#if question.other}
 				{@const _other = question.other === true ? {} : question.other}
 				{@const { description, placeholder = 'Otra opción', allowedChars, maxlength } = _other}
-				<div class="flex w-full items-center space-x-2 pl-4">
-					<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
+				<div class="flex w-full items-center gap-2 pl-4">
+					<Radio.Item id="option-other" value={OTHER_VALUE} class="border-primary" />
 
 					<div class="w-full space-y-1">
 						<Input

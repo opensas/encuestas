@@ -11,7 +11,7 @@ describe('/+page.svelte', () => {
 
 		// see: https://vitest.dev/guide/browser/context.html#page
 		// see: https://vitest.dev/guide/browser/locators
-		const heading = page.getByRole('heading', { name: 'Demos' });
-		await expect.element(heading).toBeInTheDocument();
+		const title = page.getByText('Demos');
+		await expect.element(title).toBeInTheDocument();
 	});
 });

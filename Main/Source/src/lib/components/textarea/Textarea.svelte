@@ -6,6 +6,8 @@
 	} from '$lib/components/survey/common';
 	import { Textarea } from '$lib/components/ui/textarea';
 
+	import { cn } from '$lib/utils';
+
 	import type { ComponentProps } from 'svelte';
 
 	type Props = ComponentProps<typeof Textarea> & {
@@ -16,11 +18,15 @@
 		ref = $bindable(null),
 		value = $bindable(),
 		allowedChars,
+		class: className,
 		onkeydown: _onkeydown, // allow caller to set its own handler
 		onbeforeinput: _onbeforeinput,
 		oninput: _oninput,
 		...restProps
 	}: Props = $props();
+
+	// Reactive computation for enhanced sizing
+	const customClass = $derived(cn(className, 'min-h-20'));
 
 	const onkeydown: Props['onkeydown'] = (e) => {
 		if (allowedChars && !isAllowedChar(e.key, allowedChars)) e.preventDefault();
@@ -45,4 +51,12 @@
 	};
 </script>
 
-<Textarea bind:ref bind:value {...restProps} {onbeforeinput} {oninput} {onkeydown} />
+<Textarea
+	bind:ref
+	bind:value
+	class={customClass}
+	{...restProps}
+	{onbeforeinput}
+	{oninput}
+	{onkeydown}
+/>

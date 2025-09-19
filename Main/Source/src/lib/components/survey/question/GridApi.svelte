@@ -145,6 +145,7 @@
 				{#if control === 'select'}
 					<Select
 						value={answer[id]}
+						class="w-full"
 						disabled={currentOptions.length === 0}
 						options={currentOptions}
 						onchange={(value) => onchange(id, value)}
