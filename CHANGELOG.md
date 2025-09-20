@@ -2,6 +2,19 @@
 
 Todos los cambios relevantes de `encuestas` serán documentados en este archivo.
 
+## [1.3.1] - 2025-09-19
+
+### Nuevas características
+
+- Se implementó testing de APIs con Playwright para validar endpoints REST.
+- Se agregaron pruebas automatizadas para `/api/health` y `/api/provincias`.
+- Se configuró ejecución paralela de pruebas Vitest y Playwright para mayor eficiencia.
+
+### Comandos de pruebas disponibles
+
+- `pnpm test:api [filtro?]` - Ejecuta pruebas de API que coincidan con el filtro (ej: `pnpm test:api health`)
+- `pnpm test:play [filtro?]` - Ejecuta todas las pruebas de Playwright (API + E2E)
+
 ## [1.3.0] - 2025-09-19
 
 ### Actualizaciones importantes
