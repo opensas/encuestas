@@ -106,7 +106,7 @@ function exec(cmd: string): string | null {
 function maskDatabaseUrl(url: string | undefined): string | undefined {
 	if (!url) return undefined;
 	// replace password=xxxxxx with password=********
-	//# DATABASE_URL = "sqlserver://localhost:1433;database=encuestas;user=sa;password=Dev.1234!;encrypt=true;trustServerCertificate=true"
+	//# DATABASE_URL = "sqlserver://localhost:9001;database=encuestas;user=sa;password=Dev.1234!;encrypt=true;trustServerCertificate=true"
 	return url.replace(/password=([^;]+)/i, 'password=********');
 }
 
