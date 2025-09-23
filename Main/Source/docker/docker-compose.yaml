@@ -1,9 +1,3 @@
-version: '3'
-
-networks:
-  encuestas-network:
-    name: encuestas-web-network
-
 services:
   db:
     image: mcr.microsoft.com/mssql/server:2017-latest
@@ -22,12 +16,10 @@ services:
       - ./init.sql:/tmp/init.sql
       - encuestas-db-data:/var/opt/mssql
 
-    networks:
-      - encuestas-network
-
-    command: /bin/bash -c "sleep 10 && /opt/mssql-tools/bin/sqlcmd -C -S localhost -U sa -P 'Dev.1234!' -i /tmp/init.sql & exec /opt/mssql/bin/sqlservr"
+    command: >
+      /bin/bash -c "sleep 10 &&
+      /opt/mssql-tools/bin/sqlcmd -C -S localhost -U sa -P 'Dev.1234!' -i /tmp/init.sql &
+      exec /opt/mssql/bin/sqlservr"
 
 volumes:
   encuestas-db-data:
-    name: encuestas-db-data
-    external: false
