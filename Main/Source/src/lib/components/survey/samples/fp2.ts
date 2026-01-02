@@ -173,7 +173,7 @@ export const survey_fp860: Survey = {
 export const survey_fp_autoasistido2: Survey = {
 	id: 'surv_fp_autoasistido2',
 	code: 'fp-autoasistido2',
-	title: 'Satisfacción de cursos de auto asistidos (FP)',
+	title: 'Satisfacción de cursos de Formación Profesional auto-asistidos (FP)',
 	description: '',
 	intro,
 	questions: [

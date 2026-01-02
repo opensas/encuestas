@@ -46,7 +46,7 @@ REDIRECT / popup https://trabajo.gob.ar/encuestas/upep?
 
 El sistema de encuestas soporta ciertos parámetros que le permiten indicar cómo retornar la información de la encuesta respondida
 
-`callback`: una vez finalizada la encuesta efectua un POST al url indicada en el parámetro `callback` con la información de la respuesta, o la descripción del error.
+`callback`: una vez finalizada la encuesta efectúa un POST al url indicada en el parámetro `callback` con la información de la respuesta, o la descripción del error.
 
 `redirect`: una vez finalizada la encuesta, redireccionada al usuario al url indicada en el parámetro `redirect` con la información de la respuesta, o la descripción del error.
 

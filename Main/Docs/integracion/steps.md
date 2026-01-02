@@ -161,7 +161,7 @@ git push -u origin main
 ![](img/protect-main-branch-02.png)
 
 - realizar pull request
-  - realizar alguna modificion
+  - realizar alguna modificación
   - mostrar vercel preview sites
 
 ## devops
@@ -174,4 +174,4 @@ git push -u origin main
 - tests
   - encuestas/.github/workflows/unit-and-integration-tests.yaml
   - error de cuit
-  - error de boton anterior
+  - error de botón anterior

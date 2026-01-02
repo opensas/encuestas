@@ -5,9 +5,6 @@
 		},
 		{
 			"path": "../sveltekit-adapter-node-iis"
-		},
-		{
-			"path": "../github"
 		}
 	],
 	"settings": {
@@ -27,6 +24,7 @@
 			"autotest",
 			"bezier",
 			"Bolson",
+			"bunx",
 			"caba",
 			"CABA",
 			"Catamarca",
@@ -75,6 +73,7 @@
 			"helperselector",
 			"HKLM",
 			"iisnode",
+			"iisreset",
 			"Indicanos",
 			"inetpub",
 			"inetsrv",
@@ -117,6 +116,13 @@
 			"realizás",
 			"reciclador",
 			"recicladora",
+			"redireccionada",
+			"redireccionamiento",
+			"redireccionar",
+			"redireccionará",
+			"redirecciones",
+			"redirigiéndolo",
+			"reescritura",
 			"relacionamiento",
 			"remisero",
 			"rewrited",
