@@ -2,6 +2,19 @@
 
 Todos los cambios relevantes de `encuestas` serán documentados en este archivo.
 
+## [1.3.2] - 2026-01-02
+
+### Nuevas características
+
+- Se consolidan las pruebas unitarias (test:unit) y de componentes (test:ui) con vite
+- Se consolidan las pruebas de APIs (test:api) y de integración (test:e2e) con playwright
+- Agregamos soporte de markdown para las introducciones de las encuestas
+- se implementan las siguientes encuestas:
+  - fp2: Satisfacción de Cursos de Formación Profesional y Talleres de Orientación Laboral (FP-TOL)
+  - fp-autoasistido2: Satisfacción de Cursos de Formación Profesional auto-asistidos (FP)
+  - fp860: Satisfacción de cursos de Formación Profesional a distancia (FP)
+  - toi: Cuestionario de taller de orientación individual (TOI)
+
 ## [1.3.1] - 2025-09-19
 
 ### Nuevas características
