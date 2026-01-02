@@ -15,7 +15,7 @@ export const GET = async ({ url }) => {
 
 		return jsonQuery(query, data, total);
 	} catch (err) {
-		return jsonError('No se pudo obtener las respuestas', { err });
+		return jsonError('No se pudieron obtener las respuestas', { err });
 	}
 };
 

@@ -4,7 +4,7 @@
 	const demos = [
 		{
 			name: 'Survey Examples',
-			href: '/demos/survey/survey-examples',
+			href: '/demos/survey/examples',
 			description:
 				'Complete survey examples organized by type - test real surveys, custom demos, and feature showcases',
 		},
@@ -32,6 +32,11 @@
 			name: 'Grid Text Questions',
 			href: '/demos/survey/grid-text',
 			description: 'Grid-based text input component for collecting multiple related text fields',
+		},
+		{
+			name: 'Grid Single Questions',
+			href: '/demos/survey/grid-single',
+			description: 'Grid-based single-choice component for multiple questions with shared options',
 		},
 		{
 			name: 'Grid API Questions',

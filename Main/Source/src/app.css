@@ -154,3 +154,62 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+/* 
+	Markdown content wrapper 
+	used by Main/Source/src/lib/components/survey/Message.svelte
+*/
+
+.markdown {
+	@apply leading-relaxed text-gray-900;
+}
+
+/* Spacing between elements */
+.markdown > * + * {
+	@apply mt-4;
+}
+
+/* Headings H1–H4 */
+.markdown h1 {
+	@apply mt-6 mb-3 text-xl font-bold tracking-tight;
+}
+
+.markdown h2 {
+	@apply mt-6 mb-2 text-lg font-medium tracking-tight;
+}
+
+.markdown h3 {
+	@apply mt-5 mb-2 text-base font-medium tracking-tight;
+}
+
+.markdown h4 {
+	@apply mt-4 mb-1 text-sm font-medium;
+}
+
+/* Paragraphs */
+.markdown p {
+	@apply leading-relaxed;
+}
+
+/* Strong (bold) */
+.markdown strong {
+	@apply font-semibold;
+}
+
+/* Lists */
+.markdown ul {
+	@apply mt-3 mb-4 list-disc space-y-1 pl-6;
+}
+
+.markdown ol {
+	@apply mt-3 mb-4 list-decimal space-y-1 pl-6;
+}
+
+.markdown li {
+	@apply leading-relaxed;
+}
+
+/* Optional: Better line breaks for <br> coming from Markdown */
+.markdown br {
+	@apply block;
+}

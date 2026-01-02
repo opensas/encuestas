@@ -11,7 +11,7 @@ export default defineConfig({
 			{
 				extends: './vite.config.ts',
 				test: {
-					name: 'client',
+					name: 'ui-tests',
 					environment: 'browser',
 					browser: {
 						enabled: true,
@@ -27,7 +27,7 @@ export default defineConfig({
 			{
 				extends: './vite.config.ts',
 				test: {
-					name: 'server',
+					name: 'unit-tests',
 					environment: 'node',
 					include: ['src/**/*.{test,spec}.{js,ts}'],
 					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}', 'src/routes/api/**/tests/**'],

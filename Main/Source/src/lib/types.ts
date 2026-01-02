@@ -78,6 +78,7 @@ export type Question = {
 	title: string;
 	subtitle?: string;
 	required?: boolean;
+	class?: string;
 	next?: Question['id'] | undefined | null; // null ends the survey
 	score?: number;
 } & (

@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../sveltekit-adapter-node-iis"
+		},
+		{
+			"path": "../github"
 		}
 	],
 	"settings": {
@@ -69,6 +72,7 @@
 			"frustracion",
 			"fruticultor",
 			"Hacés",
+			"helperselector",
 			"HKLM",
 			"iisnode",
 			"Indicanos",
@@ -102,6 +106,7 @@
 			"podés",
 			"predisposicion",
 			"prerendered",
+			"presencialidad",
 			"proactividad",
 			"Proactividad",
 			"puntaje",
@@ -115,6 +120,7 @@
 			"relacionamiento",
 			"remisero",
 			"rewrited",
+			"Scarano",
 			"semipresencial",
 			"setx",
 			"shadcn",
@@ -135,15 +141,18 @@
 			"upep",
 			"VARCHAR",
 			"vercel",
+			"videollamadas",
 			"vinculacion",
 			"vitest",
 			"volta",
 			"Vuferen",
+			"whatsapp",
+			"wincred",
 			"winget",
 			"wwwroot",
 			"xcopy",
 			"zinguería"
 		],
-		"kiroAgent.configureMCP": "Disabled"
+		"prisma.pinToPrisma6": true
 	},
 }

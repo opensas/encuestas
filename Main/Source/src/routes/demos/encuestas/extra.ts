@@ -42,7 +42,7 @@ export const surveyWithProgressBar: Survey = {
 	code: 'progress-bar',
 	title: 'Encuesta con Barra de Progreso',
 	intro: `
-			Esta encuesta demuestra la funcionalidad de la barra de progreso.
+			## Esta encuesta demuestra la funcionalidad de la barra de progreso.
 			
 			Verás un indicador de progreso en la parte superior que muestra tu estado de finalización.
 			Esto es especialmente útil para encuestas más largas para ayudar a los usuarios a entender 
@@ -105,7 +105,7 @@ export const surveyWithIntro: Survey = {
 	code: 'with-intro',
 	title: 'Encuesta con Introducción',
 	intro: `
-			¡Bienvenido a esta encuesta de demostración!
+			# ¡Bienvenido a esta encuesta de demostración!
 			
 			Esta encuesta demuestra la funcionalidad de pantalla de introducción. 
 			Verás esta pantalla de introducción antes de que comiencen las preguntas reales.
@@ -116,7 +116,7 @@ export const surveyWithIntro: Survey = {
 			- Información importante
 			- Contexto sobre la encuesta
 			
-			Haz clic en "Comenzar Encuesta" para empezar a responder preguntas.
+			Haz clic en **Comenzar** para empezar a responder preguntas.
 		`,
 	questions: [
 		{

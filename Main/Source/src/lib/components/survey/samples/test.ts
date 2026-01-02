@@ -5,8 +5,10 @@ export const survey_test: Survey = {
 	code: 'test',
 	title: 'Encuesta de muestra de los distintos tipos de pregunta',
 	intro: `
-		Bienvenido 
+		# Bienvenido 
+		
 		Te damos la bienvenida a esta encuesta de muestra
+		
 		Esperamos que te resulte útil
 	`,
 	outro: `

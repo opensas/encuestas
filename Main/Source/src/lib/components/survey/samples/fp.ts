@@ -1,7 +1,7 @@
 import type { Survey } from '$lib/types';
 
 export const survey_fp: Survey = {
-	id: 'surv_001',
+	id: 'surv_fp',
 	code: 'fp',
 	title:
 		'Satisfacción de participantes de Cursos de Formación Laboral y Talleres de Orientación Laboral.',
@@ -59,8 +59,8 @@ export const survey_fp: Survey = {
 	],
 };
 
-export const survey_fp_auto: Survey = {
-	id: 'surv_001',
+export const survey_fp_autoasistido: Survey = {
+	id: 'surv_fp_autoasistido',
 	code: 'fp-autoasistido',
 	title:
 		'Satisfacción de participantes de Cursos de Formación Laboral y Talleres de Orientación Laboral.',

@@ -1,15 +1,21 @@
 import { survey_aept } from './aept';
 import { survey_autotest } from './autotest';
-import { survey_fp, survey_fp_auto } from './fp';
+import { survey_fp, survey_fp_autoasistido } from './fp';
+import { survey_fp_autoasistido2, survey_fp2, survey_fp860 } from './fp2';
 import { survey_manos } from './manos';
 import { survey_cine, survey_ingles, survey_short, survey_test } from './test';
+import { survey_toi } from './toi';
 import { survey_upep } from './upep';
 
 export const surveys = [
 	survey_aept,
 	survey_upep,
 	survey_fp,
-	survey_fp_auto,
+	survey_fp_autoasistido,
+	survey_fp2,
+	survey_fp860,
+	survey_fp_autoasistido2,
+	survey_toi,
 	survey_manos,
 	survey_ingles,
 	survey_cine,

@@ -4,8 +4,8 @@
 	// Agrupar encuestas lógicamente
 	const surveyGroups = [
 		{
-			title: 'Encuestas de Evaluación',
-			description: 'Encuestas integrales de evaluación y valoración',
+			title: 'Encuestas en producción',
+			description: 'Encuestas actualmente en uso',
 			surveys: [
 				{
 					name: 'Autotest - Perfil Emprendedor',
@@ -13,6 +13,33 @@
 						'Autoevaluación integral de emprendedor con sistema de puntuación, introducción/conclusión y barra de progreso',
 					code: 'autotest',
 				},
+				{
+					name: 'FP2 - Cursos de Formación Profesional y Talleres de Orientación Laboral (FP-TOL)',
+					description:
+						'Satisfacción de cursos de Formación Profesional y Talleres de Orientación Laboral (modalidad presencial)',
+					code: 'fp2',
+				},
+				{
+					name: 'FP-AUTOASISTIDO2 - Cursos auto asistidos (FP) (FP-AUTOASISTIDO2)',
+					description: 'Satisfacción de cursos de auto asistidos',
+					code: 'fp-autoasistido2',
+				},
+				{
+					name: 'FP860 - cursos de Formación Profesional (FP)',
+					description: 'Satisfacción de cursos de Formación Profesional (modalidad a distancia)',
+					code: 'fp860',
+				},
+				{
+					name: 'TOI - Taller de orientación individual (TOI)',
+					description: 'Cuestionario de taller de orientación individual',
+					code: 'toi',
+				},
+			],
+		},
+		{
+			title: 'Encuestas de Evaluación definidas',
+			description: 'Otras encuestas de evaluación definidas por el usuario',
+			surveys: [
 				{
 					name: 'AEPT - Satisfacción de Capacitación',
 					description:
@@ -26,9 +53,9 @@
 					code: 'upep',
 				},
 				{
-					name: 'FP - Formación Profesional',
+					name: 'FP - Formación Profesional (legacy)',
 					description: 'Evaluación de formación profesional con flujo estándar',
-					code: 'fp',
+					code: 'fp-legacy',
 				},
 				{
 					name: 'FP Auto - Formación Profesional (Automática)',
@@ -119,7 +146,7 @@
 				{#each surveys as { name, description, code } (code)}
 					<a
 						class="block rounded-lg border bg-card p-6 transition-shadow hover:shadow-md"
-						href={resolve(`/demos/survey/survey-examples/${code}`)}
+						href={resolve(`/demos/encuestas/${code}`)}
 					>
 						<h3 class="mb-2 font-semibold">{name}</h3>
 						<p class="text-sm text-muted-foreground">{description}</p>

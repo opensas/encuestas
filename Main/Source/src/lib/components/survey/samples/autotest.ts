@@ -7,10 +7,13 @@ export const survey_autotest: Survey = {
 	code: 'autotest',
 	title: 'Test del emprendedor',
 	intro: `
-		¡Bienvenido al Autotest!
+		# ¡Bienvenido al Autotest!
 		El objetivo de este cuestionario de autoevaluación es obtener una visión de tu perfil como emprendedor/a, para identificar posibles herramientas de acompañamiento.
+
 		Es importante que respondas las preguntas con sinceridad para obtener una mejor percepción de tu nivel de desarrollo emprendedor. Al final del cuestionario te realizaremos una devolución.
+
 		Son 30 preguntas y responderlo te tomará entre 10-15 minutos.
+		
 		¡Muchas gracias por este tiempo y esperamos sea una herramienta valiosa para vos!
 	`,
 	outro: `

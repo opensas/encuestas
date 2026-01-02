@@ -68,6 +68,11 @@ export async function GET() {
 				`${process.env.HOMEDRIVE || ''}${process.env.HOMEPATH || ''}` ||
 				undefined,
 			tempDir: process.env.TEMP || process.env.TMP,
+			vercel: {
+				vercel: process.env.VERCEL,
+				vercel_env: process.env.VERCEL_ENV,
+				vercel_URL: process.env.VERCEL_URL,
+			},
 		},
 	});
 }
@@ -116,7 +121,6 @@ function filterDependencies<Deps extends Record<string, string>>(
 ) {
 	const filtered: Partial<Deps> = {};
 	const keywords = typeof filters === 'string' ? filters.split(',') : filters;
-	console.log({ keywords });
 
 	for (const [key, value] of Object.entries(dependencies)) {
 		if (keywords.some((keyword) => key.startsWith(keyword))) {

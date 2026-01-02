@@ -6,7 +6,7 @@ export default defineConfig({
 	projects: [
 		{
 			name: 'api-tests',
-			testMatch: '**/api/**/tests/*.test.ts',
+			testMatch: '**/api/**/*.test.ts',
 			use: {
 				baseURL: 'http://localhost:3000',
 			},
