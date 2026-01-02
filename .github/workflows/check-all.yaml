@@ -10,6 +10,10 @@ jobs:
   lint-and-check:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: Main/Source
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -18,7 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         # check package.json engines.node entry: "node": ">=22.18.0 <23"
         with:
-          node-version: '22.18.0'
+          node-version: "22.18.0"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
