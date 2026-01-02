@@ -4,6 +4,8 @@
 	import { Input, Textarea } from '$lib/components';
 	import { Label } from '$lib/components/ui/label';
 
+	import { cn } from '$lib/utils';
+
 	type Props = {
 		question: TextQuestion;
 		onupdate?: (answer: string) => void;
@@ -32,7 +34,7 @@
 	$effect(() => onchange(answer));
 </script>
 
-<div class="grid w-full gap-1.5">
+<div class={cn('grid w-full gap-1.5', question.class)}>
 	{#if label}
 		<Label for="text-question">{label}</Label>
 	{/if}

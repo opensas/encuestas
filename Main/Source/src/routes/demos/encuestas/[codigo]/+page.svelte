@@ -5,8 +5,8 @@
 
 	let { survey } = data;
 
-	const onsave = (state: SurveyState) => console.log(`${survey.code} saved:`, { state });
-	const onskip = (state: SurveyState) => console.log(`${survey.code} skipped:`, { state });
+	const onsave = (state: SurveyState) => console.log(`${survey.code} onsave called:`, { state });
+	const onskip = (state: SurveyState) => console.log(`${survey.code} onskip called:`, { state });
 </script>
 
 <div class="flex min-h-screen items-center justify-center px-2 sm:px-10">

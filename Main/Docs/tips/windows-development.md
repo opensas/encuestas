@@ -106,3 +106,26 @@ Ejecutarlo
 ```shell
 . $PROFILE
 ```
+
+## Configurar git para usar el proxy
+
+Abrir archivo en C:\Users\sscarano\.gitconfig
+
+```shell
+[credential "helperselector"]
+	selected = wincred
+[credential "https://devops.trabajo.gob.ar"]
+	provider = generic
+[user]
+	name = Sebastian Antonio Scarano
+	email = sscarano@trabajo.gob.ar
+[http]
+	sslVerify = true
+	proxy = http://fortiproxy.ministerio.trabajo.gov.ar:8080
+[https]
+	proxy = http://fortiproxy.ministerio.trabajo.gov.ar:8080
+[http "https://devops.trabajo.gob.ar"]
+	proxy =
+[https "https://devops.trabajo.gob.ar"]
+	proxy =
+```

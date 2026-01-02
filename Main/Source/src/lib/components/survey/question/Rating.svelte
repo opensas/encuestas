@@ -4,6 +4,7 @@
 	import { Button } from '$lib/components';
 	import { Slider } from '$lib/components/ui/slider';
 
+	import { cn } from '$lib/utils';
 	import { round } from '$lib/utils/number';
 
 	import { Minus, Plus } from '@lucide/svelte/icons';
@@ -35,7 +36,7 @@
 	});
 </script>
 
-<div class="space-y-2 p-4 pb-0">
+<div class={cn('space-y-2 p-4 pb-0', question.class)}>
 	<div class="flex items-center justify-center space-x-2">
 		<Button
 			class="size-8 shrink-0 rounded-full"

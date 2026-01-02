@@ -5,6 +5,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
+	import { cn } from '$lib/utils';
 	import { titleCase } from '$lib/utils/string';
 
 	import { calculateRequired, toOption } from '../common';
@@ -83,7 +84,7 @@
 </script>
 
 <!-- title row -->
-<div class="grid grid-cols-[1fr_2fr] gap-4 gap-y-6">
+<div class={cn('grid grid-cols-[1fr_2fr] gap-4 gap-y-6', question.class)}>
 	<!-- pregunta -->
 	<div></div>
 	<div style={templateCols} class="grid items-center gap-4">

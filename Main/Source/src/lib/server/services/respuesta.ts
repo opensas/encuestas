@@ -54,7 +54,6 @@ export type UpdateRespuesta = Partial<
 	Omit<Respuesta, 'respuestaId' | 'inicio' | 'fechaInsert' | 'fechaUpdate'>
 >;
 
-// Funciones de servicio
 export async function createRespuesta(data: CreateRespuesta) {
 	try {
 		const validation = await validCreate(data);

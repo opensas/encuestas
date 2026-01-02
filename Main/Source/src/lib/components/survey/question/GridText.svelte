@@ -5,6 +5,7 @@
 	import { calculateRequired } from '$lib/components/survey/common';
 	import { Label } from '$lib/components/ui/label';
 
+	import { cn } from '$lib/utils';
 	import { titleCase } from '$lib/utils/string';
 
 	type Answer = NonNullable<GridTextQuestion['answer']>;
@@ -54,7 +55,7 @@
 	initState();
 </script>
 
-<div class="space-y-4">
+<div class={cn('space-y-4', question.class)}>
 	<div
 		class="space-y-4 gap-x-2"
 		class:lg:columns-3={items.length >= 12}

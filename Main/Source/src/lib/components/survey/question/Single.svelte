@@ -6,6 +6,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
+	import { cn } from '$lib/utils';
 	import { round } from '$lib/utils/number';
 
 	type Props = {
@@ -60,7 +61,7 @@
 	$effect(() => onchange(checked));
 </script>
 
-<Radio.Root bind:value={checked} class="gap-0 space-y-4">
+<Radio.Root bind:value={checked} class={cn('gap-0 space-y-4', question.class)}>
 	{#if (question?.control || 'radio') === 'radio'}
 		<div
 			class="grid gap-x-2 gap-y-4"

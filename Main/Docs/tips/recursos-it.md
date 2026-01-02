@@ -16,7 +16,7 @@ buscador de logs: https://logsappqa.trabajo.gob.ar/
 
 https://encuestasdesa.trabajo.gob.ar
 
-files: \\S1-DIXX-WEB14\W3-Sites\EncuestasDesa
+files: \\S1-DIXX-WEB14\W3-Sites2\EncuestasDesa
 logs: \\S1-DIXX-WEB14\w3-resources\encuestasdesa
 
 ## database

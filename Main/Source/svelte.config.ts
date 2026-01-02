@@ -1,6 +1,6 @@
 import exeAdapter from '@jesterkit/exe-sveltekit';
 import iisAdapter from '@opensas/sveltekit-adapter-node-iis';
-import adapter from '@sveltejs/adapter-auto';
+import autoAdapter from '@sveltejs/adapter-auto';
 import type { Adapter, Config } from '@sveltejs/kit';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
@@ -25,7 +25,7 @@ function getAdapter(): Adapter {
 		});
 	} else {
 		console.info(`[encuestas] running on ${platform()}, using '@sveltejs/adapter-auto'\r\n`);
-		return adapter();
+		return autoAdapter();
 	}
 }
 

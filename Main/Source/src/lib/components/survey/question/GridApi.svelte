@@ -6,6 +6,7 @@
 	import { calculateRequired } from '$lib/components/survey/common';
 	import { Label } from '$lib/components/ui/label';
 
+	import { cn } from '$lib/utils';
 	import { titleCase } from '$lib/utils/string';
 
 	import { onMount } from 'svelte';
@@ -122,7 +123,7 @@
 </script>
 
 <!-- title row -->
-<div class="grid grid-cols-[1fr_2fr] gap-4 gap-y-6">
+<div class={cn('grid grid-cols-[1fr_2fr] gap-4 gap-y-6', question.class)}>
 	<!-- pregunta -->
 	<div></div>
 	<div class="grid items-center gap-4">

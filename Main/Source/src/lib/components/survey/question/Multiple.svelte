@@ -6,6 +6,7 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import { Label } from '$lib/components/ui/label';
 
+	import { cn } from '$lib/utils';
 	import { round } from '$lib/utils/number';
 
 	type Props = {
@@ -65,7 +66,7 @@
 	$effect(() => onchange(checked, checkedOther, other));
 </script>
 
-<div class="space-y-4">
+<div class={cn('space-y-4', question.class)}>
 	<div
 		class="space-y-4 gap-x-2"
 		class:lg:columns-3={options.length >= 12}

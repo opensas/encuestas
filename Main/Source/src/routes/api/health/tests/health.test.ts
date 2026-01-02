@@ -1,10 +1,12 @@
+import { OK, SERVICE_UNAVAILABLE } from '$lib/constants/http';
+
 import { expect, test } from '@playwright/test';
 
 test.describe('Health API Endpoint', () => {
-	test('should return 200 status and correct health data structure', async ({ request }) => {
+	test('should return 200 or 503 status', async ({ request }) => {
 		const response = await request.get('/api/health');
 
-		expect(response.status()).toBe(200);
+		expect([OK, SERVICE_UNAVAILABLE]).toContain(response.status());
 		expect(response.headers()['content-type']).toContain('application/json');
 	});
 
@@ -35,6 +37,13 @@ test.describe('Health API Endpoint', () => {
 		expect(data.db).toHaveProperty('status');
 		expect(typeof data.db.status).toBe('string');
 		expect(['ok', 'error']).toContain(data.db.status);
+	});
+
+	test('should return 200 or 503 status depending on the db status', async ({ request }) => {
+		const response = await request.get('/api/health');
+		const data = await response.json();
+
+		expect(response.status()).toBe(data.db.status === 'ok' ? OK : SERVICE_UNAVAILABLE);
 	});
 
 	test('should return version from package.json', async ({ request }) => {

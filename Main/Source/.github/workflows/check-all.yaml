@@ -1,4 +1,4 @@
-name: Lint and Check
+name: Lint and Check (check:all)
 
 on:
   push:
@@ -14,11 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        # check package.json engines.node entry: "node": ">=22.18.0 <23"
+        with:
+          node-version: '22.18.0'
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        # check package.json packageManager entry: "packageManager": "^pnpm@9.6.0",
-        # with:
-        # version: '9.6.0' # or any other version you need
+        # check package.json packageManager entry: "packageManager": "pnpm@9.15.1",
+        with:
+          version: 9.15.1
 
       - name: Install dependencies
         run: pnpm install
