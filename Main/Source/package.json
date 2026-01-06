@@ -27,7 +27,7 @@
 		"test:unit": "vitest --project=unit-tests",
 		"test:ui": "vitest --project=ui-tests --browser.headless",
 		"test:vite": "vitest --browser.headless --run",
-		"test:all": "npm run test:vite & npm run test:play & wait",
+		"test:all": "npm run test:vite & npm run test:play",
 		"test:e2e": "playwright test --project=e2e-tests",
 		"test:api": "playwright test --project=api-tests",
 		"test:play": "playwright test",
