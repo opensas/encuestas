@@ -161,7 +161,7 @@
 */
 
 .markdown {
-	@apply leading-relaxed text-gray-900;
+	@apply leading-relaxed text-foreground;
 }
 
 /* Spacing between elements */
@@ -188,7 +188,16 @@
 
 /* Paragraphs */
 .markdown p {
-	@apply leading-relaxed;
+	@apply leading-relaxed text-muted-foreground;
+}
+
+/* Links */
+.markdown a {
+	@apply text-primary underline underline-offset-4;
+}
+
+.markdown a:hover {
+	@apply opacity-80;
 }
 
 /* Strong (bold) */
