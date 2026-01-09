@@ -28,7 +28,6 @@ export const survey_aept: Survey = {
 			],
 			options: ['Buena', 'Regular', 'Mala'],
 		},
-
 		{
 			id: 'ques_3',
 			code: 'P3',
@@ -47,7 +46,6 @@ export const survey_aept: Survey = {
 				'Muy en desacuerdo',
 			],
 		},
-
 		{
 			id: 'ques_4',
 			code: 'P4',
@@ -61,7 +59,6 @@ export const survey_aept: Survey = {
 				'Acompañamiento de un tutor',
 			],
 		},
-
 		{
 			id: 'ques_5',
 			code: 'P5',
@@ -70,7 +67,6 @@ export const survey_aept: Survey = {
 			type: 'single',
 			options: [{ id: 'Sí', next: 'ques_5_1' }, 'No'],
 		},
-
 		{
 			id: 'ques_5_1',
 			code: 'P5.1',
@@ -82,7 +78,6 @@ export const survey_aept: Survey = {
 				placeholder: 'En qué otros programas participaste?',
 			},
 		},
-
 		{
 			id: 'ques_5_2',
 			code: 'P5.2',
@@ -95,7 +90,6 @@ export const survey_aept: Survey = {
 			],
 			options: ['Si', 'No'],
 		},
-
 		{
 			id: 'ques_6',
 			code: 'P6',
