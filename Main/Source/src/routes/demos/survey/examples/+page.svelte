@@ -47,6 +47,12 @@
 					code: 'aept',
 				},
 				{
+					name: 'AEPT2 - Satisfacción de Capacitación',
+					description:
+						'Encuesta de satisfacción para participantes en Acciones de Entrenamiento para el Trabajo (AEPT2)',
+					code: 'aept2',
+				},
+				{
 					name: 'UPEP - Unidades de Economía Popular',
 					description:
 						'Encuesta para registro y evaluación de Unidades Productivas de Economía Popular',

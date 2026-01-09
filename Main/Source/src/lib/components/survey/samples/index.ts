@@ -1,4 +1,4 @@
-import { survey_aept } from './aept';
+import { survey_aept, survey_aept2 } from './aept';
 import { survey_autotest } from './autotest';
 import { survey_fp, survey_fp_autoasistido } from './fp';
 import { survey_fp_autoasistido2, survey_fp2, survey_fp860 } from './fp2';
@@ -9,6 +9,7 @@ import { survey_upep } from './upep';
 
 export const surveys = [
 	survey_aept,
+	survey_aept2,
 	survey_upep,
 	survey_fp,
 	survey_fp_autoasistido,
