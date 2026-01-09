@@ -28,7 +28,6 @@ export const survey_aept: Survey = {
 			],
 			options: ['Buena', 'Regular', 'Mala'],
 		},
-
 		{
 			id: 'ques_3',
 			code: 'P3',
@@ -47,7 +46,6 @@ export const survey_aept: Survey = {
 				'Muy en desacuerdo',
 			],
 		},
-
 		{
 			id: 'ques_4',
 			code: 'P4',
@@ -61,7 +59,6 @@ export const survey_aept: Survey = {
 				'Acompañamiento de un tutor',
 			],
 		},
-
 		{
 			id: 'ques_5',
 			code: 'P5',
@@ -70,7 +67,6 @@ export const survey_aept: Survey = {
 			type: 'single',
 			options: [{ id: 'Sí', next: 'ques_5_1' }, 'No'],
 		},
-
 		{
 			id: 'ques_5_1',
 			code: 'P5.1',
@@ -82,7 +78,6 @@ export const survey_aept: Survey = {
 				placeholder: 'En qué otros programas participaste?',
 			},
 		},
-
 		{
 			id: 'ques_5_2',
 			code: 'P5.2',
@@ -95,7 +90,6 @@ export const survey_aept: Survey = {
 			],
 			options: ['Si', 'No'],
 		},
-
 		{
 			id: 'ques_6',
 			code: 'P6',
@@ -103,6 +97,147 @@ export const survey_aept: Survey = {
 				'Para acceder al Entrenamiento para el trabajo ¿contaste con la asistencia de alguna Oficina de Empleo o Agencia Territorial?',
 			type: 'single',
 			options: ['Sí', 'No'],
+		},
+	],
+};
+
+const intro = `
+# ¡Gracias por participar en nuestro curso / taller!
+
+Tu opinión es muy importante y nos ayudará a mejorar nuestras ofertas de formación y orientación laboral.
+Esta encuesta es corta y sencilla de responder, solo te tomará unos pocos minutos completarla.
+
+## ¿Cómo responder a las preguntas?
+
+Para la mayoría de las preguntas, te pediremos que marques una opción de 1 a 5, de acuerdo a la siguiente escala:
+
+- Marca 5: Totalmente de acuerdo o muy satisfecho.
+- Marca 4: De acuerdo o satisfecho.
+- Marca 3: Indiferente
+- Marca 2: En desacuerdo o insatisfecho.
+- Marca 1: Totalmente en desacuerdo o muy insatisfecho.
+
+En el resto de las preguntas, elegí la opción que más se ajuste a tu experiencia.
+
+Tu respuesta será confidencial.
+Una vez completa podrás descargar el CERTIFICADO del Entrenamiento realizado.
+
+¡Empecemos!
+`;
+
+export const survey_aept2: Survey = {
+	id: 'surv_aept2',
+	code: 'aept2',
+	title: 'Satisfacción de participantes de Acciones de Entrenamiento para el Trabajo (AEPT2)',
+	description: '',
+	intro,
+	questions: [
+		{
+			id: 'ques_001',
+			title: '¿Cuán satisfecho estás con tu participación en el Entrenamiento para el Trabajo?',
+			type: 'single',
+			options: [
+				'Muy en desacuerdo',
+				'En desacuerdo',
+				'Indiferente',
+				'De acuerdo',
+				'Muy de acuerdo',
+			],
+		},
+		{
+			id: 'ques_002',
+			title: 'Las tareas realizadas te resultaron adecuadas y acordes al puesto del Entrenamiento',
+			type: 'single',
+			options: [
+				'Muy en desacuerdo',
+				'En desacuerdo',
+				'Indiferente',
+				'De acuerdo',
+				'Muy de acuerdo',
+			],
+		},
+		{
+			id: 'ques_003',
+			title: 'Los contenidos de la capacitación te resultaron útiles o valiosos',
+			type: 'single',
+			options: [
+				'Muy en desacuerdo',
+				'En desacuerdo',
+				'Indiferente',
+				'De acuerdo',
+				'Muy de acuerdo',
+			],
+		},
+		{
+			id: 'ques_004',
+			title: 'La práctica del entrenamiento se desarrolló dentro de un buen clima laboral',
+			type: 'single',
+			options: [
+				'Muy en desacuerdo',
+				'En desacuerdo',
+				'Indiferente',
+				'De acuerdo',
+				'Muy de acuerdo',
+			],
+		},
+		{
+			id: 'ques_005',
+			title:
+				'¿En qué medida acordás con las siguientes afirmaciones sobre tu participación en la práctica del Entrenamiento para el Trabajo?',
+			type: 'grid-single',
+			items: [
+				'Cumplió con mis expectativas',
+				'Me permitió adquirir nuevos conocimientos y habilidades',
+				'El acompañamiento del tutor fue adecuado',
+				'Mejora mis posibilidades de conseguir empleo',
+			],
+			options: [
+				'Totalmente en desacuerdo',
+				'En desacuerdo ',
+				'Indiferente',
+				'De acuerdo ',
+				'Totalmente de acuerdo',
+			],
+		},
+		{
+			id: 'ques_006',
+			title:
+				'¿La empresa o institución cumplió con los siguientes compromisos establecidos en el Acuerdo de Entrenamiento para el Trabajo?',
+			type: 'grid-single',
+			items: [
+				'Cantidad de horas',
+				'Días y horarios',
+				'Tareas del puesto',
+				'Acompañamiento de un tutor',
+			],
+			options: ['Sí', 'No'],
+		},
+		{
+			id: 'ques_007',
+			title:
+				'¿Qué aspectos del Entrenamiento te resultaron más útiles o valiosos? Selecciona todas las opciones que correspondan',
+			type: 'multiple',
+			options: [
+				'Los conocimientos y habilidades adquiridas',
+				'La aplicación práctica y experiencia laboral',
+				'El acompañamiento del tutor',
+				'El ambiente laboral',
+				'Ninguno',
+			],
+		},
+		{
+			id: 'ques_008',
+			title: '¿Cómo mejorarías el Entrenamiento? Selecciona todas las opciones que correspondan',
+			type: 'multiple',
+			options: [
+				'Mayor duración del programa',
+				'Mayor incentivo económico',
+				'Más horas de capacitación',
+				'Mejor clima laboral',
+				'Mayor seguimiento y acompañamiento del tutor',
+				'Mayor acompañamiento de la Oficina de Empleo',
+				'Sin mejoras para proponer',
+			],
 		},
 	],
 };
