@@ -36,7 +36,13 @@ export const survey_toi: Survey = {
 		{
 			id: 'ques_004',
 			title: '¿Considera que la persona tiene un perfil digital autónomo?',
-			subtitle: 'La persona sabe / puede...',
+			type: 'single',
+			options: ['SI', { id: 'NO', next: 'ques_005' }],
+		},
+		{
+			id: 'ques_0041',
+			code: '4.1',
+			title: 'La persona sabe / puede...',
 			type: 'grid-single',
 			items: [
 				'1. Trabajar con computadora',
