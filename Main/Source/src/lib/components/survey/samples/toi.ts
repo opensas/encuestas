@@ -37,7 +37,7 @@ export const survey_toi: Survey = {
 			id: 'ques_004',
 			title: '¿Considera que la persona tiene un perfil digital autónomo?',
 			type: 'single',
-			options: ['SI', { id: 'NO', next: 'ques_005' }],
+			options: ['SI', { id: 'NO (requiere asistencia)', next: 'ques_005' }],
 		},
 		{
 			id: 'ques_0041',
@@ -53,7 +53,7 @@ export const survey_toi: Survey = {
 				'6. Comunicarse por videollamadas',
 				'7. Crear y editar contenidos digitales',
 			],
-			options: ['SI', 'NO (requiere asistencia)'],
+			options: ['SI', 'NO'],
 			class: 'grid-cols-[1fr_1fr]',
 		},
 		{
