@@ -109,13 +109,13 @@ Esta encuesta es corta y sencilla de responder, solo te tomará unos pocos minut
 
 ## ¿Cómo responder a las preguntas?
 
-Para la mayoría de las preguntas, te pediremos que marques una opción de 1 a 5, de acuerdo a la siguiente escala:
+Para la mayoría de las preguntas, te pediremos que marques una opción de acuerdo a la siguiente escala:
 
-- Marca 5: Totalmente de acuerdo o muy satisfecho.
-- Marca 4: De acuerdo o satisfecho.
-- Marca 3: Indiferente
-- Marca 2: En desacuerdo o insatisfecho.
-- Marca 1: Totalmente en desacuerdo o muy insatisfecho.
+- Totalmente de acuerdo / muy satisfecho.
+- De acuerdo / satisfecho.
+- Indiferente
+- En desacuerdo / insatisfecho.
+- Totalmente en desacuerdo / muy insatisfecho.
 
 En el resto de las preguntas, elegí la opción que más se ajuste a tu experiencia.
 
@@ -136,24 +136,18 @@ export const survey_aept2: Survey = {
 			id: 'ques_001',
 			title: '¿Cuán satisfecho estás con tu participación en el Entrenamiento para el Trabajo?',
 			type: 'single',
-			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
-				'Muy de acuerdo',
-			],
+			options: ['Muy satisfecho', 'Satisfecho', 'Indiferente', 'Insatisfecho', 'Muy insatisfecho'],
 		},
 		{
 			id: 'ques_002',
 			title: 'Las tareas realizadas te resultaron adecuadas y acordes al puesto del Entrenamiento',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -161,11 +155,11 @@ export const survey_aept2: Survey = {
 			title: 'Los contenidos de la capacitación te resultaron útiles o valiosos',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -173,11 +167,11 @@ export const survey_aept2: Survey = {
 			title: 'La práctica del entrenamiento se desarrolló dentro de un buen clima laboral',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -192,11 +186,11 @@ export const survey_aept2: Survey = {
 				'Mejora mis posibilidades de conseguir empleo',
 			],
 			options: [
-				'Totalmente en desacuerdo',
-				'En desacuerdo ',
+				'Muy de acuerdo',
+				'De acuerdo',
 				'Indiferente',
-				'De acuerdo ',
-				'Totalmente de acuerdo',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{

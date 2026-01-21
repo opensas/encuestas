@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../sveltekit-adapter-node-iis"
+		},
+		{
+			"path": "../../tmp/encuestas-scratch"
 		}
 	],
 	"settings": {
