@@ -1,22 +1,26 @@
-<script>
+<script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import * as Dialog from '$lib/components/ui/dialog';
 
 	import { QrCode } from '@lucide/svelte/icons';
 
 	import EncuestasQr from './EncuestasQR.svelte';
+
+	const upperFirst = (text: string) => text[0]?.toUpperCase() + text.slice(1);
+
+	const title = `${upperFirst(__APP_NAME__)} v${__APP_VERSION__}`;
 </script>
 
 <Dialog.Root>
 	<Dialog.Trigger>
 		<Button class="absolute top-4 left-4 z-10" size="icon" variant="outline">
 			<QrCode class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:-rotate-90 " />
-			<span class="sr-only">Escaneá el código QR</span>
+			<span class="sr-only">{title}</span>
 		</Button>
 	</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
-			<Dialog.Title>Escaneá el código QR</Dialog.Title>
+			<Dialog.Title>{title}</Dialog.Title>
 			<Dialog.Description class="text-nowrap">
 				Escaneá para navegar a
 				<a href="https://encuestas-online.vercel.app">encuestas-online.vercel.app</a>

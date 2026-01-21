@@ -3,6 +3,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 import { defineConfig } from 'vite';
 
+import pkg from './package.json';
+
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
 	test: {
@@ -34,5 +36,9 @@ export default defineConfig({
 				},
 			},
 		],
+	},
+	define: {
+		__APP_NAME__: JSON.stringify(pkg.name),
+		__APP_VERSION__: JSON.stringify(pkg.version),
 	},
 });
