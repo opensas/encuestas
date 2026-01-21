@@ -1,0 +1,47 @@
+import type { Option } from '$lib/types';
+
+export const DEFAULT_OUTRO = `
+	Fin de la encuesta
+	Muchas gracias por tu participación
+`;
+
+export type AllowedChars = 'digits' | 'numbers' | RegExp | (string & {});
+
+export function isAllowedChar(char: string, allowed?: AllowedChars) {
+	if (char.length > 1) return true; // control key, arrow, backspace, delete, etc.
+	if (!char || !allowed) return true;
+	if (allowed === 'digits') allowed = /^\d$/;
+	if (allowed === 'numbers') allowed = /^[0-9\-.]$/;
+
+	if (typeof allowed === 'string') return allowed.includes(char);
+	if (allowed instanceof RegExp) return allowed.test(char);
+	return false;
+}
+
+export function onlyAllowedChars(text: string, allowed?: AllowedChars) {
+	if (!text || !allowed) return text;
+	return text
+		.split('')
+		.filter((char) => isAllowedChar(char, allowed))
+		.join('');
+}
+
+type Question = { required?: boolean };
+
+type Item = {
+	id: string;
+	required?: boolean;
+};
+
+export function calculateRequired(question: Question, items: Item[]) {
+	const ret: Record<Item['id'], boolean> = {};
+	// take item.required, then question.required, then default to false (not required) <= change Lea to true
+	for (const { id, required } of items) ret[id] = required ?? question.required ?? true;
+	return ret;
+}
+
+export function toOption(value: string | Option): Option {
+	const option = typeof value === 'string' ? { id: value } : { ...value };
+	option.label = option.label || option.id;
+	return option;
+}

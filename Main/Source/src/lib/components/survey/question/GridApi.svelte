@@ -2,9 +2,11 @@
 	import type { ApiItem, GridApiQuestion } from '$lib/types';
 
 	import { Select, type SelectItem } from '$lib/components';
-	import { calculateRequired } from '$lib/components/survey';
+	import Combobox from '$lib/components/combobox/Combobox.svelte';
+	import { calculateRequired } from '$lib/components/survey/common';
 	import { Label } from '$lib/components/ui/label';
 
+	import { cn } from '$lib/utils';
 	import { titleCase } from '$lib/utils/string';
 
 	import { onMount } from 'svelte';
@@ -92,15 +94,21 @@
 
 		const url = fill(endpoint, selected);
 
-		const response = await fetch(url);
-		const data = await response.json();
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
 
-		const opts = data.map((row: Record<string, string>) => ({
-			value: row[idField],
-			label: row[descriptionField || idField],
-		}));
+			const opts = data.map((row: Record<string, string>) => ({
+				value: row[idField],
+				label: row[descriptionField || idField],
+			}));
 
-		options[title] = opts;
+			options[title] = opts;
+		} catch (error) {
+			// Handle API errors gracefully by setting empty options
+			console.error(`Failed to fetch options for ${title}:`, error);
+			options[title] = [];
+		}
 		return;
 	}
 
@@ -115,7 +123,7 @@
 </script>
 
 <!-- title row -->
-<div class="grid grid-cols-[1fr_2fr] gap-4 gap-y-6">
+<div class={cn('grid grid-cols-[1fr_2fr] gap-4 gap-y-6', question.class)}>
 	<!-- pregunta -->
 	<div></div>
 	<div class="grid items-center gap-4">
@@ -123,9 +131,10 @@
 		<div></div>
 	</div>
 
-	{#each items as { id, label = id }}
+	{#each items as { id, label = id, control: _control } (id)}
 		{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
 		{@const currentOptions = options[id] || []}
+		{@const control = _control || question.control || 'select'}
 		<Label class="self-center text-base {className}">
 			{titleCase(label)}
 			{#if required[id]}
@@ -134,12 +143,22 @@
 		</Label>
 		<div class="grid items-center gap-4">
 			<div class="w-full space-y-1">
-				<Select
-					value={answer[id]}
-					disabled={currentOptions.length === 0}
-					options={currentOptions}
-					onchange={(value) => onchange(id, value)}
-				/>
+				{#if control === 'select'}
+					<Select
+						value={answer[id]}
+						class="w-full"
+						disabled={currentOptions.length === 0}
+						options={currentOptions}
+						onchange={(value) => onchange(id, value)}
+					/>
+				{:else if control === 'combobox'}
+					<Combobox
+						value={answer[id]}
+						disabled={currentOptions.length === 0}
+						options={currentOptions}
+						onchange={(value) => onchange(id, value)}
+					/>
+				{/if}
 			</div>
 		</div>
 	{/each}

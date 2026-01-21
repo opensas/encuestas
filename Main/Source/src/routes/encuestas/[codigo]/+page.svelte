@@ -1,22 +1,59 @@
 <script lang="ts">
-	import { Survey } from '$lib/components/survey';
+	import type { Answer } from '$lib/types.js';
+
+	import { Survey, type SurveyState } from '$lib/components/survey';
+
+	import { putRespuesta } from '$lib/api/respuesta.js';
+	import type { RespuestaEstado } from '$lib/server/services/respuesta';
+	import { round } from '$lib/utils/number.js';
 
 	let { data } = $props();
 
-	let survey = $state(data.survey); // reactive variable
+	// let survey = $state(data.survey); // reactive variable
+	let { survey, state } = data;
 
-	async function onsave(survey: import('$lib/types').Survey) {
-		const { callback, redirect, reference, params } = data;
+	async function saveState(state: SurveyState) {
+		const { status: estado, answers: respuestas, current: preguntaActiva, score: puntaje } = state;
 
-		const response = { survey, reference, params };
+		const result = await putRespuesta({
+			respuestaId: data.respuestaId,
+			estado,
+			respuestas: JSON.stringify(respuestas),
+			preguntaActiva,
+			puntaje,
+		});
+
+		if (!result.ok) console.error(result.error);
+	}
+
+	async function onsave(state: SurveyState) {
+		// update data
+		await saveState(state);
+		const { answers, score, status, current } = state;
+		const { callback, survey, respuestaId, referencia, params } = data;
+		let { redirect } = data;
+
+		const response = {
+			respuestaId,
+			referencia,
+			status,
+			survey: updateSurvey(survey, answers),
+			answers,
+			score,
+			current,
+			params,
+		};
 
 		if (callback) {
 			const res = await fetch(callback, {
 				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(response),
 			});
-			const body = await res.json();
-			console.log(`test !!! returned body from ${callback}:`, { body });
+
+			// Si el servidor respondió con JSON válido:
+			const body = await parseResponse(res);
+			if (isRedirect(body.redirect)) redirect = body.redirect;
 		}
 
 		// called from a popup
@@ -33,10 +70,49 @@
 			return;
 		}
 
-		const answers = survey.questions.map((p) => [p.id, p.answer]);
-		console.log('!survey saved!', { survey, respuestas: answers });
+		message(answers, status); // debug
+	}
+
+	type ResponseBody = { redirect?: string };
+
+	async function parseResponse(response: Response) {
+		let body: ResponseBody = {};
+		const text = await response.text();
+		// try to parse response body as json
+		try {
+			body = text ? JSON.parse(text) : {};
+		} catch {
+			body.redirect = text;
+		}
+		if (body.redirect && !isRedirect(body.redirect)) {
+			console.error('warning, bad redirect specified', body.redirect);
+			body.redirect = undefined;
+		}
+		return body;
+	}
+
+	const isRedirect = (text: unknown): text is `http${string}` =>
+		typeof text === 'string' && text.startsWith('http');
+
+	function message(answers: Answer[], estado: RespuestaEstado) {
+		const respuestas = survey.questions.map((p) => [p.id, p.answer]);
+		console.log('!encuesta finalizada!', { estado, respuestas });
 		const LF = '\r\n\r\n';
-		const message = survey.questions.map((p) => `${p.id}: ${toString(p.answer)}`).join(LF);
+
+		let score: undefined | number = undefined;
+		let message = answers
+			.map((answer) => {
+				let text = `${answer.id}: ${toString(answer.answer)}`;
+				if ('score' in answer) {
+					score = (score ?? 0) + (answer.score || 0);
+					text += ` (puntaje: ${answer.score})`;
+				}
+				return text;
+			})
+			.join(LF);
+
+		if (score !== undefined) message += `${LF}puntaje: ${round(score, 4)}`;
+
 		alert(`Felicitaciones! completaste la encuesta.${LF}${message}`);
 	}
 
@@ -50,8 +126,17 @@
 		}
 		return value.toString();
 	}
+
+	// actualiza la encuesta con las respuestas
+	function updateSurvey(encuesta: typeof survey, answers: Answer[]) {
+		for (const answer of answers) {
+			const question = encuesta.questions.find((q) => q.id === answer.id);
+			if (question) question.answer = answer.answer;
+		}
+		return encuesta;
+	}
 </script>
 
 <div class="flex h-screen items-center justify-center px-2 sm:px-10">
-	<Survey class="max-w-4xl" {survey} {onsave} />
+	<Survey class="max-w-4xl" {state} {survey} {onsave} onskip={saveState} />
 </div>

@@ -1,0 +1,47 @@
+name: Unit and UI tests (vite test:unit and test:ui)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  APP_ENV: test
+  DATABASE_URL: sqlserver://localhost:9001;database=encuestas;user=sa;password=xxxx;encrypt=true;trustServerCertificate=true
+
+jobs:
+  unit-and-ui-vite-tests:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Main/Source
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        # check package.json engines.node entry: "node": ">=22.18.0 <23"
+        with:
+          node-version: "22.18.0"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # check package.json packageManager entry: "packageManager": "pnpm@9.15.1",
+        with:
+          version: 9.15.1
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Install playwright
+        run: pnpm exec playwright install
+
+      - name: Unit tests
+        run: pnpm test:unit --run
+
+      - name: UI tests
+        run: pnpm test:ui --run

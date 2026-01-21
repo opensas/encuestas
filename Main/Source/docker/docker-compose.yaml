@@ -1,0 +1,25 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: encuestas-db
+
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Dev.1234!
+      - MSSQL_PID=Developer
+      # - MSSQL_AGENT_ENABLED=true  # Opcional: para jobs programados
+
+    ports:
+      - '9001:1433' # Dev port - encuestas SQL Server
+
+    volumes:
+      - ./init.sql:/tmp/init.sql
+      - encuestas-db-data:/var/opt/mssql
+
+    command: >
+      /bin/bash -c "sleep 10 &&
+      /opt/mssql-tools/bin/sqlcmd -C -S localhost -U sa -P 'Dev.1234!' -i /tmp/init.sql &
+      exec /opt/mssql/bin/sqlservr"
+
+volumes:
+  encuestas-db-data:

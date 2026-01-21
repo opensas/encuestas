@@ -1,9 +1,10 @@
 import type { Survey } from '$lib/types';
 
 export const survey_fp: Survey = {
-	id: 'surv_001',
+	id: 'surv_fp',
 	code: 'fp',
-	title: 'Satisfacción de participantes de Cursos de Formación Laboral y Talleres de Orientación Laboral.',
+	title:
+		'Satisfacción de participantes de Cursos de Formación Laboral y Talleres de Orientación Laboral.',
 	description:
 		'Modalidades: presencial, semipresencial, a distancia (salvo auto asistida). Todos los destinatarios.',
 	questions: [
@@ -12,7 +13,7 @@ export const survey_fp: Survey = {
 			title:
 				'¿El curso/taller de orientación laboral le pareció útil para aumentar sus posibilidades de encontrar empleo?',
 			subtitle: 'Contanos que tan conforme estas con el desarrollo del programa',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Medianamente útil', 'NO'],
 		},
 		{
@@ -20,7 +21,7 @@ export const survey_fp: Survey = {
 			title:
 				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
 			subtitle: '',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
 		},
 		{
@@ -28,7 +29,7 @@ export const survey_fp: Survey = {
 			title:
 				'¿El capacitador del curso/taller de orientación laboral respondió a sus dudas o consultas cuando Ud. lo requirió?',
 			subtitle: '',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'A veces', 'NO', 'No había docente/capacitador'],
 		},
 		{
@@ -36,7 +37,7 @@ export const survey_fp: Survey = {
 			title:
 				'En caso de que el curso/taller de orientación laboral haya sido virtual ¿pudo acceder al campus/plataforma y a los materiales fácilmente?',
 			subtitle: '',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Con algunas dificultades', 'NO', 'No corresponde'],
 		},
 		{
@@ -44,7 +45,7 @@ export const survey_fp: Survey = {
 			title:
 				'En caso que el curso/taller de orientación laboral haya sido presencial ¿le facilitaron los insumos, herramientas o equipos necesarios para el desarrollo del mismo?',
 			subtitle: '',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Parcialmente', 'NO', 'No corresponde'],
 		},
 		{
@@ -52,44 +53,43 @@ export const survey_fp: Survey = {
 			title:
 				'Percibe que luego del curso/taller de orientación laboral, ¿tiene mayor confianza sobre su propio trabajo y sus habilidades?',
 			subtitle: '',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Parcialmente', 'NO'],
 		},
 	],
 };
 
-export const survey_fp_auto: Survey = {
-	id: 'surv_001',
+export const survey_fp_autoasistido: Survey = {
+	id: 'surv_fp_autoasistido',
 	code: 'fp-autoasistido',
 	title:
 		'Satisfacción de participantes de Cursos de Formación Laboral y Talleres de Orientación Laboral.',
-	description:
-		'Modalidad: a distancia auto asistida. Todos los destinatarios.',
+	description: 'Modalidad: a distancia auto asistida. Todos los destinatarios.',
 	questions: [
 		{
 			id: 'ques_001',
 			title: '¿El curso le pareció útil para aumentar sus posibilidades de encontrar empleo?',
 			subtitle: 'Contanos que tan conforme estas con el desarrollo del programa',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Medianamente útil', 'NO'],
-			allowOther: false,
+			other: false,
 		},
 		{
 			id: 'ques_002',
 			title:
 				'¿Los contenidos, actividades y materiales del curso le resultaron comprensibles y adecuados?',
 			subtitle: '',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Medianamente comprensibles y adecuados', 'NO'],
-			allowOther: false,
+			other: false,
 		},
 		{
 			id: 'ques_003',
 			title: '¿Pudo acceder al campus y a los materiales fácilmente?',
 			subtitle: '',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'Con algunas dificultades', 'NO'],
-			allowOther: false,
+			other: false,
 		},
 	],
 };

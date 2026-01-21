@@ -1,0 +1,87 @@
+# Sample requests to create, update, read and delete respuestas
+
+## Variables
+
+@url = http://localhost:3000/api
+
+### respuesta.all
+# @name respuestas
+@respuesta_01 = {{respuestas.response.body.data[0].respuestaId}}
+@respuesta_02 = {{respuestas.response.body.data[1].respuestaId}}
+@respuesta_03 = {{respuestas.response.body.data[2].respuestaId}}
+GET {{url}}/respuestas
+
+### respuesta.all con filtros
+GET {{url}}/respuestas?_fields=respuestaId,tipoEncuestaId,referencia,estado,puntaje&_order=-estado,respuestaId,puntaje
+
+### respuesta.all
+GET {{url}}/respuestas?respuestaId=2&estado=finalizado&tipoEncuestaId=surv_short&_fields=respuestaId,tipoEncuestaId,referencia,estado,puntaje
+### respuesta.all
+
+GET {{url}}/respuestas?_fields=respuestaId,estado&estado=*ad*&respuestaId=>=10
+
+###
+GET {{url}}/respuestas?_fields=respuestaId,referencia&referencia=B*E
+
+
+###
+GET http://localhost:5173/api/respuestas?_limit=1&_fields=respuestaId
+
+### respuesta.create
+# @name createRespuesta
+POST {{url}}/respuestas
+Content-Type: application/json
+
+{
+  "tipoEncuestaId": "surv_upepx",
+  "estado": "en procesox",
+	"referenciax": "client_12345",
+	"referenciay": "client_12345",
+}
+
+### respuesta.create
+POST {{url}}/respuestas
+Content-Type: application/json
+
+{
+  "tipoEncuestaId": "surv_upep"
+}
+
+### Get the created respuesta
+GET {{url}}/respuestas/{{createRespuesta.response.body.respuestaId}}
+
+### respuesta.update
+# @name updateRespuesta
+PUT {{url}}/respuestas/1
+Content-Type: application/json
+
+{
+	"referencia": "cine_3",
+	"estado": "en proceso"
+}
+
+### Get the created respuesta
+GET {{url}}/respuestas/1
+
+### Get the created respuesta
+GET {{url}}/respuestas/{{updateRespuesta.response.body.respuestaId}}
+
+
+### respuesta.update
+PUT {{url}}/respuestas/2
+Content-Type: application/json
+
+{
+	"estado":"en proceso",
+	"respuestas":"[{\"id\":\"ques_grid_text\",\"answer\":{\"nombre\":\"nombre...\",\"apellido\":\"apellido...\",\"direccion\":\"direccion...\"}}]",
+	"preguntaActiva":"ques_text",
+	"puntaje":0
+}
+
+### respuesta.update
+PUT {{url}}/respuestas/2
+Content-Type: application/json
+
+{
+	"referencia": "cine_1_updated"
+}

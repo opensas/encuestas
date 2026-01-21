@@ -1,13 +1,14 @@
 <script lang="ts">
 	import type { GridSingleQuestion, SingleItem } from '$lib/types';
 
-	import { Select } from '$lib/components';
-	import { calculateRequired, toOption } from '$lib/components/survey';
-	import { Input } from '$lib/components/ui/input';
+	import { Input, Select } from '$lib/components';
 	import { Label } from '$lib/components/ui/label';
 	import * as Radio from '$lib/components/ui/radio-group';
 
+	import { cn } from '$lib/utils';
 	import { titleCase } from '$lib/utils/string';
+
+	import { calculateRequired, toOption } from '../common';
 
 	type Answer = NonNullable<GridSingleQuestion['answer']>;
 
@@ -44,7 +45,7 @@
 			other[id] = '';
 			if (!answer) {
 				checked[id] = '';
-			} else if (options.find((option) => option.title === answer)) {
+			} else if (options.find((option) => option.id === answer)) {
 				checked[id] = answer;
 			} else {
 				checked[id] = OTHER_VALUE;
@@ -53,7 +54,7 @@
 		}
 
 		const cols = control === 'radio' ? options.length : 1;
-		const otherCol = question.allowOther ? ' 2fr' : '';
+		const otherCol = question.other ? ' 2fr' : '';
 		templateCols = `grid-template-columns: repeat(${cols},1fr) ${otherCol}`;
 	}
 
@@ -83,25 +84,26 @@
 </script>
 
 <!-- title row -->
-<div class="grid grid-cols-[1fr_2fr] gap-4 gap-y-6">
+<div class={cn('grid grid-cols-[1fr_2fr] gap-4 gap-y-6', question.class)}>
 	<!-- pregunta -->
 	<div></div>
 	<div style={templateCols} class="grid items-center gap-4">
 		{#if control === 'radio'}
 			<!-- each option as a radio -->
-			{#each question.options as option}
-				<Label class="justify-self-center text-center">{option}</Label>
+			{#each options as { label } (label)}
+				<Label class="justify-self-center text-center">{label}</Label>
 			{/each}
 		{:else}
 			<!-- a single select with all the options -->
 			<div></div>
 		{/if}
-		{#if question.allowOther}
-			<Label class="w-full pl-4 text-center">{question.titleOther || 'Otra opción'}</Label>
+		{#if question.other}
+			{@const label = (question.other === true ? {} : question.other)?.label}
+			<Label class="mx-auto pl-4">{label || 'Otra opción'}</Label>
 		{/if}
 	</div>
 
-	{#each items as { id, label = id }}
+	{#each items as { id, label = id } (id)}
 		{@const className = confirmed && !isValidItem(id) ? 'text-destructive' : ''}
 		<Label class="self-center text-base {className}">
 			{titleCase(label)}
@@ -116,20 +118,33 @@
 			orientation="horizontal"
 		>
 			{#if control === 'radio'}
-				{#each options as { title }}
-					<Radio.Item value={title} class="justify-self-center" />
+				{#each options as { id } (id)}
+					<Radio.Item value={id} class="justify-self-center border-primary" />
 				{/each}
 			{:else}
-				{@const items = options.map((o) => ({ value: o.title }))}
+				{@const items = options.map(({ id, label }) => ({ value: id, label }))}
 				<div class="w-full space-y-1">
-					<Select bind:value={checked[id]} options={items} />
+					<Select bind:value={checked[id]} class="w-full" options={items} />
 				</div>
 			{/if}
-			{#if question.allowOther}
-				{@const placeholder = question.placeholderOther || 'Otra opcion'}
-				<div class="flex w-full items-center space-x-2 pl-4">
-					<Radio.Item id="option-other" value={OTHER_VALUE} class="--self-start" />
-					<Input bind:value={other[id]} {placeholder} />
+			{#if question.other}
+				{@const _other = question.other === true ? {} : question.other}
+				{@const { description, placeholder = 'Otra opción', allowedChars, maxlength } = _other}
+				<div class="flex w-full items-center gap-2 pl-4">
+					<Radio.Item id="option-other" value={OTHER_VALUE} class="border-primary" />
+
+					<div class="w-full space-y-1">
+						<Input
+							id="text-other"
+							bind:value={other[id]}
+							{allowedChars}
+							{maxlength}
+							{placeholder}
+						/>
+						{#if description}
+							<p class="text-sm text-muted-foreground">{description}</p>
+						{/if}
+					</div>
 				</div>
 			{/if}
 		</Radio.Root>

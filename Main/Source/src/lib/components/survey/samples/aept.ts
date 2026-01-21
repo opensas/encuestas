@@ -12,7 +12,7 @@ export const survey_aept: Survey = {
 			code: 'P1',
 			title:
 				'¿Cuán satisfecho estás con el Programa de Entrenamiento para el Trabajo brindado por la STEySS/SSEyFL?',
-			kind: 'single',
+			type: 'single',
 			options: ['Muy satisfecho', 'Satisfecho', 'Indistinto', 'Insatisfecho', 'Muy insatisfecho'],
 		},
 		{
@@ -20,7 +20,7 @@ export const survey_aept: Survey = {
 			code: 'P2',
 			title:
 				'¿Cómo fue tu experiencia en relación a los siguientes aspectos de la gestión para acceder al Entrenamiento para el Trabajo?',
-			kind: 'grid-single',
+			type: 'grid-single',
 			items: [
 				'Registro en el Portal Empleo',
 				'Búsqueda de la oferta de EPT',
@@ -28,13 +28,12 @@ export const survey_aept: Survey = {
 			],
 			options: ['Buena', 'Regular', 'Mala'],
 		},
-
 		{
 			id: 'ques_3',
 			code: 'P3',
 			title:
 				'¿En qué medida acordás con las siguientes afirmaciones sobre la participación en la práctica de Entrenamiento para el Trabajo?',
-			kind: 'grid-single',
+			type: 'grid-single',
 			items: [
 				'Me permitió adquirir nuevos conocimientos y habilidades',
 				'Mejora mis posibilidades de conseguir empleo',
@@ -47,13 +46,12 @@ export const survey_aept: Survey = {
 				'Muy en desacuerdo',
 			],
 		},
-
 		{
 			id: 'ques_4',
 			code: 'P4',
 			title:
 				'¿La empresa cumplió con los siguientes compromisos establecidos en el Acuerdo de Entrenamiento para el Trabajo?',
-			kind: 'multiple',
+			type: 'multiple',
 			options: [
 				'Cantidad de horas',
 				'Días y horarios',
@@ -61,50 +59,179 @@ export const survey_aept: Survey = {
 				'Acompañamiento de un tutor',
 			],
 		},
-
 		{
 			id: 'ques_5',
 			code: 'P5',
 			next: 'ques_6',
 			title: '¿Participaste en algún otro programa de la STEySS/SSEyFL?',
-			kind: 'single',
-			options: [{ title: 'Sí', next: 'ques_5_1' }, 'No'],
+			type: 'single',
+			options: [{ id: 'Sí', next: 'ques_5_1' }, 'No'],
 		},
-
 		{
 			id: 'ques_5_1',
 			code: 'P5.1',
 			next: 'ques_5_2',
 			title: '¿En cuál programa de la STEySS/SSEyFL participaste?',
-			kind: 'single',
+			type: 'single',
 			options: ['Cursos', 'Programa de Inserción Laboral', 'Programa de Empleo Independiente'],
-			allowOther: true,
-			placeholderOther: 'En qué otros programas participaste?',
+			other: {
+				placeholder: 'En qué otros programas participaste?',
+			},
 		},
-
 		{
 			id: 'ques_5_2',
 			code: 'P5.2',
 			next: 'ques_6',
 			title: '¿Considerás que la experiencia en esos programas...?',
-			kind: 'grid-single',
+			type: 'grid-single',
 			items: [
 				'Resultó una buena preparación para participar del entrenamiento',
 				'Complementa la formación obtenida durante el entrenamiento',
 			],
-			options: [
-				'Si',
-				'No',
-			],
+			options: ['Si', 'No'],
 		},
-
 		{
 			id: 'ques_6',
 			code: 'P6',
 			title:
 				'Para acceder al Entrenamiento para el trabajo ¿contaste con la asistencia de alguna Oficina de Empleo o Agencia Territorial?',
-			kind: 'single',
+			type: 'single',
 			options: ['Sí', 'No'],
+		},
+	],
+};
+
+const intro = `
+# ¡Gracias por participar en nuestro curso / taller!
+
+Tu opinión es muy importante y nos ayudará a mejorar nuestras ofertas de formación y orientación laboral.
+Esta encuesta es corta y sencilla de responder, solo te tomará unos pocos minutos completarla.
+
+## ¿Cómo responder a las preguntas?
+
+Para la mayoría de las preguntas, te pediremos que marques una opción de acuerdo a la siguiente escala:
+
+- Totalmente de acuerdo / muy satisfecho.
+- De acuerdo / satisfecho.
+- Indiferente
+- En desacuerdo / insatisfecho.
+- Totalmente en desacuerdo / muy insatisfecho.
+
+En el resto de las preguntas, elegí la opción que más se ajuste a tu experiencia.
+
+Tu respuesta será confidencial.
+Una vez completa podrás descargar el CERTIFICADO del Entrenamiento realizado.
+
+¡Empecemos!
+`;
+
+export const survey_aept2: Survey = {
+	id: 'surv_aept2',
+	code: 'aept2',
+	title: 'Satisfacción de participantes de Acciones de Entrenamiento para el Trabajo (AEPT2)',
+	description: '',
+	intro,
+	questions: [
+		{
+			id: 'ques_001',
+			title: '¿Cuán satisfecho estás con tu participación en el Entrenamiento para el Trabajo?',
+			type: 'single',
+			options: ['Muy satisfecho', 'Satisfecho', 'Indiferente', 'Insatisfecho', 'Muy insatisfecho'],
+		},
+		{
+			id: 'ques_002',
+			title: 'Las tareas realizadas te resultaron adecuadas y acordes al puesto del Entrenamiento',
+			type: 'single',
+			options: [
+				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
+			],
+		},
+		{
+			id: 'ques_003',
+			title: 'Los contenidos de la capacitación te resultaron útiles o valiosos',
+			type: 'single',
+			options: [
+				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
+			],
+		},
+		{
+			id: 'ques_004',
+			title: 'La práctica del entrenamiento se desarrolló dentro de un buen clima laboral',
+			type: 'single',
+			options: [
+				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
+			],
+		},
+		{
+			id: 'ques_005',
+			title:
+				'¿En qué medida acordás con las siguientes afirmaciones sobre tu participación en la práctica del Entrenamiento para el Trabajo?',
+			type: 'grid-single',
+			items: [
+				'Cumplió con mis expectativas',
+				'Me permitió adquirir nuevos conocimientos y habilidades',
+				'El acompañamiento del tutor fue adecuado',
+				'Mejora mis posibilidades de conseguir empleo',
+			],
+			options: [
+				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
+			],
+		},
+		{
+			id: 'ques_006',
+			title:
+				'¿La empresa o institución cumplió con los siguientes compromisos establecidos en el Acuerdo de Entrenamiento para el Trabajo?',
+			type: 'grid-single',
+			items: [
+				'Cantidad de horas',
+				'Días y horarios',
+				'Tareas del puesto',
+				'Acompañamiento de un tutor',
+			],
+			options: ['Sí', 'No'],
+		},
+		{
+			id: 'ques_007',
+			title:
+				'¿Qué aspectos del Entrenamiento te resultaron más útiles o valiosos? Selecciona todas las opciones que correspondan',
+			type: 'multiple',
+			options: [
+				'Los conocimientos y habilidades adquiridas',
+				'La aplicación práctica y experiencia laboral',
+				'El acompañamiento del tutor',
+				'El ambiente laboral',
+				'Ninguno',
+			],
+		},
+		{
+			id: 'ques_008',
+			title: '¿Cómo mejorarías el Entrenamiento? Selecciona todas las opciones que correspondan',
+			type: 'multiple',
+			options: [
+				'Mayor duración del programa',
+				'Mayor incentivo económico',
+				'Más horas de capacitación',
+				'Mejor clima laboral',
+				'Mayor seguimiento y acompañamiento del tutor',
+				'Mayor acompañamiento de la Oficina de Empleo',
+				'Sin mejoras para proponer',
+			],
 		},
 	],
 };

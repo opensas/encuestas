@@ -1,12 +1,38 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import tailwindcss from '@tailwindcss/vite';
 
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-	// @ts-expect-error - see https://github.com/sveltejs/kit/issues/13102#issuecomment-2515203461
-	plugins: [sveltekit()],
-
+	plugins: [tailwindcss(), sveltekit()],
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}'],
+		expect: { requireAssertions: true },
+		projects: [
+			{
+				extends: './vite.config.ts',
+				test: {
+					name: 'ui-tests',
+					environment: 'browser',
+					browser: {
+						enabled: true,
+						provider: 'playwright',
+						screenshotFailures: false,
+						instances: [{ browser: 'chromium' }],
+					},
+					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
+					exclude: ['src/lib/server/**', 'src/routes/api/**/tests/**'],
+					setupFiles: ['./vitest-setup-client.ts'],
+				},
+			},
+			{
+				extends: './vite.config.ts',
+				test: {
+					name: 'unit-tests',
+					environment: 'node',
+					include: ['src/**/*.{test,spec}.{js,ts}'],
+					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}', 'src/routes/api/**/tests/**'],
+				},
+			},
+		],
 	},
 });

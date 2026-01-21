@@ -2,9 +2,10 @@
 	import type { GridTextQuestion, TextItem } from '$lib/types';
 
 	import { Input, Textarea } from '$lib/components';
-	import { calculateRequired } from '$lib/components/survey';
+	import { calculateRequired } from '$lib/components/survey/common';
 	import { Label } from '$lib/components/ui/label';
 
+	import { cn } from '$lib/utils';
 	import { titleCase } from '$lib/utils/string';
 
 	type Answer = NonNullable<GridTextQuestion['answer']>;
@@ -54,13 +55,13 @@
 	initState();
 </script>
 
-<div class="space-y-4">
+<div class={cn('space-y-4', question.class)}>
 	<div
-		class="gap-x-2 space-y-4"
+		class="space-y-4 gap-x-2"
 		class:lg:columns-3={items.length >= 12}
 		class:md:columns-2={items.length >= 8}
 	>
-		{#each items as item, index}
+		{#each items as item, index (item.id)}
 			{@const {
 				id,
 				label = id,

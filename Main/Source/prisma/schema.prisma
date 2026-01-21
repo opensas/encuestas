@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+  // explicitly set to default location because pnpm saves them in ./node_modules/.pnpm/@prisma+client@5.2....
+  // output   = "../node_modules/.prisma/client" // see https://github.com/prisma/prisma/issues/20948
+  // no need for this fix, added prisma to production dependencies (not devDependencies)
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Respuesta {
+  respuestaId Int @id @default(autoincrement())
+
+  tipoEncuestaId String @db.VarChar(50)
+
+  referencia String? @db.VarChar(100)
+
+  encuesta String @default("") @db.VarChar(Max)
+
+  // SurveyState
+  estado         String  @default("creado") @db.VarChar(20)
+  respuestas     String? @default("") @db.VarChar(Max)
+  preguntaActiva String? @db.VarChar(50)
+  puntaje        Float?
+
+  inicio DateTime  @default(now())
+  fin    DateTime?
+
+  fechaInsert DateTime @default(now())
+  fechaUpdate DateTime @default(now())
+
+  @@index([tipoEncuestaId, fechaInsert], name: "IX_Respuesta_tipoEncuestaId")
+  @@index([referencia, fechaInsert], name: "IX_Respuesta_referencia")
+  @@index([estado, fechaInsert], name: "IX_Respuesta_estado")
+  @@index([fechaInsert], name: "IX_Respuesta_fechaInsert")
+}

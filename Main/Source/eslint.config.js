@@ -1,19 +1,23 @@
 import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 
+import { defineConfig } from 'eslint/config';
 import prettier from 'eslint-config-prettier';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import svelte from 'eslint-plugin-svelte';
 import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
+
+import svelteConfig from './svelte.config.ts';
+
 const gitignorePath = fileURLToPath(new URL('./.gitignore', import.meta.url));
 
-export default ts.config(
+export default defineConfig(
 	includeIgnoreFile(gitignorePath),
 	js.configs.recommended,
 	...ts.configs.recommended,
-	...svelte.configs['flat/recommended'],
+	...svelte.configs.recommended,
 	{
 		plugins: {
 			'simple-import-sort': simpleImportSort,
@@ -102,21 +106,24 @@ export default ts.config(
 	},
 
 	prettier,
-	...svelte.configs['flat/prettier'],
+	...svelte.configs.prettier,
 	{
-		languageOptions: {
-			globals: {
-				...globals.browser,
-				...globals.node,
-			},
+		languageOptions: { globals: { ...globals.browser, ...globals.node } },
+
+		rules: {
+			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
+			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
+			'no-undef': 'off',
 		},
 	},
 	{
-		files: ['**/*.svelte'],
-
+		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
 		languageOptions: {
 			parserOptions: {
+				projectService: true,
+				extraFileExtensions: ['.svelte'],
 				parser: ts.parser,
+				svelteConfig,
 			},
 		},
 	},
@@ -126,9 +133,7 @@ export default ts.config(
 	{
 		/* location of your components where you would like to apply these rules  */
 		// see: https://www.shadcn-svelte.com/docs/installation#eslint-configuration
-		files: ['**/components/ui/**/*.svelte'],
-		rules: {
-			'@typescript-eslint/no-unused-vars': 'off',
-		},
+		files: ['**/components/ui/button/button.svelte'],
+		rules: { 'svelte/no-navigation-without-resolve': 'off' },
 	}
 );

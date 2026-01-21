@@ -1,27 +1,22 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
+	import { micromark } from 'micromark';
+
 	type Props = { text: string; footer?: Snippet };
 	let { text, footer }: Props = $props();
 
-	let { header, body } = $derived(parseText(text));
+	let html = $derived(parse(text));
 
-	function parseText(text: string) {
-		const CR = '\n';
+	function parse(text: string) {
 		const TAB = '\t';
-
-		let parsed = text
-			.replaceAll(TAB, '') // cleanup
-			.split(CR) // split
-			.filter(Boolean); // remove empty lines
-
-		const [header, ...body] = parsed;
-		return { header, body };
+		return micromark(text.replaceAll(TAB, ''));
 	}
 </script>
 
-<h3 class="text-xl font-medium">{header}</h3>
-{#each body as paragraph}
-	<p>{paragraph}</p>
-{/each}
+<div class="markdown">
+	<!-- eslint-disable svelte/no-at-html-tags -->
+	{@html html}
+</div>
+
 {@render footer?.()}

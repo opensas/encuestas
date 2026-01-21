@@ -12,6 +12,7 @@
 
 <DialogPrimitive.Title
 	bind:ref
-	class={cn('text-lg font-semibold leading-none tracking-tight', className)}
+	class={cn('text-lg leading-none font-semibold', className)}
+	data-slot="dialog-title"
 	{...restProps}
 />

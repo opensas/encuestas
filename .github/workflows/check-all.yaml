@@ -1,0 +1,40 @@
+name: Lint and Check (check:all)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint-and-check:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Main/Source
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        # check package.json engines.node entry: "node": ">=22.18.0 <23"
+        with:
+          node-version: "22.18.0"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # check package.json packageManager entry: "packageManager": "pnpm@9.15.1",
+        with:
+          version: 9.15.1
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run lint (prettier and eslint)
+        run: pnpm lint
+
+      - name: Run check (typescript check via svelte-check)
+        run: pnpm check

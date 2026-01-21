@@ -1,14 +1,17 @@
 <script lang="ts">
 	import type { MultipleQuestion } from '$lib/types';
 
-	import { toOption } from '$lib/components/survey';
+	import { Input } from '$lib/components';
+	import { toOption } from '$lib/components/survey/common';
 	import { Checkbox } from '$lib/components/ui/checkbox';
-	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
+
+	import { cn } from '$lib/utils';
+	import { round } from '$lib/utils/number';
 
 	type Props = {
 		question: MultipleQuestion;
-		onupdate?: (answer: string[]) => void;
+		onupdate?: (answer: string[], score?: number) => void;
 		isValid?: boolean;
 	};
 
@@ -16,6 +19,7 @@
 
 	let options = $derived(question.options.map(toOption));
 	let required = $derived(question.required ?? true); // required by default
+	let weight = $derived(question.weight);
 
 	let checked: boolean[] = $state([]);
 	let checkedOther = $state(false);
@@ -25,10 +29,10 @@
 	function initState() {
 		const answer = question.answer || [];
 
-		const titles = options.map((option) => option.title);
+		const ids = options.map((option) => option.id);
 
-		checked = titles.map((title) => answer.includes(title));
-		other = answer.find((r) => !titles.includes(r)) || '';
+		checked = ids.map((id) => answer.includes(id));
+		other = answer.find((id) => !ids.includes(id)) || '';
 		checkedOther = !!other;
 	}
 
@@ -36,32 +40,45 @@
 
 	function onchange(checked: boolean[], checkedOther: boolean, other: string) {
 		const answer = checked
-			.map((check, index) => (check ? options[index].title : null))
+			.map((check, index) => (check ? options[index].id : null))
 			.filter((resp) => resp !== null); // remove unchecked items
 
 		if (checkedOther && other) answer.push(other);
 
 		isValid = !required || (required && answer.length > 0);
 
-		onupdate(answer);
+		let score = undefined;
+		if (weight !== undefined) {
+			// Calculate combined score for all selected options
+			const totalScore = checked.reduce((sum, check, index) => {
+				if (check) {
+					const optionScore = options[index].score ?? 0;
+					return sum + optionScore;
+				}
+				return sum;
+			}, 0);
+			score = round(totalScore * weight, 4); // survey score, rounded to 4 decimals
+		}
+
+		onupdate(answer, score);
 	}
 
 	$effect(() => onchange(checked, checkedOther, other));
 </script>
 
-<div class="space-y-4">
+<div class={cn('space-y-4', question.class)}>
 	<div
-		class="gap-x-2 space-y-4"
+		class="space-y-4 gap-x-2"
 		class:lg:columns-3={options.length >= 12}
 		class:md:columns-2={options.length >= 8}
 	>
-		{#each options as { title, description }, index}
-			{@const id = `opcion_${index}`}
+		{#each options as { label, description }, index (label)}
+			{@const idx = `opcion_${index}`}
 			<div class="flex items-center space-x-3">
 				<!-- mt-1 compensates for the leading-snug, to have both aligned to the top -->
-				<Checkbox {id} bind:checked={checked[index]} class="mt-1 self-start" />
-				<Label class="flex flex-col space-y-1 leading-snug" for={id}>
-					<div>{title}</div>
+				<Checkbox id={idx} bind:checked={checked[index]} class="mt-1 self-start border-primary" />
+				<Label class="flex flex-col items-start gap-1 leading-snug" for={idx}>
+					<div>{label}</div>
 					{#if description}
 						<div class="text-xs font-normal text-muted-foreground">{description}</div>
 					{/if}
@@ -70,15 +87,19 @@
 		{/each}
 	</div>
 
-	{#if question.allowOther}
-		{@const { titleOther: title, placeholderOther: placeholder = 'Otra opción' } = question}
+	{#if question.other}
+		{@const _other = question.other === true ? {} : question.other}
+		{@const { label, description, placeholder = 'Otra opción', allowedChars, maxlength } = _other}
 		<div class="flex items-center space-x-3">
-			<Checkbox id="opcion_otra" bind:checked={checkedOther} class="--self-start" />
+			<Checkbox id="opcion_otra" bind:checked={checkedOther} class="border-primary" />
 			<div class="w-full space-y-1">
-				{#if title}
-					<Label for="text-other">{title}</Label>
+				{#if label}
+					<Label for="text-other">{label}</Label>
 				{/if}
-				<Input bind:value={other} {placeholder} />
+				<Input bind:value={other} {allowedChars} {maxlength} {placeholder} />
+				{#if description}
+					<p class="text-sm text-muted-foreground">{description}</p>
+				{/if}
 			</div>
 		</div>
 	{/if}

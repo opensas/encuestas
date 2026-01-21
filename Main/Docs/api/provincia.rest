@@ -1,0 +1,17 @@
+# Sample requests to create, update, read and delete respuestas
+
+## Variables
+
+@url = http://localhost:3000/api
+
+### respuesta.all
+# @name provincias
+GET {{url}}/provincias
+
+### respuesta.all
+# @name departamentos
+GET {{url}}/provincias/buenos-aires/departamentos
+
+### respuesta.all
+# @name localidades
+GET {{url}}/provincias/buenos-aires/departamentos/25-de-mayo/localidades
