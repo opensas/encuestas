@@ -29,7 +29,6 @@ $ xcopy /s /h /i /y "\\ministerio.trabajo.gov.ar\aplicaciones\Historial de Cambi
 ```
 
 2. Crear la aplicación en IIS
-
    - Physical path: carpeta del build
    - Puerto: ej. 3000
    - Pool: .NET CLR version → "No Managed Code"
@@ -139,6 +138,7 @@ pnpm test:unit --run  -t condition
 
 ## Entornos
 
+- devops: `https://devops.trabajo.gob.ar/DGIIT/encuestas`
 - Desarrollo: `\\S1-DIXX-WEB14\W3-Sites2\EncuestasDesa`
 - Logs: `\\s1-dixx-web14\w3-resources\encuestasdesa\logs`
 - Base de datos: `encuestas en S1-DIXX-SQL07`
