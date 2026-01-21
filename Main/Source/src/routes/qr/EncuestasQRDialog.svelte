@@ -13,8 +13,8 @@
 
 <Dialog.Root>
 	<Dialog.Trigger>
-		<Button class="absolute top-4 left-4 z-10" size="icon" variant="outline">
-			<QrCode class="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:-rotate-90 " />
+		<Button class="absolute left-4 top-4 z-10" size="icon" variant="outline">
+			<QrCode class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 " />
 			<span class="sr-only">{title}</span>
 		</Button>
 	</Dialog.Trigger>
