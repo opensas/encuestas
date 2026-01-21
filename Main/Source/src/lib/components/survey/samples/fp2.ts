@@ -8,13 +8,13 @@ Esta encuesta es corta y sencilla de responder, solo te tomará unos pocos minut
 
 ## ¿Cómo responder a las preguntas?
 
-Te pediremos que marques una opción de 1 a 5, de acuerdo a la siguiente escala:
+Te pediremos que marques una opción de acuerdo a la siguiente escala:
 
-- Marca 5: Totalmente de acuerdo o muy satisfecho.
-- Marca 4: De acuerdo o satisfecho.
-- Marca 3: Indiferente
-- Marca 2: En desacuerdo o insatisfecho.
-- Marca 1: Totalmente en desacuerdo o muy insatisfecho.
+- Totalmente de acuerdo / muy satisfecho.
+- De acuerdo / satisfecho.
+- Indiferente
+- En desacuerdo / insatisfecho.
+- Totalmente en desacuerdo / muy insatisfecho.
 
 Elegí la opción que más se ajuste a tu experiencia.
 
@@ -37,11 +37,11 @@ export const survey_fp2: Survey = {
 			title: 'El curso / taller resultó útil para incorporar nuevos conocimientos y habilidades',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -49,11 +49,11 @@ export const survey_fp2: Survey = {
 			title: 'Los contenidos, actividades y materiales del curso resultaron comprensibles',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -62,11 +62,11 @@ export const survey_fp2: Survey = {
 				'El capacitador del curso / taller respondió las dudas o consultas cuando Ud. lo requirió',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -75,11 +75,11 @@ export const survey_fp2: Survey = {
 				'Le facilitaron los insumos, herramientas o equipos necesarios para el desarrollo del mismo',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -88,11 +88,11 @@ export const survey_fp2: Survey = {
 				'Luego de haber realizado el curso percibe que han aumentado sus posibilidades de encontrar empleo o mejorarlo',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 	],
@@ -110,11 +110,11 @@ export const survey_fp860: Survey = {
 			title: 'El curso /taller resultó útil para incorporar nuevos conocimientos y habilidades',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -122,11 +122,11 @@ export const survey_fp860: Survey = {
 			title: 'Los contenidos, actividades y materiales del curso resultaron comprensibles',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -135,11 +135,11 @@ export const survey_fp860: Survey = {
 				'El capacitador del curso / taller respondió las dudas o consultas cuando Ud. lo requirió',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -147,11 +147,11 @@ export const survey_fp860: Survey = {
 			title: 'Pudo acceder al campus / plataforma y a los materiales fácilmente',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -160,11 +160,11 @@ export const survey_fp860: Survey = {
 				'Luego de haber realizado el curso percibe que han aumentado sus posibilidades de encontrar empleo o mejorarlo',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 	],
@@ -182,11 +182,11 @@ export const survey_fp_autoasistido2: Survey = {
 			title: 'El curso resultó útil para incorporar nuevos conocimientos y habilidades',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -194,11 +194,11 @@ export const survey_fp_autoasistido2: Survey = {
 			title: 'Los contenidos, actividades y materiales del curso resultaron comprensibles',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -206,11 +206,11 @@ export const survey_fp_autoasistido2: Survey = {
 			title: 'Pudo acceder al campus / plataforma y a los materiales fácilmente',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 		{
@@ -219,11 +219,11 @@ export const survey_fp_autoasistido2: Survey = {
 				'Luego de haber realizado el curso percibe que han aumentado sus posibilidades de encontrar empleo o mejorarlo.',
 			type: 'single',
 			options: [
-				'Muy en desacuerdo',
-				'En desacuerdo',
-				'Indiferente',
-				'De acuerdo',
 				'Muy de acuerdo',
+				'De acuerdo',
+				'Indiferente',
+				'En desacuerdo',
+				'Muy en desacuerdo',
 			],
 		},
 	],

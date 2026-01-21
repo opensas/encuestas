@@ -21,6 +21,13 @@
 pnpx sv create encuestas
 ```
 
+What would you like to add to your project? (use arrow keys / space bar)
+│ ◼ prettier (formatter - https://prettier.io)
+│ ◼ eslint (linter - https://eslint.org)
+│ ◼ vitest (unit testing - https://vitest.dev)
+│ ◼ playwright (browser testing - https://playwright.dev)
+│ ◼ tailwindcss (css framework - https://tailwindcss.com)
+
 ## shadcn
 
 ```sh
@@ -67,8 +74,16 @@ pnpm install tsx --save-dev
 pnpm install prisma @prisma/client
 ```
 
-````sh
-pnpm install -D dotenv
+```sh
+# see https://www.prisma.io/docs/guides/sveltekit
+# see https://www.prisma.io/docs/orm/overview/databases/sql-server#using-the-node-mssql-driver
+# see: https://www.prisma.io/docs/getting-started/prisma-orm/quickstart/sql-server
+pnpm install prisma tsx --save-dev
+pnpm install @prisma/client @prisma/adapter-mssql
+```
+
+```sh
+pnpm install -D dotenv mode-watcher micromark cross-env
 ```
 
 copy all scripts from package .json
@@ -78,11 +93,11 @@ start db server and run migrations
 ```sh
 pnpm db:purge
 pnpm db:start
-pnpm db:migrate:apply
+pnpm db:migrate
 # generate client code
 pnpm db:generate
 pnpm db:seed
-````
+```
 
 ## build tools and configuration
 
@@ -118,4 +133,8 @@ with bun
 rm -fr node_modules/
 
 time (bun i && bun check:all && bun test:all && bun run build && bun run build:exe)
+```
+
+```
+
 ```
