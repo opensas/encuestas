@@ -7,10 +7,6 @@ import { defineConfig } from 'vitest/config';
 import pkg from './package.json' with { type: 'json' };
 
 export default defineConfig({
-	define: {
-		__APP_NAME__: JSON.stringify(pkg.name),
-		__APP_VERSION__: JSON.stringify(pkg.version),
-	},
 	plugins: [tailwindcss(), sveltekit()],
 	test: {
 		expect: { requireAssertions: true },
@@ -40,6 +36,8 @@ export default defineConfig({
 			},
 		],
 	},
+	// not real variables, injected at compile time and replaced statically during build by vite
+	// see: https://vite.dev/config/shared-options.html#define
 	define: {
 		__APP_NAME__: JSON.stringify(pkg.name),
 		__APP_VERSION__: JSON.stringify(pkg.version),
