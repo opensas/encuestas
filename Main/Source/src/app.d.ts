@@ -9,9 +9,9 @@ declare global {
 		// interface Platform {}
 	}
 
-	// see vite.config.ts
-	const __APP_NAME__: string;
-	const __APP_VERSION__: string;
+	// from vite.config.ts
+	declare const __APP_NAME__: string;
+	declare const __APP_VERSION__: string;
 }
 
-export {};
+export { };

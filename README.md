@@ -29,6 +29,7 @@ $ xcopy /s /h /i /y "\\ministerio.trabajo.gov.ar\aplicaciones\Historial de Cambi
 ```
 
 2. Crear la aplicación en IIS
+
    - Physical path: carpeta del build
    - Puerto: ej. 3000
    - Pool: .NET CLR version → "No Managed Code"
@@ -142,3 +143,31 @@ pnpm test:unit --run  -t condition
 - Desarrollo: `\\S1-DIXX-WEB14\W3-Sites2\EncuestasDesa`
 - Logs: `\\s1-dixx-web14\w3-resources\encuestasdesa\logs`
 - Base de datos: `encuestas en S1-DIXX-SQL07`
+
+## Puesta en producción
+
+### Entorno de desarrollo
+
+- compilar la aplicación
+
+```shell
+pnpm build
+```
+
+- crear copia de la versión actual en desarrollo
+
+copiar a `\\S1-DIXX-WEB14\W3-Sites2\EncuestasDesa\__history\encuestas_9_9_9` el contenido de la carpeta `\\S1-DIXX-WEB14\W3-Sites2\EncuestasDesa`
+
+- copiar archivos a servidor de desarrollo
+
+> Nota: NO SOBRE ESCRIBIR los siguientes archivos: `.env` y `web.config`
+
+### Entorno de producción
+
+Crear una carpeta en `\\ministerio.trabajo.gov.ar\aplicaciones\Historial de Cambios Desa\Encuestas\Releases\V9.9.9`
+
+Con las siguientes carpetas
+
+build: contiene la versión compilada (NO incluir los archivos `.env` ni `web.config`)
+
+...

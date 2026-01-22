@@ -6,11 +6,9 @@
 
 	import EncuestasQr from './EncuestasQR.svelte';
 
-	const title = `${upperFirst(__APP_NAME__)} v${__APP_VERSION__}`;
+	const upperFirst = (text: string) => text[0]?.toUpperCase() + text.slice(1);
 
-	function upperFirst(text: string) {
-		return text[0].toUpperCase() + text.slice(1);
-	}
+	const title = `${upperFirst(__APP_NAME__)} v${__APP_VERSION__}`;
 </script>
 
 <Dialog.Root>

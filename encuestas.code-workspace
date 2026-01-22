@@ -1,14 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": ".",
 		},
 		{
-			"path": "../sveltekit-adapter-node-iis"
+			"path": "../sveltekit-adapter-node-iis",
 		},
-		{
-			"path": "../../tmp/encuestas-scratch"
-		}
 	],
 	"settings": {
 		"cSpell.words": [
@@ -160,8 +157,8 @@
 			"winget",
 			"wwwroot",
 			"xcopy",
-			"zinguería"
+			"zinguería",
 		],
-		"prisma.pinToPrisma6": true
+		"prisma.pinToPrisma6": true,
 	},
 }
