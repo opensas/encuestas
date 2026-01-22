@@ -1,7 +1,7 @@
 import type { AllowedChars } from '$lib/components/survey';
 
 // db types
-export type { Respuesta } from '@prisma/client';
+export type { Respuesta } from './server/db/generated/client';
 
 export type Survey = {
 	id: `surv_${string}`;

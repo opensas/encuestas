@@ -17,10 +17,10 @@
 
 	let { question, onupdate = () => {}, isValid = $bindable(true) }: Props = $props();
 
-	const min = question.min ?? 0;
-	const max = question.max ?? min + 10;
+	const min = $derived(question.min ?? 0);
+	const max = $derived(question.max ?? min + 10);
 	let weight = $derived(question.weight || 0);
-	let answer = $state(question.answer || min);
+	let answer = $derived(question.answer || min);
 
 	$effect(() => {
 		const required = question.required ?? true;

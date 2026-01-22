@@ -1,15 +1,17 @@
 <script lang="ts">
 	let { data } = $props();
 
-	const { respuesta } = data;
+	const { respuesta } = $derived(data);
 
-	const { respuestaId, tipoEncuestaId, encuesta, estado, respuestas, fechaInsert } = respuesta!;
+	const { respuestaId, tipoEncuestaId, encuesta, estado, respuestas, fechaInsert } = $derived(
+		respuesta!
+	);
 
-	console.log({ respuesta });
+	$effect(() => console.log({ respuesta }));
 </script>
 
 <div class="flex h-screen flex-col items-center justify-center px-2 sm:px-10">
-	<div class="space-y-6 rounded-[0.5rem] bg-background p-6 sm:border sm:p-10 sm:shadow-xl md:block">
+	<div class="space-y-6 rounded-xl bg-background p-6 sm:border sm:p-10 sm:shadow-xl md:block">
 		<table class="table-auto">
 			<tbody class="bg-white even:bg-gray-100">
 				<tr class="border-b border-gray-200 bg-white even:bg-gray-100 hover:bg-gray-200">
@@ -19,7 +21,7 @@
 				</tr>
 				{@render row('Id', respuestaId)}
 				{@render row('Tipo', tipoEncuestaId)}
-				{@render row('Encuesta', encuesta)}
+				{@render rowText('Encuesta', encuesta)}
 				{@render row('Estado', estado)}
 				{@render row('Respuestas', respuestas)}
 				{@render row('Creación', fechaInsert)}
@@ -32,5 +34,14 @@
 	<tr class="border-b border-gray-200 bg-white even:bg-gray-100 hover:bg-gray-200">
 		<td class="px-6 py-4 font-semibold">{title}</td>
 		<td class="px-6 py-4">{(text || '').toString()}</td>
+	</tr>
+{/snippet}
+
+{#snippet rowText(title: string, text: number | string | Date | null)}
+	<tr class="border-b border-gray-200 bg-white even:bg-gray-100 hover:bg-gray-200">
+		<td class="px-6 py-4 font-semibold">{title}</td>
+		<td class="px-6 py-4">
+			<textarea class="w-full" rows="15">{(text || '').toString()}</textarea>
+		</td>
 	</tr>
 {/snippet}

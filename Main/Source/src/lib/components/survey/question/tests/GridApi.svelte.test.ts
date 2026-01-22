@@ -1,8 +1,7 @@
 import type { GridApiQuestion } from '$lib/types';
 
-import { page } from '@vitest/browser/context';
-
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { page } from 'vitest/browser';
 import { render } from 'vitest-browser-svelte';
 
 import GridApi from '../GridApi.svelte';

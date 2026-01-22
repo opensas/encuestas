@@ -1,7 +1,8 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
+import { playwright } from '@vitest/browser-playwright';
 
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
@@ -12,16 +13,14 @@ export default defineConfig({
 				extends: './vite.config.ts',
 				test: {
 					name: 'ui-tests',
-					environment: 'browser',
 					browser: {
 						enabled: true,
-						provider: 'playwright',
+						provider: playwright(),
 						screenshotFailures: false,
-						instances: [{ browser: 'chromium' }],
+						instances: [{ browser: 'chromium', headless: true }],
 					},
 					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
 					exclude: ['src/lib/server/**', 'src/routes/api/**/tests/**'],
-					setupFiles: ['./vitest-setup-client.ts'],
 				},
 			},
 			{

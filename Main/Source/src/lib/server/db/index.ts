@@ -1,11 +1,14 @@
 import { DATABASE_URL } from '$lib/server/env';
 
-import { PrismaClient } from '@prisma/client';
+// import { PrismaClient } from '@prisma/client';
+import { PrismaMssql } from '@prisma/adapter-mssql';
+
+import { PrismaClient } from './generated/client';
 
 const SQL_LOG_LEVEL = 'NONE' as 'NONE' | 'QUERY' | 'INFO';
 
 const prisma = new PrismaClient({
-	datasourceUrl: DATABASE_URL,
+	adapter: new PrismaMssql(DATABASE_URL),
 	log:
 		SQL_LOG_LEVEL === 'QUERY'
 			? [

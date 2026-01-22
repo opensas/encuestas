@@ -3,7 +3,7 @@
 
 	let { data } = $props();
 
-	let { survey } = data;
+	let { survey } = $derived(data);
 
 	const onsave = (state: SurveyState) => console.log(`${survey.code} onsave called:`, { state });
 	const onskip = (state: SurveyState) => console.log(`${survey.code} onskip called:`, { state });
