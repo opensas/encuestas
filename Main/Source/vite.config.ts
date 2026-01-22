@@ -4,7 +4,7 @@ import { playwright } from '@vitest/browser-playwright';
 
 import { defineConfig } from 'vitest/config';
 
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
 
 export default defineConfig({
 	define: {
