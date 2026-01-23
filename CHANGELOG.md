@@ -2,6 +2,12 @@
 
 Todos los cambios relevantes de `encuestas` serán documentados en este archivo.
 
+## [1.3.4] - 2026-01-23
+
+- Actualización de dependencias
+- prisma 7.3.0, svelte 5.47.1, sveltekit 2.50.0, vite 7.2.6, vitest 4.0.17, playwright 1.57.0
+- agregamos version de la aplicación en pantalla de qr
+
 ## [1.3.2] - 2026-01-02
 
 ### Nuevas características

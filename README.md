@@ -162,6 +162,8 @@ copiar a `\\S1-DIXX-WEB14\W3-Sites2\EncuestasDesa\__history\encuestas_9_9_9` el 
 
 > Nota: NO SOBRE ESCRIBIR los siguientes archivos: `.env` y `web.config`
 
+- probar la aplicación en desarrollo: https://encuestasdesa.trabajo.gob.ar/encuestas/autotest?referencia=auto_123
+
 ### Entorno de producción
 
 Crear una carpeta en `\\ministerio.trabajo.gov.ar\aplicaciones\Historial de Cambios Desa\Encuestas\Releases\V9.9.9`
