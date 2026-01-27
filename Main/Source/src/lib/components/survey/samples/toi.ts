@@ -3,11 +3,13 @@ import type { Survey } from '$lib/types';
 export const survey_toi: Survey = {
 	id: 'surv_toi',
 	code: 'toi',
-	title: 'Cuestionario de taller de orientación individual (TOI)',
+	title: 'Trayecto de Orientación Individual (TOI)',
+	outro: 'Muchas gracias',
 	questions: [
 		{
 			id: 'ques_001',
-			title:
+			title: 'Currículum Vitae (CV)',
+			subtitle:
 				'¿La información del perfil laboral registrada en el CV fue confirmada en la entrevista?',
 			type: 'grid-single',
 			items: [
@@ -21,27 +23,15 @@ export const survey_toi: Survey = {
 		},
 		{
 			id: 'ques_002',
-			title:
-				'¿Califica para rendir la evaluación de Certificación de Competencias Socio laborales básica?',
-			type: 'single',
+			title: 'Acceso digital',
+			subtitle: '¿La persona dispone de equipamiento y/o acceso a Internet?',
+			type: 'grid-single',
+			items: ['1. ¿Tiene acceso a internet?', '2. ¿Tiene PC / computadora?', '3. ¿Tiene tablet?'],
 			options: ['SI', 'NO'],
+			class: 'grid-cols-[1fr_1fr]',
 		},
 		{
 			id: 'ques_003',
-			title:
-				'¿La persona está interesada en rendir la evaluación de Certificación de Competencias Socio laborales básica?',
-			type: 'single',
-			options: ['SI', 'NO'],
-		},
-		{
-			id: 'ques_004',
-			title: '¿Considera que la persona tiene un perfil digital autónomo?',
-			type: 'single',
-			options: ['SI', { id: 'NO (requiere asistencia)', next: 'ques_005' }],
-		},
-		{
-			id: 'ques_0041',
-			code: '4.1',
 			title: 'La persona sabe / puede...',
 			type: 'grid-single',
 			items: [
@@ -57,94 +47,117 @@ export const survey_toi: Survey = {
 			class: 'grid-cols-[1fr_1fr]',
 		},
 		{
+			id: 'ques_004',
+			title: '¿Considera que la persona tiene un perfil digital autónomo?',
+			type: 'single',
+			options: ['SI', { id: 'NO (requiere asistencia)', next: 'ques_005' }],
+		},
+		{
 			id: 'ques_005',
-			title: '¿La persona dispone de equipamiento y/o acceso a Internet?',
-			type: 'grid-single',
-			items: [
-				'1. ¿Tiene acceso a internet ?',
-				'2. ¿Tiene PC / computadora ?',
-				'3. ¿Tiene tablet ?',
+			title: 'Perfilamiento',
+			subtitle: 'Clasifique la experiencia laboral de la persona:',
+			type: 'single',
+			options: [
+				'1. Experiencia laboral amplia/ consolidada',
+				'2. Experiencia intermedia',
+				'3. Experiencia básica o sin experiencia',
 			],
-			options: ['SI', 'NO'],
-			class: 'grid-cols-[1fr_1fr]',
 		},
 		{
 			id: 'ques_006',
-			title: '¿Considera que corresponde un refuerzo en Acciones de Búsqueda de empleo?',
+			title: 'El perfil laboral de la persona se corresponde con (marque lo que corresponde):',
 			type: 'single',
-			options: ['SI', 'NO'],
+			options: [
+				'1. Empleo asalariado',
+				'2. Empleo independiente',
+				'3. Ambos',
+				'4. Sin experiencia',
+			],
 		},
 		{
 			id: 'ques_007',
+			title:
+				'Para el segmento sin experiencia laboral: ¿Realizó tareas en la vida social asimilables al mundo laboral? ¿Cuáles?',
+			type: 'text',
+			required: false,
+		},
+		{
+			id: 'ques_008',
 			title:
 				'¿Existe una correspondencia entre los sectores de interés laboral de la persona y las oportunidades de empleo disponibles en el mercado local?',
 			type: 'single',
 			options: ['SI', 'NO'],
 		},
-		{
-			id: 'ques_008',
-			title:
-				'¿Los intereses formativos de la persona están alineados con su perfil laboral actual y las oportunidades de inserción locales?',
-			type: 'single',
-			options: ['SI', 'NO'],
-		},
+
 		{
 			id: 'ques_009',
-			title: '¿Considera que corresponde un refuerzo de Orientación laboral?',
+			title:
+				'Si no tiene experiencia o no es la adecuada al ámbito local ¿Cuál es el sector  recomendado de acuerdo al perfil? listado de sectores',
 			type: 'single',
-			options: ['SI', 'NO'],
+			control: 'select',
+			required: true,
+			options: [
+				'1. Comercio - venta',
+				'2. Trabajo doméstico (limpieza, cuidado de personas, jardinería y otras tareas)',
+				'3. Limpieza de edificios, locales, calles y espacios verdes (NO casas particulares). Recolección de residuos. Seguridad',
+				'4. Construcción',
+				'5. Gastronomía, elaboración alimentos, panificados, restaurante, turismo, hotelería',
+				'6. Fabricación/industria. Suministro de electricidad, gas, agua y cloacas',
+				'7. Educación, docencia',
+				'8. Servicios sociales y Salud (comedores, cuidados y atención de personas en instituciones, etc.)',
+				'9. Servicios personales (peluquería, tratamientos de belleza, estética, cuidado de mascotas, astrología, fúnebres, otros)',
+				'10. Agricultura, ganadería, forestal, pesca, minería (incluye apicultura y viveros)',
+				'11. Informática, medios de comunicación, publicidad',
+				'12. Transporte, correo, mensajería, almacenamiento y logística',
+				'13. Administración y atención al cliente. Contabilidad, jurídicos, RRHH. Servicios profesionales, científicos y técnicos',
+				'14. Reparación/arreglos: ropa, calzado, celulares, equipos informáticos, electrodomésticos',
+				'15. Reparación y mantenimiento de automotores (incluye lavado) y de maquinaria y equipos industriales, agropecuarios, médicos y otros NO domésticos',
+				'16. Artes, entretenimiento, recreación, clubes',
+			],
 		},
 		{
 			id: 'ques_010',
-			title: 'El perfil laboral de la persona se corresponde con (marque lo que corresponde):',
+			title:
+				'¿Los intereses formativos de la persona están alineados con su perfil laboral actual y las oportunidades de inserción locales?',
+			subtitle: 'Formación laboral',
 			type: 'single',
-			options: ['1. Empleo asalariado', '2. Empleo independiente', '3. Ambos'],
+			options: ['SI', 'NO'],
 		},
 		{
 			id: 'ques_011',
-			title: 'Clasifique la experiencia laboral de la persona:',
+			title: 'Clasifique la situación de la persona con respecto a la búsqueda de empleo:',
+			subtitle: 'Búsqueda de empleo ',
 			type: 'single',
 			options: [
-				'1. Experiencia laboral amplia/ consolidada',
-				'2. Experiencia intermedia',
-				'3. Experiencia acotada o sin experiencia',
+				'1.  Puede realizar acciones autónomas de búsqueda de empleo',
+				'2. Requiere mejorar sus habilidades y conocimientos para la búsqueda laboral',
+				'3. No posee experiencia en búsqueda laboral',
 			],
 		},
 		{
 			id: 'ques_012',
 			title:
-				'Si no tiene experiencia o no es la adecuada al ámbito local:  ¿Cuál sería el campo de formación y búsqueda de trabajo recomendado?',
-			type: 'text',
-			required: false,
+				'¿Califica para rendir la evaluación de Certificación de Competencias Socio laborales básica?',
+			type: 'single',
+			options: ['SI', 'NO'],
 		},
 		{
 			id: 'ques_013',
-			title: 'Indique las habilidades fueron que identificadas en la entrevista',
-			type: 'multiple',
-			required: false,
-			options: [
-				'a. Resolución de problemas',
-				'b. Organización del trabajo',
-				'c. Trabajo en equipo',
-				'd. Comunicación verbal y escrita',
-				'e. Manejo de datos',
-				'f. Autonomía y proactividad',
-				'g. Capacidad de liderazgo',
-				'h. Orientación comercial',
-				'i. Motivación e iniciativa',
-				'j. Aprendizaje activo',
-				'k. Resiliencia / Flexibilidad',
-				'l. Uso de Tecnología/ IA',
-				'm. Otras habilidades(campo abierto)',
-			],
-			other: { placeholder: 'otras habilidades' },
+			title:
+				'¿La persona está interesada en rendir la evaluación de Certificación de Competencias Socio laborales básica?',
+			type: 'single',
+			options: ['SI', 'NO'],
 		},
 		{
 			id: 'ques_014',
-			title:
-				'Para el segmento sin experiencia laboral: ¿Realizó tareas en la vida social asimilables al mundo laboral? ¿Cuáles?',
-			type: 'text',
-			required: false,
+			title: 'Marque las opciones que correspondan',
+			subtitle: 'Orientación Laboral',
+			type: 'single',
+			options: [
+				'1. El perfil requiere una instancia de orientación integral ',
+				'2. Se trabajará sobre temas puntuales',
+				'3. No requiere instancias posteriores',
+			],
 		},
 		{
 			id: 'ques_015',
