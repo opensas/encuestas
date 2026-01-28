@@ -9,8 +9,7 @@
 
 	let { data } = $props();
 
-	// let survey = $state(data.survey); // reactive variable
-	let { survey, state } = data;
+	let { survey, state } = $derived(data);
 
 	async function saveState(state: SurveyState) {
 		const { status: estado, answers: respuestas, current: preguntaActiva, score: puntaje } = state;

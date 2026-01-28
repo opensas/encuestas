@@ -1,7 +1,10 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
+import { playwright } from '@vitest/browser-playwright';
 
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
+
+import pkg from './package.json' with { type: 'json' };
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
@@ -12,16 +15,14 @@ export default defineConfig({
 				extends: './vite.config.ts',
 				test: {
 					name: 'ui-tests',
-					environment: 'browser',
 					browser: {
 						enabled: true,
-						provider: 'playwright',
+						provider: playwright(),
 						screenshotFailures: false,
-						instances: [{ browser: 'chromium' }],
+						instances: [{ browser: 'chromium', headless: true }],
 					},
 					include: ['src/**/*.svelte.{test,spec}.{js,ts}'],
 					exclude: ['src/lib/server/**', 'src/routes/api/**/tests/**'],
-					setupFiles: ['./vitest-setup-client.ts'],
 				},
 			},
 			{
@@ -34,5 +35,11 @@ export default defineConfig({
 				},
 			},
 		],
+	},
+	// not real variables, injected at compile time and replaced statically during build by vite
+	// see: https://vite.dev/config/shared-options.html#define
+	define: {
+		__APP_NAME__: JSON.stringify(pkg.name),
+		__APP_VERSION__: JSON.stringify(pkg.version),
 	},
 });

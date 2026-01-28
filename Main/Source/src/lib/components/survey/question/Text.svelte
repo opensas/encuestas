@@ -24,7 +24,7 @@
 	} = $derived(question);
 	let required = $derived(question.required ?? true); // required by default
 
-	let answer = $state(question.answer || '');
+	let answer = $derived(question.answer || '');
 
 	function onchange(answer: string) {
 		isValid = !required || (required && answer.length > 0);

@@ -4,13 +4,18 @@
 
 	let { data } = $props();
 
-	const { respuestas } = data;
+	let { respuestas, page, limit } = $derived(data);
 
-	console.log({ respuestas });
+	function goToPage(page: number) {
+		// eslint-disable-next-line svelte/no-navigation-without-resolve
+		goto(`?page=${page}&limit=${limit}`);
+	}
+
+	$effect(() => console.log({ respuestas, page, limit }));
 </script>
 
 <div class="flex h-screen flex-col items-center justify-center px-2 sm:px-10">
-	<div class="space-y-6 rounded-[0.5rem] bg-background p-6 sm:border sm:p-10 sm:shadow-xl md:block">
+	<div class="space-y-6 rounded-xl bg-background p-6 sm:border sm:p-10 sm:shadow-xl md:block">
 		<h2 class="mb-4 w-full text-center text-2xl font-bold">Respuestas</h2>
 		<table class="table-auto">
 			<thead>
@@ -33,5 +38,26 @@
 				{/each}
 			</tbody>
 		</table>
+	</div>
+	<div class="mt-6 flex items-center justify-between gap-4">
+		<button
+			class="rounded-lg border px-4 py-2 text-sm font-medium transition enabled:hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
+			disabled={page <= 1}
+			onclick={() => goToPage(page - 1)}
+		>
+			← Prev
+		</button>
+
+		<span class="text-sm text-gray-600">
+			Page <strong>{page}</strong>
+		</span>
+
+		<button
+			class="rounded-lg border px-4 py-2 text-sm font-medium transition enabled:hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
+			disabled={respuestas.length < limit}
+			onclick={() => goToPage(page + 1)}
+		>
+			Next →
+		</button>
 	</div>
 </div>

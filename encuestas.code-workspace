@@ -1,14 +1,11 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": ".",
 		},
 		{
-			"path": "../sveltekit-adapter-node-iis"
+			"path": "../sveltekit-adapter-node-iis",
 		},
-		{
-			"path": "../../tmp/encuestas-scratch"
-		}
 	],
 	"settings": {
 		"cSpell.words": [
@@ -75,6 +72,7 @@
 			"Hacés",
 			"helperselector",
 			"HKLM",
+			"hotelería",
 			"iisnode",
 			"iisreset",
 			"Indicanos",
@@ -103,6 +101,7 @@
 			"opensas",
 			"organizacion",
 			"outro",
+			"Perfilamiento",
 			"pkey",
 			"planificacion",
 			"podés",
@@ -129,6 +128,7 @@
 			"relacionamiento",
 			"remisero",
 			"rewrited",
+			"RRHH",
 			"Scarano",
 			"semipresencial",
 			"setx",
@@ -162,6 +162,6 @@
 			"xcopy",
 			"zinguería"
 		],
-		"prisma.pinToPrisma6": true
+		"prisma.pinToPrisma6": true,
 	},
 }

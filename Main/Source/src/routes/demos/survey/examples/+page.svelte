@@ -127,6 +127,11 @@
 					description: `Encuesta con dos preguntas utilizada para pruebas unitarias con 'bun test:ui "Survey.svelte.test.ts" --run'`,
 					code: 'ui-test',
 				},
+				{
+					name: 'Encuesta simple con saltos condicionales usada para test:ui',
+					description: `Encuesta con varias preguntas usada para probar saltos condicionales, utilizada para pruebas unitarias con 'bun test:ui "Survey.svelte.test.ts" --run'`,
+					code: 'ui-test-with-jumps',
+				},
 			],
 		},
 	] as const;

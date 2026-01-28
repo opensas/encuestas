@@ -1,4 +1,5 @@
 // src/routes/api/system/+server.ts
+import pkg from '$lib/../../package.json' with { type: 'json' };
 import { NOT_FOUND } from '$lib/constants/http';
 import prisma from '$lib/server/db';
 import { APP_ENV } from '$lib/server/env';
@@ -8,8 +9,6 @@ import { error, json } from '@sveltejs/kit';
 
 import { execSync } from 'child_process';
 import os from 'os';
-
-import pkg from '../../../../package.json';
 
 export async function GET() {
 	if (APP_ENV === 'prod') error(NOT_FOUND);

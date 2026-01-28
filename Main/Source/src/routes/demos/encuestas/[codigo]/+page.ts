@@ -4,9 +4,9 @@ import { BAD_REQUEST } from '$lib/constants/http.js';
 
 import { error } from '@sveltejs/kit';
 
-import { surveyNoIntro, surveyTestUI, surveyWithIntro, surveyWithProgressBar } from '../extra';
+import { surveyNoIntro, surveyWithIntro, surveyWithProgressBar } from '../extra';
 
-const samples = [...surveys, surveyWithIntro, surveyNoIntro, surveyWithProgressBar, surveyTestUI];
+const samples = [...surveys, surveyWithIntro, surveyNoIntro, surveyWithProgressBar];
 
 export async function load({ params }) {
 	const codigo = params.codigo || DEFAULT_SURVEY.code;
